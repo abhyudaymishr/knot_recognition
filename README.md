@@ -67,6 +67,9 @@ pytest -q
 ## Citation
 See `CITATION.cff` for citation metadata.
 
+## Usage
+See `USAGE.md` for end-to-end examples.
+
 ## Known Limitations
 - Chirality detection is heuristic and depends on how flips affect CNN confidence.
 - Gauss/PD extractor assumes clean, high-contrast drawings.
