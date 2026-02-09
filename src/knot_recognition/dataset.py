@@ -31,6 +31,6 @@ class KnotImageDataset(Dataset):
         if self.transform:
             img = self.transform(img)
         else:
-            # default: convert to tensor
+            
             img = torch.from_numpy(np.array(img).transpose(2,0,1)).float()/255.0
         return img, label, path, label_name

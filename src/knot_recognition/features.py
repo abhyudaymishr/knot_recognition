@@ -7,10 +7,10 @@ from scipy.fft import fft
 
 
 def hu_moments(img_gray):
-    # expects uint8 grayscale
+    
     moments = cv2.moments(img_gray)
     hu = cv2.HuMoments(moments).flatten()
-    # log transform to reduce dynamic range
+    
     for i in range(len(hu)):
         if hu[i]==0:
             hu[i]=0.0
@@ -20,7 +20,7 @@ def hu_moments(img_gray):
 
 
 def radial_fourier_descriptor(img_gray, n_bins=128, nf=16):
-    # compute centroid, sample radial profile (averaged over angles)
+    # compute centroid, sample radial profile 
     H,W = img_gray.shape
     yy, xx = np.mgrid[0:H,0:W]
     cx = W/2
@@ -36,10 +36,10 @@ def radial_fourier_descriptor(img_gray, n_bins=128, nf=16):
             profile[i] = img_gray[mask].mean()
         else:
             profile[i] = 0
-    # take FFT of radial profile and use magnitudes (rotation invariant)
+    # FFT of radial profile 
     F = np.abs(fft(profile))
     feat = F[:nf]
-    # normalize
+    
     if feat.sum()>0:
         feat = feat/ (np.linalg.norm(feat)+1e-9)
     return np.real(feat)

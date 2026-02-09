@@ -141,7 +141,7 @@ def simplify_graph(G, junctions, junction_map):
                 if not nbrs:
                     break
                 if len(nbrs) > 1:
-                    # choose a degree-2 continuation if possible
+                    
                     cand = [x for x in nbrs if G.degree(x) == 2 and x not in junction_map]
                     nxt = cand[0] if cand else nbrs[0]
                 else:

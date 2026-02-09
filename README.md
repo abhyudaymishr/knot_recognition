@@ -18,14 +18,8 @@ This project classifies knot images with a ResNet-based CNN and optionally maps 
 - `raw_knot/`, `outputs/`: Example data and generated artifacts.
 
 ## Install
-Local development install (recommended):
 ```bash
-pip install -e .
-```
-
-If you only want dependencies:
-```bash
-pip install -r requirements.txt
+pip install knot-recognition
 ```
 
 ## Dataset Format
@@ -59,7 +53,7 @@ python -m knot_recognition.infer --image /path/to/image.png --checkpoint ./check
 
 Or, after installation:
 ```bash
-knot-recognition --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
+knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
 ```
 Output JSON includes:
 - `predicted_label`, `pred_prob`
@@ -89,9 +83,9 @@ label,pd_code,gauss_code
 - Not currently used in training or inference.
 
 ## Tests
-```bash
+
 pytest -q
-```
+
 
 ## Known Limitations
 - Chirality detection is heuristic and depends on how flips affect CNN confidence.

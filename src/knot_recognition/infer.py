@@ -1,11 +1,3 @@
-"""
-Inference script:
-- Loads checkpoint
-- Predicts class
-- If mapping CSV provided, returns PD and Gauss code
-- Also attempts to compute Gauss/PD from image using heuristics
-- Detects chirality by comparing model logits on original vs horizontally flipped image
-"""
 import argparse
 import torch
 import torchvision.transforms as T
@@ -56,11 +48,11 @@ def infer_image(img_path, checkpoint, mapping_csv=None):
             pd_code = row.iloc[0].get('pd_code')
             gauss_code = row.iloc[0].get('gauss_code')
 
-    # attempt extraction from image
+    
     skel, gray = preprocess_for_skeleton(np.array(img))
     gauss_auto, pd_auto = extract_gauss_code(skel)
 
-    # chirality detection: compare model on flipped image
+    
     img_flip = img.transpose(Image.FLIP_LEFT_RIGHT)
     x2 = ts(img_flip).unsqueeze(0).to(device)
     with torch.no_grad():

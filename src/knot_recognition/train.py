@@ -86,7 +86,7 @@ def main():
         train_loss, train_acc = train_epoch(model, dl_train, opt, device)
         val_loss, val_acc = val_epoch(model, dl_val, device)
         print(f"Epoch {epoch+1}/{args.epochs}  train_loss={train_loss:.4f} train_acc={train_acc:.4f}  val_loss={val_loss:.4f} val_acc={val_acc:.4f}  time={time.time()-t0:.1f}s")
-        # save best
+        
         if val_acc>best_acc:
             best_acc=val_acc
             torch.save({'model_state':model.state_dict(), 'class_to_idx':dataset.class_to_idx}, os.path.join(args.outdir,'best.pth'))

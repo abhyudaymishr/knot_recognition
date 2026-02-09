@@ -29,7 +29,7 @@ def fetch_gauss_code(knot_name):
 
 def generate_gauss_csv(output_file="gauss_codes.csv"):
     knots = ["unknot"]
-    for n in range(3, 11):   # 3-crossing to 10-crossing
+    for n in range(3, 11):   
         for i in range(1, 200):  
             knots.append(f"{n}_{i}")
 
