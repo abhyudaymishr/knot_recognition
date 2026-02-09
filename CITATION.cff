@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: "Knot Recognition"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - name: "abhyudaymishr"
+version: 0.1.0
+date-released: 2026-02-09
+license: MIT
+repository-code: "https://github.com/abhyudaymishr/knot_recognition"
+url: "https://github.com/abhyudaymishr/knot_recognition"
+keywords:
+  - knot theory
+  - topology
+  - computer vision
+  - image recognition
