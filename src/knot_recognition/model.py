@@ -1,11 +1,28 @@
+from dataclasses import dataclass
 import inspect
 
 import torch.nn as nn
 import torchvision.models as models
 
 
+@dataclass(frozen=True)
+class ResNetConfig:
+    num_classes: int = 1000
+    pretrained: bool = True
+    model_name: str = "resnet18"
+    freeze_backbone: bool = False
+
+
+def build_resnet(config: ResNetConfig):
+    return get_resnet(
+        num_classes=config.num_classes,
+        pretrained=config.pretrained,
+        model_name=config.model_name,
+        freeze_backbone=config.freeze_backbone,
+    )
+
+
 def get_resnet(num_classes=1000, pretrained=True, model_name="resnet18", freeze_backbone=False):
-    
     ctor = getattr(models, model_name, None)
     if ctor is None:
         raise ValueError(f"Unknown model_name '{model_name}'. Expected torchvision resnet variant.")
