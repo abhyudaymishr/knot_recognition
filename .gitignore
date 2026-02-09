@@ -4,3 +4,6 @@ __pycache__/
 outputs/
 *.pyc
 tests/__pycache__/
+build/
+dist/
+*.egg-info/

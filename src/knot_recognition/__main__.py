@@ -1,4 +1,4 @@
-from knot_recognition.train import main
+from .infer import main
 
 
 if __name__ == "__main__":

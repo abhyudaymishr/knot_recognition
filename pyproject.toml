@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "knot-recognition"
+version = "0.1.0"
+description = "Knot recognition and Gauss/PD extraction from images."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {file = "LICENSE"}
+authors = [{name = "abhyudaymishr"}]
+keywords = ["knot theory", "topology", "computer vision", "image recognition"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Scientific/Engineering :: Image Processing",
+]
+dependencies = [
+  "torch",
+  "torchvision",
+  "numpy",
+  "opencv-python",
+  "scikit-image",
+  "scipy",
+  "pandas",
+  "Pillow",
+  "tqdm",
+  "matplotlib",
+  "networkx",
+]
+
+[project.urls]
+Homepage = "https://github.com/abhyudaymishr/knot_recognition"
+Source = "https://github.com/abhyudaymishr/knot_recognition"
+Issues = "https://github.com/abhyudaymishr/knot_recognition/issues"
+
+[project.scripts]
+knot-recognition = "knot_recognition.infer:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

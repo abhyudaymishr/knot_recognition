@@ -4,11 +4,7 @@ from PIL import Image
 import torch
 import numpy as np
 
-# Use relative import so this file works when run with -m or directly
-try:
-    from .utils import imread_any
-except ImportError:
-    from utils import imread_any
+from .utils import imread_any
 
 class KnotImageDataset(Dataset):
     

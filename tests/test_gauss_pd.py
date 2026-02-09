@@ -4,9 +4,9 @@ from pathlib import Path
 
 import numpy as np
 
-sys.path.append(str(Path(__file__).resolve().parents[1]))
+sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
 
-import gauss_pd
+from knot_recognition import gauss_pd
 
 
 def _draw_line(img, r0, c0, r1, c1):

@@ -18,6 +18,12 @@ This project classifies knot images with a ResNet-based CNN and optionally maps 
 - `raw_knot/`, `outputs/`: Example data and generated artifacts.
 
 ## Install
+Local development install (recommended):
+```bash
+pip install -e .
+```
+
+If you only want dependencies:
 ```bash
 pip install -r requirements.txt
 ```
@@ -33,7 +39,7 @@ Each subfolder is a class label and contains images.
 
 ## Training
 ```bash
-python train.py --data-dir /path/to/data --outdir ./checkpoints --epochs 20 --batch 32 --lr 1e-3
+python -m knot_recognition.train --data-dir /path/to/data --outdir ./checkpoints --epochs 20 --batch 32 --lr 1e-3
 ```
 Outputs: `./checkpoints/best.pth`
 
@@ -48,7 +54,12 @@ model = get_resnet(num_classes=10, pretrained=True, model_name="resnet18")
 
 ## Inference
 ```bash
-python infer.py --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
+python -m knot_recognition.infer --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
+```
+
+Or, after installation:
+```bash
+knot-recognition --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
 ```
 Output JSON includes:
 - `predicted_label`, `pred_prob`

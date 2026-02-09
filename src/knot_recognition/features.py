@@ -1,11 +1,4 @@
-"""
-Symmetry-invariant and rotation/scale/translation invariant features for knots.
-Provides:
-- Hu Moments (invariant to scale/rotation/translation)
-- Radial Fourier Descriptor (rotation-invariant signature of contour)
-- Reflection symmetry score (how similar image is to mirrored version)
-- A compact feature vector combining the above for use in classifiers
-"""
+
 import numpy as np
 import cv2
 from skimage.color import rgb2gray
