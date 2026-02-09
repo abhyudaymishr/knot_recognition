@@ -312,15 +312,15 @@ def extract_gauss_code(skel, img_gray=None, *, cfg=None, return_debug=False):
     pairing = pair_edges_at_crossings(SG)
     traversals = trace_curve(SG, pairing)
 
-    # assign crossing IDs
+    
     junction_nodes = [n for n, d in SG.nodes(data=True) if d.get("type") == "junction"]
     crossing_id_map = {n: i + 1 for i, n in enumerate(junction_nodes)}
 
-    # label all edges for PD construction
+    
     all_edges = [_canon_edge(u, v, k) for u, v, k in SG.edges(keys=True)]
     edge_labels = {edge: i + 1 for i, edge in enumerate(all_edges)}
 
-    # build gauss from first traversal (single component expected)
+    
     gauss = []
     if traversals:
         t0 = traversals[0]
