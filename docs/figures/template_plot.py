@@ -1,11 +1,4 @@
-"""
-Publication-ready plot template.
 
-Usage:
-    python docs/figures/template_plot.py
-
-This generates a sample figure in docs/figures/output/.
-"""
 import os
 import numpy as np
 import matplotlib.pyplot as plt

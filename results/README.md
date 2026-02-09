@@ -1,5 +1,5 @@
 # Results
 
-Use this folder for experiment outputs, figures, and reports.
+This folder for experiment outputs, figures, and reports.(Illustrative overview only)
 
-The legacy `outputs/` folder remains for compatibility with existing scripts.
+
