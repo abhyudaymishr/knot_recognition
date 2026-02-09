@@ -1,0 +1,9 @@
+#this to be given to professor for illustration of the mapping example. 
+#The actual PD and Gauss codes should be filled in based on the real data you have for each knot type.
+
+
+label,pd_code,gauss_code
+0_unknot,,
+3_1,"PD[ [1,2],[3,4] ]","1 -2 3"
+4_1,,"1 2 -1 -2"
+# Add your real PD and Gauss codes here for each folder label
