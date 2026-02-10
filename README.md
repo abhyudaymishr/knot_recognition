@@ -19,6 +19,11 @@ Reidemeister move detection (heuristic):
 knot-moves --image /path/to/image.png --overlay results/figures/moves_overlay.png
 ```
 
+Real-time detection:
+```bash
+knot-rt --source 0 --checkpoint ./checkpoints/best.pth --moves
+```
+
 Training:
 ```bash
 python -m knot_recognition.train --data-dir /path/to/data --outdir ./checkpoints --epochs 20 --batch 32 --lr 1e-3

@@ -22,6 +22,11 @@ knot-moves --image /path/to/image.png --overlay results/figures/moves_overlay.pn
 
 Output is a JSON list of candidate moves with bounding boxes and scores.
 
+## Real-time detection
+```bash
+knot-rt --source 0 --checkpoint ./checkpoints/best.pth --moves
+```
+
 ## Run inference (module)
 ```bash
 python -m knot_recognition.infer --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
