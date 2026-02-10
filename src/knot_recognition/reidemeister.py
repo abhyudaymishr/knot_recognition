@@ -28,6 +28,12 @@ class ReidemeisterConfig:
     max_nodes_for_r1: int = 20000
     spur_prune_ratio: float = 0.25
     junction_degree: int = 3
+    use_geometry: bool = True
+    geom_weight: float = 0.5
+    geom_missing_score: float = 0.3
+    use_kpca: bool = False
+    kpca_components: int = 6
+    kpca_gamma: Optional[float] = None
     score_floor: float = 0.0
     nms_iou: float = 0.3
 
@@ -48,11 +54,14 @@ class ReidemeisterDetector:
     def detect(self, img_path: str, overlay_path: Optional[str] = None) -> List[Dict[str, Any]]:
         img = Image.fromarray(imread_any(img_path))
         img_np = np.array(img)
-        skel = self._prepare_skeleton(img_np)
+        skel, gray = self._prepare_skeleton(img_np)
 
         candidates = []
         candidates.extend(self._detect_r2_r3(skel))
         candidates.extend(self._detect_r1(skel))
+
+        if self.config.use_geometry:
+            candidates = self._apply_geometry_scores(candidates, gray)
 
         candidates = self._nms(candidates, iou_thresh=self.config.nms_iou)
         candidates = [c for c in candidates if c.score >= self.config.score_floor]
@@ -65,7 +74,7 @@ class ReidemeisterDetector:
 
     def _prepare_skeleton(self, img_np):
         cfg = self.config
-        base_skel, _ = self.preprocessor.run(img_np)
+        base_skel, gray = self.preprocessor.run(img_np)
         base_h, base_w = base_skel.shape[:2]
         union = base_skel.astype(bool)
 
@@ -78,7 +87,7 @@ class ReidemeisterDetector:
             resized = _resize_mask(skel, (base_h, base_w))
             union |= resized
 
-        return union
+        return union, gray
 
     def _detect_r1(self, skel) -> List[MoveCandidate]:
         cfg = self.config
@@ -107,7 +116,7 @@ class ReidemeisterDetector:
                     move="R1",
                     bbox=bbox,
                     score=score,
-                    details={"cycle_len": len(cycle)},
+                    details={"cycle_len": len(cycle), "size_score": score},
                 )
             )
         return candidates
@@ -152,7 +161,11 @@ class ReidemeisterDetector:
                     move="R2",
                     bbox=bbox,
                     score=score,
-                    details={"edge_count": len(lengths), "avg_len": avg_len},
+                    details={
+                        "edge_count": len(lengths),
+                        "avg_len": avg_len,
+                        "size_score": score,
+                    },
                 )
             )
 
@@ -201,11 +214,75 @@ class ReidemeisterDetector:
                             move="R3",
                             bbox=bbox,
                             score=score,
-                            details={"perimeter": per},
+                            details={"perimeter": per, "size_score": score},
                         )
                     )
 
         return candidates
+
+    def _apply_geometry_scores(self, candidates: List[MoveCandidate], gray) -> List[MoveCandidate]:
+        cfg = self.config
+        if not candidates:
+            return candidates
+
+        by_move: Dict[str, List[MoveCandidate]] = {}
+        for cand in candidates:
+            by_move.setdefault(cand.move, []).append(cand)
+
+        rescored: List[MoveCandidate] = []
+        for move, cands in by_move.items():
+            descs = []
+            idxs = []
+            for i, cand in enumerate(cands):
+                desc = _extract_cov_descriptor(gray, cand.bbox)
+                if desc is None:
+                    continue
+                descs.append(desc)
+                idxs.append(i)
+
+            if not descs:
+                for cand in cands:
+                    details = dict(cand.details)
+                    details.update({"geom_score": cfg.geom_missing_score, "geom_dist": None})
+                    rescored.append(
+                        MoveCandidate(
+                            move=cand.move,
+                            bbox=cand.bbox,
+                            score=cand.score * cfg.geom_missing_score,
+                            details=details,
+                        )
+                    )
+                continue
+
+            X = np.vstack(descs)
+            X = _maybe_kpca(X, cfg)
+            proto = np.median(X, axis=0)
+            dists = np.linalg.norm(X - proto, axis=1)
+            scale = np.median(dists) + 1e-6
+            pos_map = {idx: j for j, idx in enumerate(idxs)}
+
+            for i, cand in enumerate(cands):
+                if i not in pos_map:
+                    geom_score = cfg.geom_missing_score
+                    geom_dist = None
+                else:
+                    xi = X[pos_map[i]]
+                    geom_dist = float(np.linalg.norm(xi - proto))
+                    geom_score = float(np.exp(-geom_dist / scale))
+                size_score = float(cand.details.get("size_score", cand.score))
+                final_score = (1.0 - cfg.geom_weight) * size_score + cfg.geom_weight * geom_score
+                details = dict(cand.details)
+                details.update({"geom_score": geom_score, "geom_dist": geom_dist})
+                rescored.append(
+                    MoveCandidate(
+                        move=cand.move,
+                        bbox=cand.bbox,
+                        score=final_score,
+                        details=details,
+                    )
+                )
+
+        return rescored
 
     def _save_overlay(self, img: Image.Image, candidates: Iterable[MoveCandidate], out_path: str) -> None:
         draw = ImageDraw.Draw(img)
@@ -247,6 +324,62 @@ def _resize_mask(mask: np.ndarray, shape: Tuple[int, int]) -> np.ndarray:
     out_h, out_w = shape
     resized = cv2.resize(mask.astype(np.uint8), (out_w, out_h), interpolation=cv2.INTER_NEAREST)
     return resized.astype(bool)
+
+
+def _extract_cov_descriptor(gray: np.ndarray, bbox: BBox, pad: int = 4, eps: float = 1e-6):
+    if gray is None:
+        return None
+    h, w = gray.shape[:2]
+    x, y, bw, bh = bbox
+    x0 = max(0, int(x) - pad)
+    y0 = max(0, int(y) - pad)
+    x1 = min(w, int(x + bw) + pad)
+    y1 = min(h, int(y + bh) + pad)
+    if x1 - x0 < 5 or y1 - y0 < 5:
+        return None
+    patch = gray[y0:y1, x0:x1].astype(np.float32) / 255.0
+
+    gy, gx = np.gradient(patch)
+    ph, pw = patch.shape[:2]
+    yy, xx = np.mgrid[0:ph, 0:pw]
+    xx = (xx / max(1, pw - 1)) * 2.0 - 1.0
+    yy = (yy / max(1, ph - 1)) * 2.0 - 1.0
+
+    feats = np.stack([xx, yy, gx, gy, patch], axis=-1).reshape(-1, 5)
+    feats = feats - feats.mean(axis=0, keepdims=True)
+    cov = (feats.T @ feats) / max(1, feats.shape[0] - 1)
+    cov = cov + eps * np.eye(cov.shape[0])
+
+    vals, vecs = np.linalg.eigh(cov)
+    vals = np.clip(vals, eps, None)
+    log_cov = vecs @ np.diag(np.log(vals)) @ vecs.T
+    idx = np.triu_indices_from(log_cov)
+    return log_cov[idx]
+
+
+def _maybe_kpca(X: np.ndarray, cfg: ReidemeisterConfig) -> np.ndarray:
+    if not cfg.use_kpca or X.shape[0] < max(3, cfg.kpca_components + 1):
+        return X
+    gamma = cfg.kpca_gamma
+    if gamma is None:
+        dists = _pairwise_sq_dists(X)
+        med = np.median(dists[dists > 0]) if np.any(dists > 0) else 1.0
+        gamma = 1.0 / max(1e-6, med)
+    K = np.exp(-gamma * _pairwise_sq_dists(X))
+    one_n = np.ones((K.shape[0], K.shape[0])) / K.shape[0]
+    Kc = K - one_n @ K - K @ one_n + one_n @ K @ one_n
+    vals, vecs = np.linalg.eigh(Kc)
+    order = np.argsort(vals)[::-1]
+    vals = vals[order][: cfg.kpca_components]
+    vecs = vecs[:, order][:, : cfg.kpca_components]
+    vals = np.clip(vals, 1e-9, None)
+    return vecs * np.sqrt(vals)
+
+
+def _pairwise_sq_dists(X: np.ndarray) -> np.ndarray:
+    G = X @ X.T
+    sq = np.sum(X ** 2, axis=1, keepdims=True)
+    return np.maximum(0.0, sq - 2 * G + sq.T)
 
 
 def _bbox_iou(a: BBox, b: BBox) -> float:
