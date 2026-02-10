@@ -70,6 +70,10 @@ class KnotRecognizer:
     @torch.inference_mode()
     def predict(self, img_path, mapping_csv: Optional[str] = None):
         img = Image.fromarray(imread_any(img_path))
+        return self.predict_image(img, mapping_csv=mapping_csv)
+
+    @torch.inference_mode()
+    def predict_image(self, img: Image.Image, mapping_csv: Optional[str] = None):
         x = self.transform(img).unsqueeze(0).to(self.device)
 
         out = self.model(x)

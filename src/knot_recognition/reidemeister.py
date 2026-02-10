@@ -54,6 +54,9 @@ class ReidemeisterDetector:
     def detect(self, img_path: str, overlay_path: Optional[str] = None) -> List[Dict[str, Any]]:
         img = Image.fromarray(imread_any(img_path))
         img_np = np.array(img)
+        return self.detect_array(img_np, overlay_path=overlay_path)
+
+    def detect_array(self, img_np: np.ndarray, overlay_path: Optional[str] = None) -> List[Dict[str, Any]]:
         skel, gray = self._prepare_skeleton(img_np)
 
         candidates = []
@@ -68,6 +71,7 @@ class ReidemeisterDetector:
         candidates.sort(key=lambda c: c.score, reverse=True)
 
         if overlay_path:
+            img = Image.fromarray(img_np)
             self._save_overlay(img, candidates, overlay_path)
 
         return [asdict(c) for c in candidates]
