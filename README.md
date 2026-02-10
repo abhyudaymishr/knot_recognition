@@ -14,6 +14,11 @@ Inference (CLI):
 knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
 ```
 
+Reidemeister move detection (heuristic):
+```bash
+knot-moves --image /path/to/image.png --overlay results/figures/moves_overlay.png
+```
+
 Training:
 ```bash
 python -m knot_recognition.train --data-dir /path/to/data --outdir ./checkpoints --epochs 20 --batch 32 --lr 1e-3
