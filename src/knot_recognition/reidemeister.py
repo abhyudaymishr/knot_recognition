@@ -1,13 +1,7 @@
-"""
-Heuristic Reidemeister move detection from a single knot diagram image.
-
-This module provides a conservative detector for R1/R2/R3 candidates using
-skeleton geometry and simplified crossing graphs. It is intended for
-qualitative inspection and pipeline development, not as a definitive oracle.
-"""
 from dataclasses import asdict, dataclass
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
+import cv2
 import numpy as np
 import networkx as nx
 from PIL import Image, ImageDraw
@@ -23,10 +17,17 @@ BBox = Tuple[float, float, float, float]
 @dataclass(frozen=True)
 class ReidemeisterConfig:
     image_width: int = 512
+    scales: Tuple[float, ...] = (0.85, 1.0, 1.15)
     r1_max_cycle_len: int = 80
+    r1_min_cycle_len: int = 8
+    r1_max_junctions: int = 2
     r2_max_edge_len: int = 120
+    r2_length_ratio: float = 1.5
     r3_max_perimeter: int = 220
+    r3_edge_ratio: float = 1.5
     max_nodes_for_r1: int = 20000
+    spur_prune_ratio: float = 0.25
+    junction_degree: int = 3
     score_floor: float = 0.0
     nms_iou: float = 0.3
 
@@ -47,7 +48,7 @@ class ReidemeisterDetector:
     def detect(self, img_path: str, overlay_path: Optional[str] = None) -> List[Dict[str, Any]]:
         img = Image.fromarray(imread_any(img_path))
         img_np = np.array(img)
-        skel, _ = self.preprocessor.run(img_np)
+        skel = self._prepare_skeleton(img_np)
 
         candidates = []
         candidates.extend(self._detect_r2_r3(skel))
@@ -62,19 +63,41 @@ class ReidemeisterDetector:
 
         return [asdict(c) for c in candidates]
 
+    def _prepare_skeleton(self, img_np):
+        cfg = self.config
+        base_skel, _ = self.preprocessor.run(img_np)
+        base_h, base_w = base_skel.shape[:2]
+        union = base_skel.astype(bool)
+
+        for scale in cfg.scales:
+            if abs(scale - 1.0) < 1e-6:
+                continue
+            scaled_width = max(32, int(cfg.image_width * scale))
+            scaled_pre = Preprocessor(PreprocessConfig(width=scaled_width))
+            skel, _ = scaled_pre.run(img_np)
+            resized = _resize_mask(skel, (base_h, base_w))
+            union |= resized
+
+        return union
+
     def _detect_r1(self, skel) -> List[MoveCandidate]:
         cfg = self.config
         G = skeleton_to_graph(skel, connectivity=8)
-        G = prune_spurs(G, min_length=cfg.r1_max_cycle_len // 4)
+        spur_len = max(2, int(cfg.spur_prune_ratio * cfg.r1_max_cycle_len))
+        G = prune_spurs(G, min_length=spur_len)
 
         if G.number_of_nodes() > cfg.max_nodes_for_r1:
             return []
 
-        # Use a simple graph for cycle detection
         cycles = nx.cycle_basis(G)
         candidates = []
         for cycle in cycles:
+            if len(cycle) < cfg.r1_min_cycle_len:
+                continue
             if len(cycle) > cfg.r1_max_cycle_len:
+                continue
+            junction_count = sum(1 for n in cycle if G.degree(n) >= cfg.junction_degree)
+            if junction_count > cfg.r1_max_junctions:
                 continue
             coords = [G.nodes[n]["pos"] for n in cycle]
             bbox = _bbox_from_coords(coords)
@@ -92,13 +115,13 @@ class ReidemeisterDetector:
     def _detect_r2_r3(self, skel) -> List[MoveCandidate]:
         cfg = self.config
         G = skeleton_to_graph(skel, connectivity=8)
-        G = prune_spurs(G, min_length=cfg.r2_max_edge_len // 4)
-        junctions, junction_map = cluster_junctions(G, deg_thresh=3)
+        spur_len = max(2, int(cfg.spur_prune_ratio * cfg.r2_max_edge_len))
+        G = prune_spurs(G, min_length=spur_len)
+        junctions, junction_map = cluster_junctions(G, deg_thresh=cfg.junction_degree)
         if not junctions:
             return []
         SG = simplify_graph(G, junctions, junction_map)
 
-        # Build edge length map for junction-only edges
         edge_lengths = {}
         edge_paths = {}
         for u, v, k, data in SG.edges(keys=True, data=True):
@@ -111,9 +134,12 @@ class ReidemeisterDetector:
 
         candidates = []
 
-        # R2: parallel edges between two junctions
         for (u, v), lengths in edge_lengths.items():
             if len(lengths) < 2:
+                continue
+            min_len = min(lengths)
+            max_len = max(lengths)
+            if min_len <= 0 or (max_len / min_len) > cfg.r2_length_ratio:
                 continue
             avg_len = float(sum(lengths)) / len(lengths)
             if avg_len > cfg.r2_max_edge_len:
@@ -152,6 +178,7 @@ class ReidemeisterDetector:
 
                     per = 0.0
                     paths = []
+                    edge_lens = []
                     for a, b in [(u, v), (v, w), (u, w)]:
                         lengths = edge_lengths.get((a, b)) or edge_lengths.get((b, a))
                         paths_list = edge_paths.get((a, b)) or edge_paths.get((b, a))
@@ -159,9 +186,12 @@ class ReidemeisterDetector:
                             per = None
                             break
                         idx = int(np.argmin(lengths))
+                        edge_lens.append(lengths[idx])
                         per += lengths[idx]
                         paths.append(paths_list[idx])
                     if per is None or per > cfg.r3_max_perimeter:
+                        continue
+                    if max(edge_lens) / max(1.0, min(edge_lens)) > cfg.r3_edge_ratio:
                         continue
 
                     bbox = _bbox_from_paths(paths)
@@ -211,6 +241,12 @@ def _bbox_from_paths(paths: List[List[Tuple[int, int]]]) -> BBox:
     if not coords:
         return (0.0, 0.0, 1.0, 1.0)
     return _bbox_from_coords(coords)
+
+
+def _resize_mask(mask: np.ndarray, shape: Tuple[int, int]) -> np.ndarray:
+    out_h, out_w = shape
+    resized = cv2.resize(mask.astype(np.uint8), (out_w, out_h), interpolation=cv2.INTER_NEAREST)
+    return resized.astype(bool)
 
 
 def _bbox_iou(a: BBox, b: BBox) -> float:
