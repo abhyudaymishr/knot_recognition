@@ -59,16 +59,9 @@ class ReidemeisterDetector:
     def detect_array(self, img_np: np.ndarray, overlay_path: Optional[str] = None) -> List[Dict[str, Any]]:
         skel, gray = self._prepare_skeleton(img_np)
 
-        candidates = []
-        candidates.extend(self._detect_r2_r3(skel))
-        candidates.extend(self._detect_r1(skel))
+        candidates = self._collect_candidates(skel)
 
-        if self.config.use_geometry:
-            candidates = self._apply_geometry_scores(candidates, gray)
-
-        candidates = self._nms(candidates, iou_thresh=self.config.nms_iou)
-        candidates = [c for c in candidates if c.score >= self.config.score_floor]
-        candidates.sort(key=lambda c: c.score, reverse=True)
+        candidates = self._postprocess(candidates, gray)
 
         if overlay_path:
             img = Image.fromarray(img_np)
@@ -92,6 +85,20 @@ class ReidemeisterDetector:
             union |= resized
 
         return union, gray
+
+    def _collect_candidates(self, skel) -> List[MoveCandidate]:
+        candidates = []
+        candidates.extend(self._detect_r2_r3(skel))
+        candidates.extend(self._detect_r1(skel))
+        return candidates
+
+    def _postprocess(self, candidates: List[MoveCandidate], gray) -> List[MoveCandidate]:
+        if self.config.use_geometry:
+            candidates = self._apply_geometry_scores(candidates, gray)
+        candidates = self._nms(candidates, iou_thresh=self.config.nms_iou)
+        candidates = [c for c in candidates if c.score >= self.config.score_floor]
+        candidates.sort(key=lambda c: c.score, reverse=True)
+        return candidates
 
     def _detect_r1(self, skel) -> List[MoveCandidate]:
         cfg = self.config
@@ -134,47 +141,13 @@ class ReidemeisterDetector:
         if not junctions:
             return []
         SG = simplify_graph(G, junctions, junction_map)
-
-        edge_lengths = {}
-        edge_paths = {}
-        for u, v, k, data in SG.edges(keys=True, data=True):
-            if SG.nodes[u]["type"] != "junction" or SG.nodes[v]["type"] != "junction":
-                continue
-            path = data.get("path", [])
-            length = max(1, len(path))
-            edge_lengths.setdefault((u, v), []).append(length)
-            edge_paths.setdefault((u, v), []).append(path)
+        edge_lengths, edge_paths = _edge_stats(SG)
 
         candidates = []
-
-        for (u, v), lengths in edge_lengths.items():
-            if len(lengths) < 2:
-                continue
-            min_len = min(lengths)
-            max_len = max(lengths)
-            if min_len <= 0 or (max_len / min_len) > cfg.r2_length_ratio:
-                continue
-            avg_len = float(sum(lengths)) / len(lengths)
-            if avg_len > cfg.r2_max_edge_len:
-                continue
-            paths = edge_paths[(u, v)]
-            bbox = _bbox_from_paths(paths)
-            score = _size_score(avg_len, cfg.r2_max_edge_len)
-            candidates.append(
-                MoveCandidate(
-                    move="R2",
-                    bbox=bbox,
-                    score=score,
-                    details={
-                        "edge_count": len(lengths),
-                        "avg_len": avg_len,
-                        "size_score": score,
-                    },
-                )
-            )
+        candidates.extend(self._r2_candidates(edge_lengths, edge_paths))
 
         # R3: triangle among three junctions
-        junction_nodes = [n for n, d in SG.nodes(data=True) if d.get("type") == "junction"]
+        junction_nodes = _junction_nodes(SG)
         adj = {n: set() for n in junction_nodes}
         for (u, v), lengths in edge_lengths.items():
             adj[u].add(v)
@@ -222,6 +195,36 @@ class ReidemeisterDetector:
                         )
                     )
 
+        return candidates
+
+    def _r2_candidates(self, edge_lengths, edge_paths) -> List[MoveCandidate]:
+        cfg = self.config
+        candidates = []
+        for (u, v), lengths in edge_lengths.items():
+            if len(lengths) < 2:
+                continue
+            min_len = min(lengths)
+            max_len = max(lengths)
+            if min_len <= 0 or (max_len / min_len) > cfg.r2_length_ratio:
+                continue
+            avg_len = float(sum(lengths)) / len(lengths)
+            if avg_len > cfg.r2_max_edge_len:
+                continue
+            paths = edge_paths[(u, v)]
+            bbox = _bbox_from_paths(paths)
+            score = _size_score(avg_len, cfg.r2_max_edge_len)
+            candidates.append(
+                MoveCandidate(
+                    move="R2",
+                    bbox=bbox,
+                    score=score,
+                    details={
+                        "edge_count": len(lengths),
+                        "avg_len": avg_len,
+                        "size_score": score,
+                    },
+                )
+            )
         return candidates
 
     def _apply_geometry_scores(self, candidates: List[MoveCandidate], gray) -> List[MoveCandidate]:
@@ -328,6 +331,23 @@ def _resize_mask(mask: np.ndarray, shape: Tuple[int, int]) -> np.ndarray:
     out_h, out_w = shape
     resized = cv2.resize(mask.astype(np.uint8), (out_w, out_h), interpolation=cv2.INTER_NEAREST)
     return resized.astype(bool)
+
+
+def _junction_nodes(SG) -> List[int]:
+    return [n for n, d in SG.nodes(data=True) if d.get("type") == "junction"]
+
+
+def _edge_stats(SG):
+    edge_lengths = {}
+    edge_paths = {}
+    for u, v, k, data in SG.edges(keys=True, data=True):
+        if SG.nodes[u]["type"] != "junction" or SG.nodes[v]["type"] != "junction":
+            continue
+        path = data.get("path", [])
+        length = max(1, len(path))
+        edge_lengths.setdefault((u, v), []).append(length)
+        edge_paths.setdefault((u, v), []).append(path)
+    return edge_lengths, edge_paths
 
 
 def _extract_cov_descriptor(gray: np.ndarray, bbox: BBox, pad: int = 4, eps: float = 1e-6):
