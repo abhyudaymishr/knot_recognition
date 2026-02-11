@@ -18,6 +18,11 @@ Optional symmetry-invariant feature extraction:
 knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv --features
 ```
 
+Force a device:
+```bash
+knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --device cpu
+```
+
 ```bash
 knot-moves --image /path/to/image.png --overlay results/figures/moves_overlay.png
 ```
@@ -25,6 +30,11 @@ knot-moves --image /path/to/image.png --overlay results/figures/moves_overlay.pn
 Training:
 ```bash
 python -m knot_recognition.train --data-dir /path/to/data --outdir ./checkpoints --epochs 20 --batch 32 --lr 1e-3
+```
+
+Training on a specific device:
+```bash
+python -m knot_recognition.train --data-dir /path/to/data --device cuda
 ```
 
 ## Project Structure

@@ -126,12 +126,20 @@ class KnotRecognizer:
 
 
 def load_checkpoint(path, device="cpu"):
-    device = _resolve_device(device)
+    device = _resolve_device(None, str(device))
     return _load_model_from_checkpoint(path, device)
 
 
-def infer_image(img_path, checkpoint, mapping_csv=None, config: Optional[InferenceConfig] = None):
-    recognizer = KnotRecognizer.from_checkpoint(checkpoint, config=config)
+def infer_image(
+    img_path,
+    checkpoint,
+    mapping_csv=None,
+    config: Optional[InferenceConfig] = None,
+    device: Optional[str] = None,
+):
+    recognizer = KnotRecognizer.from_checkpoint(
+        checkpoint, config=config, device=_resolve_device(None, device)
+    )
     return recognizer.predict(img_path, mapping_csv=mapping_csv)
 
 
@@ -140,10 +148,17 @@ def main():
     parser.add_argument('--image', required=True)
     parser.add_argument('--checkpoint', required=True)
     parser.add_argument('--mapping', default=None)
+    parser.add_argument('--device', default=None)
     parser.add_argument('--features', action='store_true')
     args = parser.parse_args()
     config = InferenceConfig(include_features=args.features)
-    res = infer_image(args.image, args.checkpoint, args.mapping, config=config)
+    res = infer_image(
+        args.image,
+        args.checkpoint,
+        args.mapping,
+        config=config,
+        device=args.device,
+    )
 
     import json
     print(json.dumps(res, indent=2, default=str))
@@ -153,7 +168,9 @@ if __name__ == '__main__':
     main()
 
 
-def _resolve_device(device: Optional[torch.device]) -> torch.device:
+def _resolve_device(device: Optional[torch.device], device_str: Optional[str] = None) -> torch.device:
+    if device_str:
+        return torch.device(device_str)
     if device is None:
         return torch.device("cuda" if torch.cuda.is_available() else "cpu")
     return device

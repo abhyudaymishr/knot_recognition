@@ -28,6 +28,7 @@ class TrainConfig:
     seed: Optional[int] = None
     val_split: float = 0.2
     split_strategy: str = "random"  # "random" or "stratified"
+    device: Optional[str] = None
 
 
 class Trainer:
@@ -35,7 +36,7 @@ class Trainer:
         self.config = config
         if config.seed is not None:
             _seed_everything(config.seed)
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = _resolve_device(config.device)
 
         self.transforms = T.Compose(
             [
@@ -193,6 +194,7 @@ def main():
     parser.add_argument('--seed', type=int, default=None)
     parser.add_argument('--val-split', type=float, default=0.2)
     parser.add_argument('--split-strategy', default="random", choices=["random", "stratified"])
+    parser.add_argument('--device', default=None)
     args = parser.parse_args()
 
     config = TrainConfig(
@@ -204,6 +206,7 @@ def main():
         seed=args.seed,
         val_split=args.val_split,
         split_strategy=args.split_strategy,
+        device=args.device,
     )
     Trainer(config).fit()
 
@@ -215,6 +218,12 @@ def _seed_everything(seed: int) -> None:
     torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
+
+
+def _resolve_device(device: Optional[str]) -> torch.device:
+    if device:
+        return torch.device(device)
+    return torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def _split_indices(

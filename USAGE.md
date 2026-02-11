@@ -10,6 +10,11 @@ pip install knot-recognition
 python -m knot_recognition.train --data-dir /path/to/data --outdir ./checkpoints --epochs 20 --batch 32 --lr 1e-3
 ```
 
+Training on a specific device:
+```bash
+python -m knot_recognition.train --data-dir /path/to/data --device cpu
+```
+
 ## Run inference (CLI)
 ```bash
 knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
@@ -18,6 +23,11 @@ knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping ma
 Include symmetry-invariant features:
 ```bash
 knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv --features
+```
+
+Force a device:
+```bash
+knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --device cpu
 ```
 
 ## Detect Reidemeister moves (heuristic)
@@ -30,6 +40,11 @@ Output is a JSON list of candidate moves with bounding boxes and scores.
 ## Run inference (module)
 ```bash
 python -m knot_recognition.infer --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
+```
+
+Force a device:
+```bash
+python -m knot_recognition.infer --image /path/to/image.png --checkpoint ./checkpoints/best.pth --device cuda
 ```
 
 ## Python API
