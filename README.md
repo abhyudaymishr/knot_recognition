@@ -9,18 +9,12 @@ pip install knot-recognition
 ```
 
 ## Quickstart
-Inference (CLI):
 ```bash
 knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
 ```
 
-Reidemeister move detection (heuristic):
 ```bash
 knot-moves --image /path/to/image.png --overlay results/figures/moves_overlay.png
-```
-
-Real-time detection:
-```bash
 ```
 
 Training:
@@ -49,10 +43,8 @@ data_root/
 Each subfolder is a class label and contains images.
 
 ## Methods (Summary)
-### CNN Classification
 `get_resnet(num_classes=1000, pretrained=True, model_name="resnet18", freeze_backbone=False)`
 
-### Heuristic Gauss/PD Extraction
 - Skeleton graph -> spur pruning -> junction clustering -> graph simplification
 - Edge pairing at crossings -> curve traversal -> PD construction
 - Entry point: `extract_gauss_code(skel, img_gray=None, cfg=None, return_debug=False)`
