@@ -15,6 +15,11 @@ python -m knot_recognition.train --data-dir /path/to/data --outdir ./checkpoints
 knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
 ```
 
+Include symmetry-invariant features:
+```bash
+knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv --features
+```
+
 ## Detect Reidemeister moves (heuristic)
 ```bash
 knot-moves --image /path/to/image.png --overlay results/figures/moves_overlay.png
@@ -44,4 +49,5 @@ print(result)
 - `predicted_label`, `pred_prob`
 - `mapping_pd`, `mapping_gauss`
 - `auto_gauss`, `auto_pd` (heuristic)
+- `features` (symmetry-invariant descriptor if `--features` is set)
 - `chirality`, `chirality_confidence`

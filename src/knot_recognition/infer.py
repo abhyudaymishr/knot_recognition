@@ -10,6 +10,7 @@ import torchvision.transforms as T
 from PIL import Image
 
 from .gauss_pd import GaussPDConfig, GaussPDExtractor
+from .features import extract_symmetry_invariant_features
 from .model import get_resnet
 from .preprocess import Preprocessor
 from .utils import imread_any
@@ -19,6 +20,8 @@ from .utils import imread_any
 class InferenceConfig:
     image_size: int = 224
     chirality_threshold: float = 0.2
+    include_features: bool = False
+    feature_resize: int = 256
 
 
 class KnotRecognizer:
@@ -79,6 +82,14 @@ class KnotRecognizer:
         out = self.model(x)
         return torch.softmax(out, dim=1).cpu().numpy()[0]
 
+    def _maybe_features(self, img: Image.Image):
+        if not self.config.include_features:
+            return None
+        feats = extract_symmetry_invariant_features(
+            np.array(img), resize_to=self.config.feature_resize
+        )
+        return feats.tolist()
+
     @torch.inference_mode()
     def predict(self, img_path, mapping_csv: Optional[str] = None):
         img = Image.fromarray(imread_any(img_path))
@@ -94,6 +105,7 @@ class KnotRecognizer:
 
         skel, _ = self.preprocessor.run(np.array(img))
         gauss_auto, pd_auto = self.gauss_extractor.extract(skel)
+        features = self._maybe_features(img)
 
         probs_flip = self._predict_probs(img.transpose(Image.FLIP_LEFT_RIGHT))
         chirality, chirality_confidence = self._chirality_from_scores(
@@ -107,6 +119,7 @@ class KnotRecognizer:
             "mapping_gauss": gauss_code,
             "auto_gauss": gauss_auto,
             "auto_pd": pd_auto,
+            "features": features,
             "chirality": chirality,
             "chirality_confidence": chirality_confidence,
         }
@@ -117,8 +130,8 @@ def load_checkpoint(path, device="cpu"):
     return _load_model_from_checkpoint(path, device)
 
 
-def infer_image(img_path, checkpoint, mapping_csv=None):
-    recognizer = KnotRecognizer.from_checkpoint(checkpoint)
+def infer_image(img_path, checkpoint, mapping_csv=None, config: Optional[InferenceConfig] = None):
+    recognizer = KnotRecognizer.from_checkpoint(checkpoint, config=config)
     return recognizer.predict(img_path, mapping_csv=mapping_csv)
 
 
@@ -127,8 +140,10 @@ def main():
     parser.add_argument('--image', required=True)
     parser.add_argument('--checkpoint', required=True)
     parser.add_argument('--mapping', default=None)
+    parser.add_argument('--features', action='store_true')
     args = parser.parse_args()
-    res = infer_image(args.image, args.checkpoint, args.mapping)
+    config = InferenceConfig(include_features=args.features)
+    res = infer_image(args.image, args.checkpoint, args.mapping, config=config)
 
     import json
     print(json.dumps(res, indent=2, default=str))

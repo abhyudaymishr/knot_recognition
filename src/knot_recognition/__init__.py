@@ -2,6 +2,7 @@ __version__ = "0.1.0"
 
 from .dataset import DatasetConfig, KnotImageDataset
 from .gauss_pd import GaussPDConfig, GaussPDExtractor, extract_gauss_code
+from .features import extract_symmetry_invariant_features
 from .infer import InferenceConfig, KnotRecognizer, infer_image, load_checkpoint
 from .model import ResNetConfig, build_resnet, get_resnet
 from .preprocess import PreprocessConfig, Preprocessor, preprocess_for_skeleton
@@ -15,6 +16,7 @@ __all__ = [
     "GaussPDConfig",
     "GaussPDExtractor",
     "extract_gauss_code",
+    "extract_symmetry_invariant_features",
     "InferenceConfig",
     "KnotRecognizer",
     "infer_image",

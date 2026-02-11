@@ -13,6 +13,11 @@ pip install knot-recognition
 knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
 ```
 
+Optional symmetry-invariant feature extraction:
+```bash
+knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv --features
+```
+
 ```bash
 knot-moves --image /path/to/image.png --overlay results/figures/moves_overlay.png
 ```
