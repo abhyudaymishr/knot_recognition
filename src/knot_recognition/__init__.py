@@ -5,7 +5,6 @@ from .gauss_pd import GaussPDConfig, GaussPDExtractor, extract_gauss_code
 from .infer import InferenceConfig, KnotRecognizer, infer_image, load_checkpoint
 from .model import ResNetConfig, build_resnet, get_resnet
 from .preprocess import PreprocessConfig, Preprocessor, preprocess_for_skeleton
-from .realtime import RealTimeConfig, RealTimeKnotApp
 from .reidemeister import ReidemeisterConfig, ReidemeisterDetector, detect_moves
 from .train import TrainConfig, Trainer, train
 
@@ -26,8 +25,6 @@ __all__ = [
     "PreprocessConfig",
     "Preprocessor",
     "preprocess_for_skeleton",
-    "RealTimeConfig",
-    "RealTimeKnotApp",
     "ReidemeisterConfig",
     "ReidemeisterDetector",
     "detect_moves",

@@ -21,7 +21,6 @@ knot-moves --image /path/to/image.png --overlay results/figures/moves_overlay.pn
 
 Real-time detection:
 ```bash
-knot-rt --source 0 --checkpoint ./checkpoints/best.pth --moves
 ```
 
 Training:

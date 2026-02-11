@@ -24,7 +24,6 @@ Output is a JSON list of candidate moves with bounding boxes and scores.
 
 ## Real-time detection
 ```bash
-knot-rt --source 0 --checkpoint ./checkpoints/best.pth --moves
 ```
 
 ## Run inference (module)

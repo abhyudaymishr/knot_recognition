@@ -43,7 +43,6 @@ Issues = "https://github.com/abhyudaymishr/knot_recognition/issues"
 knot-recognition = "knot_recognition.infer:main"
 knot = "knot_recognition.infer:main"
 knot-moves = "knot_recognition.reidemeister:main"
-knot-rt = "knot_recognition.realtime:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
