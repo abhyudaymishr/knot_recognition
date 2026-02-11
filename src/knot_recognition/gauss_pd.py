@@ -112,25 +112,9 @@ def cluster_junctions(G, deg_thresh=3):
 
 def simplify_graph(G, junctions, junction_map):
     SG = nx.MultiGraph()
-
-    next_id = 0
-    junction_id_map = {}
-    terminal_for_pixel = {}
-
-    for jid, data in junctions.items():
-        nid = next_id
-        next_id += 1
-        junction_id_map[jid] = nid
-        SG.add_node(nid, type="junction", pos=data["pos"], pixels=set(data["nodes"]))
-        for n in data["nodes"]:
-            terminal_for_pixel[n] = nid
-
-    endpoint_nodes = {n for n, d in G.degree() if d == 1 and n not in junction_map}
-    for n in endpoint_nodes:
-        nid = next_id
-        next_id += 1
-        SG.add_node(nid, type="endpoint", pos=G.nodes[n]["pos"], pixels={n})
-        terminal_for_pixel[n] = nid
+    terminal_for_pixel, endpoint_nodes, junction_id_map = _build_terminals(
+        SG, G, junctions, junction_map
+    )
 
     def is_terminal(n):
         return n in junction_map or n in endpoint_nodes
@@ -141,41 +125,19 @@ def simplify_graph(G, junctions, junction_map):
             if start_pixel in junction_map and nb in junction_map:
                 if junction_map[nb] == junction_map[start_pixel]:
                     continue
-            ekey = (min(start_pixel, nb), max(start_pixel, nb))
-            if ekey in visited_edges:
+            path = _walk_path(
+                G,
+                start_pixel,
+                nb,
+                junction_map,
+                endpoint_nodes,
+                visited_edges,
+            )
+            if not path:
                 continue
-            path = [start_pixel, nb]
-            visited_edges.add(ekey)
-            prev = start_pixel
-            cur = nb
-            while True:
-                if is_terminal(cur):
-                    break
-                nbrs = [x for x in G.neighbors(cur) if x != prev]
-                if not nbrs:
-                    break
-                if len(nbrs) > 1:
-                    
-                    cand = [x for x in nbrs if G.degree(x) == 2 and x not in junction_map]
-                    nxt = cand[0] if cand else nbrs[0]
-                else:
-                    nxt = nbrs[0]
-                ekey = (min(cur, nxt), max(cur, nxt))
-                if ekey in visited_edges:
-                    break
-                visited_edges.add(ekey)
-                path.append(nxt)
-                prev, cur = cur, nxt
-
-            end_pixel = cur
-            if end_pixel in junction_map:
-                end_tid = junction_id_map[junction_map[end_pixel]]
-            elif end_pixel in endpoint_nodes:
-                end_tid = terminal_for_pixel[end_pixel]
-            else:
-                continue
-
-            if start_tid == end_tid:
+            end_pixel = path[-1]
+            end_tid = _terminal_id(end_pixel, junction_map, endpoint_nodes, terminal_for_pixel, junction_id_map)
+            if end_tid is None or start_tid == end_tid:
                 continue
             coords = [G.nodes[n]["pos"] for n in path]
             SG.add_edge(start_tid, end_tid, path=coords)
@@ -241,36 +203,8 @@ def trace_curve(SG, pairing):
     for edge in edges:
         if edge in used_edges:
             continue
-        u, v, k = edge
-        start_edge = edge
-        start_node = u
-        current_edge = edge
-        current_node = start_node
-        crossings = []
-        edge_order = []
-        guard = 0
-        while True:
-            if current_edge in used_edges and (current_edge != start_edge or current_node != start_node):
-                break
-            used_edges.add(current_edge)
-            edge_order.append(current_edge)
-            u, v, k = current_edge
-            next_node = v if current_node == u else u
-            if SG.nodes[next_node]["type"] == "junction":
-                crossings.append(next_node)
-                partner = pairing.get((next_node, current_edge))
-                if partner is None:
-                    break
-                current_node = next_node
-                current_edge = partner
-            else:
-                break
-            guard += 1
-            if current_edge == start_edge and current_node == start_node:
-                break
-            if guard > SG.number_of_edges() * 4:
-                break
-        traversals.append({"crossings": crossings, "edges": edge_order})
+        traversal = _trace_from_edge(SG, pairing, edge, used_edges)
+        traversals.append(traversal)
     return traversals
 
 
@@ -286,6 +220,101 @@ def _edge_angle_at_node(path, at_start=True):
     dy = p1[0] - p0[0]
     dx = p1[1] - p0[1]
     return math.atan2(dy, dx)
+
+
+def _build_terminals(SG, G, junctions, junction_map):
+    next_id = 0
+    junction_id_map = {}
+    terminal_for_pixel = {}
+
+    for jid, data in junctions.items():
+        nid = next_id
+        next_id += 1
+        junction_id_map[jid] = nid
+        SG.add_node(nid, type="junction", pos=data["pos"], pixels=set(data["nodes"]))
+        for n in data["nodes"]:
+            terminal_for_pixel[n] = nid
+
+    endpoint_nodes = {n for n, d in G.degree() if d == 1 and n not in junction_map}
+    for n in endpoint_nodes:
+        nid = next_id
+        next_id += 1
+        SG.add_node(nid, type="endpoint", pos=G.nodes[n]["pos"], pixels={n})
+        terminal_for_pixel[n] = nid
+
+    return terminal_for_pixel, endpoint_nodes, junction_id_map
+
+
+def _terminal_id(pixel, junction_map, endpoint_nodes, terminal_for_pixel, junction_id_map):
+    if pixel in junction_map:
+        return junction_id_map[junction_map[pixel]]
+    if pixel in endpoint_nodes:
+        return terminal_for_pixel[pixel]
+    return None
+
+
+def _walk_path(G, start_pixel, next_pixel, junction_map, endpoint_nodes, visited_edges):
+    def is_terminal(n):
+        return n in junction_map or n in endpoint_nodes
+
+    ekey = (min(start_pixel, next_pixel), max(start_pixel, next_pixel))
+    if ekey in visited_edges:
+        return None
+    path = [start_pixel, next_pixel]
+    visited_edges.add(ekey)
+    prev = start_pixel
+    cur = next_pixel
+    while True:
+        if is_terminal(cur):
+            break
+        nbrs = [x for x in G.neighbors(cur) if x != prev]
+        if not nbrs:
+            break
+        if len(nbrs) > 1:
+            cand = [x for x in nbrs if G.degree(x) == 2 and x not in junction_map]
+            nxt = cand[0] if cand else nbrs[0]
+        else:
+            nxt = nbrs[0]
+        ekey = (min(cur, nxt), max(cur, nxt))
+        if ekey in visited_edges:
+            break
+        visited_edges.add(ekey)
+        path.append(nxt)
+        prev, cur = cur, nxt
+    return path
+
+
+def _trace_from_edge(SG, pairing, edge, used_edges):
+    u, v, _ = edge
+    start_edge = edge
+    start_node = u
+    current_edge = edge
+    current_node = start_node
+    crossings = []
+    edge_order = []
+    guard = 0
+    while True:
+        if current_edge in used_edges and (current_edge != start_edge or current_node != start_node):
+            break
+        used_edges.add(current_edge)
+        edge_order.append(current_edge)
+        u, v, _ = current_edge
+        next_node = v if current_node == u else u
+        if SG.nodes[next_node]["type"] == "junction":
+            crossings.append(next_node)
+            partner = pairing.get((next_node, current_edge))
+            if partner is None:
+                break
+            current_node = next_node
+            current_edge = partner
+        else:
+            break
+        guard += 1
+        if current_edge == start_edge and current_node == start_node:
+            break
+        if guard > SG.number_of_edges() * 4:
+            break
+    return {"crossings": crossings, "edges": edge_order}
 
 
 def build_pd(SG, edge_labels, crossing_id_map):
