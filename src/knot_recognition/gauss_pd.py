@@ -24,15 +24,20 @@ DEFAULT_CFG = {
 }
 
 
+_NEIGHBORS = {
+    4: [(-1, 0), (1, 0), (0, -1), (0, 1)],
+    8: [
+        (-1, 0), (1, 0), (0, -1), (0, 1),
+        (-1, -1), (-1, 1), (1, -1), (1, 1),
+    ],
+}
+
+
 def _neighbors(connectivity=8):
-    if connectivity == 4:
-        return [(-1, 0), (1, 0), (0, -1), (0, 1)]
-    if connectivity == 8:
-        return [
-            (-1, 0), (1, 0), (0, -1), (0, 1),
-            (-1, -1), (-1, 1), (1, -1), (1, 1),
-        ]
-    raise ValueError("connectivity must be 4 or 8")
+    try:
+        return _NEIGHBORS[connectivity]
+    except KeyError as exc:
+        raise ValueError("connectivity must be 4 or 8") from exc
 
 
 def skeleton_to_graph(skel, connectivity=8):
@@ -310,16 +315,12 @@ class GaussPDExtractor:
         cfg = self.config
         G = skeleton_to_graph(skel, connectivity=cfg.connectivity)
         if G.number_of_nodes() == 0:
-            empty_pd = {"crossings": [], "edge_labels": {}}
-            return ([], empty_pd) if not return_debug else ([], empty_pd, {"graph": G})
+            return _empty_result(G, return_debug)
         G = prune_spurs(G, min_length=cfg.spur_length)
         junctions, junction_map = cluster_junctions(G, deg_thresh=cfg.junction_degree)
 
         if not junctions:
-            empty_pd = {"crossings": [], "edge_labels": {}}
-            if return_debug:
-                return [], empty_pd, {"graph": G}
-            return [], empty_pd
+            return _empty_result(G, return_debug)
 
         SG = simplify_graph(G, junctions, junction_map)
         pairing = pair_edges_at_crossings(SG)
@@ -328,14 +329,9 @@ class GaussPDExtractor:
         junction_nodes = [n for n, d in SG.nodes(data=True) if d.get("type") == "junction"]
         crossing_id_map = {n: i + 1 for i, n in enumerate(junction_nodes)}
 
-        all_edges = [_canon_edge(u, v, k) for u, v, k in SG.edges(keys=True)]
-        edge_labels = {edge: i + 1 for i, edge in enumerate(all_edges)}
+        edge_labels = _label_edges(SG)
 
-        gauss = []
-        if traversals:
-            t0 = traversals[0]
-            for node in t0["crossings"]:
-                gauss.append(crossing_id_map[node])
+        gauss = _gauss_from_traversal(traversals, crossing_id_map)
 
         pd = {
             "crossings": build_pd(SG, edge_labels, crossing_id_map),
@@ -355,8 +351,33 @@ class GaussPDExtractor:
 
 
 def extract_gauss_code(skel, img_gray=None, *, cfg=None, return_debug=False):
-    if isinstance(cfg, GaussPDConfig):
-        config = cfg
-    else:
-        config = GaussPDConfig(**({**DEFAULT_CFG, **(cfg or {})}))
+    config = _coerce_config(cfg)
     return GaussPDExtractor(config).extract(skel, return_debug=return_debug)
+
+
+def _empty_pd():
+    return {"crossings": [], "edge_labels": {}}
+
+
+def _empty_result(graph, return_debug=False):
+    pd = _empty_pd()
+    if return_debug:
+        return [], pd, {"graph": graph}
+    return [], pd
+
+
+def _label_edges(SG):
+    all_edges = [_canon_edge(u, v, k) for u, v, k in SG.edges(keys=True)]
+    return {edge: i + 1 for i, edge in enumerate(all_edges)}
+
+
+def _gauss_from_traversal(traversals, crossing_id_map):
+    if not traversals:
+        return []
+    return [crossing_id_map[node] for node in traversals[0]["crossings"]]
+
+
+def _coerce_config(cfg):
+    if isinstance(cfg, GaussPDConfig):
+        return cfg
+    return GaussPDConfig(**({**DEFAULT_CFG, **(cfg or {})}))
