@@ -2,7 +2,7 @@ import argparse
 import os
 import random
 import time
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from typing import List, Optional, Tuple
 
 import numpy as np
@@ -181,7 +181,9 @@ def val_epoch(model, dl, device):
     return loss_sum / total, acc / total
 
 
-def train(config: TrainConfig):
+def train(config: TrainConfig, device: Optional[str] = None):
+    if device is not None:
+        config = replace(config, device=device)
     Trainer(config).fit()
 
 def main():
