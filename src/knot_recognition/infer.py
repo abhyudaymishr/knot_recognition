@@ -161,11 +161,7 @@ def main():
     )
 
     import json
-    print(json.dumps(res, indent=2, default=str))
-
-
-if __name__ == '__main__':
-    main()
+    print(json.dumps(_json_safe(res), indent=2, default=str))
 
 
 def _resolve_device(device: Optional[torch.device], device_str: Optional[str] = None) -> torch.device:
@@ -200,3 +196,20 @@ def _lookup_mapping(label: str, mapping_csv: Optional[str]) -> Tuple[Optional[st
     if len(row) == 0:
         return None, None
     return row.iloc[0].get("pd_code"), row.iloc[0].get("gauss_code")
+
+
+def _json_safe(obj):
+    if isinstance(obj, dict):
+        safe = {}
+        for k, v in obj.items():
+            if not isinstance(k, (str, int, float, bool)) and k is not None:
+                k = str(k)
+            safe[k] = _json_safe(v)
+        return safe
+    if isinstance(obj, (list, tuple)):
+        return [_json_safe(v) for v in obj]
+    return obj
+
+
+if __name__ == '__main__':
+    main()

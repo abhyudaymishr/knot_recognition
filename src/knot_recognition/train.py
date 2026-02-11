@@ -24,6 +24,7 @@ class TrainConfig:
     batch: int = 32
     lr: float = 1e-3
     image_size: int = 224
+    pretrained: bool = True
     num_workers: int = 4
     seed: Optional[int] = None
     val_split: float = 0.2
@@ -50,7 +51,7 @@ class Trainer:
         self.dl_train, self.dl_val = self._build_loaders()
 
         num_classes = len(self.dataset.class_to_idx)
-        self.model = get_resnet(num_classes, pretrained=True).to(self.device)
+        self.model = get_resnet(num_classes, pretrained=config.pretrained).to(self.device)
         self.opt = torch.optim.Adam(self.model.parameters(), lr=config.lr)
 
     def _build_loaders(self):
@@ -193,7 +194,9 @@ def main():
     parser.add_argument('--epochs', type=int, default=20)
     parser.add_argument('--batch', type=int, default=32)
     parser.add_argument('--lr', type=float, default=1e-3)
+    parser.add_argument('--no-pretrained', action='store_true')
     parser.add_argument('--seed', type=int, default=None)
+    parser.add_argument('--num-workers', type=int, default=4)
     parser.add_argument('--val-split', type=float, default=0.2)
     parser.add_argument('--split-strategy', default="random", choices=["random", "stratified"])
     parser.add_argument('--device', default=None)
@@ -205,7 +208,9 @@ def main():
         epochs=args.epochs,
         batch=args.batch,
         lr=args.lr,
+        pretrained=not args.no_pretrained,
         seed=args.seed,
+        num_workers=args.num_workers,
         val_split=args.val_split,
         split_strategy=args.split_strategy,
         device=args.device,
