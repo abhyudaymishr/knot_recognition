@@ -1,6 +1,7 @@
 import argparse
 from dataclasses import dataclass
-from typing import Optional
+from functools import lru_cache
+from typing import Optional, Tuple
 
 import numpy as np
 import pandas as pd
@@ -50,14 +51,8 @@ class KnotRecognizer:
         preprocessor: Optional[Preprocessor] = None,
         gauss_extractor: Optional[GaussPDExtractor] = None,
     ):
-        device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        ck = torch.load(path, map_location=device)
-        class_to_idx = ck.get("class_to_idx")
-        idx_to_class = {v: k for k, v in class_to_idx.items()}
-        num_classes = len(class_to_idx)
-        model = get_resnet(num_classes, pretrained=False)
-        model.load_state_dict(ck["model_state"])
-        model.eval()
+        device = _resolve_device(device)
+        model, idx_to_class = _load_model_from_checkpoint(path, device)
         return cls(
             model,
             idx_to_class,
@@ -67,6 +62,23 @@ class KnotRecognizer:
             gauss_extractor=gauss_extractor,
         )
 
+    @staticmethod
+    def _chirality_from_scores(
+        same_score: float, flip_score: float, threshold: float
+    ) -> Tuple[str, float]:
+        confidence = float(same_score - flip_score)
+        chirality = "ambiguous"
+        if confidence > threshold:
+            chirality = "right-handed (prediction favors original)"
+        elif confidence < -threshold:
+            chirality = "left-handed (prediction favors mirrored)"
+        return chirality, confidence
+
+    def _predict_probs(self, img: Image.Image) -> np.ndarray:
+        x = self.transform(img).unsqueeze(0).to(self.device)
+        out = self.model(x)
+        return torch.softmax(out, dim=1).cpu().numpy()[0]
+
     @torch.inference_mode()
     def predict(self, img_path, mapping_csv: Optional[str] = None):
         img = Image.fromarray(imread_any(img_path))
@@ -74,39 +86,19 @@ class KnotRecognizer:
 
     @torch.inference_mode()
     def predict_image(self, img: Image.Image, mapping_csv: Optional[str] = None):
-        x = self.transform(img).unsqueeze(0).to(self.device)
-
-        out = self.model(x)
-        probs = torch.softmax(out, dim=1).cpu().numpy()[0]
+        probs = self._predict_probs(img)
         pred = int(np.argmax(probs))
         label = self.idx_to_class[pred]
 
-        pd_code = None
-        gauss_code = None
-        if mapping_csv is not None:
-            df = pd.read_csv(mapping_csv)
-            row = df[df["label"] == label]
-            if len(row) > 0:
-                pd_code = row.iloc[0].get("pd_code")
-                gauss_code = row.iloc[0].get("gauss_code")
+        pd_code, gauss_code = _lookup_mapping(label, mapping_csv)
 
         skel, _ = self.preprocessor.run(np.array(img))
         gauss_auto, pd_auto = self.gauss_extractor.extract(skel)
 
-        img_flip = img.transpose(Image.FLIP_LEFT_RIGHT)
-        x2 = self.transform(img_flip).unsqueeze(0).to(self.device)
-        out2 = self.model(x2)
-        probs2 = torch.softmax(out2, dim=1).cpu().numpy()[0]
-
-        same_score = probs[pred]
-        flip_score_same = probs2[pred]
-        chirality_confidence = float(same_score - flip_score_same)
-
-        chirality = "ambiguous"
-        if chirality_confidence > self.config.chirality_threshold:
-            chirality = "right-handed (prediction favors original)"
-        elif chirality_confidence < -self.config.chirality_threshold:
-            chirality = "left-handed (prediction favors mirrored)"
+        probs_flip = self._predict_probs(img.transpose(Image.FLIP_LEFT_RIGHT))
+        chirality, chirality_confidence = self._chirality_from_scores(
+            probs[pred], probs_flip[pred], self.config.chirality_threshold
+        )
 
         return {
             "predicted_label": label,
@@ -121,14 +113,8 @@ class KnotRecognizer:
 
 
 def load_checkpoint(path, device="cpu"):
-    ck = torch.load(path, map_location=device)
-    class_to_idx = ck.get("class_to_idx")
-    idx_to_class = {v: k for k, v in class_to_idx.items()}
-    num_classes = len(class_to_idx)
-    model = get_resnet(num_classes, pretrained=False)
-    model.load_state_dict(ck["model_state"])
-    model.eval()
-    return model, idx_to_class
+    device = _resolve_device(device)
+    return _load_model_from_checkpoint(path, device)
 
 
 def infer_image(img_path, checkpoint, mapping_csv=None):
@@ -150,3 +136,35 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+def _resolve_device(device: Optional[torch.device]) -> torch.device:
+    if device is None:
+        return torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    return device
+
+
+def _load_model_from_checkpoint(path: str, device: torch.device):
+    ck = torch.load(path, map_location=device)
+    class_to_idx = ck.get("class_to_idx")
+    idx_to_class = {v: k for k, v in class_to_idx.items()}
+    num_classes = len(class_to_idx)
+    model = get_resnet(num_classes, pretrained=False)
+    model.load_state_dict(ck["model_state"])
+    model.eval()
+    return model, idx_to_class
+
+
+@lru_cache(maxsize=4)
+def _load_mapping_df(mapping_csv: str) -> pd.DataFrame:
+    return pd.read_csv(mapping_csv)
+
+
+def _lookup_mapping(label: str, mapping_csv: Optional[str]) -> Tuple[Optional[str], Optional[str]]:
+    if mapping_csv is None:
+        return None, None
+    df = _load_mapping_df(mapping_csv)
+    row = df[df["label"] == label]
+    if len(row) == 0:
+        return None, None
+    return row.iloc[0].get("pd_code"), row.iloc[0].get("gauss_code")
