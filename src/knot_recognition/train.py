@@ -2,7 +2,7 @@ import argparse
 import os
 import random
 import time
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from typing import List, Optional, Tuple
 
 import numpy as np
@@ -127,7 +127,18 @@ class Trainer:
             if val_acc > best_acc:
                 best_acc = val_acc
                 torch.save(
-                    {"model_state": self.model.state_dict(), "class_to_idx": self.dataset.class_to_idx},
+                    {
+                        "model_state": self.model.state_dict(),
+                        "class_to_idx": self.dataset.class_to_idx,
+                        "optimizer_state": self.opt.state_dict(),
+                        "epoch": epoch + 1,
+                        "best_acc": best_acc,
+                        "train_loss": train_loss,
+                        "train_acc": train_acc,
+                        "val_loss": val_loss,
+                        "val_acc": val_acc,
+                        "train_config": asdict(self.config),
+                    },
                     os.path.join(self.config.outdir, "best.pth"),
                 )
 
