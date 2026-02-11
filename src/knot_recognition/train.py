@@ -1,9 +1,11 @@
 import argparse
 import os
+import random
 import time
 from dataclasses import dataclass
-from typing import Optional
+from typing import List, Optional, Tuple
 
+import numpy as np
 import torch
 import torch.nn.functional as F
 import torchvision.transforms as T
@@ -24,13 +26,15 @@ class TrainConfig:
     image_size: int = 224
     num_workers: int = 4
     seed: Optional[int] = None
+    val_split: float = 0.2
+    split_strategy: str = "random"  # "random" or "stratified"
 
 
 class Trainer:
     def __init__(self, config: TrainConfig):
         self.config = config
         if config.seed is not None:
-            torch.manual_seed(config.seed)
+            _seed_everything(config.seed)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         self.transforms = T.Compose(
@@ -49,11 +53,16 @@ class Trainer:
         self.opt = torch.optim.Adam(self.model.parameters(), lr=config.lr)
 
     def _build_loaders(self):
-        n = len(self.dataset)
-        split_idx = int(0.8 * n)
-        idxs = list(range(n))
-        train_ds = torch.utils.data.Subset(self.dataset, idxs[:split_idx])
-        val_ds = torch.utils.data.Subset(self.dataset, idxs[split_idx:])
+        idxs = list(range(len(self.dataset)))
+        train_idx, val_idx = _split_indices(
+            idxs,
+            labels=[sample[1] for sample in self.dataset.samples],
+            val_split=self.config.val_split,
+            strategy=self.config.split_strategy,
+            seed=self.config.seed,
+        )
+        train_ds = torch.utils.data.Subset(self.dataset, train_idx)
+        val_ds = torch.utils.data.Subset(self.dataset, val_idx)
         dl_train = DataLoader(
             train_ds,
             batch_size=self.config.batch,
@@ -171,6 +180,8 @@ def main():
     parser.add_argument('--batch', type=int, default=32)
     parser.add_argument('--lr', type=float, default=1e-3)
     parser.add_argument('--seed', type=int, default=None)
+    parser.add_argument('--val-split', type=float, default=0.2)
+    parser.add_argument('--split-strategy', default="random", choices=["random", "stratified"])
     args = parser.parse_args()
 
     config = TrainConfig(
@@ -180,8 +191,54 @@ def main():
         batch=args.batch,
         lr=args.lr,
         seed=args.seed,
+        val_split=args.val_split,
+        split_strategy=args.split_strategy,
     )
     Trainer(config).fit()
+
+
+def _seed_everything(seed: int) -> None:
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+
+
+def _split_indices(
+    idxs: List[int],
+    labels: List[int],
+    val_split: float,
+    strategy: str,
+    seed: Optional[int],
+) -> Tuple[List[int], List[int]]:
+    val_split = min(max(val_split, 0.0), 0.9)
+    if len(idxs) == 0:
+        return [], []
+    rng = np.random.RandomState(seed) if seed is not None else np.random
+
+    if strategy == "stratified":
+        by_label = {}
+        for idx, label in zip(idxs, labels):
+            by_label.setdefault(label, []).append(idx)
+        train_idx, val_idx = [], []
+        for label, group in by_label.items():
+            group = list(group)
+            rng.shuffle(group)
+            split = int(round((1.0 - val_split) * len(group)))
+            split = max(1, split) if len(group) > 1 else len(group)
+            train_idx.extend(group[:split])
+            val_idx.extend(group[split:])
+        rng.shuffle(train_idx)
+        rng.shuffle(val_idx)
+        return train_idx, val_idx
+
+    idxs = list(idxs)
+    rng.shuffle(idxs)
+    split_idx = int(round((1.0 - val_split) * len(idxs)))
+    split_idx = max(1, split_idx) if len(idxs) > 1 else len(idxs)
+    return idxs[:split_idx], idxs[split_idx:]
 
 
 if __name__ == '__main__':
