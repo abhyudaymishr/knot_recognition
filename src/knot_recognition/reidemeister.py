@@ -37,6 +37,23 @@ class ReidemeisterConfig:
     score_floor: float = 0.0
     nms_iou: float = 0.3
 
+    @classmethod
+    def synthetic_defaults(cls) -> "ReidemeisterConfig":
+        return cls(
+            r1_min_cycle_len=6,
+            r1_max_cycle_len=400,
+            r1_max_junctions=12,
+            r2_max_edge_len=300,
+            r2_length_ratio=2.5,
+            r3_max_perimeter=400,
+            r3_edge_ratio=2.0,
+            spur_prune_ratio=0.0,
+            junction_degree=4,
+            use_geometry=False,
+            score_floor=0.0,
+            nms_iou=1.01,
+        )
+
 
 @dataclass(frozen=True)
 class MoveCandidate:
@@ -67,6 +84,11 @@ class ReidemeisterDetector:
             img = Image.fromarray(img_np)
             self._save_overlay(img, candidates, overlay_path)
 
+        return [asdict(c) for c in candidates]
+
+    def detect_skeleton(self, skel: np.ndarray, gray: Optional[np.ndarray] = None) -> List[Dict[str, Any]]:
+        candidates = self._collect_candidates(skel)
+        candidates = self._postprocess(candidates, gray)
         return [asdict(c) for c in candidates]
 
     def _prepare_skeleton(self, img_np):
