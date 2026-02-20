@@ -1,5 +1,7 @@
 import argparse
+import csv
 from pathlib import Path
+from typing import Optional
 
 import numpy as np
 import torch
@@ -9,7 +11,7 @@ from torch.utils.data import DataLoader, Dataset
 
 
 class HybridDataset(Dataset):
-    def __init__(self, npz_path: str):
+    def __init__(self, npz_path: str, manifest_path: Optional[str] = None):
         data = np.load(npz_path, allow_pickle=True)
         self.images = data["images"].astype(np.float32) / 255.0
         self.gauss_feats = data["gauss_feats"].astype(np.float32)
@@ -17,6 +19,13 @@ class HybridDataset(Dataset):
         classes = sorted(set(self.labels_raw.tolist()))
         self.class_to_idx = {c: i for i, c in enumerate(classes)}
         self.labels = np.array([self.class_to_idx[c] for c in self.labels_raw], dtype=np.int64)
+        self.keys = None
+        if "keys" in data:
+            self.keys = data["keys"].astype(str)
+        elif manifest_path:
+            self.keys = self._load_manifest_keys(manifest_path)
+        if self.keys is not None and len(self.keys) != len(self.labels):
+            raise ValueError("Manifest keys length does not match dataset length")
 
     def __len__(self):
         return len(self.labels)
@@ -26,6 +35,13 @@ class HybridDataset(Dataset):
         feat = self.gauss_feats[idx]
         label = self.labels[idx]
         return torch.from_numpy(img), torch.from_numpy(feat), label
+
+    @staticmethod
+    def _load_manifest_keys(manifest_path: str) -> np.ndarray:
+        with open(manifest_path, "r", newline="") as f:
+            reader = csv.DictReader(f)
+            keys = [row["key"] for row in reader]
+        return np.array(keys, dtype=str)
 
 
 class HybridModel(nn.Module):
@@ -55,6 +71,41 @@ class HybridModel(nn.Module):
         return self.classifier(z)
 
 
+def group_stratified_split(keys: np.ndarray, labels: np.ndarray, train_ratio: float, seed: int):
+    rng = np.random.default_rng(seed)
+    group_to_indices: dict[str, list[int]] = {}
+    group_to_label: dict[str, int] = {}
+    for idx, (key, label) in enumerate(zip(keys, labels)):
+        group_to_indices.setdefault(str(key), []).append(idx)
+        group_to_label.setdefault(str(key), int(label))
+
+    label_to_groups: dict[int, list[str]] = {}
+    for group, label in group_to_label.items():
+        label_to_groups.setdefault(label, []).append(group)
+
+    train_indices: list[int] = []
+    val_indices: list[int] = []
+    for label, groups in label_to_groups.items():
+        groups = sorted(groups)
+        rng.shuffle(groups)
+        n_groups = len(groups)
+        if n_groups == 1:
+            n_train = 1
+        else:
+            n_train = int(round(train_ratio * n_groups))
+            n_train = max(1, min(n_groups - 1, n_train))
+        train_groups = set(groups[:n_train])
+        for group in groups:
+            if group in train_groups:
+                train_indices.extend(group_to_indices[group])
+            else:
+                val_indices.extend(group_to_indices[group])
+
+    train_indices = np.array(sorted(train_indices), dtype=np.int64)
+    val_indices = np.array(sorted(val_indices), dtype=np.int64)
+    return train_indices, val_indices
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--data", default="data/knotprot/hybrid_dataset.npz")
@@ -68,12 +119,27 @@ def main() -> None:
     parser.add_argument("--confusion", default="results/figures/hybrid_confusion.png")
     parser.add_argument("--per-class", default="results/figures/hybrid_per_class.png")
     parser.add_argument("--smooth", type=int, default=3)
+    parser.add_argument("--manifest", default="data/knotprot/hybrid_manifest.csv")
+    parser.add_argument("--seed", type=int, default=7)
     args = parser.parse_args()
 
-    dataset = HybridDataset(args.data)
+    dataset = HybridDataset(args.data, args.manifest)
     n = len(dataset)
-    split = int(0.8 * n)
-    train_ds, val_ds = torch.utils.data.random_split(dataset, [split, n - split])
+    if dataset.keys is not None:
+        train_idx, val_idx = group_stratified_split(dataset.keys, dataset.labels, 0.8, args.seed)
+        train_ds = torch.utils.data.Subset(dataset, train_idx)
+        val_ds = torch.utils.data.Subset(dataset, val_idx)
+        print(
+            f"group split: train_groups={len(set(dataset.keys[train_idx]))} "
+            f"val_groups={len(set(dataset.keys[val_idx]))}"
+        )
+    else:
+        split = int(0.8 * n)
+        train_ds, val_ds = torch.utils.data.random_split(
+            dataset,
+            [split, n - split],
+            generator=torch.Generator().manual_seed(args.seed),
+        )
     train_dl = DataLoader(train_ds, batch_size=args.batch, shuffle=True, num_workers=0)
     val_dl = DataLoader(val_ds, batch_size=args.batch, shuffle=False, num_workers=0)
 
