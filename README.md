@@ -37,6 +37,37 @@ Training on a specific device:
 python -m knot_recognition.train --data-dir /path/to/data --device cuda
 ```
 
+## Protein Knot Pipeline (Stages 1–4)
+Stage 1: Extract Cα backbones (KnotProt chains):
+```bash
+PYTHONPATH=./src python scripts/extract_knotprot_stage1.py \
+  --pdb-dir data/knotprot/pdb \
+  --out data/knotprot/backbones.npz \
+  --manifest data/knotprot/backbones.csv
+```
+
+Stage 2: Projection + crossing detection
+- `sample_viewpoints`, `project_polyline`, `detect_crossings`
+
+Stage 3: Gauss code from crossings
+- `gauss_code_from_crossings`
+
+Stage 4: Hybrid ML classifier (projection image + Gauss embedding):
+```bash
+PYTHONPATH=./src python scripts/build_knotprot_hybrid_dataset.py \
+  --viewpoints 32 --limit 20 --offset 0 --stride 3 --max-points 300 \
+  --out data/knotprot/hybrid_dataset_part1.npz \
+  --manifest data/knotprot/hybrid_manifest_part1.csv
+
+PYTHONPATH=./src python scripts/merge_hybrid_parts.py \
+  --out data/knotprot/hybrid_dataset.npz
+
+python scripts/train_hybrid_classifier.py \
+  --data data/knotprot/hybrid_dataset.npz \
+  --out checkpoints/hybrid_classifier.pth \
+  --epochs 2 --batch 64 --lr 1e-3
+```
+
 ## Project Structure
 - `src/knot_recognition/`: Core Python package (models, dataset, preprocessing, inference, Gauss/PD extraction).
 - `docs/`: Methods and reproducibility notes.

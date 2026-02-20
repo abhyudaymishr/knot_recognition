@@ -47,6 +47,34 @@ Force a device:
 python -m knot_recognition.infer --image /path/to/image.png --checkpoint ./checkpoints/best.pth --device cuda
 ```
 
+## Protein Knot Stages
+Stage 1 (Cα backbones):
+```bash
+PYTHONPATH=./src python scripts/extract_knotprot_stage1.py \
+  --pdb-dir data/knotprot/pdb \
+  --out data/knotprot/backbones.npz \
+  --manifest data/knotprot/backbones.csv
+```
+
+Stage 2–3 (projection + Gauss):
+- Use `sample_viewpoints`, `project_polyline`, `detect_crossings`, `gauss_code_from_crossings`
+
+Stage 4 (hybrid ML):
+```bash
+PYTHONPATH=./src python scripts/build_knotprot_hybrid_dataset.py \
+  --viewpoints 32 --limit 20 --offset 0 --stride 3 --max-points 300 \
+  --out data/knotprot/hybrid_dataset_part1.npz \
+  --manifest data/knotprot/hybrid_manifest_part1.csv
+
+PYTHONPATH=./src python scripts/merge_hybrid_parts.py \
+  --out data/knotprot/hybrid_dataset.npz
+
+python scripts/train_hybrid_classifier.py \
+  --data data/knotprot/hybrid_dataset.npz \
+  --out checkpoints/hybrid_classifier.pth \
+  --epochs 2 --batch 64 --lr 1e-3
+```
+
 ## Python API
 ```python
 from knot_recognition.infer import infer_image
