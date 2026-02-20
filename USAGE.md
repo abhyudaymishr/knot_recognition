@@ -37,6 +37,17 @@ knot-moves --image /path/to/image.png --overlay results/figures/moves_overlay.pn
 
 Output is a JSON list of candidate moves with bounding boxes and scores.
 
+## Reduce + classify (solver)
+```bash
+knot-solve --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
+```
+
+Save the reduced skeleton:
+```bash
+knot-solve --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv \
+  --reduced-skeleton results/figures/reduced_skeleton.png
+```
+
 ## Run inference (module)
 ```bash
 python -m knot_recognition.infer --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv

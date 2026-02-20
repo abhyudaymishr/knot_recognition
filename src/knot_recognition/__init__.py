@@ -17,6 +17,7 @@ from .protein import (
 )
 from .reidemeister import ReidemeisterConfig, ReidemeisterDetector, detect_moves
 from .train import TrainConfig, Trainer, train
+from .solver import SolverConfig, reduce_skeleton, solve_image
 
 __all__ = [
     "__version__",
@@ -49,4 +50,7 @@ __all__ = [
     "TrainConfig",
     "Trainer",
     "train",
+    "SolverConfig",
+    "reduce_skeleton",
+    "solve_image",
 ]

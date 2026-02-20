@@ -27,6 +27,11 @@ knot --image /path/to/image.png --checkpoint ./checkpoints/best.pth --device cpu
 knot-moves --image /path/to/image.png --overlay results/figures/moves_overlay.png
 ```
 
+Diagram reducer + classifier (solver):
+```bash
+knot-solve --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapping mapping_example.csv
+```
+
 Training:
 ```bash
 python -m knot_recognition.train --data-dir /path/to/data --outdir ./checkpoints --epochs 20 --batch 32 --lr 1e-3
@@ -104,6 +109,7 @@ label,pd_code,gauss_code
 
 ## Reproducibility
 - Documented environment and workflow notes are in `docs/reproducibility.md`.
+- Scientific documentation is in `docs/scientific.md`.
 - Use a clean virtual environment and pinned versions for formal experiments.
 
 ## Tests
