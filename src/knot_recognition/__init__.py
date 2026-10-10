@@ -18,9 +18,13 @@ from .protein import (
 from .reidemeister import ReidemeisterConfig, ReidemeisterDetector, detect_moves
 from .train import TrainConfig, Trainer, train
 from .solver import SolverConfig, reduce_skeleton, solve_image
+from .traverser import KnotTraverser, StrandIntersection, TraversalResult
 
 __all__ = [
     "__version__",
+    "KnotTraverser",
+    "StrandIntersection",
+    "TraversalResult",
     "DatasetConfig",
     "KnotImageDataset",
     "GaussPDConfig",
