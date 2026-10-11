@@ -57,14 +57,35 @@ def main() -> None:
     with open(args.labels, "r", newline="") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            key = f"{row['pdb_id']}_{row['chain_id']}"
-            labels[key] = row["knot_type"]
+            pdb_id = row["pdb_id"].strip().lower()
+            chain_id = row["chain_id"].strip() or "_"
+            key = f"{pdb_id}_{chain_id}"
+            labels[key] = row["knot_type"].strip()
 
-    keys = [k for k in backbones.keys() if k in labels]
+    all_bb_keys = list(backbones.keys())
+    matched_keys = [k for k in all_bb_keys if k in labels]
+    unmatched_bb = [k for k in all_bb_keys if k not in labels]
+    unmatched_lbl = [k for k in labels.keys() if k not in backbones]
+
+    print(f"Total backbones: {len(all_bb_keys)}, Total label records: {len(labels)}")
+    print(f"Matched chains: {len(matched_keys)}, Unmatched backbones: {len(unmatched_bb)}, Unmatched labels: {len(unmatched_lbl)}")
+
+    if not matched_keys:
+        sample_bb = all_bb_keys[:5]
+        sample_lbl = list(labels.keys())[:5]
+        raise ValueError(
+            f"No backbone keys matched between {args.backbones} and labels in {args.labels}.\n"
+            f"Sample backbone keys: {sample_bb}\n"
+            f"Sample label keys:    {sample_lbl}\n"
+            "Ensure PDB IDs and chain IDs match (e.g. '1j85_A')."
+        )
+
+    keys = matched_keys
     if args.offset:
         keys = keys[args.offset :]
     if args.limit:
         keys = keys[: args.limit]
+
 
     views = sample_viewpoints(args.viewpoints)
 
