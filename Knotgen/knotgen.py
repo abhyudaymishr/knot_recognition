@@ -387,6 +387,43 @@ class Knot:
             gauss=self.gauss_string(),
         )
 
+    def render_image(
+        self,
+        filename: Optional[Union[str, Path]] = None,
+        size: Tuple[int, int] = (512, 512),
+        line_width: float = 4.0,
+        gap_ratio: float = 2.4,
+        bg_color: str = "white",
+        line_color: str = "black",
+        dpi: int = 100,
+    ) -> Any:
+        """Renders the knot diagram with over/under crossing breaks to an image array and optional file.
+
+        Args:
+            filename: Optional output image file path (e.g. 'knot.png').
+            size: Target dimensions (width, height) in pixels.
+            line_width: Strand stroke width in points.
+            gap_ratio: Width ratio of the crossing gap halo relative to line_width.
+            bg_color: Image background color.
+            line_color: Knot strand stroke color.
+            dpi: Resolution dots per inch.
+
+        Returns:
+            np.ndarray: RGB uint8 image array of shape (height, width, 3).
+        """
+        from .draw import render_knot_diagram
+
+        return render_knot_diagram(
+            self,
+            filename=filename,
+            size=size,
+            line_width=line_width,
+            gap_ratio=gap_ratio,
+            bg_color=bg_color,
+            line_color=line_color,
+            dpi=dpi,
+        )
+
 
 # ==============================================================================
 # Layer 1: Braids (Alexander's & Markov's Theorem)

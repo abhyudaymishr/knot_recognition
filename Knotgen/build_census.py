@@ -18,7 +18,6 @@ import json
 import sys
 from pathlib import Path
 import sympy as sp
-import snappy
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent))
@@ -41,6 +40,10 @@ def all_names():
 
 
 def verify(name, word, nstrands):
+    try:
+        import snappy
+    except ImportError as e:
+        raise ImportError("SnapPy is required for braid census verification. Install it via `pip install snappy`.") from e
     L = snappy.Link(name)
     M_ref = L.exterior()
     if name in TORUS:
@@ -59,11 +62,16 @@ def verify(name, word, nstrands):
 
 
 def build(path="Knotgen/census_braids.json"):
+    try:
+        import snappy
+    except ImportError as e:
+        raise ImportError("SnapPy is required to build census braids. Install it via `pip install snappy`.") from e
     table, bad = {}, []
     # unknot
     table["unknot"] = dict(braid=[], nstrands=1, crossings=0, verified=True, check="trivial")
     for name in all_names():
         L = snappy.Link(name)
+
         word = [int(g) for g in L.braid_word()]
         n = max(abs(g) for g in word) + 1 if word else 1
         ok, how = verify(name, word, n)

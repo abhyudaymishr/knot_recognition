@@ -56,6 +56,7 @@ def test_knotgen_burau():
 
 
 def test_knotgen_snappy_integration():
+    pytest.importorskip("snappy")
     k = from_snappy("10_165")
     assert k.name == "10_165"
     assert len(k.crossings) == 10
@@ -89,3 +90,37 @@ def test_knots_through_9_json():
             data = json.load(f)
         total = sum(len(v) for v in data.values())
         assert total == 84, "Expected 84 knots through 9 crossings"
+
+
+def test_knotgen_image_rendering(tmp_path):
+    import numpy as np
+    from Knotgen import unknot, torus, rational, render_torus_smooth
+    from knot_recognition import KnotTraverser
+
+    # 1. Unknot rendering
+    u = unknot()
+    img_u = u.render_image(size=(256, 256))
+    assert isinstance(img_u, np.ndarray)
+    assert img_u.shape == (256, 256, 3)
+    assert img_u.dtype == np.uint8
+
+    # 2. Torus knot rendering to file
+    out_file = tmp_path / "trefoil.png"
+    t23 = torus(2, 3)
+    img_t23 = t23.render_image(filename=out_file, size=(300, 300))
+    assert out_file.exists()
+    assert img_t23.shape == (300, 300, 3)
+
+    # 3. Rational knot diagram
+    k41 = rational([2, 2])
+    img_k41 = k41.render_image(size=(256, 256))
+    assert img_k41.shape == (256, 256, 3)
+
+    # 4. Smooth 3D projection
+    img_smooth = render_torus_smooth(2, 3, size=(256, 256))
+    assert img_smooth.shape == (256, 256, 3)
+
+    # 5. Compatibility with KnotTraverser
+    traverser = KnotTraverser(cluster_radius=10, sample_radius=15)
+    res = traverser.process_image(img_t23)
+    assert len(res.intersections) > 0

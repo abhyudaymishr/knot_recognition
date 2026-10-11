@@ -24,8 +24,11 @@ from .knotgen import (
 )
 from .build_census import load_census, build as build_census
 from .enumerate import enumerate_knots
+from .draw import render_knot_diagram, render_torus_smooth
 
 __all__ = [
+    "render_knot_diagram",
+    "render_torus_smooth",
     "Knot",
     "unknot",
     "braid",
