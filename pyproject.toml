@@ -21,17 +21,32 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Image Processing",
 ]
 dependencies = [
-  "torch",
-  "torchvision",
-  "numpy",
-  "opencv-python",
-  "scikit-image",
-  "scipy",
-  "pandas",
-  "Pillow",
-  "tqdm",
-  "matplotlib",
-  "networkx",
+  "torch>=2.0.0",
+  "torchvision>=0.15.0",
+  "numpy>=1.22.0",
+  "opencv-python>=4.6.0",
+  "scikit-image>=0.19.0",
+  "scipy>=1.9.0",
+  "pandas>=1.5.0",
+  "Pillow>=9.0.0",
+  "tqdm>=4.64.0",
+  "matplotlib>=3.5.0",
+  "networkx>=2.8.0",
+  "sympy>=1.11.0",
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest>=7.0.0",
+]
+snappy = [
+  "snappy>=3.0",
+  "snappy_manifolds>=1.4",
+]
+all = [
+  "pytest>=7.0.0",
+  "snappy>=3.0",
+  "snappy_manifolds>=1.4",
 ]
 
 [project.urls]
