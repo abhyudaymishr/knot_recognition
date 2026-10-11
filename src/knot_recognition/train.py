@@ -39,7 +39,7 @@ class Trainer:
             _seed_everything(config.seed)
         self.device = _resolve_device(config.device)
 
-        self.transforms = T.Compose(
+        self.train_transforms = T.Compose(
             [
                 T.Resize((config.image_size, config.image_size)),
                 T.RandomHorizontalFlip(),
@@ -47,7 +47,16 @@ class Trainer:
                 T.ToTensor(),
             ]
         )
-        self.dataset = KnotImageDataset(config.data_dir, transform=self.transforms)
+        self.val_transforms = T.Compose(
+            [
+                T.Resize((config.image_size, config.image_size)),
+                T.ToTensor(),
+            ]
+        )
+        self.transforms = self.train_transforms
+        self.train_dataset = KnotImageDataset(config.data_dir, transform=self.train_transforms)
+        self.val_dataset = KnotImageDataset(config.data_dir, transform=self.val_transforms)
+        self.dataset = self.train_dataset
         self.dl_train, self.dl_val = self._build_loaders()
 
         num_classes = len(self.dataset.class_to_idx)
@@ -55,16 +64,17 @@ class Trainer:
         self.opt = torch.optim.Adam(self.model.parameters(), lr=config.lr)
 
     def _build_loaders(self):
-        idxs = list(range(len(self.dataset)))
+        idxs = list(range(len(self.train_dataset)))
         train_idx, val_idx = _split_indices(
             idxs,
-            labels=[sample[1] for sample in self.dataset.samples],
+            labels=[sample[1] for sample in self.train_dataset.samples],
             val_split=self.config.val_split,
             strategy=self.config.split_strategy,
             seed=self.config.seed,
         )
-        train_ds = torch.utils.data.Subset(self.dataset, train_idx)
-        val_ds = torch.utils.data.Subset(self.dataset, val_idx)
+        train_ds = torch.utils.data.Subset(self.train_dataset, train_idx)
+        val_ds = torch.utils.data.Subset(self.val_dataset, val_idx)
+
         dl_train = DataLoader(
             train_ds,
             batch_size=self.config.batch,

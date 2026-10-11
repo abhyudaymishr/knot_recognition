@@ -130,7 +130,21 @@ def detect_crossings(xy: np.ndarray, depth: np.ndarray) -> List[Crossing]:
     return crossings
 
 
-def gauss_code_from_crossings(crossings: List[Crossing], n_points: int) -> List[int]:
+def gauss_code_from_crossings(crossings: List[Crossing], n_points: int = 0) -> List[int]:
+    """Extract a 1D crossing-event sequence with over/under passage signs.
+
+    Args:
+        crossings: List of detected crossings with depth-assigned over/under attributes.
+        n_points: Total points in the polyline (currently unused, retained for backward compatibility).
+
+    Returns:
+        A list of integer crossing event tokens ordered by traversal along the polyline.
+        Each crossing index k (1-indexed) is signed:
+          +k indicates the strand is passing OVER at crossing k
+          -k indicates the strand is passing UNDER at crossing k
+        Note: This encodes over/under encounter events rather than classical topological
+        crossing chirality (handedness).
+    """
     # Assign ids per crossing
     indexed = {idx: c for idx, c in enumerate(crossings, start=1)}
     events = []
@@ -143,3 +157,4 @@ def gauss_code_from_crossings(crossings: List[Crossing], n_points: int) -> List[
     for _, __, cid, is_over in events:
         gauss.append(cid if is_over else -cid)
     return gauss
+

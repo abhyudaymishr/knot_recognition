@@ -93,12 +93,33 @@ def prune_spurs(G, min_length=5):
     return G
 
 
-def cluster_junctions(G, deg_thresh=3):
+def cluster_junctions(G, deg_thresh=3, cluster_radius=0.0):
     junction_nodes = [n for n, d in G.degree() if d >= deg_thresh]
     if not junction_nodes:
         return {}, {}
     sub = G.subgraph(junction_nodes)
     comps = list(nx.connected_components(sub))
+    if cluster_radius > 0.0 and len(comps) > 1:
+        centroids = [
+            np.array([G.nodes[n]["pos"] for n in comp], dtype=float).mean(axis=0)
+            for comp in comps
+        ]
+        comp_graph = nx.Graph()
+        for i in range(len(comps)):
+            comp_graph.add_node(i)
+        for i in range(len(comps)):
+            for j in range(i + 1, len(comps)):
+                if float(np.linalg.norm(centroids[i] - centroids[j])) <= float(cluster_radius):
+                    comp_graph.add_edge(i, j)
+
+        merged_comps = []
+        for c in nx.connected_components(comp_graph):
+            merged_nodes = set()
+            for idx in c:
+                merged_nodes.update(comps[idx])
+            merged_comps.append(merged_nodes)
+        comps = merged_comps
+
     junctions = {}
     junction_map = {}
     for jid, comp in enumerate(comps):
