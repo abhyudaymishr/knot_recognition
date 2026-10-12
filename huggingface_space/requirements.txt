@@ -1,0 +1,7 @@
+gradio==5.49.1
+numpy>=1.26,<3
+opencv-python-headless>=4.10,<5
+scikit-image>=0.24,<1
+networkx>=3.2,<4
+sympy>=1.13,<2
+Pillow>=10,<13
