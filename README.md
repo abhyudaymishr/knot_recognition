@@ -115,41 +115,58 @@ python scripts/train_nanotransformer.py \
   --lr 3e-4
 ```
 
-### 3. Certified Reidemeister Invariance (`RGNO` & $\mathbb{R}$-SimCLR)
-Two knot diagrams represent the same topological knot if and only if they are related by a finite sequence of **Reidemeister moves ($R_1, R_2, R_3$)**. This module provides:
-- **`RGNO` (Reidemeister Graph Neural Operator)**: Formulates planar diagrams as signed 4-valent graphs with confluent rewrite layers that contract $R_1$ curls and $R_2$ bigons to a canonical normal form, guaranteeing **strict $0.0$ $L_2$ distance** under $R_1$ and $R_2$ moves.
-- **$\mathbb{R}$-SimCLR**: Self-supervised contrastive learning that samples stochastic Reidemeister paths in Artin braid space and minimizes ambient isotopy orbit variance.
-- **Topological Invariant Probes**: Evaluates whether embeddings encode intrinsic topological invariants ($\det(K)$, Alexander polynomial $\Delta(2)$, hyperbolic volume) rather than visual layout.
+### 3. Certified Reidemeister Invariance vs. Topological Equivalence
+> **The Honest Claim**:  
+> *"A canonicalization layer gives exact $R_1/R_2$ invariance; here is what that buys a downstream learned model."*
 
-#### Strict R1/R2 Invariance via `RGNO`:
-```python
-import Knotgen
-from knot_recognition import RGNO
+Two knot diagrams represent the same topological knot if and only if they are related by a finite sequence of **Reidemeister moves ($R_1, R_2, R_3$)** and planar isotopies:
+- **$R_1$ (Twist / Curl)**: Markov stabilization & destabilization.
+- **$R_2$ (Poke / Bigon)**: Cancelling pair introduction & deletion.
+- **$R_3$ (Slide / Triangle)**: Artin braid Yang-Baxter slide ($\sigma_i \sigma_{i+1} \sigma_i \longleftrightarrow \sigma_{i+1} \sigma_i \sigma_{i+1}$).
+- **Flypes**: 180° rotations of alternating 2-tangles (Tait's Flyping Conjecture).
 
-# 1. Base Figure-8 knot (4_1)
-k_base = Knotgen.braid([1, -2, 1, -2], 3, "4_1")
-pd_base = [c["pd"] for c in k_base.crossings]
-signs_base = [c["sign"] for c in k_base.crossings]
+Crucially, **a polynomial-time confluent canonicalization layer can only reduce $R_1$ and $R_2$ moves**. It does not solve full knot equivalence, because equivalence gets fundamentally hard at $R_3$ triangle slides ($\Delta c = 0$) and flypes.
 
-# 2. Deformed diagram with added R2 cancelling bigons
-k_r2 = Knotgen.braid([1, 1, -1, -2, 1, -2], 3, "4_1_r2")
-pd_r2 = [c["pd"] for c in k_r2.crossings]
-signs_r2 = [c["sign"] for c in k_r2.crossings]
+#### Benchmark Protocol (5 Seeds, Knot-Level Split)
+- **Same Input for Graph Models**: Signed 4-valent Planar Diagram (PD) code / planar graph.
+- **Rendered ViT Reference Row**: NanoTransformer on 64x64 rendered raster images.
+- **Knot-Level Split**: Train on $c \le 8$ (37 knots); test on unseen $c = 9$ (49 knots) and unseen $c = 10$ (165 knots).
+- **Hard Perturbations**: Diagrams generated with $R_1, R_2, R_3$, and flypes up to $\min(c) + 6$ extra crossings.
+- **Hard Negative Mining**: Mined strictly from pairs sharing crossing count $c(K)$ or identical Alexander / Jones polynomials.
+- **Task 1**: Same-knot verification (AUROC, Top-1, Top-5 retrieval).
+- **Task 2**: Topological invariant prediction on unseen knots (signature, three-genus, braid index, unknotting number from KnotInfo) vs trivial predictors (mean and $[c(K), w(K)]$ linear fit).
 
-# 3. Compute certified embeddings
-model = RGNO()
-z_base = model(pd_base, signs_base)
-z_r2 = model(pd_r2, signs_r2)
+#### 5-Seed Empirical Benchmark Results:
+| Model Variant | Seen-A AUROC ($c \le 8$) | Unseen-9 AUROC ($c=9$) | Unseen-10 AUROC ($c=10$) | Signature MAE ($c=9$) | Unknotting MAE ($c=9$) |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Raw GNN (No Canonicalization)** | $0.555 \pm 0.030$ | $0.501 \pm 0.069$ | $0.428 \pm 0.024$ | $2.354 \pm 0.000$ | $0.724 \pm 0.000$ |
+| **Canonical GNN ($R_1 / R_2$)** | $0.544 \pm 0.017$ | $0.510 \pm 0.019$ | $0.506 \pm 0.018$ | $2.351 \pm 0.000$ | $0.715 \pm 0.000$ |
+| **Canonical GNN ($R_1$-only)** | $0.517 \pm 0.012$ | $0.550 \pm 0.012$ | $0.447 \pm 0.015$ | $2.353 \pm 0.000$ | $0.723 \pm 0.000$ |
+| **Canonical GNN ($R_2$-only)** | $0.617 \pm 0.006$ | $0.414 \pm 0.014$ | $0.559 \pm 0.012$ | $2.399 \pm 0.001$ | $0.770 \pm 0.001$ |
+| **SnapPy Simplify (Upper Bound)** | $0.535 \pm 0.011$ | $0.525 \pm 0.019$ | $0.534 \pm 0.016$ | $2.351 \pm 0.000$ | $0.715 \pm 0.000$ |
+| **Augmented GNN** | $0.502 \pm 0.014$ | $0.430 \pm 0.030$ | $0.489 \pm 0.025$ | $2.354 \pm 0.000$ | $0.724 \pm 0.000$ |
+| **Contrastive GNN** | $0.434 \pm 0.034$ | $0.291 \pm 0.074$ | $0.386 \pm 0.052$ | $2.354 \pm 0.000$ | $0.724 \pm 0.000$ |
+| **Shuffled-Label Control** | $0.537 \pm 0.019$ | $0.491 \pm 0.016$ | $0.504 \pm 0.018$ | $2.351 \pm 0.000$ | $0.715 \pm 0.000$ |
+| **Random-Feature Control** | $0.505 \pm 0.012$ | $0.411 \pm 0.059$ | $0.583 \pm 0.035$ | $2.353 \pm 0.000$ | $0.724 \pm 0.000$ |
+| **Lookup-Table Hash** | $0.634 \pm 0.002$ | $0.599 \pm 0.007$ | $0.640 \pm 0.005$ | $2.314 \pm 0.001$ | $0.681 \pm 0.001$ |
+| **Non-Learned Baseline ($\Delta(t) + c + w$)** | **$0.995 \pm 0.000$** | **$0.980 \pm 0.000$** | **$0.959 \pm 0.000$** | **$1.937 \pm 0.000$** | **$0.628 \pm 0.000$** |
+| **Rendered ViT (Reference Row)** | $0.986 \pm 0.000$ | $1.000 \pm 0.000$ | $1.000 \pm 0.000$ | $2.331 \pm 0.027$ | $0.677 \pm 0.010$ |
+| *Trivial Mean Baseline* | *---* | *---* | *---* | *2.354* | *0.724* |
+| *Trivial Linear Fit $[c(K), w(K)]$* | *---* | *---* | *---* | *2.327* | **$0.627$** |
 
-diff = (z_base - z_r2).norm().item()
-print(f"L2 distance between z(4_1) and z(R2(4_1)): {diff:.6e}")
-# Output: 0.000000e+00 (Exact Machine Zero Invariance)
-```
+#### Scientific Findings & Conclusion:
+1. **Refutation of Naive Graph Invariance**: Confluent $R_1/R_2$ canonicalization eliminates superficial curls and bigons, but **fails to close the verification gap under $R_3$ slides and flypes** (AUROC remains at $\sim 0.51$).
+2. **Failure to Beat Trivial Invariant Baselines**: On unseen crossing numbers ($c=9$ and $c=10$), learned GNN models fail to outperform a simple 2-variable linear fit on $[c(K), w(K)]$ for unknotting number and signature.
+3. **Algebraic Invariant Superiority**: The exact non-learned feature baseline ($\Delta(t) + c + w$) decisively outperforms all learned GNN encoders on unseen knots (AUROC 0.980 on $c=9$ and 0.959 on $c=10$, with signature MAE 1.937 beating trivial baselines).
+4. **Visual Layout vs Graph Structure**: The rendered-image ViT excels at diagram discrimination (AUROC 1.000) by exploiting global 2D spatial layout, an embedding mechanism fundamentally distinct from local 4-valent message passing.
 
-#### Run the Crossing Generalization Experiment:
-Train on low-crossing knots ($c \le 8$) and evaluate zero-shot ambient isotopy retrieval and invariant probing on high-crossing knots ($c \in \{9, 10\}$):
+#### Reproduce the Benchmark:
 ```bash
-python scripts/run_crossing_generalization_experiment.py --epochs 5 --out-dir results/
+python scripts/run_honest_protocol.py \
+  --epochs 15 \
+  --seeds 42 43 44 45 46 \
+  --cache data/benchmark_diagrams_cache.json \
+  --output results/honest_reidemeister_benchmark.json
 ```
 
 ### 4. 2D ResNet Image Classification Workflow
