@@ -111,7 +111,8 @@ def classify_and_retrieve_similar(image, top_k=5):
 
     model = _load_nanotransformer_model()
     engine = KnotTraverser(nanotransformer=model)
-    res = engine.traverse_and_classify(image, top_k=int(top_k))
+    fetch_k = max(15, int(top_k))
+    res = engine.traverse_and_classify(image, top_k=fetch_k)
 
     overlay = res.annotated_image.to_pil() if res.annotated_image is not None else image
 
@@ -120,18 +121,45 @@ def classify_and_retrieve_similar(image, top_k=5):
     top_prob = pred_info.get("top_probability", 0.0)
 
     # Build Assessment Markdown
+    confidence_badge = "High" if top_prob > 0.30 else ("Moderate" if top_prob > 0.10 else "Low / Uncertain")
     report_lines = [
-        f"### Predicted Knot Topology: **`{top_label}`**",
-        f"- **Model Probability:** `{top_prob*100:.2f}%`",
+        f"### Predicted Knot Topology: **`{top_label}`** ({confidence_badge} Confidence)",
+        f"- **Model Probability:** `{top_prob*100:.2f}%` (Uniform chance over 250 classes is `~0.40%`)",
         f"- **Traverser Detected Crossings:** `{len([x for x in res.intersections if x.status == 'resolved'])}` (Total junction candidates: `{len(res.intersections)}`)",
         f"- **Extracted Planar Diagram (PD) Code:** `{res.pd_string or 'PD[]'}`",
         f"- **Extracted Gauss Code:** `{res.gauss_string or '(none)'}`",
     ]
 
+    # Confidence & Photo/Texture Alert
+    if top_prob < 0.05:
+        report_lines.append(
+            "\n> ⚠️ **Low Model Confidence Alert:** The top prediction has near-uniform probability "
+            f"({top_prob*100:.2f}% vs random 0.40%). This typically indicates the image is a 3D photograph, "
+            "relief carving, or has stone/background textures rather than a high-contrast line diagram. "
+            "Check the full candidate rankings below."
+        )
+
+    # Topological Relationship: 4_1 (Figure-8) and 8_18 (Double Figure-8)
+    all_cand_labels = [p.get("label") for p in pred_info.get("predictions", [])]
+    if "8_18" in all_cand_labels and "4_1" in all_cand_labels:
+        report_lines.append(
+            "\n> 💡 **Topological Family Note:** Knot **`8_18`** is the exact **2-periodic double of the Figure-Eight knot (`4_1`)**. "
+            "Their braid representations are `[1, -2, 1, -2, 1, -2, 1, -2]` (8_18) and `[1, -2, 1, -2]` (4_1), "
+            "sharing the identical 4-fold alternating symmetry. Relief carvings with grooved, braided, or dual-strand textures "
+            "frequently activate features corresponding to `8_18`."
+        )
+
     if res.consensus:
         report_lines.append("\n#### Model & Traverser Cross-Examination")
         for note in res.consensus.get("notes", []):
             report_lines.append(f"- {note}")
+
+    if len(res.intersections) > 25 and len([x for x in res.intersections if x.status == "resolved"]) == 0:
+        report_lines.append(
+            f"\n> 📸 **Photo Texture Clutter Warning:** The traverser detected "
+            f"`{len(res.intersections)}` spurious junctions across background cracks, moss, or relief textures with 0 resolved crossings. "
+            "The raster traverser is designed for 2D line diagrams. For relief carvings or photos, crop closely around the central medallion or adjust contrast."
+        )
 
     if res.warnings:
         report_lines.append("\n#### Parsing Warnings")
@@ -140,7 +168,7 @@ def classify_and_retrieve_similar(image, top_k=5):
 
     # Top-K Predictions List of Lists for Dataframe
     preds_table = []
-    for p in pred_info.get("predictions", []):
+    for p in pred_info.get("predictions", [])[:int(top_k)]:
         preds_table.append([
             p.get("rank"),
             p.get("label"),
