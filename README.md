@@ -2,14 +2,16 @@
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Tests: 24 passed](https://img.shields.io/badge/tests-24%20passed-brightgreen.svg)](tests/)
+[![Tests: 31 passed](https://img.shields.io/badge/tests-31%20passed-brightgreen.svg)](tests/)
 
 ## Overview
 **Knot Recognition** is a scientific Python framework combining deep learning, computer vision, and computational knot theory. It provides unified workflows for:
 1. **Topological Image Traversal (`KnotTraverser`)**: Skeleton graph tracing, crossing junction detection, strand pairing, intensity-based over/under strand resolution, and PD/Gauss code extraction with visual crossing annotations.
-2. **2D Diagram Classification & Solving**: ResNet CNN classifiers, 24D rotation/reflection feature extraction, Reidemeister move candidate detection, and graph-based diagram simplification.
-3. **3D Biological Knotting (Protein Pipeline)**: PDB $C_\alpha$ backbone extraction, Fibonacci sphere projections, ray-segment crossing resolution, and hybrid (CNN image + Gauss histogram) classification.
-4. **Procedural Generative Knot Engine (`Knotgen`)**: Repository-local knot construction and diagram tools for braid closures, torus knots, rational/2-bridge knots, pretzel and Montesinos knots, diagram operations, polynomial invariants, rendering, and optional SnapPy integration. The bundled braid table has 250 entries: the unknot plus the 249 prime knots from $3_1$ through $10_{165}$.
+2. **Vision NanoTransformer (`NanoTransformer`)**: A lightweight (~0.67M parameter) patch-based Vision Transformer for fast, active classification across all 250 prime knots from unknot through $10_{165}$. Features noise estimation, bilateral edge-preserving filtering, 128-d unit-normalized prototype embeddings, and cosine similarity retrieval.
+3. **Active Neuro-Symbolic Traversal (`traverse_and_classify`)**: Seamless synergy coupling `KnotTraverser` code extraction with `NanoTransformer` classification and prototype retrieval, providing cross-verification and resilience against real-world texture noise.
+4. **2D Diagram Classification & Solving**: ResNet CNN classifiers, 24D rotation/reflection feature extraction, Reidemeister move candidate detection, and graph-based diagram simplification.
+5. **3D Biological Knotting (Protein Pipeline)**: PDB $C_\alpha$ backbone extraction, Fibonacci sphere projections, ray-segment crossing resolution, and hybrid (CNN image + Gauss histogram) classification.
+6. **Procedural Generative Knot Engine (`Knotgen`)**: Repository-local knot construction and diagram tools for braid closures, torus knots, rational/2-bridge knots, pretzel and Montesinos knots, diagram operations, polynomial invariants, rendering, and optional SnapPy integration. The bundled braid table has 250 entries: the unknot plus the 249 prime knots from $3_1$ through $10_{165}$.
 
 ---
 
@@ -58,10 +60,65 @@ print(f"PD Code:            {result.pd_string}")
 cv2.imwrite("annotated_knot.png", result.annotated_image)
 ```
 
-### 2. 2D ResNet Image Classification Workflow
+### 2. Vision NanoTransformer (`NanoTransformer`) & Active Classification
+The `NanoTransformer` is an optimized Vision Transformer (~0.67M params, 128-d latent space) pre-trained across all **250 prime knot types** (unknot through $10_{165}$). It performs:
+- **Active Classification**: Fast, end-to-end image-level knot type prediction.
+- **Noise Awareness & Denoising**: Front-end noise variance estimation, edge-preserving bilateral smoothing, and robust background handling.
+- **Top-K Prototype Retrieval**: Cosine similarity against 250 unit-normalized canonical class prototypes.
+- **Neuro-Symbolic Synergy**: Integrated with `KnotTraverser` via `traverse_and_classify(...)` to compare raster crossing codes with latent topological priors.
+
+#### Single-Image Inference & Prototype Retrieval:
+```python
+import cv2
+from knot_recognition import NanoTransformer
+
+# 1. Load the pre-trained 250-class checkpoint
+model = NanoTransformer.from_pretrained("checkpoints/nanotransformer_knot250.pth")
+
+# 2. Predict knot class and retrieve nearest prototypes
+image = cv2.imread("path/to/knot_drawing.png")
+pred_label, confidence, top_k = model.predict(image, top_k=5)
+
+print(f"Predicted Knot: {pred_label} (Confidence: {confidence:.2%})")
+print("Top 5 Nearest Prototypes:")
+for rank, (label, score) in enumerate(top_k, 1):
+    print(f"  {rank}. {label} - Cosine Sim: {score:.3f}")
+```
+
+#### Active Traversal + NanoTransformer Synergy:
+```python
+import cv2
+from knot_recognition import KnotTraverser
+
+traverser = KnotTraverser()
+image = cv2.imread("path/to/knot_drawing.png")
+
+# Joint traversal code extraction + active transformer retrieval
+result, classification = traverser.traverse_and_classify(
+    image, 
+    checkpoint_path="checkpoints/nanotransformer_knot250.pth"
+)
+
+print(f"Raster Detected Crossings: {len(result.intersections)}")
+print(f"Extracted Gauss Code:      {result.gauss_code}")
+print(f"Transformer Classification: {classification['predicted_knot']} ({classification['confidence']:.2%})")
+```
+
+#### Train the 250-Class NanoTransformer:
+```bash
+python scripts/train_nanotransformer.py \
+  --checkpoint checkpoints/nanotransformer_knot250.pth \
+  --epochs 25 \
+  --samples-per-class 16 \
+  --batch-size 32 \
+  --lr 3e-4
+```
+
+### 3. 2D ResNet Image Classification Workflow
 > **Note on Model Checkpoints**:
 > - `checkpoints/best.pth` referenced below is the output of the **2D ResNet training workflow** (`python -m knot_recognition.train`). It is not pre-packaged in the repository.
 > - The committed checkpoint `checkpoints/hybrid_classifier.pth` is for the **protein projection model** and has an incompatible architecture (`cnn.0.weight` vs ResNet `conv1.weight`), so it cannot be loaded by `knot` or `knot-solve`.
+> - For general 2D knot classification, `NanoTransformer` (`checkpoints/nanotransformer_knot250.pth`) is recommended.
 
 #### Train a 2D ResNet:
 ```bash
@@ -95,7 +152,7 @@ knot-solve --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapp
 
 ---
 
-### 3. Procedural Knot Generation & Diagram Rendering (`Knotgen/`)
+### 4. Procedural Knot Generation & Diagram Rendering (`Knotgen/`)
 `Knotgen` provides braid-based knot constructors, PD/Gauss representations, Alexander and Jones polynomials, determinants, Burau calculations, common knot operations, and rendering helpers. `Knot.render_image()` returns an RGB `uint8` array and can also save it to a file. `render_torus_smooth()` renders a projected 3D torus-knot embedding; it is a visualization, not a canonical diagram encoding.
 
 **Import scope:** `Knotgen` is currently a repository-local package and is not included by the `src/`-only package discovery in `pyproject.toml`. Run these examples from the repository root (or add the checkout root to `PYTHONPATH`). `pip install -e .` installs `knot_recognition`, but by itself does not make `import Knotgen` available outside the checkout.
@@ -144,7 +201,7 @@ The `Knotgen/knotgen.py --selftest` command also exercises SnapPy identification
 
 ---
 
-### 4. Protein Knot Pipeline (Stages 1–4)
+### 5. Protein Knot Pipeline (Stages 1–4)
 The biological pipeline models knotting in 3D protein macromolecules (such as KnotProt chains).
 
 #### Prerequisites:
@@ -217,13 +274,14 @@ python scripts/train_hybrid_classifier.py \
 ```text
 knot_recognition/
 ├── src/knot_recognition/          # Core Python package
+│   ├── nanotransformer.py         # Vision NanoTransformer: ViT, noise estimation, prototype retrieval
 │   ├── traverser.py               # KnotTraverser: curve tracing, over/under resolution, annotations
 │   ├── gauss_pd.py                # Graph skeletonization, junction clustering, PD extraction
 │   ├── features.py                # 24D feature vector (Hu moments, radial Fourier, reflection score)
 │   ├── infer.py                   # KnotRecognizer & CLI inference engine
 │   ├── model.py                   # PyTorch ResNet backbone wrappers
 │   ├── dataset.py                 # KnotImageDataset loader & transform integration
-│   ├── preprocess.py              # Grayscale binarization & skimage morphological skeletonization
+│   ├── preprocess.py              # Grayscale binarization, noise estimation & bilateral denoising
 │   ├── protein.py                 # 3D backbone projections & crossing elevation detectors
 │   ├── reidemeister.py            # Synthetic R1, R2, R3 move candidate detection & visualization
 │   ├── solver.py                  # Diagram loop simplification & reduced inference
@@ -238,19 +296,23 @@ knot_recognition/
 ├── docs/                          # Scientific & technical documentation
 │   ├── scientific.md              # Research report, methodology, and audited baseline metrics
 │   ├── reproducibility.md         # Environment setup, test benchmarks, and data guidelines
+│   ├── cable_photo_system.md      # Cable & real-world knot identification documentation
 │   ├── figures/                   # Visualization galleries
 │   └── methods.md                 # Mathematical and algorithmic reference
 ├── scripts/                       # Experiment drivers & dataset preparation
+│   ├── train_nanotransformer.py   # Noise-aware training loop for 250-class NanoTransformer
 │   ├── build_knotprot_hybrid_dataset.py
 │   ├── train_hybrid_classifier.py
 │   ├── extract_knotprot_stage1.py
 │   ├── download_knotprot.py
 │   └── merge_hybrid_parts.py
+├── checkpoints/                   # Trained model weights
+│   └── nanotransformer_knot250.pth # Pre-trained 250-class Vision NanoTransformer
 ├── data/                          # Dataset manifests and metadata
 │   └── knotprot/hybrid_manifest.csv
 ├── results/                       # Training logs and figure outputs
 │   └── hybrid_training.csv
-└── tests/                         # 24 unit tests across 7 test modules
+└── tests/                         # 31 unit tests across 8 test modules
 ```
 
 ---
@@ -282,7 +344,7 @@ knot_recognition/
 
 ## Verification & Test Suite
 
-The test suite contains **24 unit tests across 7 test modules**:
+The test suite contains **31 unit tests across 8 test modules**:
 ```bash
 pytest tests/ -v
 ```
@@ -290,6 +352,7 @@ pytest tests/ -v
 
 | Module | Scope Tested |
 |---|---|
+| `test_nanotransformer.py` | ViT forward pass, 250-class prediction, top-k cosine similarity retrieval, checkpoint persistence, noise-level awareness & bilateral denoising, traverser integration |
 | `test_traverser.py` | Raster crossing detection, strand pairing, PD/Gauss code formatting, OpenCV and PIL compatibility, crossing continuity & gap classification |
 | `test_knotgen.py` | Braids, Torus, Rational, Pretzel, Burau matrices, SnapPy integration, census table schema, procedural image rendering |
 | `test_protein_stage2.py` | 3D backbone projections, parametric segment intersection, and depth sorting |
