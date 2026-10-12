@@ -1,0 +1,1876 @@
+[
+  {
+    "alexander_polynomial": "1",
+    "determinant": 1,
+    "crossings": 0,
+    "labels": [
+      "unknot"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**2 - t + 1",
+    "determinant": 3,
+    "crossings": 3,
+    "labels": [
+      "3_1"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**2 + 3*t - 1",
+    "determinant": 5,
+    "crossings": 4,
+    "labels": [
+      "4_1"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**2 - 3*t + 2",
+    "determinant": 7,
+    "crossings": 5,
+    "labels": [
+      "5_2"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**4 - t**3 + t**2 - t + 1",
+    "determinant": 5,
+    "crossings": 5,
+    "labels": [
+      "5_1"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**2 + 5*t - 2",
+    "determinant": 9,
+    "crossings": 6,
+    "labels": [
+      "6_1"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**4 + 3*t**3 - 3*t**2 + 3*t - 1",
+    "determinant": 11,
+    "crossings": 6,
+    "labels": [
+      "6_2"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**4 - 3*t**3 + 5*t**2 - 3*t + 1",
+    "determinant": 13,
+    "crossings": 6,
+    "labels": [
+      "6_3"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**4 + 5*t**3 - 7*t**2 + 5*t - 1",
+    "determinant": 19,
+    "crossings": 7,
+    "labels": [
+      "7_6"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**4 - 3*t**3 + 3*t**2 - 3*t + 2",
+    "determinant": 13,
+    "crossings": 7,
+    "labels": [
+      "7_3"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**4 - 4*t**3 + 5*t**2 - 4*t + 2",
+    "determinant": 17,
+    "crossings": 7,
+    "labels": [
+      "7_5"
+    ]
+  },
+  {
+    "alexander_polynomial": "3*t**2 - 5*t + 3",
+    "determinant": 11,
+    "crossings": 7,
+    "labels": [
+      "7_2"
+    ]
+  },
+  {
+    "alexander_polynomial": "4*t**2 - 7*t + 4",
+    "determinant": 15,
+    "crossings": 7,
+    "labels": [
+      "7_4"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**4 - 5*t**3 + 9*t**2 - 5*t + 1",
+    "determinant": 21,
+    "crossings": 7,
+    "labels": [
+      "7_7"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - t**5 + t**4 - t**3 + t**2 - t + 1",
+    "determinant": 7,
+    "crossings": 7,
+    "labels": [
+      "7_1"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**4 + 5*t**3 - 5*t**2 + 5*t - 2",
+    "determinant": 19,
+    "crossings": 8,
+    "labels": [
+      "8_4"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**4 + 6*t**3 - 7*t**2 + 6*t - 2",
+    "determinant": 23,
+    "crossings": 8,
+    "labels": [
+      "8_6"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**4 + 7*t**3 - 9*t**2 + 7*t - 2",
+    "determinant": 27,
+    "crossings": 8,
+    "labels": [
+      "8_11"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**4 + 8*t**3 - 11*t**2 + 8*t - 2",
+    "determinant": 31,
+    "crossings": 8,
+    "labels": [
+      "8_14"
+    ]
+  },
+  {
+    "alexander_polynomial": "-3*t**2 + 7*t - 3",
+    "determinant": 13,
+    "crossings": 8,
+    "labels": [
+      "8_1"
+    ]
+  },
+  {
+    "alexander_polynomial": "-4*t**2 + 9*t - 4",
+    "determinant": 17,
+    "crossings": 8,
+    "labels": [
+      "8_3"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**4 + 4*t**3 - 5*t**2 + 4*t - 1",
+    "determinant": 15,
+    "crossings": 8,
+    "labels": [
+      "8_21"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 3*t**5 - 3*t**4 + 3*t**3 - 3*t**2 + 3*t - 1",
+    "determinant": 17,
+    "crossings": 8,
+    "labels": [
+      "8_2"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 3*t**5 - 4*t**4 + 5*t**3 - 4*t**2 + 3*t - 1",
+    "determinant": 21,
+    "crossings": 8,
+    "labels": [
+      "8_5"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 3*t**5 - 5*t**4 + 7*t**3 - 5*t**2 + 3*t - 1",
+    "determinant": 25,
+    "crossings": 8,
+    "labels": [
+      "8_9"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 4*t**5 - 8*t**4 + 11*t**3 - 8*t**2 + 4*t - 1",
+    "determinant": 37,
+    "crossings": 8,
+    "labels": [
+      "8_17"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 5*t**5 - 10*t**4 + 13*t**3 - 10*t**2 + 5*t - 1",
+    "determinant": 45,
+    "crossings": 8,
+    "labels": [
+      "8_18"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**4 - 6*t**3 + 9*t**2 - 6*t + 2",
+    "determinant": 25,
+    "crossings": 8,
+    "labels": [
+      "8_8"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**4 - 7*t**3 + 11*t**2 - 7*t + 2",
+    "determinant": 29,
+    "crossings": 8,
+    "labels": [
+      "8_13"
+    ]
+  },
+  {
+    "alexander_polynomial": "3*t**4 - 8*t**3 + 11*t**2 - 8*t + 3",
+    "determinant": 33,
+    "crossings": 8,
+    "labels": [
+      "8_15"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**4 - 2*t**3 + 3*t**2 - 2*t + 1",
+    "determinant": 9,
+    "crossings": 8,
+    "labels": [
+      "8_20"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**4 - 7*t**3 + 13*t**2 - 7*t + 1",
+    "determinant": 29,
+    "crossings": 8,
+    "labels": [
+      "8_12"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 3*t**5 + 5*t**4 - 5*t**3 + 5*t**2 - 3*t + 1",
+    "determinant": 23,
+    "crossings": 8,
+    "labels": [
+      "8_7"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 3*t**5 + 6*t**4 - 7*t**3 + 6*t**2 - 3*t + 1",
+    "determinant": 27,
+    "crossings": 8,
+    "labels": [
+      "8_10"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 4*t**5 + 8*t**4 - 9*t**3 + 8*t**2 - 4*t + 1",
+    "determinant": 35,
+    "crossings": 8,
+    "labels": [
+      "8_16"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - t**5 + t**3 - t + 1",
+    "determinant": 3,
+    "crossings": 8,
+    "labels": [
+      "8_19"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**2 + 5*t - 2",
+    "determinant": 9,
+    "crossings": 9,
+    "labels": [
+      "9_46"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**4 + 10*t**3 - 15*t**2 + 10*t - 2",
+    "determinant": 39,
+    "crossings": 9,
+    "labels": [
+      "9_15"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**4 + 11*t**3 - 17*t**2 + 11*t - 2",
+    "determinant": 43,
+    "crossings": 9,
+    "labels": [
+      "9_21"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**4 + 8*t**3 - 11*t**2 + 8*t - 2",
+    "determinant": 31,
+    "crossings": 9,
+    "labels": [
+      "9_8"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**4 + 9*t**3 - 13*t**2 + 9*t - 2",
+    "determinant": 35,
+    "crossings": 9,
+    "labels": [
+      "9_12"
+    ]
+  },
+  {
+    "alexander_polynomial": "-3*t**4 + 12*t**3 - 17*t**2 + 12*t - 3",
+    "determinant": 47,
+    "crossings": 9,
+    "labels": [
+      "9_25"
+    ]
+  },
+  {
+    "alexander_polynomial": "-3*t**4 + 14*t**3 - 21*t**2 + 14*t - 3",
+    "determinant": 55,
+    "crossings": 9,
+    "labels": [
+      "9_39"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**4 + 2*t**3 - t**2 + 2*t - 1",
+    "determinant": 7,
+    "crossings": 9,
+    "labels": [
+      "9_42"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**4 + 6*t**3 - 9*t**2 + 6*t - 1",
+    "determinant": 23,
+    "crossings": 9,
+    "labels": [
+      "9_45"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**4 + 7*t**3 - 11*t**2 + 7*t - 1",
+    "determinant": 27,
+    "crossings": 9,
+    "labels": [
+      "9_48"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 3*t**5 - 2*t**4 + t**3 - 2*t**2 + 3*t - 1",
+    "determinant": 13,
+    "crossings": 9,
+    "labels": [
+      "9_43"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 5*t**5 - 10*t**4 + 13*t**3 - 10*t**2 + 5*t - 1",
+    "determinant": 45,
+    "crossings": 9,
+    "labels": [
+      "9_24"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 5*t**5 - 11*t**4 + 15*t**3 - 11*t**2 + 5*t - 1",
+    "determinant": 49,
+    "crossings": 9,
+    "labels": [
+      "9_27"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 5*t**5 - 12*t**4 + 17*t**3 - 12*t**2 + 5*t - 1",
+    "determinant": 53,
+    "crossings": 9,
+    "labels": [
+      "9_30"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 5*t**5 - 7*t**4 + 7*t**3 - 7*t**2 + 5*t - 1",
+    "determinant": 33,
+    "crossings": 9,
+    "labels": [
+      "9_11"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 5*t**5 - 8*t**4 + 9*t**3 - 8*t**2 + 5*t - 1",
+    "determinant": 37,
+    "crossings": 9,
+    "labels": [
+      "9_36"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 5*t**5 - 9*t**4 + 11*t**3 - 9*t**2 + 5*t - 1",
+    "determinant": 41,
+    "crossings": 9,
+    "labels": [
+      "9_20"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 6*t**5 - 14*t**4 + 19*t**3 - 14*t**2 + 6*t - 1",
+    "determinant": 61,
+    "crossings": 9,
+    "labels": [
+      "9_33"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 6*t**5 - 16*t**4 + 23*t**3 - 16*t**2 + 6*t - 1",
+    "determinant": 69,
+    "crossings": 9,
+    "labels": [
+      "9_34"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**4 - 10*t**3 + 17*t**2 - 10*t + 2",
+    "determinant": 41,
+    "crossings": 9,
+    "labels": [
+      "9_19"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**4 - 11*t**3 + 19*t**2 - 11*t + 2",
+    "determinant": 45,
+    "crossings": 9,
+    "labels": [
+      "9_37"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**4 - 9*t**3 + 15*t**2 - 9*t + 2",
+    "determinant": 37,
+    "crossings": 9,
+    "labels": [
+      "9_14"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 3*t**5 + 3*t**4 - 3*t**3 + 3*t**2 - 3*t + 2",
+    "determinant": 19,
+    "crossings": 9,
+    "labels": [
+      "9_3"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 4*t**5 + 5*t**4 - 5*t**3 + 5*t**2 - 4*t + 2",
+    "determinant": 27,
+    "crossings": 9,
+    "labels": [
+      "9_6"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 4*t**5 + 6*t**4 - 7*t**3 + 6*t**2 - 4*t + 2",
+    "determinant": 31,
+    "crossings": 9,
+    "labels": [
+      "9_9"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 5*t**5 + 8*t**4 - 9*t**3 + 8*t**2 - 5*t + 2",
+    "determinant": 39,
+    "crossings": 9,
+    "labels": [
+      "9_16"
+    ]
+  },
+  {
+    "alexander_polynomial": "3*t**4 - 12*t**3 + 19*t**2 - 12*t + 3",
+    "determinant": 49,
+    "crossings": 9,
+    "labels": [
+      "9_41"
+    ]
+  },
+  {
+    "alexander_polynomial": "3*t**4 - 5*t**3 + 5*t**2 - 5*t + 3",
+    "determinant": 21,
+    "crossings": 9,
+    "labels": [
+      "9_4"
+    ]
+  },
+  {
+    "alexander_polynomial": "3*t**4 - 6*t**3 + 7*t**2 - 6*t + 3",
+    "determinant": 25,
+    "crossings": 9,
+    "labels": [
+      "9_49"
+    ]
+  },
+  {
+    "alexander_polynomial": "3*t**4 - 7*t**3 + 9*t**2 - 7*t + 3",
+    "determinant": 29,
+    "crossings": 9,
+    "labels": [
+      "9_7"
+    ]
+  },
+  {
+    "alexander_polynomial": "4*t**2 - 7*t + 4",
+    "determinant": 15,
+    "crossings": 9,
+    "labels": [
+      "9_2",
+      "9_23"
+    ]
+  },
+  {
+    "alexander_polynomial": "4*t**4 - 10*t**3 + 13*t**2 - 10*t + 4",
+    "determinant": 41,
+    "crossings": 9,
+    "labels": [
+      "9_18"
+    ]
+  },
+  {
+    "alexander_polynomial": "4*t**4 - 8*t**3 + 9*t**2 - 8*t + 4",
+    "determinant": 33,
+    "crossings": 9,
+    "labels": [
+      "9_10"
+    ]
+  },
+  {
+    "alexander_polynomial": "4*t**4 - 9*t**3 + 11*t**2 - 9*t + 4",
+    "determinant": 37,
+    "crossings": 9,
+    "labels": [
+      "9_13"
+    ]
+  },
+  {
+    "alexander_polynomial": "5*t**2 - 9*t + 5",
+    "determinant": 19,
+    "crossings": 9,
+    "labels": [
+      "9_38"
+    ]
+  },
+  {
+    "alexander_polynomial": "6*t**2 - 11*t + 6",
+    "determinant": 23,
+    "crossings": 9,
+    "labels": [
+      "9_5"
+    ]
+  },
+  {
+    "alexander_polynomial": "7*t**2 - 13*t + 7",
+    "determinant": 27,
+    "crossings": 9,
+    "labels": [
+      "9_35"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**4 - 4*t**3 + 7*t**2 - 4*t + 1",
+    "determinant": 17,
+    "crossings": 9,
+    "labels": [
+      "9_44"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 4*t**5 + 6*t**4 - 5*t**3 + 6*t**2 - 4*t + 1",
+    "determinant": 27,
+    "crossings": 9,
+    "labels": [
+      "9_47"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 5*t**5 + 10*t**4 - 11*t**3 + 10*t**2 - 5*t + 1",
+    "determinant": 43,
+    "crossings": 9,
+    "labels": [
+      "9_22"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 5*t**5 + 11*t**4 - 13*t**3 + 11*t**2 - 5*t + 1",
+    "determinant": 47,
+    "crossings": 9,
+    "labels": [
+      "9_26"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 5*t**5 + 12*t**4 - 15*t**3 + 12*t**2 - 5*t + 1",
+    "determinant": 51,
+    "crossings": 9,
+    "labels": [
+      "9_28",
+      "9_29"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 5*t**5 + 13*t**4 - 17*t**3 + 13*t**2 - 5*t + 1",
+    "determinant": 55,
+    "crossings": 9,
+    "labels": [
+      "9_31"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 5*t**5 + 9*t**4 - 9*t**3 + 9*t**2 - 5*t + 1",
+    "determinant": 39,
+    "crossings": 9,
+    "labels": [
+      "9_17"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 6*t**5 + 14*t**4 - 17*t**3 + 14*t**2 - 6*t + 1",
+    "determinant": 59,
+    "crossings": 9,
+    "labels": [
+      "9_32"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 7*t**5 + 18*t**4 - 23*t**3 + 18*t**2 - 7*t + 1",
+    "determinant": 75,
+    "crossings": 9,
+    "labels": [
+      "9_40"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - t**7 + t**6 - t**5 + t**4 - t**3 + t**2 - t + 1",
+    "determinant": 9,
+    "crossings": 9,
+    "labels": [
+      "9_1"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**4 + 7*t**3 - 9*t**2 + 7*t - 2",
+    "determinant": 27,
+    "crossings": 10,
+    "labels": [
+      "10_147"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**4 + 8*t**3 - 11*t**2 + 8*t - 2",
+    "determinant": 31,
+    "crossings": 10,
+    "labels": [
+      "10_131"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 10*t**5 - 20*t**4 + 25*t**3 - 20*t**2 + 10*t - 2",
+    "determinant": 89,
+    "crossings": 10,
+    "labels": [
+      "10_92"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 10*t**5 - 21*t**4 + 27*t**3 - 21*t**2 + 10*t - 2",
+    "determinant": 93,
+    "crossings": 10,
+    "labels": [
+      "10_114"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 10*t**5 - 23*t**4 + 31*t**3 - 23*t**2 + 10*t - 2",
+    "determinant": 101,
+    "crossings": 10,
+    "labels": [
+      "10_119"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 11*t**5 - 24*t**4 + 31*t**3 - 24*t**2 + 11*t - 2",
+    "determinant": 105,
+    "crossings": 10,
+    "labels": [
+      "10_122"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 5*t**5 - 5*t**4 + 5*t**3 - 5*t**2 + 5*t - 2",
+    "determinant": 29,
+    "crossings": 10,
+    "labels": [
+      "10_8"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 5*t**5 - 6*t**4 + 7*t**3 - 6*t**2 + 5*t - 2",
+    "determinant": 33,
+    "crossings": 10,
+    "labels": [
+      "10_61"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 6*t**5 - 10*t**4 + 13*t**3 - 10*t**2 + 6*t - 2",
+    "determinant": 49,
+    "crossings": 10,
+    "labels": [
+      "10_22"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 6*t**5 - 7*t**4 + 7*t**3 - 7*t**2 + 6*t - 2",
+    "determinant": 37,
+    "crossings": 10,
+    "labels": [
+      "10_6"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 7*t**5 - 11*t**4 + 13*t**3 - 11*t**2 + 7*t - 2",
+    "determinant": 53,
+    "crossings": 10,
+    "labels": [
+      "10_50"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 7*t**5 - 12*t**4 + 15*t**3 - 12*t**2 + 7*t - 2",
+    "determinant": 57,
+    "crossings": 10,
+    "labels": [
+      "10_76"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 7*t**5 - 13*t**4 + 17*t**3 - 13*t**2 + 7*t - 2",
+    "determinant": 61,
+    "crossings": 10,
+    "labels": [
+      "10_26"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 7*t**5 - 9*t**4 + 9*t**3 - 9*t**2 + 7*t - 2",
+    "determinant": 45,
+    "crossings": 10,
+    "labels": [
+      "10_21"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 8*t**5 - 12*t**4 + 13*t**3 - 12*t**2 + 8*t - 2",
+    "determinant": 57,
+    "crossings": 10,
+    "labels": [
+      "10_14"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 8*t**5 - 13*t**4 + 15*t**3 - 13*t**2 + 8*t - 2",
+    "determinant": 61,
+    "crossings": 10,
+    "labels": [
+      "10_39"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 8*t**5 - 14*t**4 + 17*t**3 - 14*t**2 + 8*t - 2",
+    "determinant": 65,
+    "crossings": 10,
+    "labels": [
+      "10_25",
+      "10_56"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 8*t**5 - 15*t**4 + 19*t**3 - 15*t**2 + 8*t - 2",
+    "determinant": 69,
+    "crossings": 10,
+    "labels": [
+      "10_32"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 8*t**5 - 16*t**4 + 21*t**3 - 16*t**2 + 8*t - 2",
+    "determinant": 73,
+    "crossings": 10,
+    "labels": [
+      "10_102"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 8*t**5 - 17*t**4 + 23*t**3 - 17*t**2 + 8*t - 2",
+    "determinant": 77,
+    "crossings": 10,
+    "labels": [
+      "10_90"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 9*t**5 - 16*t**4 + 19*t**3 - 16*t**2 + 9*t - 2",
+    "determinant": 73,
+    "crossings": 10,
+    "labels": [
+      "10_72"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 9*t**5 - 17*t**4 + 21*t**3 - 17*t**2 + 9*t - 2",
+    "determinant": 77,
+    "crossings": 10,
+    "labels": [
+      "10_111"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 9*t**5 - 18*t**4 + 23*t**3 - 18*t**2 + 9*t - 2",
+    "determinant": 81,
+    "crossings": 10,
+    "labels": [
+      "10_87",
+      "10_98"
+    ]
+  },
+  {
+    "alexander_polynomial": "-2*t**6 + 9*t**5 - 19*t**4 + 25*t**3 - 19*t**2 + 9*t - 2",
+    "determinant": 85,
+    "crossings": 10,
+    "labels": [
+      "10_83"
+    ]
+  },
+  {
+    "alexander_polynomial": "-3*t**4 + 10*t**3 - 13*t**2 + 10*t - 3",
+    "determinant": 39,
+    "crossings": 10,
+    "labels": [
+      "10_144"
+    ]
+  },
+  {
+    "alexander_polynomial": "-3*t**4 + 11*t**3 - 15*t**2 + 11*t - 3",
+    "determinant": 43,
+    "crossings": 10,
+    "labels": [
+      "10_7"
+    ]
+  },
+  {
+    "alexander_polynomial": "-3*t**4 + 13*t**3 - 19*t**2 + 13*t - 3",
+    "determinant": 51,
+    "crossings": 10,
+    "labels": [
+      "10_36"
+    ]
+  },
+  {
+    "alexander_polynomial": "-3*t**4 + 7*t**3 - 7*t**2 + 7*t - 3",
+    "determinant": 27,
+    "crossings": 10,
+    "labels": [
+      "10_4"
+    ]
+  },
+  {
+    "alexander_polynomial": "-3*t**4 + 9*t**3 - 11*t**2 + 9*t - 3",
+    "determinant": 35,
+    "crossings": 10,
+    "labels": [
+      "10_20",
+      "10_163"
+    ]
+  },
+  {
+    "alexander_polynomial": "-4*t**2 + 9*t - 4",
+    "determinant": 17,
+    "crossings": 10,
+    "labels": [
+      "10_1"
+    ]
+  },
+  {
+    "alexander_polynomial": "-4*t**4 + 11*t**3 - 13*t**2 + 11*t - 4",
+    "determinant": 43,
+    "crossings": 10,
+    "labels": [
+      "10_11"
+    ]
+  },
+  {
+    "alexander_polynomial": "-4*t**4 + 12*t**3 - 15*t**2 + 12*t - 4",
+    "determinant": 47,
+    "crossings": 10,
+    "labels": [
+      "10_16"
+    ]
+  },
+  {
+    "alexander_polynomial": "-4*t**4 + 14*t**3 - 19*t**2 + 14*t - 4",
+    "determinant": 55,
+    "crossings": 10,
+    "labels": [
+      "10_18",
+      "10_24"
+    ]
+  },
+  {
+    "alexander_polynomial": "-4*t**4 + 15*t**3 - 21*t**2 + 15*t - 4",
+    "determinant": 59,
+    "crossings": 10,
+    "labels": [
+      "10_38"
+    ]
+  },
+  {
+    "alexander_polynomial": "-4*t**4 + 16*t**3 - 23*t**2 + 16*t - 4",
+    "determinant": 63,
+    "crossings": 10,
+    "labels": [
+      "10_67",
+      "10_74"
+    ]
+  },
+  {
+    "alexander_polynomial": "-4*t**4 + 17*t**3 - 25*t**2 + 17*t - 4",
+    "determinant": 67,
+    "crossings": 10,
+    "labels": [
+      "10_30"
+    ]
+  },
+  {
+    "alexander_polynomial": "-5*t**4 + 22*t**3 - 33*t**2 + 22*t - 5",
+    "determinant": 87,
+    "crossings": 10,
+    "labels": [
+      "10_97"
+    ]
+  },
+  {
+    "alexander_polynomial": "-6*t**2 + 13*t - 6",
+    "determinant": 25,
+    "crossings": 10,
+    "labels": [
+      "10_3"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**4 + 4*t**3 - 5*t**2 + 4*t - 1",
+    "determinant": 15,
+    "crossings": 10,
+    "labels": [
+      "10_136"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**4 + 5*t**3 - 7*t**2 + 5*t - 1",
+    "determinant": 19,
+    "crossings": 10,
+    "labels": [
+      "10_133"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 3*t**5 - 4*t**4 + 5*t**3 - 4*t**2 + 3*t - 1",
+    "determinant": 21,
+    "crossings": 10,
+    "labels": [
+      "10_141"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 3*t**5 - 5*t**4 + 7*t**3 - 5*t**2 + 3*t - 1",
+    "determinant": 25,
+    "crossings": 10,
+    "labels": [
+      "10_155"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 4*t**5 - 10*t**4 + 15*t**3 - 10*t**2 + 4*t - 1",
+    "determinant": 45,
+    "crossings": 10,
+    "labels": [
+      "10_158"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 4*t**5 - 4*t**4 + 3*t**3 - 4*t**2 + 4*t - 1",
+    "determinant": 21,
+    "crossings": 10,
+    "labels": [
+      "10_160"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 4*t**5 - 6*t**4 + 7*t**3 - 6*t**2 + 4*t - 1",
+    "determinant": 29,
+    "crossings": 10,
+    "labels": [
+      "10_127",
+      "10_150"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 5*t**5 - 9*t**4 + 11*t**3 - 9*t**2 + 5*t - 1",
+    "determinant": 41,
+    "crossings": 10,
+    "labels": [
+      "10_149"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 6*t**5 - 11*t**4 + 13*t**3 - 11*t**2 + 6*t - 1",
+    "determinant": 49,
+    "crossings": 10,
+    "labels": [
+      "10_157"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 7*t**5 - 16*t**4 + 21*t**3 - 16*t**2 + 7*t - 1",
+    "determinant": 69,
+    "crossings": 10,
+    "labels": [
+      "10_78"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 7*t**5 - 17*t**4 + 23*t**3 - 17*t**2 + 7*t - 1",
+    "determinant": 73,
+    "crossings": 10,
+    "labels": [
+      "10_43"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 7*t**5 - 18*t**4 + 25*t**3 - 18*t**2 + 7*t - 1",
+    "determinant": 77,
+    "crossings": 10,
+    "labels": [
+      "10_71"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 7*t**5 - 19*t**4 + 27*t**3 - 19*t**2 + 7*t - 1",
+    "determinant": 81,
+    "crossings": 10,
+    "labels": [
+      "10_42",
+      "10_75"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 7*t**5 - 20*t**4 + 29*t**3 - 20*t**2 + 7*t - 1",
+    "determinant": 85,
+    "crossings": 10,
+    "labels": [
+      "10_60"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 7*t**5 - 21*t**4 + 31*t**3 - 21*t**2 + 7*t - 1",
+    "determinant": 89,
+    "crossings": 10,
+    "labels": [
+      "10_45"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 7*t**5 - 22*t**4 + 33*t**3 - 22*t**2 + 7*t - 1",
+    "determinant": 93,
+    "crossings": 10,
+    "labels": [
+      "10_96"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 8*t**5 - 20*t**4 + 27*t**3 - 20*t**2 + 8*t - 1",
+    "determinant": 85,
+    "crossings": 10,
+    "labels": [
+      "10_81"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 8*t**5 - 22*t**4 + 31*t**3 - 22*t**2 + 8*t - 1",
+    "determinant": 93,
+    "crossings": 10,
+    "labels": [
+      "10_107"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 8*t**5 - 24*t**4 + 35*t**3 - 24*t**2 + 8*t - 1",
+    "determinant": 101,
+    "crossings": 10,
+    "labels": [
+      "10_88"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**6 + 9*t**5 - 26*t**4 + 37*t**3 - 26*t**2 + 9*t - 1",
+    "determinant": 109,
+    "crossings": 10,
+    "labels": [
+      "10_115"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**8 + 3*t**7 - 3*t**6 + 3*t**5 - 3*t**4 + 3*t**3 - 3*t**2 + 3*t - 1",
+    "determinant": 23,
+    "crossings": 10,
+    "labels": [
+      "10_2"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**8 + 3*t**7 - 4*t**6 + 5*t**5 - 5*t**4 + 5*t**3 - 4*t**2 + 3*t - 1",
+    "determinant": 31,
+    "crossings": 10,
+    "labels": [
+      "10_46"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**8 + 3*t**7 - 5*t**6 + 7*t**5 - 7*t**4 + 7*t**3 - 5*t**2 + 3*t - 1",
+    "determinant": 39,
+    "crossings": 10,
+    "labels": [
+      "10_9"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**8 + 3*t**7 - 6*t**6 + 10*t**5 - 11*t**4 + 10*t**3 - 6*t**2 + 3*t - 1",
+    "determinant": 51,
+    "crossings": 10,
+    "labels": [
+      "10_64"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**8 + 4*t**7 - 8*t**6 + 12*t**5 - 13*t**4 + 12*t**3 - 8*t**2 + 4*t - 1",
+    "determinant": 63,
+    "crossings": 10,
+    "labels": [
+      "10_82"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**8 + 4*t**7 - 9*t**6 + 14*t**5 - 15*t**4 + 14*t**3 - 9*t**2 + 4*t - 1",
+    "determinant": 71,
+    "crossings": 10,
+    "labels": [
+      "10_94"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**8 + 4*t**7 - 9*t**6 + 15*t**5 - 17*t**4 + 15*t**3 - 9*t**2 + 4*t - 1",
+    "determinant": 75,
+    "crossings": 10,
+    "labels": [
+      "10_106"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**8 + 5*t**7 - 11*t**6 + 17*t**5 - 19*t**4 + 17*t**3 - 11*t**2 + 5*t - 1",
+    "determinant": 87,
+    "crossings": 10,
+    "labels": [
+      "10_112"
+    ]
+  },
+  {
+    "alexander_polynomial": "-t**8 + 5*t**7 - 12*t**6 + 19*t**5 - 21*t**4 + 19*t**3 - 12*t**2 + 5*t - 1",
+    "determinant": 95,
+    "crossings": 10,
+    "labels": [
+      "10_116"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**4 - 12*t**3 + 21*t**2 - 12*t + 2",
+    "determinant": 49,
+    "crossings": 10,
+    "labels": [
+      "10_35"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**4 - 13*t**3 + 23*t**2 - 13*t + 2",
+    "determinant": 53,
+    "crossings": 10,
+    "labels": [
+      "10_13"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**4 - 4*t**3 + 5*t**2 - 4*t + 2",
+    "determinant": 17,
+    "crossings": 10,
+    "labels": [
+      "10_130"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**4 - 6*t**3 + 9*t**2 - 6*t + 2",
+    "determinant": 25,
+    "crossings": 10,
+    "labels": [
+      "10_129"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**4 - 8*t**3 + 13*t**2 - 8*t + 2",
+    "determinant": 33,
+    "crossings": 10,
+    "labels": [
+      "10_146"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 10*t**5 + 24*t**4 - 31*t**3 + 24*t**2 - 10*t + 2",
+    "determinant": 103,
+    "crossings": 10,
+    "labels": [
+      "10_117"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 11*t**5 + 26*t**4 - 33*t**3 + 26*t**2 - 11*t + 2",
+    "determinant": 111,
+    "crossings": 10,
+    "labels": [
+      "10_113"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 11*t**5 + 27*t**4 - 35*t**3 + 27*t**2 - 11*t + 2",
+    "determinant": 115,
+    "crossings": 10,
+    "labels": [
+      "10_121"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 3*t**5 + 2*t**4 - t**3 + 2*t**2 - 3*t + 2",
+    "determinant": 15,
+    "crossings": 10,
+    "labels": [
+      "10_142"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 3*t**5 + t**4 + t**3 + t**2 - 3*t + 2",
+    "determinant": 11,
+    "crossings": 10,
+    "labels": [
+      "10_128"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 4*t**5 + 4*t**4 - 3*t**3 + 4*t**2 - 4*t + 2",
+    "determinant": 23,
+    "crossings": 10,
+    "labels": [
+      "10_134"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 6*t**5 + 10*t**4 - 11*t**3 + 10*t**2 - 6*t + 2",
+    "determinant": 47,
+    "crossings": 10,
+    "labels": [
+      "10_12",
+      "10_54"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 6*t**5 + 9*t**4 - 9*t**3 + 9*t**2 - 6*t + 2",
+    "determinant": 43,
+    "crossings": 10,
+    "labels": [
+      "10_15"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 7*t**5 + 11*t**4 - 11*t**3 + 11*t**2 - 7*t + 2",
+    "determinant": 51,
+    "crossings": 10,
+    "labels": [
+      "10_19"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 7*t**5 + 13*t**4 - 15*t**3 + 13*t**2 - 7*t + 2",
+    "determinant": 59,
+    "crossings": 10,
+    "labels": [
+      "10_23",
+      "10_52"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 7*t**5 + 14*t**4 - 17*t**3 + 14*t**2 - 7*t + 2",
+    "determinant": 63,
+    "crossings": 10,
+    "labels": [
+      "10_65",
+      "10_77"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 7*t**5 + 15*t**4 - 19*t**3 + 15*t**2 - 7*t + 2",
+    "determinant": 67,
+    "crossings": 10,
+    "labels": [
+      "10_51"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 8*t**5 + 14*t**4 - 15*t**3 + 14*t**2 - 8*t + 2",
+    "determinant": 63,
+    "crossings": 10,
+    "labels": [
+      "10_108"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 8*t**5 + 15*t**4 - 17*t**3 + 15*t**2 - 8*t + 2",
+    "determinant": 67,
+    "crossings": 10,
+    "labels": [
+      "10_93"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 8*t**5 + 16*t**4 - 19*t**3 + 16*t**2 - 8*t + 2",
+    "determinant": 71,
+    "crossings": 10,
+    "labels": [
+      "10_27"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 8*t**5 + 17*t**4 - 21*t**3 + 17*t**2 - 8*t + 2",
+    "determinant": 75,
+    "crossings": 10,
+    "labels": [
+      "10_40",
+      "10_103"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 8*t**5 + 18*t**4 - 23*t**3 + 18*t**2 - 8*t + 2",
+    "determinant": 79,
+    "crossings": 10,
+    "labels": [
+      "10_57"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 9*t**5 + 19*t**4 - 23*t**3 + 19*t**2 - 9*t + 2",
+    "determinant": 83,
+    "crossings": 10,
+    "labels": [
+      "10_86"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 9*t**5 + 20*t**4 - 25*t**3 + 20*t**2 - 9*t + 2",
+    "determinant": 87,
+    "crossings": 10,
+    "labels": [
+      "10_84"
+    ]
+  },
+  {
+    "alexander_polynomial": "2*t**6 - 9*t**5 + 21*t**4 - 27*t**3 + 21*t**2 - 9*t + 2",
+    "determinant": 91,
+    "crossings": 10,
+    "labels": [
+      "10_95"
+    ]
+  },
+  {
+    "alexander_polynomial": "3*t**4 - 11*t**3 + 17*t**2 - 11*t + 3",
+    "determinant": 45,
+    "crossings": 10,
+    "labels": [
+      "10_10",
+      "10_165"
+    ]
+  },
+  {
+    "alexander_polynomial": "3*t**4 - 16*t**3 + 27*t**2 - 16*t + 3",
+    "determinant": 65,
+    "crossings": 10,
+    "labels": [
+      "10_58"
+    ]
+  },
+  {
+    "alexander_polynomial": "3*t**4 - 9*t**3 + 13*t**2 - 9*t + 3",
+    "determinant": 37,
+    "crossings": 10,
+    "labels": [
+      "10_34",
+      "10_135"
+    ]
+  },
+  {
+    "alexander_polynomial": "3*t**6 - 8*t**5 + 12*t**4 - 13*t**3 + 12*t**2 - 8*t + 3",
+    "determinant": 59,
+    "crossings": 10,
+    "labels": [
+      "10_49"
+    ]
+  },
+  {
+    "alexander_polynomial": "3*t**6 - 9*t**5 + 15*t**4 - 17*t**3 + 15*t**2 - 9*t + 3",
+    "determinant": 71,
+    "crossings": 10,
+    "labels": [
+      "10_80"
+    ]
+  },
+  {
+    "alexander_polynomial": "3*t**6 - 9*t**5 + 16*t**4 - 19*t**3 + 16*t**2 - 9*t + 3",
+    "determinant": 75,
+    "crossings": 10,
+    "labels": [
+      "10_66"
+    ]
+  },
+  {
+    "alexander_polynomial": "4*t**4 - 13*t**3 + 19*t**2 - 13*t + 4",
+    "determinant": 53,
+    "crossings": 10,
+    "labels": [
+      "10_28",
+      "10_37"
+    ]
+  },
+  {
+    "alexander_polynomial": "4*t**4 - 14*t**3 + 21*t**2 - 14*t + 4",
+    "determinant": 57,
+    "crossings": 10,
+    "labels": [
+      "10_31",
+      "10_68"
+    ]
+  },
+  {
+    "alexander_polynomial": "4*t**4 - 16*t**3 + 25*t**2 - 16*t + 4",
+    "determinant": 65,
+    "crossings": 10,
+    "labels": [
+      "10_33"
+    ]
+  },
+  {
+    "alexander_polynomial": "5*t**4 - 14*t**3 + 19*t**2 - 14*t + 5",
+    "determinant": 57,
+    "crossings": 10,
+    "labels": [
+      "10_63"
+    ]
+  },
+  {
+    "alexander_polynomial": "5*t**4 - 15*t**3 + 21*t**2 - 15*t + 5",
+    "determinant": 61,
+    "crossings": 10,
+    "labels": [
+      "10_55"
+    ]
+  },
+  {
+    "alexander_polynomial": "6*t**4 - 18*t**3 + 25*t**2 - 18*t + 6",
+    "determinant": 73,
+    "crossings": 10,
+    "labels": [
+      "10_53"
+    ]
+  },
+  {
+    "alexander_polynomial": "7*t**4 - 21*t**3 + 29*t**2 - 21*t + 7",
+    "determinant": 85,
+    "crossings": 10,
+    "labels": [
+      "10_101"
+    ]
+  },
+  {
+    "alexander_polynomial": "8*t**4 - 26*t**3 + 37*t**2 - 26*t + 8",
+    "determinant": 105,
+    "crossings": 10,
+    "labels": [
+      "10_120"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**4 + t**3 - 3*t**2 + t + 1",
+    "determinant": 3,
+    "crossings": 10,
+    "labels": [
+      "10_145"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**4 - 2*t**3 + 3*t**2 - 2*t + 1",
+    "determinant": 9,
+    "crossings": 10,
+    "labels": [
+      "10_140"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**4 - 6*t**3 + 11*t**2 - 6*t + 1",
+    "determinant": 25,
+    "crossings": 10,
+    "labels": [
+      "10_137"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**4 - t**3 + t**2 - t + 1",
+    "determinant": 5,
+    "crossings": 10,
+    "labels": [
+      "10_132"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 2*t**4 + 3*t**3 - 2*t**2 + 1",
+    "determinant": 5,
+    "crossings": 10,
+    "labels": [
+      "10_161",
+      "10_162"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 2*t**5 + 2*t**4 - t**3 + 2*t**2 - 2*t + 1",
+    "determinant": 11,
+    "crossings": 10,
+    "labels": [
+      "10_125"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 2*t**5 + 4*t**4 - 5*t**3 + 4*t**2 - 2*t + 1",
+    "determinant": 19,
+    "crossings": 10,
+    "labels": [
+      "10_126"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 3*t**5 + 6*t**4 - 7*t**3 + 6*t**2 - 3*t + 1",
+    "determinant": 27,
+    "crossings": 10,
+    "labels": [
+      "10_143"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 3*t**5 + 7*t**4 - 9*t**3 + 7*t**2 - 3*t + 1",
+    "determinant": 31,
+    "crossings": 10,
+    "labels": [
+      "10_148"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 4*t**4 + 7*t**3 - 4*t**2 + 1",
+    "determinant": 13,
+    "crossings": 10,
+    "labels": [
+      "10_154"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 4*t**5 + 10*t**4 - 13*t**3 + 10*t**2 - 4*t + 1",
+    "determinant": 43,
+    "crossings": 10,
+    "labels": [
+      "10_151"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 4*t**5 + 8*t**4 - 9*t**3 + 8*t**2 - 4*t + 1",
+    "determinant": 35,
+    "crossings": 10,
+    "labels": [
+      "10_156"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 4*t**5 + 9*t**4 - 11*t**3 + 9*t**2 - 4*t + 1",
+    "determinant": 39,
+    "crossings": 10,
+    "labels": [
+      "10_159"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 5*t**5 + 12*t**4 - 15*t**3 + 12*t**2 - 5*t + 1",
+    "determinant": 51,
+    "crossings": 10,
+    "labels": [
+      "10_164"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 5*t**5 + 8*t**4 - 7*t**3 + 8*t**2 - 5*t + 1",
+    "determinant": 35,
+    "crossings": 10,
+    "labels": [
+      "10_138"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 7*t**5 + 15*t**4 - 17*t**3 + 15*t**2 - 7*t + 1",
+    "determinant": 63,
+    "crossings": 10,
+    "labels": [
+      "10_29"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 7*t**5 + 16*t**4 - 19*t**3 + 16*t**2 - 7*t + 1",
+    "determinant": 67,
+    "crossings": 10,
+    "labels": [
+      "10_70"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 7*t**5 + 17*t**4 - 21*t**3 + 17*t**2 - 7*t + 1",
+    "determinant": 71,
+    "crossings": 10,
+    "labels": [
+      "10_41"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 7*t**5 + 18*t**4 - 23*t**3 + 18*t**2 - 7*t + 1",
+    "determinant": 75,
+    "crossings": 10,
+    "labels": [
+      "10_59"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 7*t**5 + 19*t**4 - 25*t**3 + 19*t**2 - 7*t + 1",
+    "determinant": 79,
+    "crossings": 10,
+    "labels": [
+      "10_44"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 7*t**5 + 20*t**4 - 27*t**3 + 20*t**2 - 7*t + 1",
+    "determinant": 83,
+    "crossings": 10,
+    "labels": [
+      "10_73"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 7*t**5 + 21*t**4 - 29*t**3 + 21*t**2 - 7*t + 1",
+    "determinant": 87,
+    "crossings": 10,
+    "labels": [
+      "10_69"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 8*t**5 + 20*t**4 - 25*t**3 + 20*t**2 - 8*t + 1",
+    "determinant": 83,
+    "crossings": 10,
+    "labels": [
+      "10_110"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 8*t**5 + 22*t**4 - 29*t**3 + 22*t**2 - 8*t + 1",
+    "determinant": 91,
+    "crossings": 10,
+    "labels": [
+      "10_105"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - 8*t**5 + 24*t**4 - 33*t**3 + 24*t**2 - 8*t + 1",
+    "determinant": 99,
+    "crossings": 10,
+    "labels": [
+      "10_89"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**6 - t**5 - t**4 + 3*t**3 - t**2 - t + 1",
+    "determinant": 1,
+    "crossings": 10,
+    "labels": [
+      "10_153"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 3*t**7 + 5*t**6 - 5*t**5 + 5*t**4 - 5*t**3 + 5*t**2 - 3*t + 1",
+    "determinant": 33,
+    "crossings": 10,
+    "labels": [
+      "10_5"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 3*t**7 + 5*t**6 - 7*t**5 + 9*t**4 - 7*t**3 + 5*t**2 - 3*t + 1",
+    "determinant": 41,
+    "crossings": 10,
+    "labels": [
+      "10_17"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 3*t**7 + 6*t**6 - 7*t**5 + 7*t**4 - 7*t**3 + 6*t**2 - 3*t + 1",
+    "determinant": 41,
+    "crossings": 10,
+    "labels": [
+      "10_47"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 3*t**7 + 6*t**6 - 8*t**5 + 9*t**4 - 8*t**3 + 6*t**2 - 3*t + 1",
+    "determinant": 45,
+    "crossings": 10,
+    "labels": [
+      "10_62"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 3*t**7 + 6*t**6 - 9*t**5 + 11*t**4 - 9*t**3 + 6*t**2 - 3*t + 1",
+    "determinant": 49,
+    "crossings": 10,
+    "labels": [
+      "10_48"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 3*t**7 + 7*t**6 - 12*t**5 + 15*t**4 - 12*t**3 + 7*t**2 - 3*t + 1",
+    "determinant": 61,
+    "crossings": 10,
+    "labels": [
+      "10_79"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 4*t**7 + 10*t**6 - 16*t**5 + 19*t**4 - 16*t**3 + 10*t**2 - 4*t + 1",
+    "determinant": 81,
+    "crossings": 10,
+    "labels": [
+      "10_99"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 4*t**7 + 10*t**6 - 17*t**5 + 21*t**4 - 17*t**3 + 10*t**2 - 4*t + 1",
+    "determinant": 85,
+    "crossings": 10,
+    "labels": [
+      "10_109"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 4*t**7 + 8*t**6 - 10*t**5 + 11*t**4 - 10*t**3 + 8*t**2 - 4*t + 1",
+    "determinant": 57,
+    "crossings": 10,
+    "labels": [
+      "10_85"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 4*t**7 + 9*t**6 - 12*t**5 + 13*t**4 - 12*t**3 + 9*t**2 - 4*t + 1",
+    "determinant": 65,
+    "crossings": 10,
+    "labels": [
+      "10_100"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 4*t**7 + 9*t**6 - 14*t**5 + 17*t**4 - 14*t**3 + 9*t**2 - 4*t + 1",
+    "determinant": 73,
+    "crossings": 10,
+    "labels": [
+      "10_91"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 4*t**7 + 9*t**6 - 15*t**5 + 19*t**4 - 15*t**3 + 9*t**2 - 4*t + 1",
+    "determinant": 77,
+    "crossings": 10,
+    "labels": [
+      "10_104"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 5*t**7 + 12*t**6 - 19*t**5 + 23*t**4 - 19*t**3 + 12*t**2 - 5*t + 1",
+    "determinant": 97,
+    "crossings": 10,
+    "labels": [
+      "10_118"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - 6*t**7 + 15*t**6 - 24*t**5 + 29*t**4 - 24*t**3 + 15*t**2 - 6*t + 1",
+    "determinant": 121,
+    "crossings": 10,
+    "labels": [
+      "10_123"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - t**7 + 2*t**5 - 3*t**4 + 2*t**3 - t + 1",
+    "determinant": 3,
+    "crossings": 10,
+    "labels": [
+      "10_139"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - t**7 + t**5 - t**4 + t**3 - t + 1",
+    "determinant": 1,
+    "crossings": 10,
+    "labels": [
+      "10_124"
+    ]
+  },
+  {
+    "alexander_polynomial": "t**8 - t**7 - t**6 + 4*t**5 - 5*t**4 + 4*t**3 - t**2 - t + 1",
+    "determinant": 11,
+    "crossings": 10,
+    "labels": [
+      "10_152"
+    ]
+  }
+]

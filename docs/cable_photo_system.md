@@ -2,7 +2,7 @@
 
 ## What this prototype does
 
-The Gradio Space reuses the repository's skeleton and crossing parser. It produces an overlay, reports unresolved junctions, and computes a planar-diagram Alexander polynomial and determinant only when the parser returns a structurally consistent closed diagram. A census lookup provides candidate labels, not a unique knot identification. Multiple supplied views are processed independently; disagreement or an unresolved crossing requests another angle.
+The Gradio Space reuses the repository's skeleton and crossing parser. It produces an overlay, reports unresolved junctions, and computes a planar-diagram Alexander polynomial and determinant only when the parser returns a structurally consistent closed diagram. A precomputed census fingerprint index provides candidate labels without a per-request full-census calculation; it does not provide a unique knot identification. Multiple supplied views are processed independently; disagreement or an unresolved crossing requests another angle.
 
 ## Explicit assumptions and limits
 

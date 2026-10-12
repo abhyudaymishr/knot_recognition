@@ -71,16 +71,12 @@ def _diagram_from_result(pd_crossings):
 @lru_cache(maxsize=1)
 def _candidate_index():
     kg = _knotgen()
-    census_path = ROOT / "runtime" / "Knotgen" / "census_braids.json"
-    census = json.loads(census_path.read_text())
-    index = {}
-    for name, record in census.items():
-        try:
-            knot = kg.braid(record["braid"], nstrands=record["nstrands"], name=name)
-            signature = (str(knot.alexander()), int(knot.determinant()), len(knot.crossings))
-            index.setdefault(signature, []).append(name)
-        except Exception:
-            continue
+    index_path = ROOT / "runtime" / "Knotgen" / "census_invariant_index.json"
+    rows = json.loads(index_path.read_text())
+    index = {
+        (row["alexander_polynomial"], int(row["determinant"]), int(row["crossings"])): row["labels"]
+        for row in rows
+    }
     return kg, index
 
 
