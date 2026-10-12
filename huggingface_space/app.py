@@ -15,6 +15,15 @@ import gradio as gr
 import numpy as np
 from PIL import Image
 
+try:
+    import spaces
+except ImportError:  # The local GitHub CI runner is CPU-only.
+    class _SpacesCompat:
+        @staticmethod
+        def GPU(fn):
+            return fn
+    spaces = _SpacesCompat()
+
 ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "runtime" / "knot_recognition"
 
@@ -75,6 +84,7 @@ def _candidate_index():
     return kg, index
 
 
+@spaces.GPU
 def analyze_views(images, open_ends):
     if not images:
         return None, "Upload at least one clear view of the cable."

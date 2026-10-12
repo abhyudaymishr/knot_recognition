@@ -27,7 +27,7 @@ The Gradio Space reuses the repository's skeleton and crossing parser. It produc
 
 - Secret `KNOTASSISTANT`: a Hugging Face fine-grained token with write access to the target Space.
 
-The Gradio Space already exists. A push to the deployment branch publishes the app automatically; pull requests run validation only.
+The Gradio Space already exists and is configured for ZeroGPU. The app callback carries the required ZeroGPU decorator; its current image and invariant calculations are CPU-based. A push to the deployment branch publishes the app automatically; pull requests run validation only.
 
 ## Evaluation required before claiming performance
 
