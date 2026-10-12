@@ -25,6 +25,18 @@ from .knotgen import (
 from .build_census import load_census, build as build_census
 from .enumerate import enumerate_knots
 from .draw import render_knot_diagram, render_torus_smooth
+from .reidemeister import (
+    reidemeister_1_stabilize,
+    reidemeister_1_destabilize,
+    reidemeister_2_insert,
+    reidemeister_2_delete,
+    reidemeister_3_slide,
+    braid_far_commute,
+    braid_cyclic_shift,
+    apply_stochastic_reidemeister_moves,
+    generate_reidemeister_variant,
+    generate_reidemeister_diagram_pair,
+)
 
 __all__ = [
     "render_knot_diagram",
@@ -54,4 +66,14 @@ __all__ = [
     "load_census",
     "build_census",
     "enumerate_knots",
+    "reidemeister_1_stabilize",
+    "reidemeister_1_destabilize",
+    "reidemeister_2_insert",
+    "reidemeister_2_delete",
+    "reidemeister_3_slide",
+    "braid_far_commute",
+    "braid_cyclic_shift",
+    "apply_stochastic_reidemeister_moves",
+    "generate_reidemeister_variant",
+    "generate_reidemeister_diagram_pair",
 ]

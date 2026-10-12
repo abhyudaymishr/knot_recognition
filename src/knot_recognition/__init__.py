@@ -22,6 +22,15 @@ from .nanotransformer import (
     load_nanotransformer,
     save_nanotransformer_checkpoint,
 )
+from .r_gno import RGNO, reidemeister_normal_form, PlanarDiagramGraph
+from .reidemeister_contrastive import (
+    ReidemeisterContrastiveLoss,
+    ReidemeisterInfoNCELoss,
+    ReidemeisterAugmentedDataset,
+    ReidemeisterVisionModel,
+    reidemeister_collate_fn,
+)
+from .topological_probe import TopologicalProbeEvaluator
 
 _LAZY_EXPORTS = {
     "InferenceConfig": ".infer",
@@ -89,4 +98,13 @@ __all__ = [
     "SolverConfig",
     "reduce_skeleton",
     "solve_image",
+    "RGNO",
+    "reidemeister_normal_form",
+    "PlanarDiagramGraph",
+    "ReidemeisterContrastiveLoss",
+    "ReidemeisterInfoNCELoss",
+    "ReidemeisterAugmentedDataset",
+    "ReidemeisterVisionModel",
+    "reidemeister_collate_fn",
+    "TopologicalProbeEvaluator",
 ]

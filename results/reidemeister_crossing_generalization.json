@@ -1,0 +1,141 @@
+{
+  "dataset_split": {
+    "train_knots_count": 36,
+    "test_knots_count": 214,
+    "train_domain": "c <= 8 crossings",
+    "test_domain": "c in {9, 10} crossings"
+  },
+  "probing_results": {
+    "naive_vit": {
+      "determinant": {
+        "r2_score": -1.0,
+        "spearman_rho": 0.14723005659403077,
+        "pearson_r": 0.14999695122241974,
+        "mae": 35.46152877807617,
+        "train_samples": 36,
+        "test_samples": 214
+      },
+      "alexander_at_2": {
+        "r2_score": -0.02541053295135498,
+        "spearman_rho": -0.1932733699334279,
+        "pearson_r": -0.08829186856746674,
+        "mae": 2.780036211013794,
+        "train_samples": 36,
+        "test_samples": 214
+      },
+      "crossing_number": {
+        "r2_score": -1.0,
+        "spearman_rho": 0.006210987773112822,
+        "pearson_r": 0.029167328029870987,
+        "mae": 2.769989252090454,
+        "train_samples": 36,
+        "test_samples": 214
+      },
+      "braid_index": {
+        "r2_score": -0.6384811401367188,
+        "spearman_rho": -0.2960245190932614,
+        "pearson_r": -0.17699334025382996,
+        "mae": 1.4003574848175049,
+        "train_samples": 36,
+        "test_samples": 214
+      },
+      "hyperbolic_volume": {
+        "r2_score": -1.0,
+        "spearman_rho": 0.1981812265380008,
+        "pearson_r": 0.16497577726840973,
+        "mae": 5.38700532913208,
+        "train_samples": 36,
+        "test_samples": 214
+      }
+    },
+    "r_simclr": {
+      "determinant": {
+        "r2_score": -1.0,
+        "spearman_rho": 0.1688272693867842,
+        "pearson_r": 0.17757374048233032,
+        "mae": 35.42607116699219,
+        "train_samples": 36,
+        "test_samples": 214
+      },
+      "alexander_at_2": {
+        "r2_score": -0.023992300033569336,
+        "spearman_rho": -0.16475742634307555,
+        "pearson_r": -0.010766332969069481,
+        "mae": 2.7922379970550537,
+        "train_samples": 36,
+        "test_samples": 214
+      },
+      "crossing_number": {
+        "r2_score": -1.0,
+        "spearman_rho": 0.38751376371038915,
+        "pearson_r": 0.369150310754776,
+        "mae": 2.7707953453063965,
+        "train_samples": 36,
+        "test_samples": 214
+      },
+      "braid_index": {
+        "r2_score": -0.6796926259994507,
+        "spearman_rho": -0.00629275902155815,
+        "pearson_r": -0.06603451818227768,
+        "mae": 1.4226293563842773,
+        "train_samples": 36,
+        "test_samples": 214
+      },
+      "hyperbolic_volume": {
+        "r2_score": -1.0,
+        "spearman_rho": 0.19414893617254156,
+        "pearson_r": 0.20401613414287567,
+        "mae": 5.369213581085205,
+        "train_samples": 36,
+        "test_samples": 214
+      }
+    },
+    "r_gno": {
+      "determinant": {
+        "r2_score": -1.0,
+        "spearman_rho": -0.03119324366999311,
+        "pearson_r": 0.047674115747213364,
+        "mae": 34.67449951171875,
+        "train_samples": 36,
+        "test_samples": 214
+      },
+      "alexander_at_2": {
+        "r2_score": -0.024726510047912598,
+        "spearman_rho": 0.34787142439228386,
+        "pearson_r": 0.06412962079048157,
+        "mae": 2.705561876296997,
+        "train_samples": 36,
+        "test_samples": 214
+      },
+      "crossing_number": {
+        "r2_score": -1.0,
+        "spearman_rho": -0.08727388660686512,
+        "pearson_r": -0.05794648826122284,
+        "mae": 2.661393404006958,
+        "train_samples": 36,
+        "test_samples": 214
+      },
+      "braid_index": {
+        "r2_score": -0.3421599864959717,
+        "spearman_rho": 0.4614362002702522,
+        "pearson_r": 0.37779659032821655,
+        "mae": 1.2664700746536255,
+        "train_samples": 36,
+        "test_samples": 214
+      },
+      "hyperbolic_volume": {
+        "r2_score": -1.0,
+        "spearman_rho": -0.04030961431862606,
+        "pearson_r": 0.004943050444126129,
+        "mae": 5.161890506744385,
+        "train_samples": 36,
+        "test_samples": 214
+      }
+    }
+  },
+  "retrieval_accuracy": {
+    "naive_vit_top1": 23.83177570093458,
+    "r_simclr_top1": 23.364485981308412,
+    "r_gno_top1": 100.0
+  }
+}

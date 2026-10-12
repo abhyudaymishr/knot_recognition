@@ -2,16 +2,17 @@
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Tests: 31 passed](https://img.shields.io/badge/tests-31%20passed-brightgreen.svg)](tests/)
+[![Tests: 37 passed](https://img.shields.io/badge/tests-37%20passed-brightgreen.svg)](tests/)
 
 ## Overview
 **Knot Recognition** is a scientific Python framework combining deep learning, computer vision, and computational knot theory. It provides unified workflows for:
 1. **Topological Image Traversal (`KnotTraverser`)**: Skeleton graph tracing, crossing junction detection, strand pairing, intensity-based over/under strand resolution, and PD/Gauss code extraction with visual crossing annotations.
 2. **Vision NanoTransformer (`NanoTransformer`)**: A lightweight (~0.67M parameter) patch-based Vision Transformer for fast, active classification across all 250 prime knots from unknot through $10_{165}$. Features noise estimation, bilateral edge-preserving filtering, 128-d unit-normalized prototype embeddings, and cosine similarity retrieval.
-3. **Active Neuro-Symbolic Traversal (`traverse_and_classify`)**: Seamless synergy coupling `KnotTraverser` code extraction with `NanoTransformer` classification and prototype retrieval, providing cross-verification and resilience against real-world texture noise.
-4. **2D Diagram Classification & Solving**: ResNet CNN classifiers, 24D rotation/reflection feature extraction, Reidemeister move candidate detection, and graph-based diagram simplification.
-5. **3D Biological Knotting (Protein Pipeline)**: PDB $C_\alpha$ backbone extraction, Fibonacci sphere projections, ray-segment crossing resolution, and hybrid (CNN image + Gauss histogram) classification.
-6. **Procedural Generative Knot Engine (`Knotgen`)**: Repository-local knot construction and diagram tools for braid closures, torus knots, rational/2-bridge knots, pretzel and Montesinos knots, diagram operations, polynomial invariants, rendering, and optional SnapPy integration. The bundled braid table has 250 entries: the unknot plus the 249 prime knots from $3_1$ through $10_{165}$.
+3. **Certified Reidemeister Invariance & R-GNO**: Mathematical ambient isotopy invariance by construction. Reidemeister Graph Neural Operator (`RGNO`) with confluent $R_1/R_2$ reduction layers and self-supervised contrastive learning ($\mathbb{R}$-SimCLR) over stochastic braid moves in `Knotgen`.
+4. **Active Neuro-Symbolic Traversal (`traverse_and_classify`)**: Seamless synergy coupling `KnotTraverser` code extraction with `NanoTransformer` classification and prototype retrieval, providing cross-verification and resilience against real-world texture noise.
+5. **2D Diagram Classification & Solving**: ResNet CNN classifiers, 24D rotation/reflection feature extraction, Reidemeister move candidate detection, and graph-based diagram simplification.
+6. **3D Biological Knotting (Protein Pipeline)**: PDB $C_\alpha$ backbone extraction, Fibonacci sphere projections, ray-segment crossing resolution, and hybrid (CNN image + Gauss histogram) classification.
+7. **Procedural Generative Knot Engine (`Knotgen`)**: Repository-local knot construction and diagram tools for braid closures, torus knots, rational/2-bridge knots, pretzel and Montesinos knots, diagram operations, polynomial invariants, rendering, and optional SnapPy integration. The bundled braid table has 250 entries: the unknot plus the 249 prime knots from $3_1$ through $10_{165}$.
 
 ---
 
@@ -114,7 +115,44 @@ python scripts/train_nanotransformer.py \
   --lr 3e-4
 ```
 
-### 3. 2D ResNet Image Classification Workflow
+### 3. Certified Reidemeister Invariance (`RGNO` & $\mathbb{R}$-SimCLR)
+Two knot diagrams represent the same topological knot if and only if they are related by a finite sequence of **Reidemeister moves ($R_1, R_2, R_3$)**. This module provides:
+- **`RGNO` (Reidemeister Graph Neural Operator)**: Formulates planar diagrams as signed 4-valent graphs with confluent rewrite layers that contract $R_1$ curls and $R_2$ bigons to a canonical normal form, guaranteeing **strict $0.0$ $L_2$ distance** under $R_1$ and $R_2$ moves.
+- **$\mathbb{R}$-SimCLR**: Self-supervised contrastive learning that samples stochastic Reidemeister paths in Artin braid space and minimizes ambient isotopy orbit variance.
+- **Topological Invariant Probes**: Evaluates whether embeddings encode intrinsic topological invariants ($\det(K)$, Alexander polynomial $\Delta(2)$, hyperbolic volume) rather than visual layout.
+
+#### Strict R1/R2 Invariance via `RGNO`:
+```python
+import Knotgen
+from knot_recognition import RGNO
+
+# 1. Base Figure-8 knot (4_1)
+k_base = Knotgen.braid([1, -2, 1, -2], 3, "4_1")
+pd_base = [c["pd"] for c in k_base.crossings]
+signs_base = [c["sign"] for c in k_base.crossings]
+
+# 2. Deformed diagram with added R2 cancelling bigons
+k_r2 = Knotgen.braid([1, 1, -1, -2, 1, -2], 3, "4_1_r2")
+pd_r2 = [c["pd"] for c in k_r2.crossings]
+signs_r2 = [c["sign"] for c in k_r2.crossings]
+
+# 3. Compute certified embeddings
+model = RGNO()
+z_base = model(pd_base, signs_base)
+z_r2 = model(pd_r2, signs_r2)
+
+diff = (z_base - z_r2).norm().item()
+print(f"L2 distance between z(4_1) and z(R2(4_1)): {diff:.6e}")
+# Output: 0.000000e+00 (Exact Machine Zero Invariance)
+```
+
+#### Run the Crossing Generalization Experiment:
+Train on low-crossing knots ($c \le 8$) and evaluate zero-shot ambient isotopy retrieval and invariant probing on high-crossing knots ($c \in \{9, 10\}$):
+```bash
+python scripts/run_crossing_generalization_experiment.py --epochs 5 --out-dir results/
+```
+
+### 4. 2D ResNet Image Classification Workflow
 > **Note on Model Checkpoints**:
 > - `checkpoints/best.pth` referenced below is the output of the **2D ResNet training workflow** (`python -m knot_recognition.train`). It is not pre-packaged in the repository.
 > - The committed checkpoint `checkpoints/hybrid_classifier.pth` is for the **protein projection model** and has an incompatible architecture (`cnn.0.weight` vs ResNet `conv1.weight`), so it cannot be loaded by `knot` or `knot-solve`.
@@ -152,7 +190,7 @@ knot-solve --image /path/to/image.png --checkpoint ./checkpoints/best.pth --mapp
 
 ---
 
-### 4. Procedural Knot Generation & Diagram Rendering (`Knotgen/`)
+### 5. Procedural Knot Generation & Diagram Rendering (`Knotgen/`)
 `Knotgen` provides braid-based knot constructors, PD/Gauss representations, Alexander and Jones polynomials, determinants, Burau calculations, common knot operations, and rendering helpers. `Knot.render_image()` returns an RGB `uint8` array and can also save it to a file. `render_torus_smooth()` renders a projected 3D torus-knot embedding; it is a visualization, not a canonical diagram encoding.
 
 **Import scope:** `Knotgen` is currently a repository-local package and is not included by the `src/`-only package discovery in `pyproject.toml`. Run these examples from the repository root (or add the checkout root to `PYTHONPATH`). `pip install -e .` installs `knot_recognition`, but by itself does not make `import Knotgen` available outside the checkout.
@@ -201,7 +239,7 @@ The `Knotgen/knotgen.py --selftest` command also exercises SnapPy identification
 
 ---
 
-### 5. Protein Knot Pipeline (Stages 1–4)
+### 6. Protein Knot Pipeline (Stages 1–4)
 The biological pipeline models knotting in 3D protein macromolecules (such as KnotProt chains).
 
 #### Prerequisites:
@@ -274,6 +312,9 @@ python scripts/train_hybrid_classifier.py \
 ```text
 knot_recognition/
 ├── src/knot_recognition/          # Core Python package
+│   ├── r_gno.py                   # Reidemeister Graph Neural Operator & canonical R1/R2 reduction
+│   ├── reidemeister_contrastive.py # Self-supervised contrastive learning (R-SimCLR / R-VICReg)
+│   ├── topological_probe.py       # Linear probing on exact invariants (det, Alexander, volume)
 │   ├── nanotransformer.py         # Vision NanoTransformer: ViT, noise estimation, prototype retrieval
 │   ├── traverser.py               # KnotTraverser: curve tracing, over/under resolution, annotations
 │   ├── gauss_pd.py                # Graph skeletonization, junction clustering, PD extraction
@@ -287,6 +328,7 @@ knot_recognition/
 │   ├── solver.py                  # Diagram loop simplification & reduced inference
 │   └── train.py                   # 2D ResNet supervised training loop
 ├── Knotgen/                       # Repository-local knot generation tools
+│   ├── reidemeister.py            # Stochastic R1, R2, R3 braid & diagram move engine
 │   ├── knotgen.py                 # Knot model, constructors, invariants, operations, SnapPy bridge
 │   ├── draw.py                    # Planar diagram and smooth torus-knot rendering
 │   ├── enumerate.py               # Experimental shadow enumeration and finite-invariant filtering
@@ -294,12 +336,15 @@ knot_recognition/
 │   ├── census_braids.json         # 250 rows: unknot plus prime knots 3_1 through 10_165
 │   └── knots_through_9.json       # 84 generated prime-knot records for crossing numbers 3–9
 ├── docs/                          # Scientific & technical documentation
+│   ├── reidemeister_invariance_theory.md # Mathematical proofs and NeurIPS/ICML paper formulation
 │   ├── scientific.md              # Research report, methodology, and audited baseline metrics
 │   ├── reproducibility.md         # Environment setup, test benchmarks, and data guidelines
 │   ├── cable_photo_system.md      # Cable & real-world knot identification documentation
 │   ├── figures/                   # Visualization galleries
 │   └── methods.md                 # Mathematical and algorithmic reference
 ├── scripts/                       # Experiment drivers & dataset preparation
+│   ├── run_crossing_generalization_experiment.py # Crossing extrapolation & invariant probing
+│   ├── train_reidemeister_contrastive.py # Self-supervised contrastive training CLI
 │   ├── train_nanotransformer.py   # Noise-aware training loop for 250-class NanoTransformer
 │   ├── build_knotprot_hybrid_dataset.py
 │   ├── train_hybrid_classifier.py
@@ -311,8 +356,9 @@ knot_recognition/
 ├── data/                          # Dataset manifests and metadata
 │   └── knotprot/hybrid_manifest.csv
 ├── results/                       # Training logs and figure outputs
+│   ├── reidemeister_crossing_generalization.json # Crossing generalization metrics
 │   └── hybrid_training.csv
-└── tests/                         # 31 unit tests across 8 test modules
+└── tests/                         # 37 unit tests across 9 test modules
 ```
 
 ---
@@ -344,7 +390,7 @@ knot_recognition/
 
 ## Verification & Test Suite
 
-The test suite contains **31 unit tests across 8 test modules**:
+The test suite contains **37 unit tests across 9 test modules**:
 ```bash
 pytest tests/ -v
 ```
@@ -352,6 +398,7 @@ pytest tests/ -v
 
 | Module | Scope Tested |
 |---|---|
+| `test_reidemeister_invariance.py` | Stochastic R1/R2/R3 generators, invariant preservation (Alexander, det), confluent R-NF canonical reduction, RGNO certified zero-distance invariance, contrastive loss, topological invariant probing |
 | `test_nanotransformer.py` | ViT forward pass, 250-class prediction, top-k cosine similarity retrieval, checkpoint persistence, noise-level awareness & bilateral denoising, traverser integration |
 | `test_traverser.py` | Raster crossing detection, strand pairing, PD/Gauss code formatting, OpenCV and PIL compatibility, crossing continuity & gap classification |
 | `test_knotgen.py` | Braids, Torus, Rational, Pretzel, Burau matrices, SnapPy integration, census table schema, procedural image rendering |
