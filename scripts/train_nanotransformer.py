@@ -1,10 +1,10 @@
 """
-train_nanotransformer.py - Local Training Script for Knot NanoTransformer.
+train_nanotransformer.py - Noise-Aware Local Training for Knot NanoTransformer.
 
 Trains the Vision NanoTransformer across all 250 prime knot classes
-(from 0_unknot to 10_165) using raw knot diagrams and augmentations.
-Computes prototype embeddings for fast topological similarity retrieval
-and serializes the checkpoint for local traverser use and Hugging Face deployment.
+(from 0_unknot to 10_165) using raw knot diagrams augmented with realistic
+photographic noise, multi-scale surface textures, contrast inversions, and blur.
+Computes noise-invariant prototype embeddings for robust similarity retrieval.
 """
 
 from __future__ import annotations
@@ -15,8 +15,9 @@ import random
 import sys
 import time
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
+import cv2
 import numpy as np
 import torch
 import torch.nn as nn
@@ -37,6 +38,44 @@ from knot_recognition.nanotransformer import (
     save_nanotransformer_checkpoint,
 )
 from knot_recognition.utils import imread_any
+
+
+class RandomNoiseAndTexture:
+    """Simulates real-world photographic noise, stone/paper textures, and relief contrast."""
+
+    def __init__(self, p_noise: float = 0.65, p_invert: float = 0.35):
+        self.p_noise = p_noise
+        self.p_invert = p_invert
+
+    def __call__(self, img: Image.Image) -> Image.Image:
+        arr = np.array(img).astype(np.float32)
+
+        # 1. Random invert (simulate dark stone relief with light carving vs black ink on white paper)
+        if random.random() < self.p_invert:
+            arr = 255.0 - arr
+
+        # 2. Random procedural texture / grain / background gradient
+        if random.random() < self.p_noise:
+            h, w = arr.shape[:2]
+            # Multi-scale background texture
+            low_h, low_w = max(4, h // 8), max(4, w // 8)
+            channels = 3 if arr.ndim == 3 else 1
+            low_freq = np.random.randn(low_h, low_w, channels).astype(np.float32) * random.uniform(15.0, 45.0)
+            low_freq_resized = cv2.resize(low_freq, (w, h), interpolation=cv2.INTER_LINEAR)
+            if low_freq_resized.ndim == 2 and arr.ndim == 3:
+                low_freq_resized = low_freq_resized[:, :, None]
+
+            # High-frequency grain
+            high_freq = np.random.randn(h, w, channels).astype(np.float32) * random.uniform(8.0, 25.0)
+            noise = low_freq_resized + high_freq
+            arr = np.clip(arr + noise, 0.0, 255.0)
+
+        # 3. Random Gaussian blur (simulate defocus / depth-of-field)
+        if random.random() < 0.30:
+            k = random.choice([3, 5])
+            arr = cv2.GaussianBlur(arr, (k, k), 0)
+
+        return Image.fromarray(arr.astype(np.uint8))
 
 
 class KnotImageClassificationDataset(Dataset):
@@ -82,16 +121,17 @@ class KnotImageClassificationDataset(Dataset):
 
 def build_transforms(image_size: int = 128) -> Tuple[Any, Any]:
     train_transform = T.Compose([
+        RandomNoiseAndTexture(p_noise=0.65, p_invert=0.35),
         T.Resize((image_size, image_size)),
         T.RandomAffine(
             degrees=180,
-            translate=(0.06, 0.06),
-            scale=(0.92, 1.08),
+            translate=(0.08, 0.08),
+            scale=(0.90, 1.10),
             interpolation=T.InterpolationMode.BILINEAR,
             fill=255,
         ),
         T.RandomHorizontalFlip(p=0.5),
-        T.ColorJitter(brightness=0.15, contrast=0.15),
+        T.ColorJitter(brightness=0.20, contrast=0.20),
         T.ToTensor(),
         T.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
     ])
@@ -144,7 +184,6 @@ def compute_class_prototypes(
             mean_feat = torch.mean(stacked, dim=0)
             prototypes[c_idx] = F.normalize(mean_feat, p=2, dim=-1)
         else:
-            # Fallback random unit vector if empty
             prototypes[c_idx] = F.normalize(torch.randn(embed_dim), p=2, dim=-1)
 
     return prototypes
@@ -163,13 +202,12 @@ def train_model(
     seed: int = 42,
     device_name: Optional[str] = None,
 ) -> Tuple[NanoTransformer, Dict[str, Any]]:
-    # Set seeds
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
 
     device = resolve_device(device_name)
-    print(f"[*] Training NanoTransformer on device: {device}")
+    print(f"[*] Training Noise-Aware NanoTransformer on device: {device}")
 
     train_tf, eval_tf = build_transforms(image_size=image_size)
     full_ds = KnotImageClassificationDataset(data_dir, transform=train_tf)
@@ -179,7 +217,6 @@ def train_model(
     num_classes = len(full_ds.classes)
     print(f"[*] Loaded dataset: {num_samples} images across {num_classes} knot classes (0_unknot to 10_165).")
 
-    # Stratified or randomized train/val split
     indices = list(range(num_samples))
     random.shuffle(indices)
     split = int(0.85 * num_samples)
@@ -197,7 +234,6 @@ def train_model(
         shuffle=False,
     )
 
-    # Initialize NanoTransformer
     config = NanoTransformerConfig(
         image_size=image_size,
         patch_size=16,
@@ -217,7 +253,7 @@ def train_model(
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs, eta_min=1e-5)
 
-    print(f"[*] Starting training for {epochs} epochs...")
+    print(f"[*] Starting noise-aware training for {epochs} epochs...")
     start_time = time.time()
     best_val_acc = 0.0
 
@@ -266,12 +302,10 @@ def train_model(
     elapsed = time.time() - start_time
     print(f"[*] Training finished in {elapsed:.2f}s! Best Val Accuracy: {best_val_acc*100:.1f}%")
 
-    # Compute prototypes across all images for nearest-neighbor similarity
     print("[*] Computing prototype embeddings for all 250 classes...")
     prototypes = compute_class_prototypes(model, eval_ds, device=device)
     model.set_prototypes(prototypes)
 
-    # Load and attach census metadata
     print("[*] Loading and attaching topological census metadata...")
     census_meta = load_census_metadata_table(
         mapping_csv=REPO_ROOT / mapping_csv,
@@ -279,7 +313,6 @@ def train_model(
     )
     model.census_metadata = census_meta
 
-    # Save checkpoint
     out_path = REPO_ROOT / out_checkpoint
     save_nanotransformer_checkpoint(
         model,
@@ -290,9 +323,10 @@ def train_model(
             "val_acc": float(val_acc),
             "best_val_acc": float(best_val_acc),
             "training_time_seconds": float(elapsed),
+            "noise_aware": True,
         },
     )
-    print(f"[+] Saved NanoTransformer checkpoint to {out_path} ({out_path.stat().st_size / 1024:.1f} KB)")
+    print(f"[+] Saved Noise-Aware NanoTransformer checkpoint to {out_path} ({out_path.stat().st_size / 1024:.1f} KB)")
 
     return model, {
         "train_acc": train_acc,
@@ -303,7 +337,7 @@ def train_model(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Train NanoTransformer for 250 knot classes.")
+    parser = argparse.ArgumentParser(description="Train Noise-Aware NanoTransformer for 250 knot classes.")
     parser.add_argument("--data-dir", default="raw_knot", help="Path to raw knot dataset")
     parser.add_argument("--mapping-csv", default="mapping_generated.csv", help="Knot mapping CSV")
     parser.add_argument("--census-json", default="Knotgen/census_braids.json", help="Knot census braids JSON")

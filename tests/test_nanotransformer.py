@@ -128,3 +128,37 @@ def test_traverser_integration_with_nanotransformer():
     assert res.consensus is not None
     assert "traverser_crossings" in res.consensus
     assert "predicted_label" in res.consensus
+
+
+def test_nanotransformer_noise_awareness():
+    from knot_recognition.nanotransformer import denoise_for_nanotransformer
+
+    # Create artificial noisy image (textured background)
+    rng = np.random.default_rng(42)
+    noisy_img = rng.integers(0, 255, (200, 400, 3), dtype=np.uint8)
+    pil_noisy = Image.fromarray(noisy_img)
+
+    cleaned_pil, noise_val, is_noisy = denoise_for_nanotransformer(pil_noisy)
+    assert is_noisy is True
+    assert noise_val > 600.0
+    # Wide image was cropped/centered
+    assert cleaned_pil.size[0] <= pil_noisy.size[0]
+
+    cfg = NanoTransformerConfig(
+        image_size=64,
+        patch_size=8,
+        in_channels=3,
+        embed_dim=64,
+        depth=2,
+        num_heads=2,
+        num_classes=3,
+    )
+    model = NanoTransformer(cfg)
+    model.set_classes(["0_unknot", "3_1", "4_1"])
+    model.set_prototypes(torch.randn(3, 64))
+
+    pred = model.predict_image(pil_noisy, top_k=2, noise_aware=True)
+    assert pred["is_noisy"] is True
+    assert pred["noise_level"] > 600.0
+    assert len(pred["predictions"]) == 2
+

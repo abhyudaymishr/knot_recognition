@@ -141,6 +141,48 @@ class TransformerEncoderBlock(nn.Module):
         return x
 
 
+def denoise_for_nanotransformer(
+    pil_img: Image.Image,
+    noise_threshold: float = 600.0,
+) -> Tuple[Image.Image, float, bool]:
+    """Measures texture noise and applies edge-preserving bilateral filtering & aspect normalization."""
+    arr = np.array(pil_img)
+    if arr.ndim == 2:
+        gray = arr
+    else:
+        import cv2
+        gray = cv2.cvtColor(arr, cv2.COLOR_RGB2GRAY)
+
+    import cv2
+    lap_var = float(cv2.Laplacian(gray, cv2.CV_64F).var())
+    is_noisy = lap_var > noise_threshold
+
+    w, h = pil_img.size
+    # Saliency crop if wide/tall aspect ratio with central knot
+    if w > h * 1.35 or h > w * 1.35:
+        cx, cy = w // 2, h // 2
+        r = min(w, h) // 2
+        cropped = pil_img.crop((cx - r, cy - r, cx + r, cy + r))
+    else:
+        cropped = pil_img
+
+    if is_noisy:
+        c_arr = np.array(cropped)
+        if c_arr.ndim == 3:
+            c_gray = cv2.cvtColor(c_arr, cv2.COLOR_RGB2GRAY)
+            smoothed = cv2.bilateralFilter(c_gray, 9, 75, 75)
+            clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+            enhanced = clahe.apply(smoothed)
+            out_img = Image.fromarray(cv2.cvtColor(enhanced, cv2.COLOR_GRAY2RGB))
+        else:
+            smoothed = cv2.bilateralFilter(c_arr, 9, 75, 75)
+            out_img = Image.fromarray(smoothed)
+    else:
+        out_img = cropped
+
+    return out_img, lap_var, is_noisy
+
+
 class NanoTransformer(nn.Module):
     """
     Vision NanoTransformer for 250-Class Knot Recognition and Similarity Retrieval.
@@ -240,15 +282,18 @@ class NanoTransformer(nn.Module):
             feat = F.normalize(feat, p=2, dim=-1)
         return feat
 
+
+
     @torch.inference_mode()
     def predict_image(
         self,
         img: Union[str, Path, np.ndarray, Image.Image],
         top_k: int = 5,
         device: Optional[torch.device] = None,
+        noise_aware: bool = True,
     ) -> Dict[str, Any]:
         """
-        Runs image classification, returning top-k predictions and embedding.
+        Runs noise-aware image classification, returning top-k predictions and embedding.
         """
         dev = device or next(self.parameters()).device
         self.eval()
@@ -261,14 +306,30 @@ class NanoTransformer(nn.Module):
         else:
             pil_img = img
 
+        noise_level = 0.0
+        is_noisy = False
+        target_img = pil_img
+
+        if noise_aware:
+            denoised_img, noise_level, is_noisy = denoise_for_nanotransformer(pil_img)
+            target_img = denoised_img
+
         transform = T.Compose([
             T.Resize((self.config.image_size, self.config.image_size)),
             T.ToTensor(),
             T.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
         ])
-        tensor = transform(pil_img.convert("RGB")).unsqueeze(0).to(dev)
+        tensor = transform(target_img.convert("RGB")).unsqueeze(0).to(dev)
 
-        feat = self.extract_embedding(tensor, normalize=True)
+        if noise_aware and is_noisy:
+            # Dual-pass embedding fusion: prioritize denoised contour with subtle raw context
+            raw_tensor = transform(pil_img.convert("RGB")).unsqueeze(0).to(dev)
+            feat_clean = self.extract_embedding(tensor, normalize=True)
+            feat_raw = self.extract_embedding(raw_tensor, normalize=True)
+            feat = F.normalize(0.80 * feat_clean + 0.20 * feat_raw, p=2, dim=-1)
+        else:
+            feat = self.extract_embedding(tensor, normalize=True)
+
         logits = self.head(feat)
         probs = F.softmax(logits, dim=-1)[0].cpu().numpy()
 
@@ -295,6 +356,8 @@ class NanoTransformer(nn.Module):
             "embedding": feat_np,
             "top_label": predictions[0]["label"] if predictions else "unknown",
             "top_probability": predictions[0]["probability"] if predictions else 0.0,
+            "noise_level": noise_level,
+            "is_noisy": is_noisy,
         }
 
     @torch.inference_mode()
