@@ -62,6 +62,35 @@ Force a device:
 python -m knot_recognition.infer --image /path/to/image.png --checkpoint ./checkpoints/best.pth --device cuda
 ```
 
+## Vision NanoTransformer & Active Traverser (250 Prime Knots: 0_unknot to 10_165)
+
+Train the lightweight Vision NanoTransformer locally across all 250 prime knot classes:
+```bash
+python scripts/train_nanotransformer.py --epochs 25 --batch-size 32
+```
+
+Perform active diagram traversal, top-k classification, and topological similarity retrieval:
+```python
+from knot_recognition import KnotTraverser, load_nanotransformer
+
+# Load locally trained NanoTransformer
+model = load_nanotransformer("checkpoints/nanotransformer_knot250.pth")
+
+# Attach to traverser
+traverser = KnotTraverser(nanotransformer=model)
+
+# Traverse knot diagram, classify topology, and retrieve nearest topological neighbors
+result = traverser.traverse_and_classify("path/to/knot_diagram.png", top_k=5)
+
+print("Predicted Knot:", result.classification["top_label"])
+print("Confidence:", result.classification["top_probability"])
+print("Consensus Check:", result.consensus)
+print("Planar Diagram (PD):", result.pd_string)
+print("Similar Knots from Census:")
+for knot in result.similar_knots:
+    print(f"  Rank {knot['rank']}: {knot['label']} (Cosine Sim: {knot['similarity']:.3f}, Crossings: {knot['crossings']})")
+```
+
 ## Protein Knot Pipeline
 
 ### External Prerequisites

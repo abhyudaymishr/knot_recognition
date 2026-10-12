@@ -5,3 +5,5 @@ scikit-image>=0.24,<1
 networkx>=3.2,<4
 sympy>=1.13,<2
 Pillow>=10,<13
+torch>=2.0.0
+torchvision>=0.15.0

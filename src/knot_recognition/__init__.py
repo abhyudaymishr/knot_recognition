@@ -16,6 +16,12 @@ from .protein import (
 )
 from .reidemeister import ReidemeisterConfig, ReidemeisterDetector, detect_moves
 from .traverser import AnnotatedImage, KnotTraverser, StrandIntersection, TraversalResult
+from .nanotransformer import (
+    NanoTransformer,
+    NanoTransformerConfig,
+    load_nanotransformer,
+    save_nanotransformer_checkpoint,
+)
 
 _LAZY_EXPORTS = {
     "InferenceConfig": ".infer",
@@ -47,6 +53,10 @@ __all__ = [
     "KnotTraverser",
     "StrandIntersection",
     "TraversalResult",
+    "NanoTransformer",
+    "NanoTransformerConfig",
+    "load_nanotransformer",
+    "save_nanotransformer_checkpoint",
     "DatasetConfig",
     "KnotImageDataset",
     "GaussPDConfig",

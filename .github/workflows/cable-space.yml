@@ -32,7 +32,8 @@ jobs:
         run: python -m pip install -r huggingface_space/requirements.txt
       - name: Bundle current engine sources into the Space package
         run: |
-          cp src/knot_recognition/utils.py src/knot_recognition/preprocess.py src/knot_recognition/gauss_pd.py src/knot_recognition/traverser.py huggingface_space/runtime/knot_recognition/
+          cp src/knot_recognition/utils.py src/knot_recognition/preprocess.py src/knot_recognition/gauss_pd.py src/knot_recognition/traverser.py src/knot_recognition/nanotransformer.py huggingface_space/runtime/knot_recognition/
+          cp checkpoints/nanotransformer_knot250.pth huggingface_space/runtime/
           cp Knotgen/knotgen.py Knotgen/census_braids.json huggingface_space/runtime/Knotgen/
           python scripts/build_cable_invariant_index.py --census Knotgen/census_braids.json --knotgen Knotgen/knotgen.py --out huggingface_space/runtime/Knotgen/census_invariant_index.json
       - name: Validate Python syntax and runtime imports

@@ -1,6 +1,7 @@
-"""Human-reviewed cable knot diagram triage demo for Hugging Face Spaces.
+"""Human-reviewed cable knot diagram triage and active NanoTransformer demo for Hugging Face Spaces.
 
-This is an experimental diagram parser, not a validated cable-photo classifier.
+Combines the locally trained 250-class Vision NanoTransformer for instant active
+knot classification and similarity retrieval with the topological KnotTraverser.
 """
 from __future__ import annotations
 
@@ -29,12 +30,11 @@ SRC = ROOT / "runtime" / "knot_recognition"
 
 
 def _load_diagram_engine():
-    # Load the existing vision modules without importing the package's unrelated
-    # training/model stack (which otherwise pulls in torch and torchvision).
+    # Load the runtime vision & model modules
     pkg = types.ModuleType("knot_recognition")
     pkg.__path__ = [str(SRC)]
     sys.modules.setdefault("knot_recognition", pkg)
-    for name in ("utils", "preprocess", "gauss_pd", "traverser"):
+    for name in ("utils", "preprocess", "gauss_pd", "nanotransformer", "traverser"):
         fullname = f"knot_recognition.{name}"
         if fullname in sys.modules:
             continue
@@ -47,6 +47,22 @@ def _load_diagram_engine():
 
 
 KnotTraverser = _load_diagram_engine()
+
+
+@lru_cache(maxsize=1)
+def _load_nanotransformer_model():
+    ckpt_path = ROOT / "runtime" / "nanotransformer_knot250.pth"
+    if not ckpt_path.exists():
+        print(f"Warning: Checkpoint not found at {ckpt_path}")
+        return None
+    try:
+        from knot_recognition.nanotransformer import load_nanotransformer
+        model = load_nanotransformer(ckpt_path, device="cpu")
+        print(f"Loaded NanoTransformer with {len(model.classes)} classes.")
+        return model
+    except Exception as exc:
+        print(f"Warning: failed to load NanoTransformer: {exc}")
+        return None
 
 
 def _knotgen():
@@ -80,6 +96,78 @@ def _candidate_index():
     return kg, index
 
 
+# ==============================================================================
+# Tab 1: NanoTransformer Active Classification & Similar Knot Retrieval
+# ==============================================================================
+@spaces.GPU
+def classify_and_retrieve_similar(image, top_k=5):
+    if image is None:
+        return None, "Please upload a clear image of a knot or cable tangle.", [], []
+
+    if isinstance(image, (str, Path)):
+        image = Image.open(image).convert("RGB")
+    elif not isinstance(image, Image.Image):
+        image = Image.fromarray(np.asarray(image).astype("uint8")).convert("RGB")
+
+    model = _load_nanotransformer_model()
+    engine = KnotTraverser(nanotransformer=model)
+    res = engine.traverse_and_classify(image, top_k=int(top_k))
+
+    overlay = res.annotated_image.to_pil() if res.annotated_image is not None else image
+
+    pred_info = res.classification or {}
+    top_label = pred_info.get("top_label", "unknown")
+    top_prob = pred_info.get("top_probability", 0.0)
+
+    # Build Assessment Markdown
+    report_lines = [
+        f"### Predicted Knot Topology: **`{top_label}`**",
+        f"- **Model Probability:** `{top_prob*100:.2f}%`",
+        f"- **Traverser Detected Crossings:** `{len([x for x in res.intersections if x.status == 'resolved'])}` (Total junction candidates: `{len(res.intersections)}`)",
+        f"- **Extracted Planar Diagram (PD) Code:** `{res.pd_string or 'PD[]'}`",
+        f"- **Extracted Gauss Code:** `{res.gauss_string or '(none)'}`",
+    ]
+
+    if res.consensus:
+        report_lines.append("\n#### Model & Traverser Cross-Examination")
+        for note in res.consensus.get("notes", []):
+            report_lines.append(f"- {note}")
+
+    if res.warnings:
+        report_lines.append("\n#### Parsing Warnings")
+        for w in res.warnings:
+            report_lines.append(f"- ⚠️ {w}")
+
+    # Top-K Predictions List of Lists for Dataframe
+    preds_table = []
+    for p in pred_info.get("predictions", []):
+        preds_table.append([
+            p.get("rank"),
+            p.get("label"),
+            f"{p.get('probability', 0.0)*100:.2f}%",
+            p.get("crossings", "-"),
+            p.get("alexander_polynomial", "") or "-",
+            p.get("determinant", "-"),
+        ])
+
+    # Similar Knots List of Lists for Dataframe
+    similar_table = []
+    for s in res.similar_knots:
+        similar_table.append([
+            s.get("rank"),
+            s.get("label"),
+            f"{s.get('similarity', 0.0):.4f}",
+            s.get("crossings", "-"),
+            s.get("alexander_polynomial", "") or "-",
+            s.get("determinant", "-"),
+        ])
+
+    return overlay, "\n".join(report_lines), preds_table, similar_table
+
+
+# ==============================================================================
+# Tab 2: Multi-View Cable Photo Triage & Invariant Checking
+# ==============================================================================
 @spaces.GPU
 def analyze_views(images, open_ends):
     if not images:
@@ -161,19 +249,64 @@ def analyze_views(images, open_ends):
     return overlays, "## Assessment\n" + recommendation + "\n\n```json\n" + json.dumps(reports, indent=2) + "\n```"
 
 
-with gr.Blocks(title="Cable Knot Photo Triage") as demo:
-    gr.Markdown("""# Cable knot photo triage (experimental)
+# ==============================================================================
+# Gradio Application Interface
+# ==============================================================================
+with gr.Blocks(title="Knot Recognition & Active NanoTransformer Triage") as demo:
+    gr.Markdown("""# 🪢 Knot Recognition & NanoTransformer Active Classifier
 
-Upload one or more views. The existing image engine proposes crossing locations and over/under states; inspect the overlays. Unclear or inconsistent views are sent back for another photo. A knot name is never treated as certain from the invariant fingerprint alone.
-
-**Capture guidance:** use a plain contrasting background, keep the full tangle in frame, avoid glare, and take a second view after rotating the cable/camera. Indicate whether the cable has open ends. This prototype does not infer hidden 3D geometry from a single photograph and has not been validated on coaxial-cable photographs.
+Combines a locally trained **Vision NanoTransformer** spanning all 250 prime knots (`0_unknot` to `10_165`) with the topological **Knot Traverser** for fast active knot classification, topological similarity retrieval, and over/under crossing analysis.
 """)
-    images = gr.Gallery(label="Cable views", type="pil", columns=2, height="auto")
-    open_ends = gr.Checkbox(label="The cable has open ends", value=True)
-    run = gr.Button("Analyze views", variant="primary")
-    overlays = gr.Gallery(label="Detected crossing overlays", columns=2, height="auto")
-    report = gr.Markdown()
-    run.click(analyze_views, inputs=[images, open_ends], outputs=[overlays, report])
+
+    with gr.Tabs():
+        with gr.TabItem("⚡ Active Classification & Similar Knot Retrieval"):
+            gr.Markdown("""
+Upload an image of a knot diagram or cable tangle. The **NanoTransformer** predicts candidate knot types, fetches nearest topological neighbors in its 128-d embedding space, and cross-validates against physical crossings extracted by the **Knot Traverser**.
+""")
+            with gr.Row():
+                with gr.Column(scale=1):
+                    input_img = gr.Image(label="Knot Image", type="pil")
+                    top_k_slider = gr.Slider(minimum=1, maximum=10, value=5, step=1, label="Top-K Candidates")
+                    classify_btn = gr.Button("⚡ Classify & Retrieve Knots", variant="primary")
+                with gr.Column(scale=1):
+                    annotated_out = gr.Image(label="Traverser Annotated Crossing Overlay")
+                    summary_md = gr.Markdown(label="Summary Report")
+
+            gr.Markdown("### 📊 Top Model Predictions")
+            preds_df = gr.Dataframe(
+                headers=["Rank", "Knot Label", "Probability", "Crossings", "Alexander Polynomial", "Determinant"],
+                datatype=["number", "str", "str", "number", "str", "number"],
+                label="Predictions across 250 Prime Knots",
+            )
+
+            gr.Markdown("### 🔍 Top Structurally Similar Knots (128-d Embedding Space)")
+            similar_df = gr.Dataframe(
+                headers=["Rank", "Similar Knot", "Cosine Similarity", "Crossings", "Alexander Polynomial", "Determinant"],
+                datatype=["number", "str", "str", "number", "str", "number"],
+                label="Nearest Census Neighbors",
+            )
+
+            classify_btn.click(
+                classify_and_retrieve_similar,
+                inputs=[input_img, top_k_slider],
+                outputs=[annotated_out, summary_md, preds_df, similar_df],
+            )
+
+        with gr.TabItem("📸 Multi-View Cable Photo Triage"):
+            gr.Markdown("""
+Upload multiple views of a cable tangle. Proposes crossing locations and over/under states, requiring multi-angle agreement before computing topological invariants.
+""")
+            gallery_in = gr.Gallery(label="Cable Views", type="pil", columns=2, height="auto")
+            open_ends_chk = gr.Checkbox(label="The cable has open ends", value=True)
+            triage_btn = gr.Button("Analyze Cable Views", variant="primary")
+            gallery_out = gr.Gallery(label="Detected Crossing Overlays", columns=2, height="auto")
+            triage_report = gr.Markdown()
+
+            triage_btn.click(
+                analyze_views,
+                inputs=[gallery_in, open_ends_chk],
+                outputs=[gallery_out, triage_report],
+            )
 
 if __name__ == "__main__":
     demo.launch()

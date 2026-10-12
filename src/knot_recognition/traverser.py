@@ -97,6 +97,9 @@ class TraversalResult:
     intersections: List[StrandIntersection]
     annotated_image: Optional[AnnotatedImage] = None
     warnings: List[str] = field(default_factory=list)
+    classification: Optional[Dict[str, Any]] = None
+    similar_knots: List[Dict[str, Any]] = field(default_factory=list)
+    consensus: Optional[Dict[str, Any]] = None
 
 
 # ==============================================================================
@@ -111,10 +114,12 @@ class KnotTraverser:
         gauss_config: Optional[GaussPDConfig] = None,
         cluster_radius: float = 12.0,
         sample_radius: int = 18,
+        nanotransformer: Optional[Any] = None,
         **kwargs: Any,
     ):
         self.cluster_radius = float(cluster_radius)
         self.sample_radius = int(sample_radius)
+        self.nanotransformer = nanotransformer
         self.preprocessor = Preprocessor(preprocess_config or PreprocessConfig(width=512))
         self.gauss_cfg = gauss_config or GaussPDConfig(
             connectivity=kwargs.get("connectivity", 8),
@@ -122,12 +127,72 @@ class KnotTraverser:
             junction_degree=kwargs.get("junction_degree", 3),
         )
 
+    def traverse_and_classify(
+        self,
+        img_input: Union[str, Path, np.ndarray, Image.Image],
+        nanotransformer: Optional[Any] = None,
+        output_overlay_path: Optional[Union[str, Path]] = None,
+        top_k: int = 5,
+    ) -> TraversalResult:
+        """Runs diagram traversal empowered by NanoTransformer classification & similar knot retrieval."""
+        result = self.process_image(img_input, output_overlay_path=output_overlay_path, _skip_model=True)
+        model = nanotransformer or self.nanotransformer
+        if model is None:
+            return result
+
+        try:
+            pred_res = model.predict_image(img_input, top_k=top_k)
+            similar = model.fetch_similar_knots(pred_res["embedding"], top_k=top_k)
+            result.classification = pred_res
+            result.similar_knots = similar
+
+            resolved_crossings = [i for i in result.intersections if i.status == "resolved"]
+            n_crossings_traverser = len(resolved_crossings)
+            top_pred = pred_res.get("predictions", [{}])[0]
+            top_label = top_pred.get("label", "unknown")
+            top_crossings = top_pred.get("crossings", 0)
+
+            consensus_match = (n_crossings_traverser == top_crossings)
+            crossing_diff = n_crossings_traverser - top_crossings
+            notes = []
+            if consensus_match:
+                notes.append(
+                    f"Crossing count agreement: traverser detected {n_crossings_traverser} crossings "
+                    f"matching predicted knot {top_label}."
+                )
+            else:
+                notes.append(
+                    f"Crossing divergence: traverser detected {n_crossings_traverser} crossings, "
+                    f"whereas top model prediction '{top_label}' expects {top_crossings} crossings (delta: {crossing_diff:+d})."
+                )
+
+            result.consensus = {
+                "traverser_crossings": n_crossings_traverser,
+                "predicted_label": top_label,
+                "predicted_crossings": top_crossings,
+                "agreement": consensus_match,
+                "confidence": float(top_pred.get("probability", 0.0)),
+                "notes": notes,
+            }
+        except Exception as exc:
+            result.warnings.append(f"NanoTransformer classification failed: {exc}")
+
+        return result
+
     def process_image(
         self,
         img_input: Union[str, Path, np.ndarray, Image.Image],
         output_overlay_path: Optional[Union[str, Path]] = None,
+        _skip_model: bool = False,
     ) -> TraversalResult:
         """Runs the complete traversal pipeline on a knot image."""
+        if not _skip_model and self.nanotransformer is not None:
+            return self.traverse_and_classify(
+                img_input,
+                nanotransformer=self.nanotransformer,
+                output_overlay_path=output_overlay_path,
+            )
+
         # 1. Ingest image
         if img_input is None:
             raise ValueError(
