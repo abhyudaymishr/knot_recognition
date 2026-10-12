@@ -209,10 +209,10 @@ def reidemeister_normal_form(
 class SignedMessagePassingLayer(nn.Module):
     """Equivariant message passing over 4-valent signed knot graphs."""
 
-    def __init__(self, hidden_dim: int):
+    def __init__(self, hidden_dim: int, edge_in_dim: int = 4):
         super().__init__()
         self.msg_mlp = nn.Sequential(
-            nn.Linear(hidden_dim * 2 + 2, hidden_dim),
+            nn.Linear(hidden_dim * 2 + edge_in_dim, hidden_dim),
             nn.LayerNorm(hidden_dim),
             nn.GELU(),
             nn.Linear(hidden_dim, hidden_dim),

@@ -109,3 +109,50 @@ def test_canonical_hash_lookup_table():
     sim = torch.dot(z_unseen1, z_unseen2).item()
     # Independent random vectors have dot product near 0 (rarely > 0.5)
     assert abs(sim) < 0.6
+
+
+def test_rebuilt_pair_sampler_positives_and_negatives():
+    """
+    Verifies that:
+      1. Positives strictly share a knot identity (knot_1 == knot_2).
+      2. Negatives strictly never share a knot identity (knot_1 != knot_2).
+      3. Negatives match crossing count (crossing_1 == crossing_2) whenever matched candidates exist.
+    """
+    from knot_recognition.knotinfo_bench import KnotPairSampler
+
+    bench = KnotInfoBenchmark()
+    _, test_9, _ = bench.get_splits()
+
+    # Create dummy split with 2 diagrams for each 9-crossing knot
+    dummy_split = {
+        k: [{"pd": [(1, 2, 3, 4)], "signs": [1]}, {"pd": [(2, 3, 4, 1)], "signs": [1]}]
+        for k in test_9
+    }
+
+    sampler = KnotPairSampler(bench)
+    pairs = sampler.sample_pairs_for_dataset(dummy_split, candidate_knots=test_9, num_negatives_per_anchor=5)
+
+    assert len(pairs) > 0
+
+    pos_count = 0
+    neg_count = 0
+    matched_crossing_count = 0
+
+    for p in pairs:
+        if p.is_positive:
+            pos_count += 1
+            # Rule 1: Positives strictly share a knot
+            assert p.knot_1 == p.knot_2, f"Positive pair failed to share knot: {p.knot_1} vs {p.knot_2}"
+        else:
+            neg_count += 1
+            # Rule 2: Negatives strictly never share a knot
+            assert p.knot_1 != p.knot_2, f"Negative pair shared knot: {p.knot_1} == {p.knot_2}"
+            # Rule 3: Crossing counts must match when candidates exist
+            if p.pair_type == "matched_crossing_negative":
+                matched_crossing_count += 1
+                assert p.crossing_1 == p.crossing_2, f"Matched crossing negative failed: {p.crossing_1} != {p.crossing_2}"
+
+    assert pos_count == len(test_9)
+    assert neg_count == len(test_9) * 5
+    assert matched_crossing_count == len(test_9) * 5  # all 9-crossing knots have matching 9-crossing negatives
+

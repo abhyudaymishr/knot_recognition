@@ -51,7 +51,7 @@ from knot_recognition.canonical_models import (
     CanonicalHashLookupTable,
     build_graph_tensors_from_pd,
 )
-from knot_recognition.knotinfo_bench import KnotInfoBenchmark
+from knot_recognition.knotinfo_bench import KnotInfoBenchmark, KnotPair, KnotPairSampler
 from knot_recognition.nanotransformer import NanoTransformer, NanoTransformerConfig
 
 
@@ -178,6 +178,7 @@ def train_graph_model(
     head.train()
     final_loss = 0.0
 
+    batch_size = 16
     if not is_augmented:
         # Precompute canonicalized graph tensors once
         precomputed = []
@@ -189,22 +190,28 @@ def train_graph_model(
         for epoch in range(epochs):
             random.shuffle(precomputed)
             epoch_loss = 0.0
-            for nf, ei, ef, label in precomputed:
-                optimizer.zero_grad()
+            optimizer.zero_grad()
+            batch_accum = 0
+            for i, (nf, ei, ef, label) in enumerate(precomputed):
                 z = model.backbone(nf, ei, ef)
                 logits = head(z.unsqueeze(0))
                 target = torch.tensor([label], dtype=torch.long, device=device)
                 loss = F.cross_entropy(logits, target)
                 loss.backward()
-                optimizer.step()
+                batch_accum += 1
                 epoch_loss += loss.item()
+                if batch_accum >= batch_size or (i + 1) == len(precomputed):
+                    optimizer.step()
+                    optimizer.zero_grad()
+                    batch_accum = 0
             final_loss = epoch_loss / max(1, len(precomputed))
     else:
         for epoch in range(epochs):
             random.shuffle(samples)
             epoch_loss = 0.0
-            for knot_name, pd_list, signs, label in samples:
-                optimizer.zero_grad()
+            optimizer.zero_grad()
+            batch_accum = 0
+            for i, (knot_name, pd_list, signs, label) in enumerate(samples):
                 cur_pd, cur_signs = list(pd_list), list(signs)
                 if random.random() < 0.5 and cur_pd:
                     try:
@@ -222,8 +229,12 @@ def train_graph_model(
                 target = torch.tensor([label], dtype=torch.long, device=device)
                 loss = F.cross_entropy(logits, target)
                 loss.backward()
-                optimizer.step()
+                batch_accum += 1
                 epoch_loss += loss.item()
+                if batch_accum >= batch_size or (i + 1) == len(samples):
+                    optimizer.step()
+                    optimizer.zero_grad()
+                    batch_accum = 0
             final_loss = epoch_loss / max(1, len(samples))
 
     model.eval()
@@ -256,11 +267,14 @@ def train_contrastive_model(
     knot_names = list(train_data.keys())
     model.train()
     final_loss = 0.0
+    batch_size = 16
 
     for epoch in range(epochs):
         epoch_loss = 0.0
         random.shuffle(knot_names)
-        for anchor_knot in knot_names:
+        optimizer.zero_grad()
+        batch_accum = 0
+        for i, anchor_knot in enumerate(knot_names):
             t_list = cached_tensors[anchor_knot]
             if len(t_list) < 2:
                 continue
@@ -270,7 +284,6 @@ def train_contrastive_model(
 
             neg_knots = [k for k in knot_names if k != anchor_knot]
             sampled_negs = random.sample(neg_knots, min(5, len(neg_knots)))
-            optimizer.zero_grad()
             z1 = model.backbone(nf1, ei1, ef1)
             z2 = model.backbone(nf2, ei2, ef2)
             pos_sim = torch.dot(z1, z2) / tau
@@ -285,8 +298,12 @@ def train_contrastive_model(
             target = torch.zeros(1, dtype=torch.long, device=device)
             loss = F.cross_entropy(logits, target)
             loss.backward()
-            optimizer.step()
+            batch_accum += 1
             epoch_loss += loss.item()
+            if batch_accum >= batch_size or (i + 1) == len(knot_names):
+                optimizer.step()
+                optimizer.zero_grad()
+                batch_accum = 0
 
         final_loss = epoch_loss / max(1, len(knot_names))
 
@@ -399,48 +416,61 @@ def evaluate_task1_verification(
     embeddings: Dict[str, List[np.ndarray]],
     bench: KnotInfoBenchmark,
     candidate_knots: List[str],
+    dataset_split: Optional[Dict[str, List[Dict[str, Any]]]] = None,
+    seed: int = 42,
 ) -> Dict[str, float]:
     """
-    Task 1: Same-knot verification with hard negatives.
+    Task 1: Same-knot verification with hard negatives using rebuilt KnotPairSampler.
+    Positives strictly share a knot identity; negatives strictly never share knot identity,
+    with matched crossing count.
     Returns: AUROC, Top-1 accuracy, Top-5 accuracy.
     """
+    sampler = KnotPairSampler(bench)
+    split_to_use = dataset_split if dataset_split is not None else {
+        k: [{"dummy": i} for i in range(len(v))] for k, v in embeddings.items()
+    }
+    pairs = sampler.sample_pairs_for_dataset(
+        split_to_use, candidate_knots, num_negatives_per_anchor=5, seed=seed
+    )
+
     y_true: List[int] = []
     y_scores: List[float] = []
+    anchor_scores: Dict[str, Dict[str, Any]] = {}
+
+    for p in pairs:
+        emb1_list = embeddings.get(p.knot_1, [])
+        emb2_list = embeddings.get(p.knot_2, [])
+        if not emb1_list or not emb2_list:
+            continue
+
+        emb1 = emb1_list[0]
+        emb2 = emb2_list[1] if (p.is_positive and len(emb2_list) > 1) else emb2_list[0]
+        sim = float(np.dot(emb1, emb2))
+
+        y_true.append(1 if p.is_positive else 0)
+        y_scores.append(sim)
+
+        if p.knot_1 not in anchor_scores:
+            anchor_scores[p.knot_1] = {"pos": None, "negs": []}
+        if p.is_positive:
+            anchor_scores[p.knot_1]["pos"] = sim
+        else:
+            anchor_scores[p.knot_1]["negs"].append(sim)
+
     top1_correct = 0
     top5_correct = 0
     total_queries = 0
 
-    rng = np.random.default_rng(42)
-
-    for knot_name, emb_list in embeddings.items():
-        if len(emb_list) < 2:
-            continue
-        anchor = emb_list[0]
-        pos = emb_list[1]
-        pos_sim = float(np.dot(anchor, pos))
-
-        y_true.append(1)
-        y_scores.append(pos_sim)
-
-        # Mine 5 hard negatives
-        hard_negs = bench.mine_hard_negatives(knot_name, candidate_knots, num_negatives=5, rng=rng)
-        neg_sims = []
-        for neg_knot in hard_negs:
-            if neg_knot in embeddings and embeddings[neg_knot]:
-                neg_emb = embeddings[neg_knot][0]
-                sim = float(np.dot(anchor, neg_emb))
-                y_true.append(0)
-                y_scores.append(sim)
-                neg_sims.append(sim)
-
-        # Retrieval accuracy among [pos] + neg_sims
-        candidates = [pos_sim] + neg_sims
-        ranked = sorted(candidates, reverse=True)
-        if ranked[0] == pos_sim:
-            top1_correct += 1
-        if pos_sim in ranked[:5]:
-            top5_correct += 1
-        total_queries += 1
+    for k, sc in anchor_scores.items():
+        if sc["pos"] is not None and sc["negs"]:
+            total_queries += 1
+            pos_sim = sc["pos"]
+            candidates = [pos_sim] + sc["negs"]
+            ranked = sorted(candidates, reverse=True)
+            if ranked[0] == pos_sim:
+                top1_correct += 1
+            if pos_sim in ranked[:5]:
+                top5_correct += 1
 
     try:
         auroc = float(roc_auc_score(y_true, y_scores))
@@ -614,10 +644,10 @@ def run_experiment_suite(
             emb_9 = get_model_embeddings(trained_model, dataset["test_unseen_9"], device=device, is_vit=is_vit, bench=bench)
             emb_10 = get_model_embeddings(trained_model, dataset["test_unseen_10"], device=device, is_vit=is_vit, bench=bench)
 
-            # Task 1: Same-knot verification
-            task1_seen_a = evaluate_task1_verification(emb_seen_a, bench, train_knots)
-            task1_9 = evaluate_task1_verification(emb_9, bench, test_9)
-            task1_10 = evaluate_task1_verification(emb_10, bench, test_10)
+            # Task 1: Same-knot verification with rebuilt KnotPairSampler
+            task1_seen_a = evaluate_task1_verification(emb_seen_a, bench, train_knots, dataset_split=dataset["test_seen_a"], seed=seed)
+            task1_9 = evaluate_task1_verification(emb_9, bench, test_9, dataset_split=dataset["test_unseen_9"], seed=seed)
+            task1_10 = evaluate_task1_verification(emb_10, bench, test_10, dataset_split=dataset["test_unseen_10"], seed=seed)
 
             # Task 2: Invariant prediction
             task2_9 = evaluate_task2_invariants(emb_train, emb_9, bench)

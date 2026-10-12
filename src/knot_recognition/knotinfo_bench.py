@@ -15,7 +15,8 @@ Provides:
      - Same crossing number pairs (within split)
      - Same Alexander polynomial pairs
      - Same Jones polynomial pairs
-  3. Trivial baseline predictors:
+  3. Rebuilt KnotPairSampler with matched crossing count guarantees.
+  4. Trivial baseline predictors:
      - Mean predictor
      - Linear / Ridge regression on crossing number c(K) and writhe w(K).
 """
@@ -64,7 +65,6 @@ def parse_unknotting_number(raw_val: Any) -> Tuple[float, str]:
     try:
         return float(int(s)), s
     except Exception:
-        # Fallback regex search for digits
         m = re.findall(r"\d+", s)
         if m:
             nums = [float(x) for x in m]
@@ -113,7 +113,6 @@ class KnotInfoBenchmark:
             alex_raw = str(row.get("alexander_polynomial", "1"))
             jones_raw = str(row.get("jones_polynomial", "1"))
 
-            # Calculate writhe from census braid word if present
             braid_word = data.get("braid", [])
             w = sum(1 if g > 0 else -1 for g in braid_word) if braid_word else 0
 
@@ -150,10 +149,6 @@ class KnotInfoBenchmark:
                 test_10.append(name)
         return sorted(train_knots), sorted(test_9), sorted(test_10)
 
-    # ==========================================================================
-    # Hard Negative Mining
-    # ==========================================================================
-
     def mine_hard_negatives(
         self,
         anchor_name: str,
@@ -163,8 +158,8 @@ class KnotInfoBenchmark:
     ) -> List[str]:
         """
         Mines hard negative knots from candidate_pool for anchor_name:
-          Priority 1: Same Alexander polynomial or same Jones polynomial (different knot).
-          Priority 2: Same crossing number c(K).
+          Priority 1: Same crossing number c(K).
+          Priority 2: Same Alexander polynomial or same Jones polynomial.
           Priority 3: Other knots in candidate_pool.
         """
         if rng is None:
@@ -175,31 +170,25 @@ class KnotInfoBenchmark:
         if not pool:
             return []
 
-        # Priority 1: Identical polynomial
+        same_crossing = [k for k in pool if self.get_knot(k).crossing_number == anchor.crossing_number]
         same_poly = [
             k for k in pool
-            if (self.get_knot(k).alexander_poly_raw == anchor.alexander_poly_raw
-                or self.get_knot(k).jones_poly_raw == anchor.jones_poly_raw)
+            if k not in same_crossing and (
+                self.get_knot(k).alexander_poly_raw == anchor.alexander_poly_raw
+                or self.get_knot(k).jones_poly_raw == anchor.jones_poly_raw
+            )
         ]
-
-        # Priority 2: Identical crossing number
-        same_crossing = [
-            k for k in pool
-            if k not in same_poly and self.get_knot(k).crossing_number == anchor.crossing_number
-        ]
-
-        # Priority 3: Remainder
-        other = [k for k in pool if k not in same_poly and k not in same_crossing]
+        other = [k for k in pool if k not in same_crossing and k not in same_poly]
 
         selected: List[str] = []
-        if same_poly:
-            perm = rng.permutation(len(same_poly))
-            selected.extend([same_poly[i] for i in perm[:num_negatives]])
+        if same_crossing:
+            perm = rng.permutation(len(same_crossing))
+            selected.extend([same_crossing[i] for i in perm[:num_negatives]])
 
         remaining = num_negatives - len(selected)
-        if remaining > 0 and same_crossing:
-            perm = rng.permutation(len(same_crossing))
-            selected.extend([same_crossing[i] for i in perm[:remaining]])
+        if remaining > 0 and same_poly:
+            perm = rng.permutation(len(same_poly))
+            selected.extend([same_poly[i] for i in perm[:remaining]])
 
         remaining = num_negatives - len(selected)
         if remaining > 0 and other:
@@ -207,10 +196,6 @@ class KnotInfoBenchmark:
             selected.extend([other[i] for i in perm[:remaining]])
 
         return selected[:num_negatives]
-
-    # ==========================================================================
-    # Trivial Baseline Predictors (Crossing Number & Writhe)
-    # ==========================================================================
 
     def evaluate_trivial_predictors(
         self,
@@ -222,7 +207,6 @@ class KnotInfoBenchmark:
         Evaluates trivial predictors on unseen test knots:
           1. Mean predictor: predicts the train set target mean for all test knots.
           2. Linear fit: Ridge regression on [crossing_number, writhe].
-        Returns MAE and accuracy (for integer targets within 0.5) for each target.
         """
         results: Dict[str, Dict[str, float]] = {}
 
@@ -253,3 +237,117 @@ class KnotInfoBenchmark:
             }
 
         return results
+
+
+# ==============================================================================
+# Rebuilt Pair Sampler with Matched Crossing Count
+# ==============================================================================
+
+@dataclass
+class KnotPair:
+    diag_1: Any
+    diag_2: Any
+    knot_1: str
+    knot_2: str
+    crossing_1: int
+    crossing_2: int
+    is_positive: bool
+    pair_type: str  # 'positive', 'matched_crossing_negative', 'hard_poly_negative', 'fallback_negative'
+
+
+class KnotPairSampler:
+    """
+    Rebuilt pair sampler ensuring:
+      1. Positives strictly share a knot identity (knot_1 == knot_2).
+      2. Negatives strictly never share a knot identity (knot_1 != knot_2).
+      3. Negatives match crossing count (crossing_1 == crossing_2) whenever candidates exist.
+    """
+
+    def __init__(self, bench: KnotInfoBenchmark):
+        self.bench = bench
+
+    def sample_pairs_for_dataset(
+        self,
+        dataset_split: Dict[str, List[Dict[str, Any]]],
+        candidate_knots: Sequence[str],
+        num_negatives_per_anchor: int = 5,
+        seed: int = 42,
+    ) -> List[KnotPair]:
+        rng = np.random.default_rng(seed)
+        pairs: List[KnotPair] = []
+
+        # Group candidate knots by crossing number
+        knots_by_crossing: Dict[int, List[str]] = {}
+        for k in candidate_knots:
+            c = self.bench.get_knot(k).crossing_number
+            knots_by_crossing.setdefault(c, []).append(k)
+
+        for knot_name, diags in dataset_split.items():
+            if len(diags) < 2:
+                continue
+            entry_anchor = self.bench.get_knot(knot_name)
+            c_anchor = entry_anchor.crossing_number
+
+            # 1. Positive pair: distinct diagrams of the same knot
+            d1 = diags[0]
+            d2 = diags[1]
+            pairs.append(KnotPair(
+                diag_1=d1,
+                diag_2=d2,
+                knot_1=knot_name,
+                knot_2=knot_name,
+                crossing_1=c_anchor,
+                crossing_2=c_anchor,
+                is_positive=True,
+                pair_type="positive",
+            ))
+
+            # 2. Hard Negative pairs: strictly different knot with matched crossing count
+            same_c_pool = [k for k in knots_by_crossing.get(c_anchor, []) if k != knot_name]
+            same_poly_pool = [
+                k for k in candidate_knots
+                if k != knot_name and (
+                    self.bench.get_knot(k).alexander_poly_raw == entry_anchor.alexander_poly_raw
+                    or self.bench.get_knot(k).jones_poly_raw == entry_anchor.jones_poly_raw
+                )
+            ]
+
+            chosen_negs: List[Tuple[str, str]] = []
+            if same_c_pool:
+                perm = rng.permutation(len(same_c_pool))
+                for idx in perm[:num_negatives_per_anchor]:
+                    chosen_negs.append((same_c_pool[idx], "matched_crossing_negative"))
+
+            rem = num_negatives_per_anchor - len(chosen_negs)
+            if rem > 0 and same_poly_pool:
+                candidates = [k for k in same_poly_pool if k not in [x[0] for x in chosen_negs]]
+                if candidates:
+                    perm = rng.permutation(len(candidates))
+                    for idx in perm[:rem]:
+                        chosen_negs.append((candidates[idx], "hard_poly_negative"))
+
+            rem = num_negatives_per_anchor - len(chosen_negs)
+            if rem > 0:
+                other_pool = [k for k in candidate_knots if k != knot_name and k not in [x[0] for x in chosen_negs]]
+                if other_pool:
+                    perm = rng.permutation(len(other_pool))
+                    for idx in perm[:rem]:
+                        chosen_negs.append((other_pool[idx], "fallback_negative"))
+
+            for neg_knot, p_type in chosen_negs:
+                neg_diags = dataset_split.get(neg_knot, [])
+                if neg_diags:
+                    d_neg = neg_diags[0]
+                    c_neg = self.bench.get_knot(neg_knot).crossing_number
+                    pairs.append(KnotPair(
+                        diag_1=d1,
+                        diag_2=d_neg,
+                        knot_1=knot_name,
+                        knot_2=neg_knot,
+                        crossing_1=c_anchor,
+                        crossing_2=c_neg,
+                        is_positive=False,
+                        pair_type=p_type,
+                    ))
+
+        return pairs

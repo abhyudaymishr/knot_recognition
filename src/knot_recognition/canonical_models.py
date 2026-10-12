@@ -51,27 +51,38 @@ def build_graph_tensors_from_pd(
     signs: Optional[Sequence[int]] = None,
     device: Optional[torch.device] = None,
 ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-    """Converts a PD code into node features (N, 6), edge_index (2, E), and edge_attr (E, 2)."""
+    """
+    Converts a PD code into permutation-invariant topological node features (N, 10),
+    edge_index (2, E), and edge_attr (E, 4).
+    """
     dev = device or torch.device("cpu")
     n = len(pd_list)
     if n == 0:
-        node_feats = torch.zeros((1, 6), dtype=torch.float32, device=dev)
+        node_feats = torch.zeros((1, 10), dtype=torch.float32, device=dev)
         edge_index = torch.empty((2, 0), dtype=torch.long, device=dev)
-        edge_feats = torch.empty((0, 2), dtype=torch.float32, device=dev)
+        edge_feats = torch.empty((0, 4), dtype=torch.float32, device=dev)
         return node_feats, edge_index, edge_feats
 
     sign_list = list(signs) if signs is not None else [1] * n
+    n_arcs = max(1.0, float(2 * n))
 
     node_feats_list = []
-    for i, s_val in enumerate(sign_list):
-        s = float(s_val)
+    for i, c in enumerate(pd_list):
+        s = float(sign_list[i]) if i < len(sign_list) else 1.0
+        u1, ov1, u2, ov2 = [float(x) for x in c[:4]]
+        chord_u = abs(u1 - u2) / n_arcs
+        chord_ov = abs(ov1 - ov2) / n_arcs
         node_feats_list.append([
             s,
-            4.0,
             1.0 if s > 0 else 0.0,
             1.0 if s < 0 else 0.0,
-            float(i) / max(1.0, float(n)),
-            s / max(1.0, float(n)),
+            chord_u,
+            chord_ov,
+            u1 / n_arcs,
+            ov1 / n_arcs,
+            u2 / n_arcs,
+            ov2 / n_arcs,
+            float(n) / 20.0,
         ])
     node_feats = torch.tensor(node_feats_list, dtype=torch.float32, device=dev)
 
@@ -86,15 +97,17 @@ def build_graph_tensors_from_pd(
             (c1, p1), (c2, p2) = port_list
             src_list.extend([c1, c2])
             dst_list.extend([c2, c1])
-            edge_attr_list.append([float(p1 - p2), 1.0])
-            edge_attr_list.append([float(p2 - p1), -1.0])
+            is_over1 = 1.0 if p1 in (1, 3) else 0.0
+            is_over2 = 1.0 if p2 in (1, 3) else 0.0
+            edge_attr_list.append([float(p1), float(p2), is_over1, is_over2])
+            edge_attr_list.append([float(p2), float(p1), is_over2, is_over1])
 
     if src_list:
         edge_index = torch.tensor([src_list, dst_list], dtype=torch.long, device=dev)
         edge_feats = torch.tensor(edge_attr_list, dtype=torch.float32, device=dev)
     else:
         edge_index = torch.empty((2, 0), dtype=torch.long, device=dev)
-        edge_feats = torch.empty((0, 2), dtype=torch.float32, device=dev)
+        edge_feats = torch.empty((0, 4), dtype=torch.float32, device=dev)
 
     return node_feats, edge_index, edge_feats
 
@@ -110,7 +123,7 @@ class SignedGNNBackbone(nn.Module):
 
     def __init__(
         self,
-        node_in_dim: int = 6,
+        node_in_dim: int = 10,
         hidden_dim: int = 128,
         out_dim: int = 128,
         num_layers: int = 4,
@@ -122,11 +135,10 @@ class SignedGNNBackbone(nn.Module):
             nn.GELU(),
         )
         self.layers = nn.ModuleList([
-            SignedMessagePassingLayer(hidden_dim) for _ in range(num_layers)
+            SignedMessagePassingLayer(hidden_dim, edge_in_dim=4) for _ in range(num_layers)
         ])
         self.pool_proj = nn.Sequential(
             nn.Linear(hidden_dim * 2, hidden_dim),
-            nn.LayerNorm(hidden_dim),
             nn.GELU(),
             nn.Linear(hidden_dim, out_dim),
         )
@@ -167,7 +179,7 @@ class BaseKnotGraphModel(nn.Module):
         super().__init__()
         self.mode = mode
         self.backbone = SignedGNNBackbone(
-            node_in_dim=6,
+            node_in_dim=10,
             hidden_dim=hidden_dim,
             out_dim=out_dim,
             num_layers=num_layers,
