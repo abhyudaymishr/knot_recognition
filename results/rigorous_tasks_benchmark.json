@@ -8,7 +8,7 @@
       45,
       46
     ],
-    "timestamp": "2026-10-13 14:09:33",
+    "timestamp": "2026-10-13 14:47:23",
     "device": "cpu"
   },
   "task1_verification": {
@@ -44,16 +44,16 @@
       "pure_gnn_canon": {
         "label": "Pure Graph GNN (Canonical Input, Untrained)",
         "overall_auroc": 1.0,
-        "overall_stderr_knot_bootstrap": 1.570092458683775e-17,
-        "alternating_auroc": 0.9999999999999999,
+        "overall_stderr_knot_bootstrap": 2.125915238862715e-17,
+        "alternating_auroc": 1.0,
         "non_alternating_auroc": 1.0
       },
       "trained_can_gnn": {
         "label": "Pure Graph GNN (Canonical Input, Contrastive Trained)",
-        "overall_auroc": 0.9564009957201502,
-        "overall_stderr_knot_bootstrap": 0.004968172592754687,
-        "alternating_auroc": 0.9600847709696608,
-        "non_alternating_auroc": 0.94428
+        "overall_auroc": 0.9648532622936502,
+        "overall_stderr_knot_bootstrap": 0.004253100158989631,
+        "alternating_auroc": 0.9686711778703152,
+        "non_alternating_auroc": 0.9535440000000001
       },
       "alexander_poly": {
         "label": "Alexander Polynomial Baseline",
@@ -64,107 +64,114 @@
       }
     },
     "distinct_base_origin_non_alternating": {
-      "num_knots": 435,
-      "minimality_rate_pct": 100.0,
+      "num_knots": 335,
+      "minimality_rate_pct": 47.16417910447761,
       "identical_canonical_rate_pct": 0.0,
-      "overall_summary": {
-        "num_knots": 435,
-        "snappy_exterior_isometry_auroc": 0.9954022988505746,
-        "face_histogram_auroc": 0.9549229752939622,
-        "face_histogram_pos_cos": 0.9835075126297173,
-        "face_histogram_neg_cos": 0.8430243947451143,
-        "wl_hash_auroc": 0.7425287356321839,
-        "wl_hash_pos_match_rate_pct": 48.50574712643678,
-        "untrained_gnn_auroc_mean": 0.9385827454089049,
-        "untrained_gnn_auroc_stderr": 0.0038365910212866563,
-        "untrained_gnn_seeds_auroc": [
-          0.9389900911613158,
-          0.9348637864975559,
-          0.9250749108204518,
-          0.9508706566257101,
-          0.94311428193949
-        ],
-        "exact_string_match_auroc": 0.5
-      },
-      "breakdown_by_crossing": {
-        "c<=10": {
+      "per_slice_breakdown": {
+        "c<=10_random": {
           "num_knots": 50,
-          "snappy_exterior_isometry_auroc": 0.96,
-          "face_histogram_auroc": 0.6896800000000001,
-          "face_histogram_pos_cos": 0.8565153503417968,
-          "face_histogram_neg_cos": 0.7844661165475846,
-          "wl_hash_auroc": 0.51,
-          "wl_hash_pos_match_rate_pct": 2.0,
-          "untrained_gnn_auroc_mean": 0.646192,
-          "untrained_gnn_auroc_stderr": 0.003713489356387067,
+          "neg_mode": "random",
+          "exterior_isometry_auroc": 1.0,
+          "face_histogram_auroc": 0.9372,
+          "wl_hash_auroc": 0.53,
+          "untrained_gnn_auroc_mean": 0.61968,
+          "untrained_gnn_auroc_stderr": 0.005400325916090608,
           "untrained_gnn_seeds_auroc": [
-            0.6574399999999999,
-            0.6392,
-            0.6362399999999999,
-            0.65424,
-            0.64384
+            0.6416,
+            0.618,
+            0.6172,
+            0.6044,
+            0.6172
           ],
           "exact_string_match_auroc": 0.5
         },
-        "c=11": {
+        "c<=10_hard_geometric": {
+          "num_knots": 50,
+          "neg_mode": "hard_geometric",
+          "exterior_isometry_auroc": 1.0,
+          "face_histogram_auroc": 0.3207,
+          "wl_hash_auroc": 0.53,
+          "untrained_gnn_auroc_mean": 0.39180000000000004,
+          "untrained_gnn_auroc_stderr": 0.003185466998730322,
+          "untrained_gnn_seeds_auroc": [
+            0.381,
+            0.39220000000000005,
+            0.4024,
+            0.3882,
+            0.39519999999999994
+          ],
+          "exact_string_match_auroc": 0.5
+        },
+        "c=11_random": {
           "num_knots": 185,
-          "snappy_exterior_isometry_auroc": 1.0,
-          "face_histogram_auroc": 0.996800584368152,
-          "face_histogram_pos_cos": 0.9999999906565692,
-          "face_histogram_neg_cos": 0.8536159869786856,
-          "wl_hash_auroc": 1.0,
-          "wl_hash_pos_match_rate_pct": 100.0,
-          "untrained_gnn_auroc_mean": 1.0,
-          "untrained_gnn_auroc_stderr": 0.0,
+          "neg_mode": "random",
+          "exterior_isometry_auroc": 1.0,
+          "face_histogram_auroc": 0.8667348429510592,
+          "wl_hash_auroc": 0.5351351351351351,
+          "untrained_gnn_auroc_mean": 0.6470679327976624,
+          "untrained_gnn_auroc_stderr": 0.0011422446819076375,
           "untrained_gnn_seeds_auroc": [
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0
+            0.6472169466764061,
+            0.6421621621621622,
+            0.6479766252739225,
+            0.6486048210372534,
+            0.6493791088385683
           ],
           "exact_string_match_auroc": 0.5
         },
-        "c=12": {
-          "num_knots": 200,
-          "snappy_exterior_isometry_auroc": 1.0,
-          "face_histogram_auroc": 0.997375,
-          "face_histogram_pos_cos": 1.0000000110268592,
-          "face_histogram_neg_cos": 0.8467718461900949,
-          "wl_hash_auroc": 0.5625,
-          "wl_hash_pos_match_rate_pct": 12.5,
-          "untrained_gnn_auroc_mean": 0.9578200000000001,
-          "untrained_gnn_auroc_stderr": 0.007635950923100537,
+        "c=11_hard_geometric": {
+          "num_knots": 185,
+          "neg_mode": "hard_geometric",
+          "exterior_isometry_auroc": 1.0,
+          "face_histogram_auroc": 0.23034331628926225,
+          "wl_hash_auroc": 0.5351351351351351,
+          "untrained_gnn_auroc_mean": 0.39412856099342586,
+          "untrained_gnn_auroc_stderr": 0.0015117884751840703,
           "untrained_gnn_seeds_auroc": [
-            0.9561850000000001,
-            0.949195,
-            0.93316,
-            0.9843025,
-            0.9662575
+            0.3904236669101534,
+            0.3905478451424398,
+            0.3937618699780862,
+            0.3987216946676406,
+            0.39718772826880944
           ],
           "exact_string_match_auroc": 0.5
         },
-        "all_435": {
-          "num_knots": 435,
-          "snappy_exterior_isometry_auroc": 0.9954022988505746,
-          "face_histogram_auroc": 0.9549229752939622,
-          "face_histogram_pos_cos": 0.9835075126297173,
-          "face_histogram_neg_cos": 0.8430243947451143,
-          "wl_hash_auroc": 0.7425287356321839,
-          "wl_hash_pos_match_rate_pct": 48.50574712643678,
-          "untrained_gnn_auroc_mean": 0.9385827454089049,
-          "untrained_gnn_auroc_stderr": 0.0038365910212866563,
+        "c=12_random": {
+          "num_knots": 100,
+          "neg_mode": "random",
+          "exterior_isometry_auroc": 1.0,
+          "face_histogram_auroc": 0.90915,
+          "wl_hash_auroc": 0.515,
+          "untrained_gnn_auroc_mean": 0.68004,
+          "untrained_gnn_auroc_stderr": 0.005454748390164305,
           "untrained_gnn_seeds_auroc": [
-            0.9389900911613158,
-            0.9348637864975559,
-            0.9250749108204518,
-            0.9508706566257101,
-            0.94311428193949
+            0.68035,
+            0.6775,
+            0.6588499999999999,
+            0.6944,
+            0.6890999999999999
+          ],
+          "exact_string_match_auroc": 0.5
+        },
+        "c=12_hard_geometric": {
+          "num_knots": 100,
+          "neg_mode": "hard_geometric",
+          "exterior_isometry_auroc": 1.0,
+          "face_histogram_auroc": 0.266675,
+          "wl_hash_auroc": 0.515,
+          "untrained_gnn_auroc_mean": 0.414375,
+          "untrained_gnn_auroc_stderr": 0.008638802000277584,
+          "untrained_gnn_seeds_auroc": [
+            0.42574999999999996,
+            0.41645,
+            0.37725,
+            0.42015,
+            0.43227499999999996
           ],
           "exact_string_match_auroc": 0.5
         }
       },
-      "note": "Exterior isometry cap of 0.9954 (and 0.9600 at c<=10) is due to non-hyperbolic satellite knots (e.g. 10_124, 10_162..165) where Mostow rigidity does not apply."
+      "note": "Presentations derived purely from KnotInfo (PD vs braid closure). Perko pair renumbering resolved; exterior isometry is 1.000 across all slices."
     }
   },
   "task2_invariants": {
@@ -444,19 +451,59 @@
   "task2_validation_holdout": {
     "unknotting_number": {
       "num_test_knots": 1628,
-      "out_of_distribution_test_mae": 0.4278251298615211
+      "mean_predictor_mae": 0.489421546459198,
+      "linear_cw_mae": 0.4709642231464386,
+      "formula_bound_mae": 0.8476658463478088,
+      "rf_mae_mean": 0.3554374517374517,
+      "rf_mae_std": 0.01008263725346586,
+      "gbdt_mae_mean": 0.37939404446980096,
+      "gbdt_mae_std": 0.0024080210066047603,
+      "gnn_joint_val_mae_mean": 0.42737137359439836,
+      "gnn_joint_val_mae_std": 0.006591977776901494,
+      "gnn_pertgt_val_mae_mean": 0.425945874716452,
+      "gnn_pertgt_val_mae_std": 0.006670013516075403
     },
     "smooth_four_genus": {
       "num_test_knots": 2176,
-      "out_of_distribution_test_mae": 0.3543229211002897
+      "mean_predictor_mae": 0.5965992212295532,
+      "linear_cw_mae": 0.5243061780929565,
+      "formula_bound_mae": 0.27068015933036804,
+      "rf_mae_mean": 0.1384733455882353,
+      "rf_mae_std": 0.006328674911494558,
+      "gbdt_mae_mean": 0.35316885718237767,
+      "gbdt_mae_std": 0.012384955037419855,
+      "gnn_joint_val_mae_mean": 0.3701429631344499,
+      "gnn_joint_val_mae_std": 0.009114076057821455,
+      "gnn_pertgt_val_mae_mean": 0.36308514043585205,
+      "gnn_pertgt_val_mae_std": 0.010045707673028736
     },
     "three_genus": {
       "num_test_knots": 2176,
-      "out_of_distribution_test_mae": 0.7300663672539796
+      "mean_predictor_mae": 0.8547205924987793,
+      "linear_cw_mae": 0.6187661290168762,
+      "formula_bound_mae": null,
+      "rf_mae_mean": 0.056171875,
+      "rf_mae_std": 0.0007649577144723714,
+      "gbdt_mae_mean": 0.0551644534411853,
+      "gbdt_mae_std": 6.187996721187637e-05,
+      "gnn_joint_val_mae_mean": 0.6654723457673251,
+      "gnn_joint_val_mae_std": 0.06021526344848974,
+      "gnn_pertgt_val_mae_mean": 0.6501954807792789,
+      "gnn_pertgt_val_mae_std": 0.04635078735954737
     },
     "signature": {
       "num_test_knots": 2176,
-      "out_of_distribution_test_mae": 0.9816653717875196
+      "mean_predictor_mae": 2.324897050857544,
+      "linear_cw_mae": 0.920814573764801,
+      "formula_bound_mae": null,
+      "rf_mae_mean": 0.019284926470588232,
+      "rf_mae_std": 0.002395865929270266,
+      "gbdt_mae_mean": 0.010172535033649403,
+      "gbdt_mae_std": 3.3395116535531566e-17,
+      "gnn_joint_val_mae_mean": 0.9799590623933125,
+      "gnn_joint_val_mae_std": 0.0389057608709117,
+      "gnn_pertgt_val_mae_mean": 0.9587960390591332,
+      "gnn_pertgt_val_mae_std": 0.04450310380790858
     }
   }
 }

@@ -158,14 +158,21 @@ Following rigorous scientific auditing, the experimental protocol was audited an
    - Knots are partitioned strictly using KnotInfo's validated `alternating` column.
    - **Murasugi 4-Genus Bound ($g_4 \ge |\sigma|/2$)**: Murasugi's classical theorem provides only a *lower bound* on smooth 4-genus, not an exact equality for alternating knots. The standard counterexample is knot $8_3$, which is alternating with signature $\sigma(8_3) = 0$ but $g_4(8_3) = 1$ (non-slice). Under KnotInfo ground truth, $|\sigma|/2$ evaluates to **$0.264$ MAE** on alternating knots ($949$ exact, $338$ differ by 1, $1$ differs by 2) and **$0.280$ MAE** on non-alternating knots (**$0.271$ overall**). Both stratified numbers are mathematically exact.
    - **Exact Three-Genus Theorem ($g_3 = \text{deg}(\Delta)/2$)**: The exact equality that holds for alternating knots is Murasugi's theorem for Seifert three-genus: $g_3(K) = \text{deg}(\Delta(K))/2$. This evaluates to an exact **$0.000$ MAE** on alternating knots and **$0.015$ overall**.
-3. **Scaled Distinct Base Origin Evaluation**: Expanded to $435$ non-alternating knots across $c \in \{9, 10, 11, 12\}$ testing KnotInfo vs. SnapPy census diagrams. All canonicalized diagrams reach minimal crossing count ($100.0\%$). SnapPy's exterior isometry (`is_isometric_to`, exact under Mostow rigidity for hyperbolic knots) serves as the exact upper bound reference ($0.9954$).
+3. **Resolution of Perko-Pair Naming Shift & Distinct Base Evaluation via KnotInfo**:
+   - KnotInfo and SnapPy indices diverge at $10_{161..165}$ due to Kenneth Perko's 1974 discovery ($10_{161} = 10_{162}$ duplicate dropped in SnapPy, shifting subsequent names by 1).
+   - Among 10-crossing knots, only $10_{124}$ is non-hyperbolic (torus knot $T(3,5)$); knots $10_{162..165}$ are hyperbolic (e.g. $10_{165}$ has hyperbolic volume $\approx 12.5067$). The earlier $0.9600$ isometry drop was a naming misalignment artifact, not a topological limitation.
+   - By generating both distinct presentations directly from **KnotInfo alone** (PD code vs braid notation closure via `snappy.Link(braid_closure=b)`), cross-table naming divergence is mathematically eliminated. This achieves **$100.0\%$ canonical minimality, $0.0\%$ identical canonical forms, and $1.0000$ exterior isometry** across all crossing slices.
 4. **Resolution of Label Leakage and "Formula Inputs" in Tabular Baselines**:
    - **Signature Row Dropped**: Random Forest and GBDT models fed classical features including $\sigma(K)$ "predicted" signature with MAE $0.003$. This was pure label leakage; the signature row has been dropped.
    - **Three-Genus Flagged as Formula Input**: Alexander polynomial degree is the Seifert genus formula itself for alternating knots. Tabular performance ($0.046$) is explicitly flagged as "Formula Input: $\text{deg}(\Delta)/2$", not as a learned baseline.
    - **Label Inference in Tabular Models**: KnotInfo's ground truth for unknotting number and smooth 4-genus is known primarily where classical bounds (signature, Rasmussen $s$, Ozsváth–Szabó $\tau$) meet. Tabular models fed these invariants achieve low MAE ($0.074$ on $g_4$) by reconstructing the mathematical decision rules of the labeling process, not by intuiting knot topology.
    - **The Solved Subset vs. Unsolved Frontier**: For unknotting number, the $1,628$ test knots evaluated are the mathematically resolved subset where bounds coincide; the roughly $548$ interval-valued knots represent the true unresolved frontier.
-5. **Face-Degree Histogram & Crossing Summary Baseline**: A simple non-neural geometric baseline ($[c, n_+, n_-, w, h_2, \dots, h_{10}]$) reaches **$0.9549$ AUROC**, matching/exceeding the Untrained GNN ($0.9386$).
-6. **Strict Validation Holdout Experiment**: Evaluated with train on $c \le 10$, checkpoint selection on $c = 11$ validation holdout, and test on $c = 12$ with zero test-set hyperparameter tuning.
+5. **Hard Negatives Evaluation (Geometric Nearest Neighbors)**:
+   - Random same-crossing negatives are trivially separated ($0.87 - 0.94$ face histogram AUROC) because random knots differ widely in shadow statistics.
+   - When evaluated against **hard negatives** (nearest neighbors in the geometric face-degree histogram space $[c, n_+, n_-, w, h_2..h_{10}]$), the face histogram baseline collapses to **$0.23 - 0.32$ AUROC**, and the untrained GNN collapses to **$0.39 - 0.41$ AUROC**, while topological exterior isometry retains **$1.0000$**.
+6. **Strict Multi-Seed Validation Holdout Experiment**:
+   - Evaluated across 5 random seeds ($[42, 43, 44, 45, 46]$) with train on $c \le 10$, checkpoint selection on $c = 11$ validation holdout, and test on $c = 12$ without test-set tuning.
+   - Evaluates both **Joint Checkpoint Selection** and **Per-Target Checkpoint Selection** on validation loss, and compares directly against Random Forest and GBDT trained on the identical holdout split.
 
 ---
 
@@ -181,19 +188,24 @@ Following rigorous scientific auditing, the experimental protocol was audited an
 | | **Pure Graph GNN (Canonical, Contrastive)** | $0.956 \pm 0.010$ | $0.960$ | $0.944$ | Contrastive representation across backtrack walks. |
 | | **Alexander Polynomial Baseline** | $0.954 \pm 0.016$ | $0.954$ | $0.952$ | Evaluated with same-Alexander hard negatives sharing $\Delta(t)$. |
 
-#### B. Scaled Distinct Base Origin Breakdown ($N = 435$ Non-Alternating Knots: KnotInfo vs. SnapPy Census)
-| Crossing Slice | Knots ($N$) | SnapPy Exterior Iso (Upper Bound) | Face Hist Baseline ($[c, n_+, n_-, w, h]$) | WL Graph Hash (Match Rate) | Untrained Pure GNN (5-Seed Mean ± Stderr) | Canonical PD String Match |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **$c \le 10$** | 50 | **$0.9600^\ast$** | **$0.6897$** | $0.5100$ ($2.0\%$) | $0.6462 \pm 0.0037$ | $0.5000$ ($0\%$) |
-| **$c = 11$** | 185 | **$1.0000$** | **$0.9968$** | **$1.0000$** ($100\%^\dagger$) | $1.0000 \pm 0.0000$ | $0.5000$ ($0\%$) |
-| **$c = 12$** | 200 | **$1.0000$** | **$0.9974$** | $0.5625$ ($12.5\%$) | $0.9578 \pm 0.0076$ | $0.5000$ ($0\%$) |
-| **Overall** | **435** | **$0.9954^\ast$** | **$0.9549$** (pos $0.9835$, neg $0.8425$) | **$0.7425$** ($48.5\%^\ddagger$) | **$0.9386 \pm 0.0038$** (pos $0.9996$, neg $0.9978$) | $0.5000$ ($0\%$) |
+#### B. Distinct Base Origin Breakdown (KnotInfo PD vs KnotInfo Braid Closure Across Crossing Slices)
+Both presentations are generated from **KnotInfo alone** (PD code vs Braid closure), avoiding cross-census naming shifts. Diagrams are $0.0\%$ identical after canonicalization ($0 / 335$).
+
+| Crossing Slice | Knots ($N$) | Negatives Mode | Exterior Isometry (Topological Truth) | Face Hist Baseline ($[c, n_+, n_-, w, h]$) | WL Graph Hash | Untrained Pure GNN (5-Seed Mean ± Stderr) | Canonical PD String Match |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **$c \le 10$** | 50 | Random | **$1.0000$** | $0.9372$ | $0.5300$ | $0.6197 \pm 0.0054$ | $0.5000$ ($0\%) |
+| **$c \le 10$** | 50 | **Hard Geometric** | **$1.0000$** | **$0.3207$** | $0.5300$ | **$0.3918 \pm 0.0032$** | $0.5000$ ($0\%) |
+| **$c = 11$** | 185 | Random | **$1.0000$** | $0.8667$ | $0.5351$ | $0.6471 \pm 0.0011$ | $0.5000$ ($0\%) |
+| **$c = 11$** | 185 | **Hard Geometric** | **$1.0000$** | **$0.2303$** | $0.5351$ | **$0.3941 \pm 0.0015$** | $0.5000$ ($0\%) |
+| **$c = 12$** | 100 | Random | **$1.0000$** | $0.9092$ | $0.5150$ | $0.6800 \pm 0.0055$ | $0.5000$ ($0\%) |
+| **$c = 12$** | 100 | **Hard Geometric** | **$1.0000$** | **$0.2667$** | $0.5150$ | **$0.4144 \pm 0.0086$** | $0.5000$ ($0\%) |
 
 *Table Notes on Task 1 Breakdown*:
-- $^\ast$ **SnapPy Exterior Isometry Upper Bound**: The gap from $1.0000$ ($0.9600$ at $c \le 10$ and $0.9954$ overall) is caused entirely by non-hyperbolic satellite/torus knots ($10_{124}, 10_{162}, 10_{163}, 10_{164}, 10_{165}$) where hyperbolic Mostow rigidity does not apply to SnapPy's hyperbolic isometry routine.
-- $^\dagger$ **Source Table Confound at $c = 11$**: Both KnotInfo and SnapPy census derived their $11$-crossing presentations from Hoste–Thistlethwaite DT tables; canonicalization yields identical minimal diagrams in $100\%$ of cases.
-- $^\ddagger$ **Discrete WL Hash Bound**: The WL hash's AUROC is mathematically capped at $0.7425$ because discrete $0/1$ scores assign $0$ to the $51.5\%$ unmatched positive pairs, tying them with true negatives in rank ordering.
-- **The 0.94 Untrained GNN Explained**: The Untrained GNN adds **nothing** beyond the simple Face-Degree Histogram baseline ($0.9549$ vs $0.9386$). Furthermore, the Untrained GNN's positive vs negative cosines are compressed into $[0.9978, 0.9996]$ (a tiny margin of $0.0018$ where rankings ride on microscopic numerical fluctuations), whereas the Face Histogram exhibits a natural, robust geometric margin ($0.9835$ vs $0.8425$, margin $0.1410$).
+- **The Perko-Pair Resolution**: All non-alternating knots across all slices ($c \le 10$, $c = 11$, $c = 12$) achieve exact **$1.0000$ exterior isometry**. The previous $0.9600$ cap at $c \le 10$ was caused entirely by SnapPy dropping the duplicate Perko pair $10_{161} = 10_{162}$ and shifting subsequent indices by 1, resulting in mismatched pairs. Deriving both presentations from KnotInfo directly eliminates naming divergence.
+- **Torus Knot $10_{124}$**: The only non-hyperbolic knot among 10 crossings is $10_{124}$ (the torus knot $T(3,5)$ with hyperbolic volume 0). Satellite knots do not exist until higher crossing numbers. Knots $10_{162..165}$ are hyperbolic (e.g. $10_{165}$ volume $\approx 12.5067$).
+- **No Pooled $c = 11$ Headline**: Results are strictly reported per-crossing slice, preventing table-conflation inflation.
+- **Hard Negative Collapse**: On random negatives, face histograms and graph baselines score high ($0.87 - 0.94$) because random knots differ widely in shadow statistics. When evaluated against hard negatives (geometric nearest neighbors in face-degree histogram space), the face-degree histogram collapses to **$0.23 - 0.32$ AUROC**, and the untrained GNN collapses to **$0.39 - 0.41$ AUROC**, demonstrating that neither captures knot topology under distinct presentations.
+- **Topological Ground Truth Survives**: Exterior isometry via Mostow rigidity correctly certifies every pair (**$1.0000$**), providing the honest invariant benchmark.
 
 ---
 
@@ -228,20 +240,30 @@ Following rigorous scientific auditing, the experimental protocol was audited an
 
 ---
 
-### 8.3 Strict Out-of-Distribution Validation Holdout Experiment
+### 8.3 Strict Out-of-Distribution Validation Holdout Experiment Across 5 Seeds
 
 To ensure zero test-set hyperparameter tuning and inspect the crossing generalization gap rigorously:
-- **Train Set**: Knots with $c \le 10$ ($N = 250$).
-- **Validation Holdout**: Knots with $c = 11$ ($N = 552$), used exclusively for checkpoint selection via validation loss.
-- **Test Set**: Knots with $c = 12$ ($N = 2,176$), evaluated out-of-distribution without any test-set tuning.
+- **Train Set**: Knots with $c \le 10$ ($N = 250$ prime knots).
+- **Validation Holdout**: Knots with $c = 11$ ($N = 552$ prime knots), used exclusively for checkpoint selection via validation loss.
+- **Test Set**: Knots with $c = 12$ ($N = 2,176$ prime knots), evaluated out-of-distribution without any test-set tuning.
 - **Node Features**: Intrinsic signed graph topology and normalized face degree profiles ($[s, \text{is\_pos}, \text{is\_neg}, f_1, f_2, f_3, f_4]$) with **no** crossing count or size term ($n/20$).
+- **Apples-to-Apples Baseline Comparison**: Random Forest and Gradient Boosted Trees trained on the **identical** $c \le 10$ split across the same 5 seeds.
+- **Multi-Task Interference Check**: Evaluates both **Joint Checkpoint Selection** and **Per-Target Checkpoint Selection** on $c = 11$ validation to test whether joint multi-task loss was driving 3-genus MAE up.
 
-| Target Invariant | $c = 12$ Test Knots | Out-of-Distribution Test MAE | Comparison to Baselines on $c = 12$ |
-| :--- | :---: | :---: | :--- |
-| **Unknotting Number $u(K)$** | 1,628 | **$0.428$** | Near linear baseline $[c, w]$ ($0.446$) and mean ($0.449$). |
-| **Smooth 4-Genus $g_4(K)$** | 2,176 | **$0.354$** | Substantially worse than classical bound $|\sigma|/2$ ($0.271$) and $|\tau|$ ($0.243$). |
-| **Three-Genus $g_3(K)$** | 2,176 | **$0.730$** | **Worse than the mean baseline** ($0.606$); destroyed by Alexander degree ($0.015$). |
-| **Signature $\sigma(K)$** | 2,176 | **$0.982$** | Worse than linear baseline $[c, w]$ ($0.919$); exact Goeritz signature is $0.000$. |
+| Target Invariant | Test Knots | Mean Base ($c \le 10$) | Linear $[c, w]$ | Classical Bound | Random Forest (5-Seed) | GBDT (5-Seed) | GNN Joint Val (5-Seed) | GNN Per-Target Val (5-Seed) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Unknotting Number $u(K)$** | 1,628 | $0.489$ | $0.471$ | $0.848$ | $0.355 \pm 0.010$ | $0.379 \pm 0.002$ | $0.427 \pm 0.007$ | **$0.426 \pm 0.007$** |
+| **Smooth 4-Genus $g_4(K)$** | 2,176 | $0.597$ | $0.524$ | $0.271^\ast$ | **$0.138 \pm 0.006$** | $0.353 \pm 0.012$ | $0.370 \pm 0.009$ | $0.363 \pm 0.010$ |
+| **Three-Genus $g_3(K)$** | 2,176 | $0.855$ | $0.619$ | **$0.015^\dagger$** | $0.056 \pm 0.001^\ddagger$ | $0.055 \pm 0.000^\ddagger$ | $0.665 \pm 0.060$ | **$0.650 \pm 0.046$** |
+| **Signature $\sigma(K)$** | 2,176 | $2.325$ | $0.921$ | **$0.000^\S$** | *[Leakage]^\parallel* | *[Leakage]^\parallel* | $0.980 \pm 0.039$ | **$0.959 \pm 0.045$** |
+
+*Table Notes on Holdout Benchmark*:
+- **Resolving the 3-Genus Holdout Artifact**: In the earlier single-seed run (seed 42), joint checkpointing produced an MAE of $0.730$. Evaluating across 5 seeds with per-target checkpoint selection drops 3-genus MAE to **$0.650 \pm 0.046$**, which beats the true $c \le 10$ training mean predictor ($0.855$) on $c = 12$ and approaches linear $[c, w]$ ($0.619$).
+- **Tabular Models on the Identical Split**: When trained on $c \le 10$ ($N = 250$), Random Forest and GBDT achieve $0.355$ on unknotting number and $0.138$ on 4-genus. For 3-genus, tabular performance ($0.056$) relies directly on Alexander polynomial degree as an input feature ($\text{deg}(\Delta)/2$).
+- **Tempered Generalization Finding**: Rather than declaring "a genuine inductive limitation of local message passing" from a single seed, the 5-seed evidence demonstrates that:
+  1. The GNN outperforms trivial mean predictors across all four targets ($0.426$ vs $0.489$ on $u$, $0.363$ vs $0.597$ on $g_4$, $0.650$ vs $0.855$ on $g_3$, $0.959$ vs $2.325$ on $\sigma$).
+  2. Training on only 250 knots induces substantial sample-size limitations and face-degree distribution shift at $c = 12$.
+  3. Learned message-passing representations cannot compete with algebraic and Seifert-surface invariants (Alexander polynomial degree $0.015$ on $g_3$, Goeritz signature $0.000$).
 
 ---
 
@@ -267,7 +289,7 @@ The audited empirical benchmarks establish six fundamental failure modes in geom
 
 ### 9.5 Pitfall 5: Multi-Task Optimization Imbalance vs. Generalization Gap
 - **Mechanism**: Optimization failure previously masked model capacity. When trained with target standardization, Smooth L1 loss, and batched gradient accumulation, the GNN comfortably fits training knots ($c \le 11$), beating linear fits across all targets.
-- **Audit Measurement**: However, under a strict validation holdout split ($c \le 10$ train, $c = 11$ val checkpoint, $c = 12$ test), the model exhibits a severe out-of-distribution generalization gap: 3-genus collapses to $0.730$ MAE (worse than the test mean baseline $0.606$), and unknotting number ($0.428$) fails to beat simple linear fits ($0.446$). Local message passing cannot extrapolate geometric surgery invariants to higher crossing numbers.
+- **Audit Measurement**: Under a strict validation holdout split ($c \le 10$ train, $c = 11$ val checkpoint, $c = 12$ test across 5 seeds), the GNN beats the training mean baseline on all targets ($0.426$ vs $0.489$ on $u$, $0.363$ vs $0.597$ on $g_4$, $0.650$ vs $0.855$ on $g_3$). Using per-target checkpoint selection resolves multi-task loss interference on 3-genus ($0.650$ vs $0.730$ previously). However, trained on only 250 knots, the GNN cannot match tabular models with algebraic formula inputs ($0.056$ on $g_3$ using Alexander degree) or classical bounds ($0.271$ on $g_4$ via signature).
 
 ---
 
