@@ -1,0 +1,1831 @@
+{
+  "development": {
+    "coordinates": [
+      {
+        "coordinate_count": 435,
+        "key": "1aja_A",
+        "xyz_sha256": "8b97dfcf2e60fd508dee5143df5abd059275e74520d22e326c5d886c087f4c21"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1ajb_A",
+        "xyz_sha256": "2751db88dd2d7a882ed87c4974416dd20f51a0581910c5d713866aae85ce3834"
+      },
+      {
+        "coordinate_count": 446,
+        "key": "1ajc_A",
+        "xyz_sha256": "1e7fb11622dbeaa509059845bb6651fd306fcda3b2319572b32009a2b3cde049"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1ajd_A",
+        "xyz_sha256": "eb6666b39e48b615382a6b8524af569cbfd1666d8a89ab7d78f3ef50d8fb087e"
+      },
+      {
+        "coordinate_count": 446,
+        "key": "1ali_A",
+        "xyz_sha256": "af48b9846d12e71be90ec919e780530487f33b3caa05a2b9580335dd6c939433"
+      },
+      {
+        "coordinate_count": 446,
+        "key": "1alj_A",
+        "xyz_sha256": "b81181e6371763f257f659085c1e7f2bf7cde813143c463137d599d7fe48498d"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1alk_A",
+        "xyz_sha256": "53a959de0b80886005af6183a8983a4dc550f7c11578570dc7347e1e217dbdf7"
+      },
+      {
+        "coordinate_count": 446,
+        "key": "1ani_A",
+        "xyz_sha256": "e011c5f451b4bb6df80ff5a1a4ec9bcc481524628e5834efb3e50820c0a2986d"
+      },
+      {
+        "coordinate_count": 446,
+        "key": "1anj_A",
+        "xyz_sha256": "69d5069850eb091b7b787f6a96461e26ba675a3276f49c9931c6f0f5f5e9ff1a"
+      },
+      {
+        "coordinate_count": 481,
+        "key": "1auk_A",
+        "xyz_sha256": "f379ed01ceecb14d0fd4ae2bc96c56c1628dca729c04a5e820ae58fc3a7a89c8"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1b8j_A",
+        "xyz_sha256": "8d3d7bac57f4a929d938cda3962597200784714eb0d14b74cbe78f8a9b596ed9"
+      },
+      {
+        "coordinate_count": 354,
+        "key": "1by7_A",
+        "xyz_sha256": "24a1bd98f9e4c1579a725b4991ba97893528e470c432774367c4ad7f6229d9e6"
+      },
+      {
+        "coordinate_count": 214,
+        "key": "1cmx_A",
+        "xyz_sha256": "3bd0a31957a0db814e8e48a85e03878cd293392449418d9e6170b1488d59d6ae"
+      },
+      {
+        "coordinate_count": 257,
+        "key": "1cng_A",
+        "xyz_sha256": "b9e6eea906a061fbf7c637fad60f4c97aec4828c7fb4c5d100b0177b2f0d9ae4"
+      },
+      {
+        "coordinate_count": 257,
+        "key": "1cnh_A",
+        "xyz_sha256": "7a2fc8a39c5597fe754e4adcac870b018f788d3d7058cd3356695e8305a57700"
+      },
+      {
+        "coordinate_count": 255,
+        "key": "1cvf_A",
+        "xyz_sha256": "a57f88f7f2a114caec4e26aafc976e13e7ebd288628a9be99cdc4f893c8f899f"
+      },
+      {
+        "coordinate_count": 481,
+        "key": "1e1z_P",
+        "xyz_sha256": "7ecaf7b7bf1030a30518ca02890ec2d8d3a5e40c0ef30a939ceb12392710f357"
+      },
+      {
+        "coordinate_count": 306,
+        "key": "1e2h_A",
+        "xyz_sha256": "baea0393d008d27c9c56657f7db699b6540de587c63fae41e427b7fd957a101d"
+      },
+      {
+        "coordinate_count": 300,
+        "key": "1e2i_A",
+        "xyz_sha256": "00d117e08b747207c2182d73a00b51986832b918bce5e015655e7b772bbf04f8"
+      },
+      {
+        "coordinate_count": 306,
+        "key": "1e2j_A",
+        "xyz_sha256": "e0f8c2b2d385aca70892c44aa6539c903102f695ddeaf07b12c1f767c25050d0"
+      },
+      {
+        "coordinate_count": 308,
+        "key": "1e2k_A",
+        "xyz_sha256": "d8699e48bbf61bfc20548c5766698f424fece278f19d55d302df4b497a7b46b3"
+      },
+      {
+        "coordinate_count": 304,
+        "key": "1e2l_A",
+        "xyz_sha256": "098b97d1fa7c85f198284d4880022af5be44d01576d42470f9ff3f5fd6209e20"
+      },
+      {
+        "coordinate_count": 305,
+        "key": "1e2m_A",
+        "xyz_sha256": "b45c074e4d0842937feda20c10009c9826e0ba401a4d5a021b6db0d884c5da16"
+      },
+      {
+        "coordinate_count": 310,
+        "key": "1e2n_A",
+        "xyz_sha256": "bf153e3ff03969d6ac9647f9cbca572f315734d4607a2342b0ad459eac6c24f5"
+      },
+      {
+        "coordinate_count": 305,
+        "key": "1e2p_A",
+        "xyz_sha256": "a1da87353a7029d539b784632ce7014216c2b21e3ea8c9726acd916ae4516c16"
+      },
+      {
+        "coordinate_count": 481,
+        "key": "1e2s_P",
+        "xyz_sha256": "13972d717efc7cd2c22f19203e561ce5b35442abe1554a600d490c934c899806"
+      },
+      {
+        "coordinate_count": 481,
+        "key": "1e33_P",
+        "xyz_sha256": "9434bc06e15459fd2916602c758263863ccee9962b4afa88799439de364bdf35"
+      },
+      {
+        "coordinate_count": 481,
+        "key": "1e3c_P",
+        "xyz_sha256": "d47d490840d87c4091beabb97965131c37bc26792ece6baea17a5c72e85008c1"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1ed8_A",
+        "xyz_sha256": "e95aa91202e93d35509779259d758e12953926db6abbe90d85ff313d5ee5c63d"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1ed9_A",
+        "xyz_sha256": "f1c73ac926d488d36facd0d951760e7138d5223e4e2252fdfdd5111003110202"
+      },
+      {
+        "coordinate_count": 404,
+        "key": "1ei6_A",
+        "xyz_sha256": "79fb70ccdbdc618b49d01f985a7345524ca5050ce374b1b5b09adc4bfe81e749"
+      },
+      {
+        "coordinate_count": 508,
+        "key": "1ejj_A",
+        "xyz_sha256": "63858d43c9841a3162a9d14a3104e5e544f443db88803a2da07939d7eae0bde5"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1elx_A",
+        "xyz_sha256": "1b17ef5e1d54f8be1fea3a05d62143d5f80b99a0c7c5a2b578162fd9d768394e"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1ely_A",
+        "xyz_sha256": "2a42ae8b8708d2ae25fcfd9aa59b0dccfc63bcaacbd65c90286ee5c0a9aa61b1"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1elz_A",
+        "xyz_sha256": "e15cb8aeed6adaa93fbf40e8abfbd8a2b1d2fd5abc1d949010229dca331523a7"
+      },
+      {
+        "coordinate_count": 508,
+        "key": "1eqj_A",
+        "xyz_sha256": "f0dca75bbc51f0142e7079ab5af84640d4c0975e804d77418bb37b31b280e161"
+      },
+      {
+        "coordinate_count": 479,
+        "key": "1ew2_A",
+        "xyz_sha256": "508c186a2b46ab229addf624d4a41060fa49967e0a5fe86cc658c9b492491008"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1ew8_A",
+        "xyz_sha256": "2932c1ff1232a0364e317237c523adb1e6af98bc247fa5a0e8ae8fd4aad19da4"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1ew9_A",
+        "xyz_sha256": "4972378bcd8d9048806ab78546afe9a06454cfd624acc0015378bfae44e98807"
+      },
+      {
+        "coordinate_count": 548,
+        "key": "1f48_A",
+        "xyz_sha256": "a0b9ba1c378bf9d15af1d7505334f72ba304c9e5e607d4f2d3f5e995438bc7c1"
+      },
+      {
+        "coordinate_count": 257,
+        "key": "1fqn_A",
+        "xyz_sha256": "3ee2d344cc7a0587926df779ec16fe8cbabb5436784faca18965bee0afdeec4e"
+      },
+      {
+        "coordinate_count": 257,
+        "key": "1fsn_A",
+        "xyz_sha256": "08830848969c090648b57c24bfb6d4e39e1e6b0aa556d77b18e0aae7bb67a1cd"
+      },
+      {
+        "coordinate_count": 474,
+        "key": "1fsu_A",
+        "xyz_sha256": "fea0f434c0ebfdbff71f19532d3dcb84d8fa45b66c8f828b8491866293736b1e"
+      },
+      {
+        "coordinate_count": 383,
+        "key": "1fug_A",
+        "xyz_sha256": "b18769f9ceeed49e7df268cbc2e2e49a59ca7df921e3e2ff88620fc044e28dee"
+      },
+      {
+        "coordinate_count": 295,
+        "key": "1gq6_A",
+        "xyz_sha256": "2b45df016403a10896d6252043cb3cc3beadaca74c415d262ee50296ea2e3fbf"
+      },
+      {
+        "coordinate_count": 301,
+        "key": "1gq7_A",
+        "xyz_sha256": "198aaf302a605fe350ce337c89a52745767c31144ce888d16c5a960c9aa658d5"
+      },
+      {
+        "coordinate_count": 490,
+        "key": "1gv4_A",
+        "xyz_sha256": "9204dadd0da6d3b0605259f657e374b2850d545f7bdccf9d703aa7aa9fb35fd9"
+      },
+      {
+        "coordinate_count": 242,
+        "key": "1gz0_A",
+        "xyz_sha256": "54e242de08661cf8218e41ac79f410ac85cb0e305c8585813f7091d3889c9710"
+      },
+      {
+        "coordinate_count": 525,
+        "key": "1hdh_A",
+        "xyz_sha256": "99d19a38056c2a0f6bb39f1aeb0bbf30e6b86890fbd92f33cd0d4e34c2f6f1da"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1hjk_A",
+        "xyz_sha256": "26a79240bcf3749a85e3f7edd8d02357e51dc3c4d3caf8d09db63178cc220700"
+      },
+      {
+        "coordinate_count": 446,
+        "key": "1hqa_A",
+        "xyz_sha256": "2531d770d91b8d6677131c82c257e2e7b22a656f95ff4b747da4df88f1599208"
+      },
+      {
+        "coordinate_count": 255,
+        "key": "1hva_A",
+        "xyz_sha256": "97a56af35eebca4babea7662a4f855972a97bde93e8eafbab5447e3d334c8999"
+      },
+      {
+        "coordinate_count": 293,
+        "key": "1hyn_P",
+        "xyz_sha256": "1d56ec69ec760bc3360978afef71bba5624fec4d1778ab79afa77a0d8fa18909"
+      },
+      {
+        "coordinate_count": 258,
+        "key": "1ipa_A",
+        "xyz_sha256": "37cc22b8e67021a3b656811d61115f63ba0bba0af5bf9c3fcda46aeb7bcfb701"
+      },
+      {
+        "coordinate_count": 156,
+        "key": "1j85_A",
+        "xyz_sha256": "babafc9e85f35b6e7b14ad942142f1b0559272b6bfe91da746a0b35f58184b8a"
+      },
+      {
+        "coordinate_count": 468,
+        "key": "1jch_A",
+        "xyz_sha256": "50c45ca1a8a0b16156448cad471cecbef6279d44a6ae4d7aa789ab8379b6abd1"
+      },
+      {
+        "coordinate_count": 324,
+        "key": "1js1_X",
+        "xyz_sha256": "66d8fe4027c5e8169745969402292ee7b2f8904fa9493bfa6b34ad20041d8bae"
+      },
+      {
+        "coordinate_count": 262,
+        "key": "1k3r_A",
+        "xyz_sha256": "86b75cb43778af5c80f09221e9b01330eb60cb0421fe5b4b12cd2fee0b6a9f23"
+      },
+      {
+        "coordinate_count": 476,
+        "key": "1k7h_A",
+        "xyz_sha256": "43e585ed1c041da1c27d45f0646fedf549cc55a6da30c79a74526994f352be73"
+      },
+      {
+        "coordinate_count": 444,
+        "key": "1kh4_A",
+        "xyz_sha256": "9b08be69a389e5ce619ba7569ae7e8cc4b28dffe013abc28bf4f5b51109f45fd"
+      },
+      {
+        "coordinate_count": 444,
+        "key": "1kh5_A",
+        "xyz_sha256": "1fa6d484cd2559135309dd833c876a178ffd39c0ab718c92500a33c8d9eb4513"
+      },
+      {
+        "coordinate_count": 444,
+        "key": "1kh7_A",
+        "xyz_sha256": "180df4a57327c044ccd700856cf09e68e98c0bff3374f56589f78073b645ad42"
+      },
+      {
+        "coordinate_count": 444,
+        "key": "1kh9_A",
+        "xyz_sha256": "e2355b42b93d57b454c44c1582bd3bc065a41cc2d66a0aa6f33848920874d1dc"
+      },
+      {
+        "coordinate_count": 444,
+        "key": "1khj_A",
+        "xyz_sha256": "75667b3317c1bbad279611d751696183449caaa9ac18289e524744a51d4504b7"
+      },
+      {
+        "coordinate_count": 444,
+        "key": "1khk_A",
+        "xyz_sha256": "485a0a14f54c631b2162d01d7505b839e9dc00a4541f05e859bb1c06306443a9"
+      },
+      {
+        "coordinate_count": 444,
+        "key": "1khl_A",
+        "xyz_sha256": "204d3ae9a7122b8a85b777b55ac8508db38ecff2f9c79ae882d8ccf4c6fffc49"
+      },
+      {
+        "coordinate_count": 444,
+        "key": "1khn_A",
+        "xyz_sha256": "0dd1afb60d48e6ccdf5231e6b275cdc0fffebed3c5e0dc1ba765836c0ea634d7"
+      },
+      {
+        "coordinate_count": 306,
+        "key": "1ki2_A",
+        "xyz_sha256": "e6b3d7557ee1b4dfab79cba898d1b88f84701b01a4297fbaba1a35257e8ffbe1"
+      },
+      {
+        "coordinate_count": 306,
+        "key": "1ki3_A",
+        "xyz_sha256": "535ec8c7e6fac98cd31e62deaaefe38c9ca1904f69b3e6add98cdb9bb3e9e2f0"
+      },
+      {
+        "coordinate_count": 300,
+        "key": "1ki4_A",
+        "xyz_sha256": "4d221cc9f288091a96c89f2dc4a625770b118bbd57d020a90db6d2999eda299f"
+      },
+      {
+        "coordinate_count": 300,
+        "key": "1ki6_A",
+        "xyz_sha256": "0504bcd476ee4c8a67e3352f48d4af708252daff6dde71f6bc0af014893904d1"
+      },
+      {
+        "coordinate_count": 304,
+        "key": "1ki6_B",
+        "xyz_sha256": "a0e990a4552757044a9025ced164021ca82847f6f79097d3030d868c214dc25c"
+      },
+      {
+        "coordinate_count": 302,
+        "key": "1ki7_A",
+        "xyz_sha256": "83c20cb727534b437af6ba5335206e0c79d8afc868b513ee9ab69c2376d9d841"
+      },
+      {
+        "coordinate_count": 304,
+        "key": "1ki8_A",
+        "xyz_sha256": "bb2253da3dfb8db0a166adca2741c22ed9f5c9f7db5e4a34bae8f5494f7a5840"
+      },
+      {
+        "coordinate_count": 300,
+        "key": "1kim_A",
+        "xyz_sha256": "f598a1b00cab66f3bc0eed5dcba69daf3545443c4538ccb2f045c62d7300269d"
+      },
+      {
+        "coordinate_count": 190,
+        "key": "1lm4_A",
+        "xyz_sha256": "0f4fa5a6e1aa157e9880a13da5cfafdcbb47f2a2e217b616643ca617082e2ae9"
+      },
+      {
+        "coordinate_count": 763,
+        "key": "1lns_A",
+        "xyz_sha256": "4ff9e8ebdbf77002f6c855496f7c6dd314d38b51ada8948a721d0ff4fd5cd3cc"
+      },
+      {
+        "coordinate_count": 377,
+        "key": "1mxa_A",
+        "xyz_sha256": "282241fd0fef2c3906a3fede7c73128c0b5d60b98c11e2596208e2ad245a2905"
+      },
+      {
+        "coordinate_count": 377,
+        "key": "1mxb_A",
+        "xyz_sha256": "57c46175b7167a91b2609b040565fcd9b54060ec0e88a0964072b60af212f401"
+      },
+      {
+        "coordinate_count": 377,
+        "key": "1mxc_A",
+        "xyz_sha256": "bdfa4d4125a250df6d6c449a18b9391d41fd8bc9f488f7714f7a037c49ca74f4"
+      },
+      {
+        "coordinate_count": 156,
+        "key": "1mxi_A",
+        "xyz_sha256": "09046551c7bfa81e57bb579f90dc0441e953d6cafc6beef382c2406c4b0bc263"
+      },
+      {
+        "coordinate_count": 482,
+        "key": "1n2k_A",
+        "xyz_sha256": "8d20e91c0cd097feb2dfdefd0d4dbc1d75b66a27fc5a0b448ae3d489c5a21d7e"
+      },
+      {
+        "coordinate_count": 483,
+        "key": "1n2l_A",
+        "xyz_sha256": "89e389a4b7dbd54948e73ea8e72d345d4b4e70be4990848606273e847dd9c4d5"
+      },
+      {
+        "coordinate_count": 159,
+        "key": "1n2m_A",
+        "xyz_sha256": "718452d55b881d732080e6a0a826823ca44715f3617633a21f9184b5199823b7"
+      },
+      {
+        "coordinate_count": 153,
+        "key": "1ns5_A",
+        "xyz_sha256": "e7cf9ed5dc33140db6399df60b9f19eee744470cfd85d6af55424cf0d9bfc959"
+      },
+      {
+        "coordinate_count": 246,
+        "key": "1nxz_A",
+        "xyz_sha256": "3b734917d37acf123b538883cd945c4a185fd03f55d56dcfc9d82c99b06641ae"
+      },
+      {
+        "coordinate_count": 147,
+        "key": "1o6d_A",
+        "xyz_sha256": "d02b2c9a1c3b88e2ddb06df6be21d86bc4b8edf4be509878aa616972b13001d3"
+      },
+      {
+        "coordinate_count": 368,
+        "key": "1o90_A",
+        "xyz_sha256": "b1f8c9cbc62928fd02bd2addbc6c2d09b2b2bc18e5c899d3af4cdcaa4ad7f168"
+      },
+      {
+        "coordinate_count": 368,
+        "key": "1o92_A",
+        "xyz_sha256": "d68ad98275803a187ee73e42bf12ce3ac9c5312a39521d1e47523da7458e15ab"
+      },
+      {
+        "coordinate_count": 368,
+        "key": "1o93_A",
+        "xyz_sha256": "c892b987ca374344f8b02614dc469c9c984f8d48d9358516f17ce2332a9ae594"
+      },
+      {
+        "coordinate_count": 509,
+        "key": "1o98_A",
+        "xyz_sha256": "b5a6db9aa6a19c722c3983536fd4b914002864726eedf922f25d3d528cc6d161"
+      },
+      {
+        "coordinate_count": 509,
+        "key": "1o99_A",
+        "xyz_sha256": "b42e9af59566dcd97a056c1fbf41788fc695dee7dcf237fbbc1f25f967d80e67"
+      },
+      {
+        "coordinate_count": 368,
+        "key": "1o9t_A",
+        "xyz_sha256": "b5ed0c2823f022ce2f4c4b38d6fe0a3f24f95fa6cedad026fbe88711dbebefdd"
+      },
+      {
+        "coordinate_count": 307,
+        "key": "1of1_A",
+        "xyz_sha256": "ed698db92f24347c1b405ff9e0258d3508f864a06a0cfcc63fefaf962c83d9f8"
+      },
+      {
+        "coordinate_count": 131,
+        "key": "1ogc_A",
+        "xyz_sha256": "cb9c67832dc46895edf4035fabdfe65bf96d2a88837f66689205d0c631669be3"
+      },
+      {
+        "coordinate_count": 131,
+        "key": "1ogd_A",
+        "xyz_sha256": "61e860a244026e886306cf6276e2cc89d0d829434612848558d20ab937e0e7b3"
+      },
+      {
+        "coordinate_count": 131,
+        "key": "1oge_A",
+        "xyz_sha256": "9ed6d109f6b1ede2594602f451dbf3dfc0d5b1ade606e24a6aa3e1968115f529"
+      },
+      {
+        "coordinate_count": 131,
+        "key": "1ogf_A",
+        "xyz_sha256": "82145cb45ff04c70f4c1f4f67ddca043c40f0025751b7c56675fefacd1e6c612"
+      },
+      {
+        "coordinate_count": 325,
+        "key": "1osn_A",
+        "xyz_sha256": "4678ad8a0a5d60d83d6bd0c690531379a89c44ceec0e5c858039c31af0af62f0"
+      },
+      {
+        "coordinate_count": 548,
+        "key": "1p49_A",
+        "xyz_sha256": "5a8454529ebffaa7253970d6dfdfa61fcb73f1f473b04b9fdc4e73724f6f811a"
+      },
+      {
+        "coordinate_count": 333,
+        "key": "1p6x_A",
+        "xyz_sha256": "f40f2262a6494418ab71991fe166dcf20cb729325c743b3315a26a115e6b22f5"
+      },
+      {
+        "coordinate_count": 323,
+        "key": "1p72_A",
+        "xyz_sha256": "36010670497c765f7d16960a7ef06715a4c42e3a29c37ccb1b8a54f78546ff33"
+      },
+      {
+        "coordinate_count": 320,
+        "key": "1p73_A",
+        "xyz_sha256": "f85ae8da3844b922331241b2e7eea098a7bcecbd056ba002714cfd2cac336542"
+      },
+      {
+        "coordinate_count": 331,
+        "key": "1p75_A",
+        "xyz_sha256": "fe49b189228317ad695edefa230d5f96b8647644aedc131c83cabc9d3810a00e"
+      },
+      {
+        "coordinate_count": 301,
+        "key": "1p7c_A",
+        "xyz_sha256": "17b9253f2abf19d027b734cc5c1e6d7c7d9d26cf59f38c191aee3e2d96291d8a"
+      },
+      {
+        "coordinate_count": 383,
+        "key": "1p7l_A",
+        "xyz_sha256": "e690f06d737fcecdda7255438e01237116d85721df2b903f0db03ed1dfe83e56"
+      },
+      {
+        "coordinate_count": 235,
+        "key": "1p9p_A",
+        "xyz_sha256": "c83ee696a1c6f3ec1f53998d7224546430642a91994d87307332a360c29a99eb"
+      },
+      {
+        "coordinate_count": 514,
+        "key": "1pgi_A",
+        "xyz_sha256": "ea6e267f952abe46ac39abbda966c658b73ed031288b64403216c263e8cab401"
+      },
+      {
+        "coordinate_count": 300,
+        "key": "1qhi_A",
+        "xyz_sha256": "0638aca2b31de105959922119a136f4007b3eb9a9169fab432ce591dfd18c498"
+      },
+      {
+        "coordinate_count": 368,
+        "key": "1qm4_A",
+        "xyz_sha256": "3498527a2a8e1c3e4a60387ac68fc1317db8c11c843c45fc252eaf5083a3e328"
+      },
+      {
+        "coordinate_count": 383,
+        "key": "1rg9_A",
+        "xyz_sha256": "ce492dc47b88c705bc211d40f3ba53f85b9397971e1d14b2e5a1549e48388be0"
+      },
+      {
+        "coordinate_count": 490,
+        "key": "1rh1_A",
+        "xyz_sha256": "e9dcd3359c141b6a948baca1dae87d7614529bdfe3baf23257869548a26560a4"
+      },
+      {
+        "coordinate_count": 476,
+        "key": "1shn_A",
+        "xyz_sha256": "dbb9f92100cf34bd0602fd21eccd8cfda546338d5c0d574ebfe50332d0196389"
+      },
+      {
+        "coordinate_count": 476,
+        "key": "1shq_A",
+        "xyz_sha256": "e12e445ac3faec968d1974d1ee9bcc17f9d5bf62ca16b85abbf95644faff12e5"
+      },
+      {
+        "coordinate_count": 875,
+        "key": "1ti2_A",
+        "xyz_sha256": "3c2e6115ffb3ebdb4fb86bafcd3db82931051d8d07e1907dfd42e9c1b528348f"
+      },
+      {
+        "coordinate_count": 875,
+        "key": "1ti4_A",
+        "xyz_sha256": "10282ab3eacdfbbe30dd54c8e1f7569c9642631239356febf8e1eb287544d809"
+      },
+      {
+        "coordinate_count": 875,
+        "key": "1ti6_A",
+        "xyz_sha256": "1598f2eb091d444820cc50973c77076a363f6e8e8a2bd445d76d3750d92a63ec"
+      },
+      {
+        "coordinate_count": 148,
+        "key": "1to0_A",
+        "xyz_sha256": "70a2bb70c21ba7903d8a3528da6fe2a42518a5a8d6f55333f5d44788d0ec2278"
+      },
+      {
+        "coordinate_count": 241,
+        "key": "1uaj_A",
+        "xyz_sha256": "2ab33fb92324dc5f6e5a9e3a931030a955b8d8799207fa27a010177e503ba038"
+      },
+      {
+        "coordinate_count": 243,
+        "key": "1uak_A",
+        "xyz_sha256": "de2cd5b44d1657bb79ba22e133046b7003fb3b107e744a7262a4feca349b9be3"
+      },
+      {
+        "coordinate_count": 243,
+        "key": "1ual_A",
+        "xyz_sha256": "ec88859b6fd29aa76ce5a5f21fc1101d88002809193c0f6a58d14a499c08b0b3"
+      },
+      {
+        "coordinate_count": 250,
+        "key": "1uam_A",
+        "xyz_sha256": "fb83959594dde422d74424f2220d6f85f84c570cd17cd40ac87e1ef0eb83be3c"
+      },
+      {
+        "coordinate_count": 206,
+        "key": "1uch_A",
+        "xyz_sha256": "105ef7e3e8e646ee495e1c0d52d6c11003e4dd78713a92b520f80731257d477c"
+      },
+      {
+        "coordinate_count": 446,
+        "key": "1ura_A",
+        "xyz_sha256": "844f33a70b04a7fc214120df9a6b9e89ea7af0c31f088bc0d7fcadb7d6886156"
+      },
+      {
+        "coordinate_count": 446,
+        "key": "1urb_A",
+        "xyz_sha256": "37d69ec2f809f6839e032a2dd82edfc38585d1dba8898dd2ad287ceaefa6a98b"
+      },
+      {
+        "coordinate_count": 191,
+        "key": "1v2x_A",
+        "xyz_sha256": "0663dbc1906e1dabc0e32206ede22d29fdb713407e28d063225048e9e0edf617"
+      },
+      {
+        "coordinate_count": 227,
+        "key": "1v6z_A",
+        "xyz_sha256": "1524d8b30bb801311db0e1fbffd3a3ec2f91f5125a2f556a879f176a5379bb3d"
+      },
+      {
+        "coordinate_count": 157,
+        "key": "1vh0_A",
+        "xyz_sha256": "7c5ead1d56c17385475dc116090b0fa58c353f160221c4a8197bda726c65c6f7"
+      },
+      {
+        "coordinate_count": 235,
+        "key": "1vhk_A",
+        "xyz_sha256": "93342f69e361dac2d3bfec5694798233dacca0e7b78f8dd3037771654e817b87"
+      },
+      {
+        "coordinate_count": 241,
+        "key": "1vhy_A",
+        "xyz_sha256": "53fa9e2925ee3fb0e32e742eb6e628c61f1db842184cc138e13b122d0826fa85"
+      },
+      {
+        "coordinate_count": 428,
+        "key": "1vl4_A",
+        "xyz_sha256": "65c6f3165703766b17768556b871d9a5946f2e5b4e0810fcfeb394535126e87f"
+      },
+      {
+        "coordinate_count": 875,
+        "key": "1vle_M",
+        "xyz_sha256": "7cda29b1eb91dc764d9d817f341957c911f4f687f6d2958d63c3cd738c87cee7"
+      },
+      {
+        "coordinate_count": 875,
+        "key": "1vlf_M",
+        "xyz_sha256": "655b57db1b0a6bb23b5de4197643f3053297ab3329bc04e0fcfc8781b3e466ac"
+      },
+      {
+        "coordinate_count": 437,
+        "key": "1vpb_A",
+        "xyz_sha256": "792e093751e288d7c8727931e7c8b0392d9750b5c6f6cbbce8b8592e0d4c0902"
+      },
+      {
+        "coordinate_count": 313,
+        "key": "1vtk_A",
+        "xyz_sha256": "605bb838464b275155c6736df3b40073b396ae5185ad6671bcbf9d02d1edfbdf"
+      },
+      {
+        "coordinate_count": 303,
+        "key": "1wog_A",
+        "xyz_sha256": "d77ad86af8b5be46fb5b7a6fa041c639c0628d9fc9395974017ee1c1c13fe0dc"
+      },
+      {
+        "coordinate_count": 303,
+        "key": "1woh_A",
+        "xyz_sha256": "723fa8e98477a9263873ed0c04709e4d362060cda249e6dfb2ca178ef1a17b58"
+      },
+      {
+        "coordinate_count": 303,
+        "key": "1woi_A",
+        "xyz_sha256": "ec06d423110df743e42e6209ec156bf282a391881ea1a74b8dbc85d7cb9ba58f"
+      },
+      {
+        "coordinate_count": 267,
+        "key": "1x7o_A",
+        "xyz_sha256": "8f2035abfe9204f9241841a67e5fb829aae31e214ad9a6d0474ccd92b401d6e4"
+      },
+      {
+        "coordinate_count": 265,
+        "key": "1x7p_A",
+        "xyz_sha256": "96f7f7b67edae3911003d535dbc7373fbf99d458983a1708b3515ef34f31a69c"
+      },
+      {
+        "coordinate_count": 229,
+        "key": "1xd3_A",
+        "xyz_sha256": "15615a8c5d54dc77eb550ee440b3cda98e76449c117e7b9b1412632b4f7bc304"
+      },
+      {
+        "coordinate_count": 405,
+        "key": "1xfh_A",
+        "xyz_sha256": "7add19419c679e655afaa29aa31e2263a29c52278d9da647ca3c4d04c03d5a1e"
+      },
+      {
+        "coordinate_count": 282,
+        "key": "1xjd_A",
+        "xyz_sha256": "e4b66ce63c56c964f7f465c032a1628fb07aa5d3985f301c0031d2c09140be38"
+      },
+      {
+        "coordinate_count": 377,
+        "key": "1xra_A",
+        "xyz_sha256": "38fc50bb832b2949cd7466854e84affb1f005b3d11eb15e633969be113b5e55b"
+      },
+      {
+        "coordinate_count": 377,
+        "key": "1xrb_A",
+        "xyz_sha256": "7c46d564cb35fc6e16cb911966d55cecbced0483439cd47249c24910b12f9fd5"
+      },
+      {
+        "coordinate_count": 377,
+        "key": "1xrc_A",
+        "xyz_sha256": "7cb2a03d2013732e880170a38b3d0b342ac024b88e91fdf301e9f2cff6f319ae"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1y6v_A",
+        "xyz_sha256": "88a5d26c775649c2bc02a48b7a4cd6db70bbfc872245b24375518a4147176762"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "1y7a_A",
+        "xyz_sha256": "36720809b3a2fa02f3a7775f7baf7242603cdeaacd8f5c58c3763a43bc493736"
+      },
+      {
+        "coordinate_count": 274,
+        "key": "1y7w_A",
+        "xyz_sha256": "23b9d0123d10e974fa55ed342441903b07f509856d39f23de7fcecacd0f7b4ee"
+      },
+      {
+        "coordinate_count": 334,
+        "key": "1yh1_A",
+        "xyz_sha256": "e4113cdc79bda2900caffe8bffad2ffb5fd885e97a12d5fa7aec0396695278ec"
+      },
+      {
+        "coordinate_count": 487,
+        "key": "1yrl_A",
+        "xyz_sha256": "23be6b62b0526248962920045abe790cc80295cf250a5b41b539084132620cfa"
+      },
+      {
+        "coordinate_count": 366,
+        "key": "1z8g_A",
+        "xyz_sha256": "ecadcee87cf1b58f130171e3b2ac84e64f404b7380cc093f93e3adde4592fd7b"
+      },
+      {
+        "coordinate_count": 480,
+        "key": "1zeb_A",
+        "xyz_sha256": "5c521bbe2131e42d8301d95d430dbe41cbfb9c09e23b986f0018652c5507becf"
+      },
+      {
+        "coordinate_count": 481,
+        "key": "1zed_A",
+        "xyz_sha256": "92934db88c52954ba6235c18803be72f8b329eac545afb87d0e2cdfa212d8309"
+      },
+      {
+        "coordinate_count": 481,
+        "key": "1zef_A",
+        "xyz_sha256": "eb36477067dc95990c566931dfff2a3d3c0b6519ba4f5597f7bee9c45de29eb0"
+      },
+      {
+        "coordinate_count": 197,
+        "key": "1zjr_A",
+        "xyz_sha256": "412350ee81f47f7d9e7c07763176fe7b275e2f7bf4e4477d50678ef1cfb4e183"
+      },
+      {
+        "coordinate_count": 262,
+        "key": "1znc_A",
+        "xyz_sha256": "5c0eb87bb23d8735bbb8ccbab543c9d53edbab97c1d8bbc2ad747d48c975e98f"
+      },
+      {
+        "coordinate_count": 257,
+        "key": "1zsa_A",
+        "xyz_sha256": "14194ac870803a520b06cabc9716eb5852e9fb65aca5c19f37f276354872a804"
+      },
+      {
+        "coordinate_count": 313,
+        "key": "1ztu_A",
+        "xyz_sha256": "41bef0e950df3118e14dd701c19a514dae5b1f1a7fe5565ff4a6908cb165a133"
+      },
+      {
+        "coordinate_count": 509,
+        "key": "2a65_A",
+        "xyz_sha256": "af6ac0dbbefafc06394c5e5e3c31bfbcc88cc92d4c50450c9d9904c2fcf71b8f"
+      },
+      {
+        "coordinate_count": 446,
+        "key": "2anh_A",
+        "xyz_sha256": "97cb029bb12b5e3e2cec48dd135e1b70e8f58068e889c42b2aaed44fc70c17d9"
+      },
+      {
+        "coordinate_count": 232,
+        "key": "2axc_A",
+        "xyz_sha256": "1556f90a9e11e24f24c39832126a8f5aa30a48f647b58f6226780e48fea99f93"
+      },
+      {
+        "coordinate_count": 470,
+        "key": "2b5u_A",
+        "xyz_sha256": "6176ea7cd4cf19fab194d8bd4cec2035865699ab1fc15474d7deb4d947adb5cb"
+      },
+      {
+        "coordinate_count": 478,
+        "key": "2b9b_A",
+        "xyz_sha256": "1a85cf48229e1ecacd3bbaf2457a595fd2a57b4ddc4a41c7fcaebe785827931f"
+      },
+      {
+        "coordinate_count": 258,
+        "key": "2cbe_A",
+        "xyz_sha256": "6f7632546e35d09d0a0f3587442d28ecf44ad766a0ee07199fa4ac5af4bb27a9"
+      },
+      {
+        "coordinate_count": 179,
+        "key": "2cfa_B",
+        "xyz_sha256": "56bc8cbce0aaa3f8b9d79e7c478eb411ddde15a1fdea529a6701ddcbead3670f"
+      },
+      {
+        "coordinate_count": 225,
+        "key": "2cx8_A",
+        "xyz_sha256": "4a54e2ad93cbd470fdf8314e82ad4d578ffc85816b4f9e063e17cf579881159c"
+      },
+      {
+        "coordinate_count": 481,
+        "key": "2d1g_A",
+        "xyz_sha256": "f21ab9709da2e8c5d1f9bcb9a6840076e0fd8d068fbce5d27354a3d21749c019"
+      },
+      {
+        "coordinate_count": 82,
+        "key": "2efv_A",
+        "xyz_sha256": "0c2bc1f533f7faedccc80aae85695a901857938446abf4312459f04c9b01dbdc"
+      },
+      {
+        "coordinate_count": 229,
+        "key": "2egv_A",
+        "xyz_sha256": "32b0169153537da0b4f05687c7ccadabadc1b7a1b49aba22954b3d62daacf359"
+      },
+      {
+        "coordinate_count": 229,
+        "key": "2egw_A",
+        "xyz_sha256": "dc8fbd967881be8d19867c781320d8642c4884503a617ae473473278f0df0ed1"
+      },
+      {
+        "coordinate_count": 223,
+        "key": "2etl_A",
+        "xyz_sha256": "cc3a5fab07bc7c1c9d1fea8bdeef168e89a8304d77286c26c6a3bf64672d1a5a"
+      },
+      {
+        "coordinate_count": 321,
+        "key": "2fg6_C",
+        "xyz_sha256": "e84ab2735330de7245d3f3c20b3208dd9d58ce5f17dfd7918544de726ccf21e3"
+      },
+      {
+        "coordinate_count": 320,
+        "key": "2fg7_C",
+        "xyz_sha256": "6ee40a946562b7b70adf91bd8cffa6691806cf5235674dec4d16405125195dbb"
+      },
+      {
+        "coordinate_count": 320,
+        "key": "2g7m_C",
+        "xyz_sha256": "6ac3a04b86d1e1e41bb1300e06c01ed4147dc787ab9e65a527295b0a668cd9ed"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "2g9y_A",
+        "xyz_sha256": "d2f6c348fbc96f492efd83a9e9a3d379d0e1e2cb43a23b16f794974ec675e42b"
+      },
+      {
+        "coordinate_count": 449,
+        "key": "2ga3_A",
+        "xyz_sha256": "07de1b5a40ddd6404adcb60fc192dca6d5052fb80b29b4c7c0be738fc103a273"
+      },
+      {
+        "coordinate_count": 479,
+        "key": "2glq_A",
+        "xyz_sha256": "938f539c85a957e29ff803db04fbc345c9286f85a785b5d944188775ac5f63f1"
+      },
+      {
+        "coordinate_count": 382,
+        "key": "2gsn_A",
+        "xyz_sha256": "abf52e62e8a551d6f95e65c395ef130aec743ba3b7682eb988d82be0217163e5"
+      },
+      {
+        "coordinate_count": 382,
+        "key": "2gso_A",
+        "xyz_sha256": "b635d52bec62f32b90c2ad14b89d671095709096a726024b38bab76f0358bac2"
+      },
+      {
+        "coordinate_count": 382,
+        "key": "2gsu_A",
+        "xyz_sha256": "3924ac09b0010273a40f2c8f6c17a1245b2fe838d8865702d0350a7217f36e87"
+      },
+      {
+        "coordinate_count": 159,
+        "key": "2ha8_A",
+        "xyz_sha256": "4aeae15994706fd6b0b6612e9e3a3367aa1fac75f0230494d13159778a39a4fa"
+      },
+      {
+        "coordinate_count": 259,
+        "key": "2hfy_A",
+        "xyz_sha256": "27db2348bc503b6d6bf6599c538ca20a0c168c69c51fc372c0c82f31a06824f4"
+      },
+      {
+        "coordinate_count": 206,
+        "key": "2hjn_A",
+        "xyz_sha256": "3e943c16810945a7e9909b93111626d58b011eab72df2f976d2b7bbb27c3ab21"
+      },
+      {
+        "coordinate_count": 251,
+        "key": "2i6d_A",
+        "xyz_sha256": "47e4d7d2fe0a0b108bcb0891589978959f56e6200d84fa4f157b8631be3baf23"
+      },
+      {
+        "coordinate_count": 508,
+        "key": "2ify_A",
+        "xyz_sha256": "7e7c07266cbd4c6241197369a4628cdee0b741c9cfc2122aa27b2f31c984230c"
+      },
+      {
+        "coordinate_count": 340,
+        "key": "2iuc_A",
+        "xyz_sha256": "5b8e8cb4a366147c97897964e60050db18073740d25ee61f489aa9f51f955b5a"
+      },
+      {
+        "coordinate_count": 342,
+        "key": "2iuc_B",
+        "xyz_sha256": "8c81fa018c20b1958b0b8fff63ed1cf729be1e3ef3038b6196c93d0b3ea4c60e"
+      },
+      {
+        "coordinate_count": 109,
+        "key": "2j6b_A",
+        "xyz_sha256": "780dfe45047c03b1cf99e9ff74622657e6256036a371438490863ca2ad5f1c99"
+      },
+      {
+        "coordinate_count": 109,
+        "key": "2j6c_A",
+        "xyz_sha256": "c65adfa5b49494dd54ff88ae29e91bf24b51812e78384350920df83d8364dbad"
+      },
+      {
+        "coordinate_count": 117,
+        "key": "2j85_A",
+        "xyz_sha256": "83a34069eb2b4eb9c46c37e9c597e2cf3adc95027262cf6f8d7fdb3ada92cbb2"
+      },
+      {
+        "coordinate_count": 463,
+        "key": "2jln_A",
+        "xyz_sha256": "d40f79fda5dac1148096aa41a828938022726e2fadbf162ee22ca6b70c5b08a4"
+      },
+      {
+        "coordinate_count": 461,
+        "key": "2jlo_A",
+        "xyz_sha256": "5b9b2d243a51a159c6bf2f817d0cfec0dfb7bd2272637133ae6a260a12ba1880"
+      },
+      {
+        "coordinate_count": 109,
+        "key": "2k0a_A",
+        "xyz_sha256": "c772214e377518a0adf655bacfff21d1432be65892c6a57547faa480c86b8b62"
+      },
+      {
+        "coordinate_count": 300,
+        "key": "2ki5_A",
+        "xyz_sha256": "b5fe9f78aa9337966029811acfb7951fcf67717b91e0206f407aef375c4ea3ad"
+      },
+      {
+        "coordinate_count": 231,
+        "key": "2len_A",
+        "xyz_sha256": "c3400e55f40db7a83fa310eaf91b1917c3788b133a91643ca85a28b204bcfbb6"
+      },
+      {
+        "coordinate_count": 240,
+        "key": "2m9p_A",
+        "xyz_sha256": "e0c2e0a0d6c275d6635529208503d8f7e33f967bae30e8858634d7a6f76b13c0"
+      },
+      {
+        "coordinate_count": 240,
+        "key": "2m9q_A",
+        "xyz_sha256": "9248bc702d32a783cd3f0556a85fb821845c5896195af0a1a15c29f6a6ada709"
+      },
+      {
+        "coordinate_count": 402,
+        "key": "2nwl_A",
+        "xyz_sha256": "5af896b1021ac2b5f0309c09d0001641f7646556486bf5d207fa7affd5c87dd8"
+      },
+      {
+        "coordinate_count": 407,
+        "key": "2nww_A",
+        "xyz_sha256": "7ed1456e8f82dbf9961bdb6ed7d0ee6d055e01f32a3817e81ad870e748a5b691"
+      }
+    ],
+    "downloaded_keys": 200,
+    "failures": [],
+    "requested_keys": 200
+  },
+  "development_label_counts": {
+    "K": 66,
+    "S": 134
+  },
+  "development_selection": "chain IDs in historical repository hybrid_manifest.csv; current API K/S labels",
+  "external": {
+    "coordinates": [
+      {
+        "coordinate_count": 259,
+        "key": "2hfx_A",
+        "xyz_sha256": "fbdcb54f208d90359e9e1aa757cec6061ba7f3bb9b81783f5d7df759a901860c"
+      },
+      {
+        "coordinate_count": 161,
+        "key": "2o3a_A",
+        "xyz_sha256": "22a8e564810444177c0091137a61912fd51ff57712dbc795dd886c62a74e2704"
+      },
+      {
+        "coordinate_count": 132,
+        "key": "2ofz_A",
+        "xyz_sha256": "9a4820a50af67eab91557f3983bee267f686a7a71e75b7d6d9ee6afce57e8d52"
+      },
+      {
+        "coordinate_count": 195,
+        "key": "2qmm_A",
+        "xyz_sha256": "7c3f2d3baabc150f1dc44dc71e2cce69578b366cc22e51c55b694001fc6304c0"
+      },
+      {
+        "coordinate_count": 188,
+        "key": "2qwv_A",
+        "xyz_sha256": "2678f5d81c77bcd00e982eefd51799bf6a8c881762e37734c82e803be78e60b6"
+      },
+      {
+        "coordinate_count": 465,
+        "key": "2qzu_A",
+        "xyz_sha256": "76a9af55e350b616524558ea420c3263d952126c0c2290949d2497159a046176"
+      },
+      {
+        "coordinate_count": 121,
+        "key": "2rh3_A",
+        "xyz_sha256": "09ee3621df411eb3005696195f24cdc5ef5bd7a778f4066255c8c3a32dd87250"
+      },
+      {
+        "coordinate_count": 217,
+        "key": "2v3j_A",
+        "xyz_sha256": "c60379a121322a0e65c05955c4d4c651d602f7d016a7ba2f438af90bef58c3a7"
+      },
+      {
+        "coordinate_count": 210,
+        "key": "2v64_A",
+        "xyz_sha256": "9449ca68f00ffb924482f7e2d6586a71cd183a9686fe27d80890b4e4184e6d7b"
+      },
+      {
+        "coordinate_count": 500,
+        "key": "2vea_A",
+        "xyz_sha256": "c82f1d22d2131c9698e1f123bbcd5ca953da786d6dfb82b90645554e72212ce9"
+      },
+      {
+        "coordinate_count": 511,
+        "key": "2vqr_A",
+        "xyz_sha256": "8faa7a8f59079ed16bd2bfef838ddb0efc23aa71fae1c41a35111ea17343aa0c"
+      },
+      {
+        "coordinate_count": 424,
+        "key": "2w5q_A",
+        "xyz_sha256": "cc5f9d3409b59b363781f06a8bb0df115bf084d06af7499dba94477de526b913"
+      },
+      {
+        "coordinate_count": 531,
+        "key": "2wit_A",
+        "xyz_sha256": "27a714115b39222c4340cf1ab98666413e08b6b01bf2efb378e5e1b9762e1f42"
+      },
+      {
+        "coordinate_count": 413,
+        "key": "2wxz_C",
+        "xyz_sha256": "5f643bdb37128b6a2d7e1310be164461b4a5b97ea5d14aa026dd239941144450"
+      },
+      {
+        "coordinate_count": 538,
+        "key": "2xq2_A",
+        "xyz_sha256": "26c7a6cadeff9d903d45af864239211a2094f7a4c678935de14f2fd89ed3161e"
+      },
+      {
+        "coordinate_count": 783,
+        "key": "2xr9_A",
+        "xyz_sha256": "e0eaaa88a80aa058471af77cb2ed6116910f680c3213c17fb8104213825acc66"
+      },
+      {
+        "coordinate_count": 242,
+        "key": "2xtj_A",
+        "xyz_sha256": "a586abd41ba45bd9a41191350992d68cc1ec79fd6eddc913a70265306eb2f818"
+      },
+      {
+        "coordinate_count": 385,
+        "key": "2yfk_A",
+        "xyz_sha256": "e794f505e60b41b09834c55620cd21f66957a5a576c2a88927a7f26276e1ac2a"
+      },
+      {
+        "coordinate_count": 330,
+        "key": "2zkt_A",
+        "xyz_sha256": "7e554914e371415ef78d90b8964b705baab7c9f8ac4764ab9c3757545ffd393c"
+      },
+      {
+        "coordinate_count": 204,
+        "key": "3a7s_A",
+        "xyz_sha256": "2742bb5a531be2f694c2b246aa362b612e84bbe44496c1849139dbeef4892940"
+      },
+      {
+        "coordinate_count": 310,
+        "key": "3b1b_A",
+        "xyz_sha256": "4f6e85b77ee61188f97c101b4b29a7201c47a89bd4103dabff0b0943261264e7"
+      },
+      {
+        "coordinate_count": 464,
+        "key": "3b5q_A",
+        "xyz_sha256": "7af58cefa91715f5229f4894ea93a8141ab61a5db339af2de12c8d6fcb2047bc"
+      },
+      {
+        "coordinate_count": 204,
+        "key": "3bbd_A",
+        "xyz_sha256": "25035a757ba15b06e8e65c050fcbfa41bc1324b5be654808c5c2e3cc3303fdaf"
+      },
+      {
+        "coordinate_count": 311,
+        "key": "3bjx_A",
+        "xyz_sha256": "f46b8806542464fc035e37fb1f5e71457f46324e0a37bea5d55d57ade5193f72"
+      },
+      {
+        "coordinate_count": 435,
+        "key": "3cm8_A",
+        "xyz_sha256": "c6bce84acbcd9e0e7f2ec4d842a9c503a7ecf3afa5e14737ff848bce595ad969"
+      },
+      {
+        "coordinate_count": 236,
+        "key": "3csy_I",
+        "xyz_sha256": "a40202a916120d01c402c094c2bb604745458727ae76cd5fa8d913e025e4fab8"
+      },
+      {
+        "coordinate_count": 236,
+        "key": "3cwo_X",
+        "xyz_sha256": "bd2d43bcb9b3170a2c2fb421328483d825ea3d442d21edda537b9734c2cf10b7"
+      },
+      {
+        "coordinate_count": 188,
+        "key": "3dcm_X",
+        "xyz_sha256": "757b2b196a19fff047d1d369ea724d327cc5ef2e3850097b7ddc372fb6832cd5"
+      },
+      {
+        "coordinate_count": 502,
+        "key": "3e2d_A",
+        "xyz_sha256": "ba42a601ffbc0483d6a407869d5e6031f57d21ce189f4820ca56261a51e2cbb4"
+      },
+      {
+        "coordinate_count": 284,
+        "key": "3ed7_A",
+        "xyz_sha256": "3c100b64b532c3433f17f9d554c95aef98adde3f4d3250c9b4f89e9b9b7d175f"
+      },
+      {
+        "coordinate_count": 519,
+        "key": "3en9_A",
+        "xyz_sha256": "1feea806485ffaffd5cadab5d4ca1d17ac5a92fca28e87cc985be4a2fc88dedb"
+      },
+      {
+        "coordinate_count": 495,
+        "key": "3fr7_A",
+        "xyz_sha256": "8a84ba942de1a06aa61e26a1fa146ff17ca0408efef4c39ab9e10015abb234d8"
+      },
+      {
+        "coordinate_count": 267,
+        "key": "3fsg_A",
+        "xyz_sha256": "88d0adabb54e22db1c2fd95f83c9176a2958641e60e1e8e9679c0d19dfc8d15b"
+      },
+      {
+        "coordinate_count": 435,
+        "key": "3gi8_C",
+        "xyz_sha256": "6191e4537cc934d020cb10f1af91697169f48978471b0a3e4fc8965ce44c706f"
+      },
+      {
+        "coordinate_count": 261,
+        "key": "3gyq_A",
+        "xyz_sha256": "ccab22bfc043048dc89d4abd3e632d6fb95d03f124cea3178adf9cd6d961f0ef"
+      },
+      {
+        "coordinate_count": 213,
+        "key": "3ic6_A",
+        "xyz_sha256": "578428589cdf611ece3f0712d20340eecfe4bd3c00490a54efb87095b218026a"
+      },
+      {
+        "coordinate_count": 282,
+        "key": "3ihr_A",
+        "xyz_sha256": "361c6d57ab99d75ec9c05afb85db999248e8642cd10934c85f6d2c1671fd2ba4"
+      },
+      {
+        "coordinate_count": 239,
+        "key": "3ilk_A",
+        "xyz_sha256": "cd49ab0cc77921b317ae40ff491fe0e225bc64a3492cd92e00736a8db98adb6d"
+      },
+      {
+        "coordinate_count": 257,
+        "key": "3iqk_A",
+        "xyz_sha256": "6582afb74f7dc3b87ff0b9987e0fdb185e22ad3b07c6c5b582386a73a5cc60ae"
+      },
+      {
+        "coordinate_count": 376,
+        "key": "3j7y_5",
+        "xyz_sha256": "65b654f626d6eb59d06c5a012b90b9ac61fac98087c39fdbe82c62e17b027d48"
+      },
+      {
+        "coordinate_count": 370,
+        "key": "3j7y_s",
+        "xyz_sha256": "80addeb6684e712d41d6a4b14b479c6e0ae358ccdb55c9f9968470ae3b669052"
+      },
+      {
+        "coordinate_count": 237,
+        "key": "3jyw_E",
+        "xyz_sha256": "17bdce9b084e16661563cdccdc09e2279f958dcf2ab8171f6e4473801b842787"
+      },
+      {
+        "coordinate_count": 167,
+        "key": "3kty_A",
+        "xyz_sha256": "003298742f4c7c6c163962a713f38c45511f277993ccae19f5ecb033a920e9a0"
+      },
+      {
+        "coordinate_count": 423,
+        "key": "3l1l_A",
+        "xyz_sha256": "ee42a7c9fcf45eb593cc4cf3f0e89039b1c4a150fb697f082e4ee45f21403178"
+      },
+      {
+        "coordinate_count": 154,
+        "key": "3l8u_A",
+        "xyz_sha256": "393bd5a141ca736b605c35c39df92895226b60fa5e92810c9edbbe88487ba199"
+      },
+      {
+        "coordinate_count": 409,
+        "key": "3lxq_A",
+        "xyz_sha256": "0da2898e9338f65adfe6461badcd3d4e923a13001e0ecf1280949345d9d5782b"
+      },
+      {
+        "coordinate_count": 401,
+        "key": "3m7v_A",
+        "xyz_sha256": "ab6cd5ae1e646308b0374f34c0b9b555496ac245db11b25706c09289b441618f"
+      },
+      {
+        "coordinate_count": 150,
+        "key": "3mfb_A",
+        "xyz_sha256": "1ffc4ae662d885ba7f35c1c8baa5f8a1ca485af6cee475f35cd267045c0f01a5"
+      },
+      {
+        "coordinate_count": 161,
+        "key": "3mlg_A",
+        "xyz_sha256": "784832b4d1287d695f41fc4b9e7205a973593144be2b7e7983dddd0b48f880e8"
+      },
+      {
+        "coordinate_count": 593,
+        "key": "3mt5_A",
+        "xyz_sha256": "c23b34c05731dcf70270d7e358fa8dbd4eae9d5a178d93f39bd7855fac31aad4"
+      },
+      {
+        "coordinate_count": 194,
+        "key": "3o0p_A",
+        "xyz_sha256": "0331f38afcb53a55edc612abc4f2e3e6c48f4cb8e10998cded1ee6e1cab4d35c"
+      },
+      {
+        "coordinate_count": 216,
+        "key": "3o7b_A",
+        "xyz_sha256": "3b827052fbb46e91ac705d6b5c4e2822e1690ffbebc5189206b529cce743b82d"
+      },
+      {
+        "coordinate_count": 290,
+        "key": "3pzl_A",
+        "xyz_sha256": "cc12d9289153ea1df8dee93ea6f8bddf17dd8fa627d99433ac0d00ccea2811ea"
+      },
+      {
+        "coordinate_count": 526,
+        "key": "3q3q_A",
+        "xyz_sha256": "a393a93e698f43e45633fdc25b69673ccc662696c9072ca02b2d5cc6d6e4352c"
+      },
+      {
+        "coordinate_count": 407,
+        "key": "3qe7_A",
+        "xyz_sha256": "1cb2f36102ef4eb7582520f55eecb071e715d3cc9f6406b38e720b27bbd96f36"
+      },
+      {
+        "coordinate_count": 442,
+        "key": "3qtd_A",
+        "xyz_sha256": "b6dc87fd08eb24a7cc8043defda8aa5497c789fed9591b36863025f68e66f4a4"
+      },
+      {
+        "coordinate_count": 356,
+        "key": "3rfy_A",
+        "xyz_sha256": "2bd507c7d261d65390828640e2a6b48aaee17762c908cb63119ddc0ac9f78b0a"
+      },
+      {
+        "coordinate_count": 249,
+        "key": "3s88_I",
+        "xyz_sha256": "587b9dd632403dee3a8303a1345f8b7688aa0a8bd78f9c40736c03d43e227e63"
+      },
+      {
+        "coordinate_count": 265,
+        "key": "3sig_A",
+        "xyz_sha256": "fee256aac5c937eb479c4c6a32effe453e8e5323fa48e4498dcbdb26d5052620"
+      },
+      {
+        "coordinate_count": 297,
+        "key": "3v5u_A",
+        "xyz_sha256": "ec8ff77fda6ac51903c17449dba2f0c2517d8689186536ba955e4db53ea5aabf"
+      },
+      {
+        "coordinate_count": 156,
+        "key": "3x2d_A",
+        "xyz_sha256": "8495ad5f972372c98c0a3d523bba75aacfd668ba6d04e2c5f8602ade0ec91cc2"
+      },
+      {
+        "coordinate_count": 348,
+        "key": "4bin_A",
+        "xyz_sha256": "3613e5eaafbf8cfe817f763ce3910c62b10418d18e043121e45b89d78108498a"
+      },
+      {
+        "coordinate_count": 286,
+        "key": "4bxw_A",
+        "xyz_sha256": "702ecf7b779237279662b785bed7460136667d6c641f2f4cc064f4e5a052def7"
+      },
+      {
+        "coordinate_count": 207,
+        "key": "4cbp_A",
+        "xyz_sha256": "3c04cd7eb037ad8da619083f2eb8f60d4a5529958e9443c2f0bd8217d97b7810"
+      },
+      {
+        "coordinate_count": 124,
+        "key": "4chj_A",
+        "xyz_sha256": "6036a3cb456771b96ac1882400690ebbd548f2b625b022ab14b757c1b311e7e7"
+      },
+      {
+        "coordinate_count": 156,
+        "key": "4cng_A",
+        "xyz_sha256": "3c78f976fcb2438ca7d3fa280ad16613774a929ca7fd4f8411addecd015a83f8"
+      },
+      {
+        "coordinate_count": 451,
+        "key": "4djk_A",
+        "xyz_sha256": "bb7b6280036db13ee6ceb2d3ef14bed065dcffd75e222282d14419b24031052e"
+      },
+      {
+        "coordinate_count": 313,
+        "key": "4dz4_A",
+        "xyz_sha256": "c569bf237b444da69c40a0f732e5c4142d60cc44f330764d98ad569a78bb2137"
+      },
+      {
+        "coordinate_count": 178,
+        "key": "4fmw_A",
+        "xyz_sha256": "7d1cfabf478267e0753211ff64e64ed866c7e045dc6ad24907dbf4557da3c131"
+      },
+      {
+        "coordinate_count": 257,
+        "key": "4gge_A",
+        "xyz_sha256": "f4c130349b1cf0ed134e7bf8fd7a278bb9c8045695318c497660325bc1402a16"
+      },
+      {
+        "coordinate_count": 628,
+        "key": "4gw9_A",
+        "xyz_sha256": "291c11e0b520b1fce665007d2caca9b170064924d453c73e3fdb7a1625dd0414"
+      },
+      {
+        "coordinate_count": 272,
+        "key": "4h6v_A",
+        "xyz_sha256": "cc3bb9011a08292c52dc19a31461ad69c814b1a85f7d7190469b1f965c02c532"
+      },
+      {
+        "coordinate_count": 231,
+        "key": "4ig7_A",
+        "xyz_sha256": "e1692d1d7155eefa0d18320066c4c257d0e030664770dc6ccf2bf9403a285cfd"
+      },
+      {
+        "coordinate_count": 232,
+        "key": "4j3c_A",
+        "xyz_sha256": "094bbed19af491da8449f53cd96fc5598dec34b4ce870e5001cdd505ca440935"
+      },
+      {
+        "coordinate_count": 446,
+        "key": "4j7h_A",
+        "xyz_sha256": "44d021c4a1a2b04e461839f5871274c08a7429de0d0dd8c2ef04ccd5e3d65d9f"
+      },
+      {
+        "coordinate_count": 185,
+        "key": "4jwh_A",
+        "xyz_sha256": "283c75d730a9345ff4001a5936aba789aa5885faf6dc0583a9f86a1a1eda9374"
+      },
+      {
+        "coordinate_count": 374,
+        "key": "4k1c_A",
+        "xyz_sha256": "b79216345971c200ad8f8c14386d7ee5f943223f85874df50d47be2e7e719ed3"
+      },
+      {
+        "coordinate_count": 334,
+        "key": "4kav_A",
+        "xyz_sha256": "962a7820b7c98a84922dd5d9f3d7583b7a5957f760da5284fe52b37b035b22c2"
+      },
+      {
+        "coordinate_count": 325,
+        "key": "4kjr_A",
+        "xyz_sha256": "e966145ec953cdf66dde36e23c5d4b1e38c42c415a70943489639b2d0f4ced9e"
+      },
+      {
+        "coordinate_count": 395,
+        "key": "4kpp_A",
+        "xyz_sha256": "54ffed01314f56b89522b640876e05ca51e6a1c408b7513e2de5d7a2b8ff2e42"
+      },
+      {
+        "coordinate_count": 276,
+        "key": "4ky9_A",
+        "xyz_sha256": "4f4c7eb84b7618c40646b8e75be8e15f4db0068f7de77278a7144b7c2a60e9cf"
+      },
+      {
+        "coordinate_count": 244,
+        "key": "4l69_A",
+        "xyz_sha256": "0de0b8026c0b2a7466fdbe5f4f8ecb805d1081e748c2af63992cda10f4bbcbef"
+      },
+      {
+        "coordinate_count": 404,
+        "key": "4l7i_A",
+        "xyz_sha256": "94442a9f0c7022299af33fc3b8ddc6e5e663b18d56ffb858fac2a69a0d1ece4c"
+      },
+      {
+        "coordinate_count": 107,
+        "key": "4lrv_A",
+        "xyz_sha256": "850c9678ff7fbe6cfd269475f42e65ee19979ce4fc635fc1ce49a3531f59856e"
+      },
+      {
+        "coordinate_count": 484,
+        "key": "4miv_A",
+        "xyz_sha256": "0a2d0b61372a9f685d16a3a1276dd9eb41881781cbbad2c0a69d92264a0fe7ec"
+      },
+      {
+        "coordinate_count": 319,
+        "key": "4o6b_A",
+        "xyz_sha256": "9eb7dcd00a3113282d1f70265546d4ebd58c9e7f1318513719e3989ead411e5e"
+      },
+      {
+        "coordinate_count": 411,
+        "key": "4oyg_A",
+        "xyz_sha256": "caeceddca6a4e7ce30575a51c7a347b22cd41b68525fb9e25f6df9c552150367"
+      },
+      {
+        "coordinate_count": 411,
+        "key": "4oyg_B",
+        "xyz_sha256": "20834a444130ea313cfa3f579a437a0c58a091d9d1221e9b3fdf54cfcd73d547"
+      },
+      {
+        "coordinate_count": 411,
+        "key": "4oyg_C",
+        "xyz_sha256": "dc7b7b0940b5eb98ac3c0e5965d6593dfa3ffba562183c892841609ddcfafc86"
+      },
+      {
+        "coordinate_count": 411,
+        "key": "4oyg_D",
+        "xyz_sha256": "fb80651b06ae8a735d36b63a0a8cb45fe88ecb04f5990f6608960250f34a36f0"
+      },
+      {
+        "coordinate_count": 411,
+        "key": "4oyg_E",
+        "xyz_sha256": "c110bdb68f0dfb5469f7eb3a2ff284bf467014e77cdc7a19c5bffc9183eda12b"
+      },
+      {
+        "coordinate_count": 411,
+        "key": "4oyg_F",
+        "xyz_sha256": "e805da4728e66c911d80f36b3a0ee6de1ac323e4414a00a8aab9ae624316c894"
+      },
+      {
+        "coordinate_count": 301,
+        "key": "4qrv_A",
+        "xyz_sha256": "0e55d06456a82937bc02cd30c5afc51640083fb961f0f356093e958809932ddf"
+      },
+      {
+        "coordinate_count": 236,
+        "key": "4tzo_A",
+        "xyz_sha256": "6eeba8b7cb2007bab00940f4649e1851bec41e1892dcc79316e91c32d65c62c5"
+      },
+      {
+        "coordinate_count": 237,
+        "key": "4v7h_BE",
+        "xyz_sha256": "17bdce9b084e16661563cdccdc09e2279f958dcf2ab8171f6e4473801b842787"
+      },
+      {
+        "coordinate_count": 395,
+        "key": "4wgv_A",
+        "xyz_sha256": "474330f601549eb540a7ccd6942264125899ab6b2fd0b8af220385447ac61642"
+      },
+      {
+        "coordinate_count": 488,
+        "key": "4wkk_A",
+        "xyz_sha256": "7157fb34b3ead56392a5fbabcf53888cae54b4bfaa43ab024f442158b0f479dd"
+      },
+      {
+        "coordinate_count": 475,
+        "key": "4yzf_A",
+        "xyz_sha256": "8d31332b8dd6619025dd5f6d9215b3810948668906a867a59ecd7debfa3d1dfa"
+      },
+      {
+        "coordinate_count": 1597,
+        "key": "5a42_A",
+        "xyz_sha256": "17ecf2a1857af36f95d1f9bffcb83957757100d9102d5b634ffd54fb2c3452d4"
+      },
+      {
+        "coordinate_count": 270,
+        "key": "5a7y_A",
+        "xyz_sha256": "3a375d3ab912501e75a24d9223a7c6e9eaf982d5a4fc14b006742a95969b481c"
+      },
+      {
+        "coordinate_count": 250,
+        "key": "5a7z_A",
+        "xyz_sha256": "4743273db725fe3d7abde98ede60c57691aaeac7852f939154034a540c61958f"
+      },
+      {
+        "coordinate_count": 151,
+        "key": "5ap8_A",
+        "xyz_sha256": "144ce2f914864f6d416c6b35cfe803cc9617ee83338a7c1007c956bfa4362c4d"
+      },
+      {
+        "coordinate_count": 184,
+        "key": "5apg_A",
+        "xyz_sha256": "6b5a9bc6b83784e172d541d5f868f709cd04b7d4f40822fab59de7f46ba027b5"
+      },
+      {
+        "coordinate_count": 264,
+        "key": "5bu6_B",
+        "xyz_sha256": "94270408284f809a5e5f0c4e2d2f56dcac0a8e7fdb333c288cd5833fcf84cf9f"
+      },
+      {
+        "coordinate_count": 185,
+        "key": "5c50_B",
+        "xyz_sha256": "465bd415b11804f187e39cf6964655af2a7e190ff94594d2206d59347e66be9f"
+      },
+      {
+        "coordinate_count": 203,
+        "key": "5c77_A",
+        "xyz_sha256": "425b38c35befacc2edc8449cd36cdb6759baf51ca3b3542d20f52eca238409bf"
+      },
+      {
+        "coordinate_count": 361,
+        "key": "5ce1_A",
+        "xyz_sha256": "e3a1f497ebb50f376e817fb81cf4ae04dcc5471371dba98c948a1dc27c43cd58"
+      },
+      {
+        "coordinate_count": 257,
+        "key": "5cjl_A",
+        "xyz_sha256": "5709ad5f44aa46d072d17ebe4c912d9d72514c7ed92782b974c33a2e29108cd5"
+      },
+      {
+        "coordinate_count": 467,
+        "key": "5da0_A",
+        "xyz_sha256": "1bbc417a6273decaf9615ab416724d3f82eb32207c548c33183d60954f3606a1"
+      },
+      {
+        "coordinate_count": 490,
+        "key": "5ew5_A",
+        "xyz_sha256": "b5e2f0d008fb6f45db08e2ba7d7611c5efd3ef06b28fdc50edf5067eb4239b1c"
+      },
+      {
+        "coordinate_count": 158,
+        "key": "5f1b_A",
+        "xyz_sha256": "58b9c41094290b55e35f06759acee0fbb3b012d3dc888ab9067e644d4dbb51e7"
+      },
+      {
+        "coordinate_count": 506,
+        "key": "5fql_A",
+        "xyz_sha256": "2acb66ddbcbe6c0400807cf1baef5ede75a93a70665f40aae60cfa12b6ad29c7"
+      },
+      {
+        "coordinate_count": 494,
+        "key": "5g2v_A",
+        "xyz_sha256": "38ba45f00ea8f7ddaba716ec26f8478be7770031d678b29f4a0a393f8e421d74"
+      },
+      {
+        "coordinate_count": 775,
+        "key": "5gsl_A",
+        "xyz_sha256": "2e424b64abe4228e474465e7b0cd263ae3fc4fdca8b125719106f457d088a674"
+      },
+      {
+        "coordinate_count": 159,
+        "key": "5hj3_C",
+        "xyz_sha256": "da1e479c79958634eb25fc096753b5491669ee210421aeb384e4be1e7cc4b965"
+      },
+      {
+        "coordinate_count": 232,
+        "key": "5kem_A",
+        "xyz_sha256": "6092746637b428f85dc37229146427bfebcf9eff1d7b4e3c23c4a92a0c12507c"
+      },
+      {
+        "coordinate_count": 494,
+        "key": "5m87_A",
+        "xyz_sha256": "83556466c4130573a8df51c02be92c21c268b07a81475604fd83c36503bc6688"
+      },
+      {
+        "coordinate_count": 480,
+        "key": "5nj9_A",
+        "xyz_sha256": "02866ad96f69b8d0522aec6f6ead63c1cdb492e4b368a8d3acbb9f09be779189"
+      },
+      {
+        "coordinate_count": 323,
+        "key": "5xnu_A",
+        "xyz_sha256": "9df3058ea85307310c3bfd40c81b75b08f7a621a64c662afdf9fe78c145872c2"
+      },
+      {
+        "coordinate_count": 358,
+        "key": "5znm_A",
+        "xyz_sha256": "eae17dbf44d0a5999bf0b92450daeb85ba5a078957cddcc3e2d93f2f22dd665e"
+      },
+      {
+        "coordinate_count": 85,
+        "key": "5zya_D",
+        "xyz_sha256": "877bbaf107b9a6076d2467d7b77e8ba4cbac32092f6adc955c09e58d6a2249e0"
+      },
+      {
+        "coordinate_count": 1154,
+        "key": "6ac6_A",
+        "xyz_sha256": "d7be7e72909e3d66a7aa18a33a2cc27100294cdd95c03edacd0cde6147ee867b"
+      },
+      {
+        "coordinate_count": 1065,
+        "key": "6acg_A",
+        "xyz_sha256": "196fa0e19558a949cd7170290fd685f054ac173470342b2903d6df964f299a1b"
+      },
+      {
+        "coordinate_count": 641,
+        "key": "6d05_A",
+        "xyz_sha256": "4d4de11f818baa3dd2e2cbd3b0db8cdf451e04e7276eac5f8d1efa62b909cb05"
+      },
+      {
+        "coordinate_count": 537,
+        "key": "6dzy_A",
+        "xyz_sha256": "71c6990d37b811713bd2e873ce5254112339bbc7c02413695adb5225e5abcff8"
+      },
+      {
+        "coordinate_count": 170,
+        "key": "6emv_A",
+        "xyz_sha256": "91692c779e45940739b1c8290f1a6067b003e498ccbc81cd389635095fde66fc"
+      },
+      {
+        "coordinate_count": 433,
+        "key": "6f2w_A",
+        "xyz_sha256": "bbd3897791e0b09f91fb6e169b0e89e6a07c3347832a8a3cca799b917b655251"
+      },
+      {
+        "coordinate_count": 1275,
+        "key": "6fij_A",
+        "xyz_sha256": "a054086cb03eee151e450a128724c748491ea1ca5f78fb978ea3cf90500a2b48"
+      },
+      {
+        "coordinate_count": 515,
+        "key": "6fny_A",
+        "xyz_sha256": "0c79bc67e147ce0bdb6ac7e42a54a5946b2d7ff9c7d63163b2b58bc4c8443706"
+      },
+      {
+        "coordinate_count": 406,
+        "key": "6hc7_A",
+        "xyz_sha256": "f0f63d5853eb7ae2645ca6dc6fe628a29e0ea4b5756d4626a5fa7a7ee992b49d"
+      },
+      {
+        "coordinate_count": 459,
+        "key": "6hhm_A",
+        "xyz_sha256": "cdbc2fc6c81e76382c0a0195f6185d903f74002588da3265e0afd3784599d4fd"
+      },
+      {
+        "coordinate_count": 319,
+        "key": "6hix_BG",
+        "xyz_sha256": "16bd52cdfd2cbea2518f7713bb786bbbc540ec1db14a1f185a2173326bc77ea4"
+      },
+      {
+        "coordinate_count": 461,
+        "key": "6i7s_A",
+        "xyz_sha256": "cee3e4c64a4289356ab466879e9e9397ec1f680087434294664602b7e295e2a9"
+      },
+      {
+        "coordinate_count": 474,
+        "key": "6j66_A",
+        "xyz_sha256": "98eac5a32ff45174376223be50d24546591d17f24d3aead91920b5c1a97c9565"
+      },
+      {
+        "coordinate_count": 385,
+        "key": "6ki1_A",
+        "xyz_sha256": "00746dd72e2e81e2fe30f7c1f3e0714de8fe12034c657626cf9a53d0b18b5883"
+      },
+      {
+        "coordinate_count": 537,
+        "key": "6kku_A",
+        "xyz_sha256": "4dfed2218617c14a3f46a88b3bf6d2dd6d3cb1fc8eae6cfd9227db8a681a10d4"
+      },
+      {
+        "coordinate_count": 257,
+        "key": "6mlk_A",
+        "xyz_sha256": "b8e67f2fb3998f11d16bea5a9f97cb2b7a835e0dcff988efaea936323fc486be"
+      },
+      {
+        "coordinate_count": 678,
+        "key": "6nd4_N",
+        "xyz_sha256": "62b222557e4a664e8a8cd2677aa7eb5b97fd7cd63471dbcc1aad27793f84f89c"
+      },
+      {
+        "coordinate_count": 472,
+        "key": "6npk_A",
+        "xyz_sha256": "24e04b5ef611a609dcbc2298d7f6cf9b8fb7f26f36e18804e47ff4217b1350ea"
+      },
+      {
+        "coordinate_count": 861,
+        "key": "6npl_A",
+        "xyz_sha256": "7eab78f1e36d10ffb89ed3c6e4a36af4e663e786364ed69c1b275630bcf873ec"
+      },
+      {
+        "coordinate_count": 506,
+        "key": "6o7a_A",
+        "xyz_sha256": "10443e0056de2275072861d0a711fd8638100364b9cb90a0b1f431595b86ef0e"
+      },
+      {
+        "coordinate_count": 260,
+        "key": "6qn0_A",
+        "xyz_sha256": "fccbd1f4a15dbbce87a1d0198d0f8851054c9d4a45f0da4bb2af0895d86e7a81"
+      },
+      {
+        "coordinate_count": 277,
+        "key": "6qqm_A",
+        "xyz_sha256": "500530f8d06e136ba20f627d38950b943338f35c9c13447ac61bf8b8bcc5e404"
+      },
+      {
+        "coordinate_count": 212,
+        "key": "6qqw_A",
+        "xyz_sha256": "5cae066ff818ec645bd5b94c9440ee755815ef07980d7bb298b66f01d7a043fc"
+      },
+      {
+        "coordinate_count": 212,
+        "key": "6qqz_A",
+        "xyz_sha256": "ddbc59707c1a1fba453c7d521f47bb48ccff64aebf9976aa160ab014d32ddf37"
+      },
+      {
+        "coordinate_count": 100,
+        "key": "6qx9_BP",
+        "xyz_sha256": "46d2924ba31baa57917e916b1f6c34e1fb4aad4656a4f67c9430a023d0a404aa"
+      },
+      {
+        "coordinate_count": 430,
+        "key": "6rvx_A",
+        "xyz_sha256": "c0fbbdb4dc209db39cfc2112272f6bd3b597d91f917729dbbfb71bdd28cb4798"
+      },
+      {
+        "coordinate_count": 113,
+        "key": "6scf_A",
+        "xyz_sha256": "6d660ebe5e1da42839d26c751b38aed999558216bbb03020414d5f86c12ae48c"
+      },
+      {
+        "coordinate_count": 642,
+        "key": "6sj9_A",
+        "xyz_sha256": "1547b15e9aa0dd230b9337ee53290aeb81764769c74b32b3701b553e6ad7d295"
+      },
+      {
+        "coordinate_count": 219,
+        "key": "6uev_A",
+        "xyz_sha256": "547507b24ebe3c6745901a2af5ff4b49b157f826e8fc263989f8c9247b9a9ca8"
+      },
+      {
+        "coordinate_count": 258,
+        "key": "6zr9_A",
+        "xyz_sha256": "80c37efe61d95d16c88b080cf9bcb50a4d4e841ec8d0156f84aea5b49488e844"
+      },
+      {
+        "coordinate_count": 350,
+        "key": "7cww_A",
+        "xyz_sha256": "2a3eb0eb8758ae1c5d4b0e6ffd9368c9861520c40c232ac5aa1d7bc515bb3373"
+      },
+      {
+        "coordinate_count": 393,
+        "key": "7qi6_5",
+        "xyz_sha256": "fe0e39e0fc438e795109e1c2cf7cc18347f0c6384546432463e9d8012a5a7ea6"
+      },
+      {
+        "coordinate_count": 379,
+        "key": "8axz_A",
+        "xyz_sha256": "b8db8919fcaa8793b1960393615e27c2bd7b5a36770d5da3acf634beba925ece"
+      }
+    ],
+    "downloaded_keys": 154,
+    "failures": [
+      {
+        "error": "Could not retrieve https://knotprot.cent.uw.edu.pl/chains/7nh8/AAA/chain.xyz.txt: HTTP Error 500: INTERNAL SERVER ERROR",
+        "key": "7nh8_AAA"
+      },
+      {
+        "error": "Could not retrieve https://knotprot.cent.uw.edu.pl/chains/7plf/AAA/chain.xyz.txt: HTTP Error 500: INTERNAL SERVER ERROR",
+        "key": "7plf_AAA"
+      },
+      {
+        "error": "Could not retrieve https://knotprot.cent.uw.edu.pl/chains/7pri/AAA/chain.xyz.txt: HTTP Error 500: INTERNAL SERVER ERROR",
+        "key": "7pri_AAA"
+      }
+    ],
+    "requested_keys": 157
+  },
+  "external_label_counts": {
+    "K": 71,
+    "S": 83
+  },
+  "external_selection": "published Y records from non-redundant API endpoint, excluding development PDB-chain IDs",
+  "historical_manifest_path": "data/knotprot/hybrid_manifest.csv",
+  "historical_manifest_sha256": "1c0bf45f99e63d2a9ff1a4c23298b62aef9845fb1325a6564df55f943535fcd3",
+  "notes": [
+    "Historical chain IDs are highly redundant; this protocol's external cohort is restricted to the API's published non-redundant list.",
+    "The source is one KnotProt release; this is external-chain validation, not an independent database replication.",
+    "Labels are K/S (knot versus slipknot), not the historical four-class chirality/type labels.",
+    "KnotProt supplies coordinates after its own structure processing; this differs from raw RCSB PDB parsing."
+  ],
+  "pdb_accession_overlap": [],
+  "retrieved_at_utc": "2026-10-12T11:41:47.276850+00:00",
+  "source_api": "https://knotprot.cent.uw.edu.pl",
+  "source_files": {
+    "all_chains": {
+      "path": "source_all_chains_knotted_N_C.txt",
+      "sha256": "4e766112cc8075266f0479ab28b444ec367282e4fc532e34150da2028a507389"
+    },
+    "nonredundant": {
+      "path": "source_nr_chains_knotted_N_C.txt",
+      "sha256": "282054a44eefdd2764de436e41fc76d31a6ca89ad43289e65117b4f3befd80ea"
+    }
+  },
+  "target": "KnotProt full-chain annotation class: K=knot, S=slipknot"
+}

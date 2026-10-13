@@ -1,0 +1,1428 @@
+{
+  "chain_sampling": {
+    "1aja_A": {
+      "max_points": 300,
+      "original_ca_count": 435,
+      "processed_point_count": 145,
+      "stride": 3
+    },
+    "1ajb_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1ajc_A": {
+      "max_points": 300,
+      "original_ca_count": 446,
+      "processed_point_count": 149,
+      "stride": 3
+    },
+    "1ajd_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1ali_A": {
+      "max_points": 300,
+      "original_ca_count": 446,
+      "processed_point_count": 149,
+      "stride": 3
+    },
+    "1alj_A": {
+      "max_points": 300,
+      "original_ca_count": 446,
+      "processed_point_count": 149,
+      "stride": 3
+    },
+    "1alk_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1ani_A": {
+      "max_points": 300,
+      "original_ca_count": 446,
+      "processed_point_count": 149,
+      "stride": 3
+    },
+    "1anj_A": {
+      "max_points": 300,
+      "original_ca_count": 446,
+      "processed_point_count": 149,
+      "stride": 3
+    },
+    "1auk_A": {
+      "max_points": 300,
+      "original_ca_count": 481,
+      "processed_point_count": 161,
+      "stride": 3
+    },
+    "1b8j_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1by7_A": {
+      "max_points": 300,
+      "original_ca_count": 354,
+      "processed_point_count": 118,
+      "stride": 3
+    },
+    "1cmx_A": {
+      "max_points": 300,
+      "original_ca_count": 214,
+      "processed_point_count": 72,
+      "stride": 3
+    },
+    "1cng_A": {
+      "max_points": 300,
+      "original_ca_count": 257,
+      "processed_point_count": 86,
+      "stride": 3
+    },
+    "1cnh_A": {
+      "max_points": 300,
+      "original_ca_count": 257,
+      "processed_point_count": 86,
+      "stride": 3
+    },
+    "1cvf_A": {
+      "max_points": 300,
+      "original_ca_count": 255,
+      "processed_point_count": 85,
+      "stride": 3
+    },
+    "1e1z_P": {
+      "max_points": 300,
+      "original_ca_count": 481,
+      "processed_point_count": 161,
+      "stride": 3
+    },
+    "1e2h_A": {
+      "max_points": 300,
+      "original_ca_count": 306,
+      "processed_point_count": 102,
+      "stride": 3
+    },
+    "1e2i_A": {
+      "max_points": 300,
+      "original_ca_count": 300,
+      "processed_point_count": 100,
+      "stride": 3
+    },
+    "1e2j_A": {
+      "max_points": 300,
+      "original_ca_count": 306,
+      "processed_point_count": 102,
+      "stride": 3
+    },
+    "1e2k_A": {
+      "max_points": 300,
+      "original_ca_count": 308,
+      "processed_point_count": 103,
+      "stride": 3
+    },
+    "1e2l_A": {
+      "max_points": 300,
+      "original_ca_count": 304,
+      "processed_point_count": 102,
+      "stride": 3
+    },
+    "1e2m_A": {
+      "max_points": 300,
+      "original_ca_count": 305,
+      "processed_point_count": 102,
+      "stride": 3
+    },
+    "1e2n_A": {
+      "max_points": 300,
+      "original_ca_count": 310,
+      "processed_point_count": 104,
+      "stride": 3
+    },
+    "1e2p_A": {
+      "max_points": 300,
+      "original_ca_count": 305,
+      "processed_point_count": 102,
+      "stride": 3
+    },
+    "1e2s_P": {
+      "max_points": 300,
+      "original_ca_count": 481,
+      "processed_point_count": 161,
+      "stride": 3
+    },
+    "1e33_P": {
+      "max_points": 300,
+      "original_ca_count": 481,
+      "processed_point_count": 161,
+      "stride": 3
+    },
+    "1e3c_P": {
+      "max_points": 300,
+      "original_ca_count": 481,
+      "processed_point_count": 161,
+      "stride": 3
+    },
+    "1ed8_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1ed9_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1ei6_A": {
+      "max_points": 300,
+      "original_ca_count": 404,
+      "processed_point_count": 135,
+      "stride": 3
+    },
+    "1ejj_A": {
+      "max_points": 300,
+      "original_ca_count": 508,
+      "processed_point_count": 170,
+      "stride": 3
+    },
+    "1elx_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1ely_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1elz_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1eqj_A": {
+      "max_points": 300,
+      "original_ca_count": 508,
+      "processed_point_count": 170,
+      "stride": 3
+    },
+    "1ew2_A": {
+      "max_points": 300,
+      "original_ca_count": 479,
+      "processed_point_count": 160,
+      "stride": 3
+    },
+    "1ew8_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1ew9_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1f48_A": {
+      "max_points": 300,
+      "original_ca_count": 548,
+      "processed_point_count": 183,
+      "stride": 3
+    },
+    "1fqn_A": {
+      "max_points": 300,
+      "original_ca_count": 257,
+      "processed_point_count": 86,
+      "stride": 3
+    },
+    "1fsn_A": {
+      "max_points": 300,
+      "original_ca_count": 257,
+      "processed_point_count": 86,
+      "stride": 3
+    },
+    "1fsu_A": {
+      "max_points": 300,
+      "original_ca_count": 474,
+      "processed_point_count": 158,
+      "stride": 3
+    },
+    "1fug_A": {
+      "max_points": 300,
+      "original_ca_count": 383,
+      "processed_point_count": 128,
+      "stride": 3
+    },
+    "1gq6_A": {
+      "max_points": 300,
+      "original_ca_count": 295,
+      "processed_point_count": 99,
+      "stride": 3
+    },
+    "1gq7_A": {
+      "max_points": 300,
+      "original_ca_count": 301,
+      "processed_point_count": 101,
+      "stride": 3
+    },
+    "1gv4_A": {
+      "max_points": 300,
+      "original_ca_count": 490,
+      "processed_point_count": 164,
+      "stride": 3
+    },
+    "1gz0_A": {
+      "max_points": 300,
+      "original_ca_count": 242,
+      "processed_point_count": 81,
+      "stride": 3
+    },
+    "1hdh_A": {
+      "max_points": 300,
+      "original_ca_count": 525,
+      "processed_point_count": 175,
+      "stride": 3
+    },
+    "1hjk_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1hqa_A": {
+      "max_points": 300,
+      "original_ca_count": 446,
+      "processed_point_count": 149,
+      "stride": 3
+    },
+    "1hva_A": {
+      "max_points": 300,
+      "original_ca_count": 255,
+      "processed_point_count": 85,
+      "stride": 3
+    },
+    "1hyn_P": {
+      "max_points": 300,
+      "original_ca_count": 293,
+      "processed_point_count": 98,
+      "stride": 3
+    },
+    "1ipa_A": {
+      "max_points": 300,
+      "original_ca_count": 258,
+      "processed_point_count": 86,
+      "stride": 3
+    },
+    "1j85_A": {
+      "max_points": 300,
+      "original_ca_count": 156,
+      "processed_point_count": 52,
+      "stride": 3
+    },
+    "1jch_A": {
+      "max_points": 300,
+      "original_ca_count": 468,
+      "processed_point_count": 156,
+      "stride": 3
+    },
+    "1js1_X": {
+      "max_points": 300,
+      "original_ca_count": 324,
+      "processed_point_count": 108,
+      "stride": 3
+    },
+    "1k3r_A": {
+      "max_points": 300,
+      "original_ca_count": 262,
+      "processed_point_count": 88,
+      "stride": 3
+    },
+    "1k7h_A": {
+      "max_points": 300,
+      "original_ca_count": 476,
+      "processed_point_count": 159,
+      "stride": 3
+    },
+    "1kh4_A": {
+      "max_points": 300,
+      "original_ca_count": 444,
+      "processed_point_count": 148,
+      "stride": 3
+    },
+    "1kh5_A": {
+      "max_points": 300,
+      "original_ca_count": 444,
+      "processed_point_count": 148,
+      "stride": 3
+    },
+    "1kh7_A": {
+      "max_points": 300,
+      "original_ca_count": 444,
+      "processed_point_count": 148,
+      "stride": 3
+    },
+    "1kh9_A": {
+      "max_points": 300,
+      "original_ca_count": 444,
+      "processed_point_count": 148,
+      "stride": 3
+    },
+    "1khj_A": {
+      "max_points": 300,
+      "original_ca_count": 444,
+      "processed_point_count": 148,
+      "stride": 3
+    },
+    "1khk_A": {
+      "max_points": 300,
+      "original_ca_count": 444,
+      "processed_point_count": 148,
+      "stride": 3
+    },
+    "1khl_A": {
+      "max_points": 300,
+      "original_ca_count": 444,
+      "processed_point_count": 148,
+      "stride": 3
+    },
+    "1khn_A": {
+      "max_points": 300,
+      "original_ca_count": 444,
+      "processed_point_count": 148,
+      "stride": 3
+    },
+    "1ki2_A": {
+      "max_points": 300,
+      "original_ca_count": 306,
+      "processed_point_count": 102,
+      "stride": 3
+    },
+    "1ki3_A": {
+      "max_points": 300,
+      "original_ca_count": 306,
+      "processed_point_count": 102,
+      "stride": 3
+    },
+    "1ki4_A": {
+      "max_points": 300,
+      "original_ca_count": 300,
+      "processed_point_count": 100,
+      "stride": 3
+    },
+    "1ki6_A": {
+      "max_points": 300,
+      "original_ca_count": 300,
+      "processed_point_count": 100,
+      "stride": 3
+    },
+    "1ki6_B": {
+      "max_points": 300,
+      "original_ca_count": 304,
+      "processed_point_count": 102,
+      "stride": 3
+    },
+    "1ki7_A": {
+      "max_points": 300,
+      "original_ca_count": 302,
+      "processed_point_count": 101,
+      "stride": 3
+    },
+    "1ki8_A": {
+      "max_points": 300,
+      "original_ca_count": 304,
+      "processed_point_count": 102,
+      "stride": 3
+    },
+    "1kim_A": {
+      "max_points": 300,
+      "original_ca_count": 300,
+      "processed_point_count": 100,
+      "stride": 3
+    },
+    "1lm4_A": {
+      "max_points": 300,
+      "original_ca_count": 190,
+      "processed_point_count": 64,
+      "stride": 3
+    },
+    "1lns_A": {
+      "max_points": 300,
+      "original_ca_count": 763,
+      "processed_point_count": 255,
+      "stride": 3
+    },
+    "1mxa_A": {
+      "max_points": 300,
+      "original_ca_count": 377,
+      "processed_point_count": 126,
+      "stride": 3
+    },
+    "1mxb_A": {
+      "max_points": 300,
+      "original_ca_count": 377,
+      "processed_point_count": 126,
+      "stride": 3
+    },
+    "1mxc_A": {
+      "max_points": 300,
+      "original_ca_count": 377,
+      "processed_point_count": 126,
+      "stride": 3
+    },
+    "1mxi_A": {
+      "max_points": 300,
+      "original_ca_count": 156,
+      "processed_point_count": 52,
+      "stride": 3
+    },
+    "1n2k_A": {
+      "max_points": 300,
+      "original_ca_count": 482,
+      "processed_point_count": 161,
+      "stride": 3
+    },
+    "1n2l_A": {
+      "max_points": 300,
+      "original_ca_count": 483,
+      "processed_point_count": 161,
+      "stride": 3
+    },
+    "1n2m_A": {
+      "max_points": 300,
+      "original_ca_count": 159,
+      "processed_point_count": 53,
+      "stride": 3
+    },
+    "1ns5_A": {
+      "max_points": 300,
+      "original_ca_count": 153,
+      "processed_point_count": 51,
+      "stride": 3
+    },
+    "1nxz_A": {
+      "max_points": 300,
+      "original_ca_count": 246,
+      "processed_point_count": 82,
+      "stride": 3
+    },
+    "1o6d_A": {
+      "max_points": 300,
+      "original_ca_count": 147,
+      "processed_point_count": 49,
+      "stride": 3
+    },
+    "1o90_A": {
+      "max_points": 300,
+      "original_ca_count": 368,
+      "processed_point_count": 123,
+      "stride": 3
+    },
+    "1o92_A": {
+      "max_points": 300,
+      "original_ca_count": 368,
+      "processed_point_count": 123,
+      "stride": 3
+    },
+    "1o93_A": {
+      "max_points": 300,
+      "original_ca_count": 368,
+      "processed_point_count": 123,
+      "stride": 3
+    },
+    "1o98_A": {
+      "max_points": 300,
+      "original_ca_count": 509,
+      "processed_point_count": 170,
+      "stride": 3
+    },
+    "1o99_A": {
+      "max_points": 300,
+      "original_ca_count": 509,
+      "processed_point_count": 170,
+      "stride": 3
+    },
+    "1o9t_A": {
+      "max_points": 300,
+      "original_ca_count": 368,
+      "processed_point_count": 123,
+      "stride": 3
+    },
+    "1of1_A": {
+      "max_points": 300,
+      "original_ca_count": 307,
+      "processed_point_count": 103,
+      "stride": 3
+    },
+    "1ogc_A": {
+      "max_points": 300,
+      "original_ca_count": 131,
+      "processed_point_count": 44,
+      "stride": 3
+    },
+    "1ogd_A": {
+      "max_points": 300,
+      "original_ca_count": 131,
+      "processed_point_count": 44,
+      "stride": 3
+    },
+    "1oge_A": {
+      "max_points": 300,
+      "original_ca_count": 131,
+      "processed_point_count": 44,
+      "stride": 3
+    },
+    "1ogf_A": {
+      "max_points": 300,
+      "original_ca_count": 131,
+      "processed_point_count": 44,
+      "stride": 3
+    },
+    "1osn_A": {
+      "max_points": 300,
+      "original_ca_count": 325,
+      "processed_point_count": 109,
+      "stride": 3
+    },
+    "1p49_A": {
+      "max_points": 300,
+      "original_ca_count": 548,
+      "processed_point_count": 183,
+      "stride": 3
+    },
+    "1p6x_A": {
+      "max_points": 300,
+      "original_ca_count": 333,
+      "processed_point_count": 111,
+      "stride": 3
+    },
+    "1p72_A": {
+      "max_points": 300,
+      "original_ca_count": 323,
+      "processed_point_count": 108,
+      "stride": 3
+    },
+    "1p73_A": {
+      "max_points": 300,
+      "original_ca_count": 320,
+      "processed_point_count": 107,
+      "stride": 3
+    },
+    "1p75_A": {
+      "max_points": 300,
+      "original_ca_count": 331,
+      "processed_point_count": 111,
+      "stride": 3
+    },
+    "1p7c_A": {
+      "max_points": 300,
+      "original_ca_count": 301,
+      "processed_point_count": 101,
+      "stride": 3
+    },
+    "1p7l_A": {
+      "max_points": 300,
+      "original_ca_count": 383,
+      "processed_point_count": 128,
+      "stride": 3
+    },
+    "1p9p_A": {
+      "max_points": 300,
+      "original_ca_count": 235,
+      "processed_point_count": 79,
+      "stride": 3
+    },
+    "1pgi_A": {
+      "max_points": 300,
+      "original_ca_count": 514,
+      "processed_point_count": 172,
+      "stride": 3
+    },
+    "1qhi_A": {
+      "max_points": 300,
+      "original_ca_count": 300,
+      "processed_point_count": 100,
+      "stride": 3
+    },
+    "1qm4_A": {
+      "max_points": 300,
+      "original_ca_count": 368,
+      "processed_point_count": 123,
+      "stride": 3
+    },
+    "1rg9_A": {
+      "max_points": 300,
+      "original_ca_count": 383,
+      "processed_point_count": 128,
+      "stride": 3
+    },
+    "1rh1_A": {
+      "max_points": 300,
+      "original_ca_count": 490,
+      "processed_point_count": 164,
+      "stride": 3
+    },
+    "1shn_A": {
+      "max_points": 300,
+      "original_ca_count": 476,
+      "processed_point_count": 159,
+      "stride": 3
+    },
+    "1shq_A": {
+      "max_points": 300,
+      "original_ca_count": 476,
+      "processed_point_count": 159,
+      "stride": 3
+    },
+    "1ti2_A": {
+      "max_points": 300,
+      "original_ca_count": 875,
+      "processed_point_count": 292,
+      "stride": 3
+    },
+    "1ti4_A": {
+      "max_points": 300,
+      "original_ca_count": 875,
+      "processed_point_count": 292,
+      "stride": 3
+    },
+    "1ti6_A": {
+      "max_points": 300,
+      "original_ca_count": 875,
+      "processed_point_count": 292,
+      "stride": 3
+    },
+    "1to0_A": {
+      "max_points": 300,
+      "original_ca_count": 148,
+      "processed_point_count": 50,
+      "stride": 3
+    },
+    "1uaj_A": {
+      "max_points": 300,
+      "original_ca_count": 241,
+      "processed_point_count": 81,
+      "stride": 3
+    },
+    "1uak_A": {
+      "max_points": 300,
+      "original_ca_count": 243,
+      "processed_point_count": 81,
+      "stride": 3
+    },
+    "1ual_A": {
+      "max_points": 300,
+      "original_ca_count": 243,
+      "processed_point_count": 81,
+      "stride": 3
+    },
+    "1uam_A": {
+      "max_points": 300,
+      "original_ca_count": 250,
+      "processed_point_count": 84,
+      "stride": 3
+    },
+    "1uch_A": {
+      "max_points": 300,
+      "original_ca_count": 206,
+      "processed_point_count": 69,
+      "stride": 3
+    },
+    "1ura_A": {
+      "max_points": 300,
+      "original_ca_count": 446,
+      "processed_point_count": 149,
+      "stride": 3
+    },
+    "1urb_A": {
+      "max_points": 300,
+      "original_ca_count": 446,
+      "processed_point_count": 149,
+      "stride": 3
+    },
+    "1v2x_A": {
+      "max_points": 300,
+      "original_ca_count": 191,
+      "processed_point_count": 64,
+      "stride": 3
+    },
+    "1v6z_A": {
+      "max_points": 300,
+      "original_ca_count": 227,
+      "processed_point_count": 76,
+      "stride": 3
+    },
+    "1vh0_A": {
+      "max_points": 300,
+      "original_ca_count": 157,
+      "processed_point_count": 53,
+      "stride": 3
+    },
+    "1vhk_A": {
+      "max_points": 300,
+      "original_ca_count": 235,
+      "processed_point_count": 79,
+      "stride": 3
+    },
+    "1vhy_A": {
+      "max_points": 300,
+      "original_ca_count": 241,
+      "processed_point_count": 81,
+      "stride": 3
+    },
+    "1vl4_A": {
+      "max_points": 300,
+      "original_ca_count": 428,
+      "processed_point_count": 143,
+      "stride": 3
+    },
+    "1vle_M": {
+      "max_points": 300,
+      "original_ca_count": 875,
+      "processed_point_count": 292,
+      "stride": 3
+    },
+    "1vlf_M": {
+      "max_points": 300,
+      "original_ca_count": 875,
+      "processed_point_count": 292,
+      "stride": 3
+    },
+    "1vpb_A": {
+      "max_points": 300,
+      "original_ca_count": 437,
+      "processed_point_count": 146,
+      "stride": 3
+    },
+    "1vtk_A": {
+      "max_points": 300,
+      "original_ca_count": 313,
+      "processed_point_count": 105,
+      "stride": 3
+    },
+    "1wog_A": {
+      "max_points": 300,
+      "original_ca_count": 303,
+      "processed_point_count": 101,
+      "stride": 3
+    },
+    "1woh_A": {
+      "max_points": 300,
+      "original_ca_count": 303,
+      "processed_point_count": 101,
+      "stride": 3
+    },
+    "1woi_A": {
+      "max_points": 300,
+      "original_ca_count": 303,
+      "processed_point_count": 101,
+      "stride": 3
+    },
+    "1x7o_A": {
+      "max_points": 300,
+      "original_ca_count": 267,
+      "processed_point_count": 89,
+      "stride": 3
+    },
+    "1x7p_A": {
+      "max_points": 300,
+      "original_ca_count": 265,
+      "processed_point_count": 89,
+      "stride": 3
+    },
+    "1xd3_A": {
+      "max_points": 300,
+      "original_ca_count": 229,
+      "processed_point_count": 77,
+      "stride": 3
+    },
+    "1xfh_A": {
+      "max_points": 300,
+      "original_ca_count": 405,
+      "processed_point_count": 135,
+      "stride": 3
+    },
+    "1xjd_A": {
+      "max_points": 300,
+      "original_ca_count": 282,
+      "processed_point_count": 94,
+      "stride": 3
+    },
+    "1xra_A": {
+      "max_points": 300,
+      "original_ca_count": 377,
+      "processed_point_count": 126,
+      "stride": 3
+    },
+    "1xrb_A": {
+      "max_points": 300,
+      "original_ca_count": 377,
+      "processed_point_count": 126,
+      "stride": 3
+    },
+    "1xrc_A": {
+      "max_points": 300,
+      "original_ca_count": 377,
+      "processed_point_count": 126,
+      "stride": 3
+    },
+    "1y6v_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1y7a_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "1y7w_A": {
+      "max_points": 300,
+      "original_ca_count": 274,
+      "processed_point_count": 92,
+      "stride": 3
+    },
+    "1yh1_A": {
+      "max_points": 300,
+      "original_ca_count": 334,
+      "processed_point_count": 112,
+      "stride": 3
+    },
+    "1yrl_A": {
+      "max_points": 300,
+      "original_ca_count": 487,
+      "processed_point_count": 163,
+      "stride": 3
+    },
+    "1z8g_A": {
+      "max_points": 300,
+      "original_ca_count": 366,
+      "processed_point_count": 122,
+      "stride": 3
+    },
+    "1zeb_A": {
+      "max_points": 300,
+      "original_ca_count": 480,
+      "processed_point_count": 160,
+      "stride": 3
+    },
+    "1zed_A": {
+      "max_points": 300,
+      "original_ca_count": 481,
+      "processed_point_count": 161,
+      "stride": 3
+    },
+    "1zef_A": {
+      "max_points": 300,
+      "original_ca_count": 481,
+      "processed_point_count": 161,
+      "stride": 3
+    },
+    "1zjr_A": {
+      "max_points": 300,
+      "original_ca_count": 197,
+      "processed_point_count": 66,
+      "stride": 3
+    },
+    "1znc_A": {
+      "max_points": 300,
+      "original_ca_count": 262,
+      "processed_point_count": 88,
+      "stride": 3
+    },
+    "1zsa_A": {
+      "max_points": 300,
+      "original_ca_count": 257,
+      "processed_point_count": 86,
+      "stride": 3
+    },
+    "1ztu_A": {
+      "max_points": 300,
+      "original_ca_count": 313,
+      "processed_point_count": 105,
+      "stride": 3
+    },
+    "2a65_A": {
+      "max_points": 300,
+      "original_ca_count": 509,
+      "processed_point_count": 170,
+      "stride": 3
+    },
+    "2anh_A": {
+      "max_points": 300,
+      "original_ca_count": 446,
+      "processed_point_count": 149,
+      "stride": 3
+    },
+    "2axc_A": {
+      "max_points": 300,
+      "original_ca_count": 232,
+      "processed_point_count": 78,
+      "stride": 3
+    },
+    "2b5u_A": {
+      "max_points": 300,
+      "original_ca_count": 470,
+      "processed_point_count": 157,
+      "stride": 3
+    },
+    "2b9b_A": {
+      "max_points": 300,
+      "original_ca_count": 478,
+      "processed_point_count": 160,
+      "stride": 3
+    },
+    "2cbe_A": {
+      "max_points": 300,
+      "original_ca_count": 258,
+      "processed_point_count": 86,
+      "stride": 3
+    },
+    "2cfa_B": {
+      "max_points": 300,
+      "original_ca_count": 179,
+      "processed_point_count": 60,
+      "stride": 3
+    },
+    "2cx8_A": {
+      "max_points": 300,
+      "original_ca_count": 225,
+      "processed_point_count": 75,
+      "stride": 3
+    },
+    "2d1g_A": {
+      "max_points": 300,
+      "original_ca_count": 481,
+      "processed_point_count": 161,
+      "stride": 3
+    },
+    "2efv_A": {
+      "max_points": 300,
+      "original_ca_count": 82,
+      "processed_point_count": 28,
+      "stride": 3
+    },
+    "2egv_A": {
+      "max_points": 300,
+      "original_ca_count": 229,
+      "processed_point_count": 77,
+      "stride": 3
+    },
+    "2egw_A": {
+      "max_points": 300,
+      "original_ca_count": 229,
+      "processed_point_count": 77,
+      "stride": 3
+    },
+    "2etl_A": {
+      "max_points": 300,
+      "original_ca_count": 223,
+      "processed_point_count": 75,
+      "stride": 3
+    },
+    "2fg6_C": {
+      "max_points": 300,
+      "original_ca_count": 321,
+      "processed_point_count": 107,
+      "stride": 3
+    },
+    "2fg7_C": {
+      "max_points": 300,
+      "original_ca_count": 320,
+      "processed_point_count": 107,
+      "stride": 3
+    },
+    "2g7m_C": {
+      "max_points": 300,
+      "original_ca_count": 320,
+      "processed_point_count": 107,
+      "stride": 3
+    },
+    "2g9y_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "2ga3_A": {
+      "max_points": 300,
+      "original_ca_count": 449,
+      "processed_point_count": 150,
+      "stride": 3
+    },
+    "2glq_A": {
+      "max_points": 300,
+      "original_ca_count": 479,
+      "processed_point_count": 160,
+      "stride": 3
+    },
+    "2gsn_A": {
+      "max_points": 300,
+      "original_ca_count": 382,
+      "processed_point_count": 128,
+      "stride": 3
+    },
+    "2gso_A": {
+      "max_points": 300,
+      "original_ca_count": 382,
+      "processed_point_count": 128,
+      "stride": 3
+    },
+    "2gsu_A": {
+      "max_points": 300,
+      "original_ca_count": 382,
+      "processed_point_count": 128,
+      "stride": 3
+    },
+    "2ha8_A": {
+      "max_points": 300,
+      "original_ca_count": 159,
+      "processed_point_count": 53,
+      "stride": 3
+    },
+    "2hfy_A": {
+      "max_points": 300,
+      "original_ca_count": 259,
+      "processed_point_count": 87,
+      "stride": 3
+    },
+    "2hjn_A": {
+      "max_points": 300,
+      "original_ca_count": 206,
+      "processed_point_count": 69,
+      "stride": 3
+    },
+    "2i6d_A": {
+      "max_points": 300,
+      "original_ca_count": 251,
+      "processed_point_count": 84,
+      "stride": 3
+    },
+    "2ify_A": {
+      "max_points": 300,
+      "original_ca_count": 508,
+      "processed_point_count": 170,
+      "stride": 3
+    },
+    "2iuc_A": {
+      "max_points": 300,
+      "original_ca_count": 340,
+      "processed_point_count": 114,
+      "stride": 3
+    },
+    "2iuc_B": {
+      "max_points": 300,
+      "original_ca_count": 342,
+      "processed_point_count": 114,
+      "stride": 3
+    },
+    "2j6b_A": {
+      "max_points": 300,
+      "original_ca_count": 109,
+      "processed_point_count": 37,
+      "stride": 3
+    },
+    "2j6c_A": {
+      "max_points": 300,
+      "original_ca_count": 109,
+      "processed_point_count": 37,
+      "stride": 3
+    },
+    "2j85_A": {
+      "max_points": 300,
+      "original_ca_count": 117,
+      "processed_point_count": 39,
+      "stride": 3
+    },
+    "2jln_A": {
+      "max_points": 300,
+      "original_ca_count": 463,
+      "processed_point_count": 155,
+      "stride": 3
+    },
+    "2jlo_A": {
+      "max_points": 300,
+      "original_ca_count": 461,
+      "processed_point_count": 154,
+      "stride": 3
+    },
+    "2k0a_A": {
+      "max_points": 300,
+      "original_ca_count": 109,
+      "processed_point_count": 37,
+      "stride": 3
+    },
+    "2ki5_A": {
+      "max_points": 300,
+      "original_ca_count": 300,
+      "processed_point_count": 100,
+      "stride": 3
+    },
+    "2len_A": {
+      "max_points": 300,
+      "original_ca_count": 231,
+      "processed_point_count": 77,
+      "stride": 3
+    },
+    "2m9p_A": {
+      "max_points": 300,
+      "original_ca_count": 240,
+      "processed_point_count": 80,
+      "stride": 3
+    },
+    "2m9q_A": {
+      "max_points": 300,
+      "original_ca_count": 240,
+      "processed_point_count": 80,
+      "stride": 3
+    },
+    "2nwl_A": {
+      "max_points": 300,
+      "original_ca_count": 402,
+      "processed_point_count": 134,
+      "stride": 3
+    },
+    "2nww_A": {
+      "max_points": 300,
+      "original_ca_count": 407,
+      "processed_point_count": 136,
+      "stride": 3
+    }
+  },
+  "inputs": {
+    "backbones_path": "data/knotprot/research_2026_10/development/backbones.npz",
+    "backbones_sha256": "96cfde8d55b2eb6d691533a2ef019f5463f6a56fcae74f4b1c22d332128b3d51",
+    "labels_path": "data/knotprot/research_2026_10/development/knotprot_labels.csv",
+    "labels_sha256": "6cc5be7de74077aedfb5c9f8430b8ef3d2b560849a71eb21766ef04b0cbf4a16"
+  },
+  "matched_chain_ids": [
+    "1aja_A",
+    "1ajb_A",
+    "1ajc_A",
+    "1ajd_A",
+    "1ali_A",
+    "1alj_A",
+    "1alk_A",
+    "1ani_A",
+    "1anj_A",
+    "1auk_A",
+    "1b8j_A",
+    "1by7_A",
+    "1cmx_A",
+    "1cng_A",
+    "1cnh_A",
+    "1cvf_A",
+    "1e1z_P",
+    "1e2h_A",
+    "1e2i_A",
+    "1e2j_A",
+    "1e2k_A",
+    "1e2l_A",
+    "1e2m_A",
+    "1e2n_A",
+    "1e2p_A",
+    "1e2s_P",
+    "1e33_P",
+    "1e3c_P",
+    "1ed8_A",
+    "1ed9_A",
+    "1ei6_A",
+    "1ejj_A",
+    "1elx_A",
+    "1ely_A",
+    "1elz_A",
+    "1eqj_A",
+    "1ew2_A",
+    "1ew8_A",
+    "1ew9_A",
+    "1f48_A",
+    "1fqn_A",
+    "1fsn_A",
+    "1fsu_A",
+    "1fug_A",
+    "1gq6_A",
+    "1gq7_A",
+    "1gv4_A",
+    "1gz0_A",
+    "1hdh_A",
+    "1hjk_A",
+    "1hqa_A",
+    "1hva_A",
+    "1hyn_P",
+    "1ipa_A",
+    "1j85_A",
+    "1jch_A",
+    "1js1_X",
+    "1k3r_A",
+    "1k7h_A",
+    "1kh4_A",
+    "1kh5_A",
+    "1kh7_A",
+    "1kh9_A",
+    "1khj_A",
+    "1khk_A",
+    "1khl_A",
+    "1khn_A",
+    "1ki2_A",
+    "1ki3_A",
+    "1ki4_A",
+    "1ki6_A",
+    "1ki6_B",
+    "1ki7_A",
+    "1ki8_A",
+    "1kim_A",
+    "1lm4_A",
+    "1lns_A",
+    "1mxa_A",
+    "1mxb_A",
+    "1mxc_A",
+    "1mxi_A",
+    "1n2k_A",
+    "1n2l_A",
+    "1n2m_A",
+    "1ns5_A",
+    "1nxz_A",
+    "1o6d_A",
+    "1o90_A",
+    "1o92_A",
+    "1o93_A",
+    "1o98_A",
+    "1o99_A",
+    "1o9t_A",
+    "1of1_A",
+    "1ogc_A",
+    "1ogd_A",
+    "1oge_A",
+    "1ogf_A",
+    "1osn_A",
+    "1p49_A",
+    "1p6x_A",
+    "1p72_A",
+    "1p73_A",
+    "1p75_A",
+    "1p7c_A",
+    "1p7l_A",
+    "1p9p_A",
+    "1pgi_A",
+    "1qhi_A",
+    "1qm4_A",
+    "1rg9_A",
+    "1rh1_A",
+    "1shn_A",
+    "1shq_A",
+    "1ti2_A",
+    "1ti4_A",
+    "1ti6_A",
+    "1to0_A",
+    "1uaj_A",
+    "1uak_A",
+    "1ual_A",
+    "1uam_A",
+    "1uch_A",
+    "1ura_A",
+    "1urb_A",
+    "1v2x_A",
+    "1v6z_A",
+    "1vh0_A",
+    "1vhk_A",
+    "1vhy_A",
+    "1vl4_A",
+    "1vle_M",
+    "1vlf_M",
+    "1vpb_A",
+    "1vtk_A",
+    "1wog_A",
+    "1woh_A",
+    "1woi_A",
+    "1x7o_A",
+    "1x7p_A",
+    "1xd3_A",
+    "1xfh_A",
+    "1xjd_A",
+    "1xra_A",
+    "1xrb_A",
+    "1xrc_A",
+    "1y6v_A",
+    "1y7a_A",
+    "1y7w_A",
+    "1yh1_A",
+    "1yrl_A",
+    "1z8g_A",
+    "1zeb_A",
+    "1zed_A",
+    "1zef_A",
+    "1zjr_A",
+    "1znc_A",
+    "1zsa_A",
+    "1ztu_A",
+    "2a65_A",
+    "2anh_A",
+    "2axc_A",
+    "2b5u_A",
+    "2b9b_A",
+    "2cbe_A",
+    "2cfa_B",
+    "2cx8_A",
+    "2d1g_A",
+    "2efv_A",
+    "2egv_A",
+    "2egw_A",
+    "2etl_A",
+    "2fg6_C",
+    "2fg7_C",
+    "2g7m_C",
+    "2g9y_A",
+    "2ga3_A",
+    "2glq_A",
+    "2gsn_A",
+    "2gso_A",
+    "2gsu_A",
+    "2ha8_A",
+    "2hfy_A",
+    "2hjn_A",
+    "2i6d_A",
+    "2ify_A",
+    "2iuc_A",
+    "2iuc_B",
+    "2j6b_A",
+    "2j6c_A",
+    "2j85_A",
+    "2jln_A",
+    "2jlo_A",
+    "2k0a_A",
+    "2ki5_A",
+    "2len_A",
+    "2m9p_A",
+    "2m9q_A",
+    "2nwl_A",
+    "2nww_A"
+  ],
+  "matched_chain_ids_sha256": "060c3dc9adbe4cd1989305d78a1e15ea80334d805cfdc10c7944f96a4911273f",
+  "outputs": {
+    "dataset_path": "data/knotprot/research_2026_10/development/hybrid_dataset.npz",
+    "dataset_sha256": "d12f6855d05a12c5d4da7984a9ecb70a9cbdc955c7757eef62c577b4ba7809bf",
+    "manifest_path": "data/knotprot/research_2026_10/development/hybrid_manifest.csv",
+    "manifest_sha256": "ba3a01cbac053d8b4f803f6cecf9dc75b49ebb804e20155c4d82c86ad3559fec"
+  },
+  "parameters": {
+    "limit": null,
+    "max_points": 300,
+    "offset": 0,
+    "stride": 3,
+    "viewpoints": 32
+  },
+  "schema_version": 1,
+  "warning": "Projection-derived features are heuristic; subsampling is not guaranteed to preserve topology."
+}

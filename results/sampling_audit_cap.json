@@ -1,0 +1,298 @@
+{
+  "chains_changed_by_preprocessing": [
+    "5a42_A",
+    "6ac6_A",
+    "6acg_A",
+    "6fij_A"
+  ],
+  "development_source": "data/knotprot/research_2026_10/development/hybrid_dataset.npz",
+  "external_full": "data/knotprot/research_2026_10/external/hybrid_dataset_stride3_uncapped.npz",
+  "external_reduced": "data/knotprot/research_2026_10/external/hybrid_dataset.npz",
+  "full_parameters": {
+    "limit": null,
+    "max_points": null,
+    "offset": 0,
+    "stride": 3,
+    "viewpoints": 32
+  },
+  "label_check": "K/S labels are identical because the original KnotProt chain annotation is carried through; this is not an independent topology check.",
+  "metrics": {
+    "hybrid/full": {
+      "accuracy": 0.7012987012987013,
+      "balanced_accuracy": 0.7055828949601222,
+      "brier_score": 0.4120460097032452,
+      "chain_bootstrap_95ci": {
+        "accuracy": [
+          0.6298701298701299,
+          0.7727272727272727
+        ],
+        "balanced_accuracy": [
+          0.6332088919056508,
+          0.7739691159002206
+        ],
+        "macro_f1": [
+          0.6291038154392192,
+          0.7715791454921889
+        ]
+      },
+      "confusion_matrix": [
+        [
+          54,
+          17
+        ],
+        [
+          29,
+          54
+        ]
+      ],
+      "ece_10_bins": 0.07061685624245409,
+      "log_loss": 0.6075167002146398,
+      "macro_f1": 0.7012987012987013,
+      "n_chains": 154,
+      "per_class_recall": {
+        "K": 0.7605633802816901,
+        "S": 0.6506024096385542
+      }
+    },
+    "hybrid/reduced": {
+      "accuracy": 0.7012987012987013,
+      "balanced_accuracy": 0.7055828949601222,
+      "brier_score": 0.4116551196434991,
+      "chain_bootstrap_95ci": {
+        "accuracy": [
+          0.6298701298701299,
+          0.7727272727272727
+        ],
+        "balanced_accuracy": [
+          0.6332088919056508,
+          0.7739691159002206
+        ],
+        "macro_f1": [
+          0.6291038154392192,
+          0.7715791454921889
+        ]
+      },
+      "confusion_matrix": [
+        [
+          54,
+          17
+        ],
+        [
+          29,
+          54
+        ]
+      ],
+      "ece_10_bins": 0.07027334494089642,
+      "log_loss": 0.6061294738548015,
+      "macro_f1": 0.7012987012987013,
+      "n_chains": 154,
+      "per_class_recall": {
+        "K": 0.7605633802816901,
+        "S": 0.6506024096385542
+      }
+    },
+    "image/full": {
+      "accuracy": 0.7142857142857143,
+      "balanced_accuracy": 0.7176310877312064,
+      "brier_score": 0.409347702801951,
+      "chain_bootstrap_95ci": {
+        "accuracy": [
+          0.6428571428571429,
+          0.7792207792207793
+        ],
+        "balanced_accuracy": [
+          0.648203376887833,
+          0.7840043271678261
+        ],
+        "macro_f1": [
+          0.6427215590331969,
+          0.7791835357624831
+        ]
+      },
+      "confusion_matrix": [
+        [
+          54,
+          17
+        ],
+        [
+          27,
+          56
+        ]
+      ],
+      "ece_10_bins": 0.08540319766950384,
+      "log_loss": 0.6026498326705592,
+      "macro_f1": 0.7142375168690958,
+      "n_chains": 154,
+      "per_class_recall": {
+        "K": 0.7605633802816901,
+        "S": 0.6746987951807228
+      }
+    },
+    "image/reduced": {
+      "accuracy": 0.7142857142857143,
+      "balanced_accuracy": 0.7176310877312064,
+      "brier_score": 0.40894549463576696,
+      "chain_bootstrap_95ci": {
+        "accuracy": [
+          0.6428571428571429,
+          0.7792207792207793
+        ],
+        "balanced_accuracy": [
+          0.648203376887833,
+          0.7840043271678261
+        ],
+        "macro_f1": [
+          0.6427215590331969,
+          0.7791835357624831
+        ]
+      },
+      "confusion_matrix": [
+        [
+          54,
+          17
+        ],
+        [
+          27,
+          56
+        ]
+      ],
+      "ece_10_bins": 0.08050159509981136,
+      "log_loss": 0.6014571337423703,
+      "macro_f1": 0.7142375168690958,
+      "n_chains": 154,
+      "per_class_recall": {
+        "K": 0.7605633802816901,
+        "S": 0.6746987951807228
+      }
+    },
+    "projection_features/full": {
+      "accuracy": 0.7142857142857143,
+      "balanced_accuracy": 0.7105039877821144,
+      "brier_score": 0.41867704220883845,
+      "chain_bootstrap_95ci": {
+        "accuracy": [
+          0.6428571428571429,
+          0.7792207792207793
+        ],
+        "balanced_accuracy": [
+          0.6360936704564738,
+          0.7788902087222127
+        ],
+        "macro_f1": [
+          0.6360724617225458,
+          0.7786233722306781
+        ]
+      },
+      "confusion_matrix": [
+        [
+          47,
+          24
+        ],
+        [
+          20,
+          63
+        ]
+      ],
+      "ece_10_bins": 0.1122600699902262,
+      "log_loss": 0.6072480218008367,
+      "macro_f1": 0.7111679454390452,
+      "n_chains": 154,
+      "per_class_recall": {
+        "K": 0.6619718309859155,
+        "S": 0.7590361445783133
+      }
+    },
+    "projection_features/reduced": {
+      "accuracy": 0.7142857142857143,
+      "balanced_accuracy": 0.7105039877821144,
+      "brier_score": 0.4186875686797251,
+      "chain_bootstrap_95ci": {
+        "accuracy": [
+          0.6428571428571429,
+          0.7792207792207793
+        ],
+        "balanced_accuracy": [
+          0.6360936704564738,
+          0.7788902087222127
+        ],
+        "macro_f1": [
+          0.6360724617225458,
+          0.7786233722306781
+        ]
+      },
+      "confusion_matrix": [
+        [
+          47,
+          24
+        ],
+        [
+          20,
+          63
+        ]
+      ],
+      "ece_10_bins": 0.1123625378009855,
+      "log_loss": 0.6072614783389353,
+      "macro_f1": 0.7111679454390452,
+      "n_chains": 154,
+      "per_class_recall": {
+        "K": 0.6619718309859155,
+        "S": 0.7590361445783133
+      }
+    }
+  },
+  "n_chains_changed_by_preprocessing": 4,
+  "per_modality_prediction_flips_on_changed_chains": {
+    "hybrid": {
+      "count": 0,
+      "total_changed": 4
+    },
+    "image": {
+      "count": 0,
+      "total_changed": 4
+    },
+    "projection_features": {
+      "count": 0,
+      "total_changed": 4
+    }
+  },
+  "projection_feature_drift_on_changed_chains": [
+    {
+      "key": "5a42_A",
+      "mean_feature_cosine": 0.9997564554214478,
+      "mean_feature_l1": 0.00046521081821992993,
+      "reduced_points": 300,
+      "uncapped_points": 533
+    },
+    {
+      "key": "6ac6_A",
+      "mean_feature_cosine": 0.9991518259048462,
+      "mean_feature_l1": 0.0008047574083320796,
+      "reduced_points": 300,
+      "uncapped_points": 385
+    },
+    {
+      "key": "6acg_A",
+      "mean_feature_cosine": 0.9987064599990845,
+      "mean_feature_l1": 0.0009935104753822088,
+      "reduced_points": 300,
+      "uncapped_points": 355
+    },
+    {
+      "key": "6fij_A",
+      "mean_feature_cosine": 0.9990991353988647,
+      "mean_feature_l1": 0.0008464351412840188,
+      "reduced_points": 300,
+      "uncapped_points": 425
+    }
+  ],
+  "question": "Does the preprocessing variant change the derived input or model predictions?",
+  "reduced_parameters": {
+    "limit": null,
+    "max_points": 300,
+    "offset": 0,
+    "stride": 3,
+    "viewpoints": 32
+  },
+  "source_knotprot_labels_recomputed_after_subsampling": false,
+  "viewpoints": 32
+}

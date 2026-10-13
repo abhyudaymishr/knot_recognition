@@ -1,0 +1,1106 @@
+{
+  "chain_sampling": {
+    "2hfx_A": {
+      "max_points": null,
+      "original_ca_count": 259,
+      "processed_point_count": 87,
+      "stride": 3
+    },
+    "2o3a_A": {
+      "max_points": null,
+      "original_ca_count": 161,
+      "processed_point_count": 54,
+      "stride": 3
+    },
+    "2ofz_A": {
+      "max_points": null,
+      "original_ca_count": 132,
+      "processed_point_count": 44,
+      "stride": 3
+    },
+    "2qmm_A": {
+      "max_points": null,
+      "original_ca_count": 195,
+      "processed_point_count": 65,
+      "stride": 3
+    },
+    "2qwv_A": {
+      "max_points": null,
+      "original_ca_count": 188,
+      "processed_point_count": 63,
+      "stride": 3
+    },
+    "2qzu_A": {
+      "max_points": null,
+      "original_ca_count": 465,
+      "processed_point_count": 155,
+      "stride": 3
+    },
+    "2rh3_A": {
+      "max_points": null,
+      "original_ca_count": 121,
+      "processed_point_count": 41,
+      "stride": 3
+    },
+    "2v3j_A": {
+      "max_points": null,
+      "original_ca_count": 217,
+      "processed_point_count": 73,
+      "stride": 3
+    },
+    "2v64_A": {
+      "max_points": null,
+      "original_ca_count": 210,
+      "processed_point_count": 70,
+      "stride": 3
+    },
+    "2vea_A": {
+      "max_points": null,
+      "original_ca_count": 500,
+      "processed_point_count": 167,
+      "stride": 3
+    },
+    "2vqr_A": {
+      "max_points": null,
+      "original_ca_count": 511,
+      "processed_point_count": 171,
+      "stride": 3
+    },
+    "2w5q_A": {
+      "max_points": null,
+      "original_ca_count": 424,
+      "processed_point_count": 142,
+      "stride": 3
+    },
+    "2wit_A": {
+      "max_points": null,
+      "original_ca_count": 531,
+      "processed_point_count": 177,
+      "stride": 3
+    },
+    "2wxz_C": {
+      "max_points": null,
+      "original_ca_count": 413,
+      "processed_point_count": 138,
+      "stride": 3
+    },
+    "2xq2_A": {
+      "max_points": null,
+      "original_ca_count": 538,
+      "processed_point_count": 180,
+      "stride": 3
+    },
+    "2xr9_A": {
+      "max_points": null,
+      "original_ca_count": 783,
+      "processed_point_count": 261,
+      "stride": 3
+    },
+    "2xtj_A": {
+      "max_points": null,
+      "original_ca_count": 242,
+      "processed_point_count": 81,
+      "stride": 3
+    },
+    "2yfk_A": {
+      "max_points": null,
+      "original_ca_count": 385,
+      "processed_point_count": 129,
+      "stride": 3
+    },
+    "2zkt_A": {
+      "max_points": null,
+      "original_ca_count": 330,
+      "processed_point_count": 110,
+      "stride": 3
+    },
+    "3a7s_A": {
+      "max_points": null,
+      "original_ca_count": 204,
+      "processed_point_count": 68,
+      "stride": 3
+    },
+    "3b1b_A": {
+      "max_points": null,
+      "original_ca_count": 310,
+      "processed_point_count": 104,
+      "stride": 3
+    },
+    "3b5q_A": {
+      "max_points": null,
+      "original_ca_count": 464,
+      "processed_point_count": 155,
+      "stride": 3
+    },
+    "3bbd_A": {
+      "max_points": null,
+      "original_ca_count": 204,
+      "processed_point_count": 68,
+      "stride": 3
+    },
+    "3bjx_A": {
+      "max_points": null,
+      "original_ca_count": 311,
+      "processed_point_count": 104,
+      "stride": 3
+    },
+    "3cm8_A": {
+      "max_points": null,
+      "original_ca_count": 435,
+      "processed_point_count": 145,
+      "stride": 3
+    },
+    "3csy_I": {
+      "max_points": null,
+      "original_ca_count": 236,
+      "processed_point_count": 79,
+      "stride": 3
+    },
+    "3cwo_X": {
+      "max_points": null,
+      "original_ca_count": 236,
+      "processed_point_count": 79,
+      "stride": 3
+    },
+    "3dcm_X": {
+      "max_points": null,
+      "original_ca_count": 188,
+      "processed_point_count": 63,
+      "stride": 3
+    },
+    "3e2d_A": {
+      "max_points": null,
+      "original_ca_count": 502,
+      "processed_point_count": 168,
+      "stride": 3
+    },
+    "3ed7_A": {
+      "max_points": null,
+      "original_ca_count": 284,
+      "processed_point_count": 95,
+      "stride": 3
+    },
+    "3en9_A": {
+      "max_points": null,
+      "original_ca_count": 519,
+      "processed_point_count": 173,
+      "stride": 3
+    },
+    "3fr7_A": {
+      "max_points": null,
+      "original_ca_count": 495,
+      "processed_point_count": 165,
+      "stride": 3
+    },
+    "3fsg_A": {
+      "max_points": null,
+      "original_ca_count": 267,
+      "processed_point_count": 89,
+      "stride": 3
+    },
+    "3gi8_C": {
+      "max_points": null,
+      "original_ca_count": 435,
+      "processed_point_count": 145,
+      "stride": 3
+    },
+    "3gyq_A": {
+      "max_points": null,
+      "original_ca_count": 261,
+      "processed_point_count": 87,
+      "stride": 3
+    },
+    "3ic6_A": {
+      "max_points": null,
+      "original_ca_count": 213,
+      "processed_point_count": 71,
+      "stride": 3
+    },
+    "3ihr_A": {
+      "max_points": null,
+      "original_ca_count": 282,
+      "processed_point_count": 94,
+      "stride": 3
+    },
+    "3ilk_A": {
+      "max_points": null,
+      "original_ca_count": 239,
+      "processed_point_count": 80,
+      "stride": 3
+    },
+    "3iqk_A": {
+      "max_points": null,
+      "original_ca_count": 257,
+      "processed_point_count": 86,
+      "stride": 3
+    },
+    "3j7y_5": {
+      "max_points": null,
+      "original_ca_count": 376,
+      "processed_point_count": 126,
+      "stride": 3
+    },
+    "3j7y_s": {
+      "max_points": null,
+      "original_ca_count": 370,
+      "processed_point_count": 124,
+      "stride": 3
+    },
+    "3jyw_E": {
+      "max_points": null,
+      "original_ca_count": 237,
+      "processed_point_count": 79,
+      "stride": 3
+    },
+    "3kty_A": {
+      "max_points": null,
+      "original_ca_count": 167,
+      "processed_point_count": 56,
+      "stride": 3
+    },
+    "3l1l_A": {
+      "max_points": null,
+      "original_ca_count": 423,
+      "processed_point_count": 141,
+      "stride": 3
+    },
+    "3l8u_A": {
+      "max_points": null,
+      "original_ca_count": 154,
+      "processed_point_count": 52,
+      "stride": 3
+    },
+    "3lxq_A": {
+      "max_points": null,
+      "original_ca_count": 409,
+      "processed_point_count": 137,
+      "stride": 3
+    },
+    "3m7v_A": {
+      "max_points": null,
+      "original_ca_count": 401,
+      "processed_point_count": 134,
+      "stride": 3
+    },
+    "3mfb_A": {
+      "max_points": null,
+      "original_ca_count": 150,
+      "processed_point_count": 50,
+      "stride": 3
+    },
+    "3mlg_A": {
+      "max_points": null,
+      "original_ca_count": 161,
+      "processed_point_count": 54,
+      "stride": 3
+    },
+    "3mt5_A": {
+      "max_points": null,
+      "original_ca_count": 593,
+      "processed_point_count": 198,
+      "stride": 3
+    },
+    "3o0p_A": {
+      "max_points": null,
+      "original_ca_count": 194,
+      "processed_point_count": 65,
+      "stride": 3
+    },
+    "3o7b_A": {
+      "max_points": null,
+      "original_ca_count": 216,
+      "processed_point_count": 72,
+      "stride": 3
+    },
+    "3pzl_A": {
+      "max_points": null,
+      "original_ca_count": 290,
+      "processed_point_count": 97,
+      "stride": 3
+    },
+    "3q3q_A": {
+      "max_points": null,
+      "original_ca_count": 526,
+      "processed_point_count": 176,
+      "stride": 3
+    },
+    "3qe7_A": {
+      "max_points": null,
+      "original_ca_count": 407,
+      "processed_point_count": 136,
+      "stride": 3
+    },
+    "3qtd_A": {
+      "max_points": null,
+      "original_ca_count": 442,
+      "processed_point_count": 148,
+      "stride": 3
+    },
+    "3rfy_A": {
+      "max_points": null,
+      "original_ca_count": 356,
+      "processed_point_count": 119,
+      "stride": 3
+    },
+    "3s88_I": {
+      "max_points": null,
+      "original_ca_count": 249,
+      "processed_point_count": 83,
+      "stride": 3
+    },
+    "3sig_A": {
+      "max_points": null,
+      "original_ca_count": 265,
+      "processed_point_count": 89,
+      "stride": 3
+    },
+    "3v5u_A": {
+      "max_points": null,
+      "original_ca_count": 297,
+      "processed_point_count": 99,
+      "stride": 3
+    },
+    "3x2d_A": {
+      "max_points": null,
+      "original_ca_count": 156,
+      "processed_point_count": 52,
+      "stride": 3
+    },
+    "4bin_A": {
+      "max_points": null,
+      "original_ca_count": 348,
+      "processed_point_count": 116,
+      "stride": 3
+    },
+    "4bxw_A": {
+      "max_points": null,
+      "original_ca_count": 286,
+      "processed_point_count": 96,
+      "stride": 3
+    },
+    "4cbp_A": {
+      "max_points": null,
+      "original_ca_count": 207,
+      "processed_point_count": 69,
+      "stride": 3
+    },
+    "4chj_A": {
+      "max_points": null,
+      "original_ca_count": 124,
+      "processed_point_count": 42,
+      "stride": 3
+    },
+    "4cng_A": {
+      "max_points": null,
+      "original_ca_count": 156,
+      "processed_point_count": 52,
+      "stride": 3
+    },
+    "4djk_A": {
+      "max_points": null,
+      "original_ca_count": 451,
+      "processed_point_count": 151,
+      "stride": 3
+    },
+    "4dz4_A": {
+      "max_points": null,
+      "original_ca_count": 313,
+      "processed_point_count": 105,
+      "stride": 3
+    },
+    "4fmw_A": {
+      "max_points": null,
+      "original_ca_count": 178,
+      "processed_point_count": 60,
+      "stride": 3
+    },
+    "4gge_A": {
+      "max_points": null,
+      "original_ca_count": 257,
+      "processed_point_count": 86,
+      "stride": 3
+    },
+    "4gw9_A": {
+      "max_points": null,
+      "original_ca_count": 628,
+      "processed_point_count": 210,
+      "stride": 3
+    },
+    "4h6v_A": {
+      "max_points": null,
+      "original_ca_count": 272,
+      "processed_point_count": 91,
+      "stride": 3
+    },
+    "4ig7_A": {
+      "max_points": null,
+      "original_ca_count": 231,
+      "processed_point_count": 77,
+      "stride": 3
+    },
+    "4j3c_A": {
+      "max_points": null,
+      "original_ca_count": 232,
+      "processed_point_count": 78,
+      "stride": 3
+    },
+    "4j7h_A": {
+      "max_points": null,
+      "original_ca_count": 446,
+      "processed_point_count": 149,
+      "stride": 3
+    },
+    "4jwh_A": {
+      "max_points": null,
+      "original_ca_count": 185,
+      "processed_point_count": 62,
+      "stride": 3
+    },
+    "4k1c_A": {
+      "max_points": null,
+      "original_ca_count": 374,
+      "processed_point_count": 125,
+      "stride": 3
+    },
+    "4kav_A": {
+      "max_points": null,
+      "original_ca_count": 334,
+      "processed_point_count": 112,
+      "stride": 3
+    },
+    "4kjr_A": {
+      "max_points": null,
+      "original_ca_count": 325,
+      "processed_point_count": 109,
+      "stride": 3
+    },
+    "4kpp_A": {
+      "max_points": null,
+      "original_ca_count": 395,
+      "processed_point_count": 132,
+      "stride": 3
+    },
+    "4ky9_A": {
+      "max_points": null,
+      "original_ca_count": 276,
+      "processed_point_count": 92,
+      "stride": 3
+    },
+    "4l69_A": {
+      "max_points": null,
+      "original_ca_count": 244,
+      "processed_point_count": 82,
+      "stride": 3
+    },
+    "4l7i_A": {
+      "max_points": null,
+      "original_ca_count": 404,
+      "processed_point_count": 135,
+      "stride": 3
+    },
+    "4lrv_A": {
+      "max_points": null,
+      "original_ca_count": 107,
+      "processed_point_count": 36,
+      "stride": 3
+    },
+    "4miv_A": {
+      "max_points": null,
+      "original_ca_count": 484,
+      "processed_point_count": 162,
+      "stride": 3
+    },
+    "4o6b_A": {
+      "max_points": null,
+      "original_ca_count": 319,
+      "processed_point_count": 107,
+      "stride": 3
+    },
+    "4oyg_A": {
+      "max_points": null,
+      "original_ca_count": 411,
+      "processed_point_count": 137,
+      "stride": 3
+    },
+    "4oyg_B": {
+      "max_points": null,
+      "original_ca_count": 411,
+      "processed_point_count": 137,
+      "stride": 3
+    },
+    "4oyg_C": {
+      "max_points": null,
+      "original_ca_count": 411,
+      "processed_point_count": 137,
+      "stride": 3
+    },
+    "4oyg_D": {
+      "max_points": null,
+      "original_ca_count": 411,
+      "processed_point_count": 137,
+      "stride": 3
+    },
+    "4oyg_E": {
+      "max_points": null,
+      "original_ca_count": 411,
+      "processed_point_count": 137,
+      "stride": 3
+    },
+    "4oyg_F": {
+      "max_points": null,
+      "original_ca_count": 411,
+      "processed_point_count": 137,
+      "stride": 3
+    },
+    "4qrv_A": {
+      "max_points": null,
+      "original_ca_count": 301,
+      "processed_point_count": 101,
+      "stride": 3
+    },
+    "4tzo_A": {
+      "max_points": null,
+      "original_ca_count": 236,
+      "processed_point_count": 79,
+      "stride": 3
+    },
+    "4v7h_BE": {
+      "max_points": null,
+      "original_ca_count": 237,
+      "processed_point_count": 79,
+      "stride": 3
+    },
+    "4wgv_A": {
+      "max_points": null,
+      "original_ca_count": 395,
+      "processed_point_count": 132,
+      "stride": 3
+    },
+    "4wkk_A": {
+      "max_points": null,
+      "original_ca_count": 488,
+      "processed_point_count": 163,
+      "stride": 3
+    },
+    "4yzf_A": {
+      "max_points": null,
+      "original_ca_count": 475,
+      "processed_point_count": 159,
+      "stride": 3
+    },
+    "5a42_A": {
+      "max_points": null,
+      "original_ca_count": 1597,
+      "processed_point_count": 533,
+      "stride": 3
+    },
+    "5a7y_A": {
+      "max_points": null,
+      "original_ca_count": 270,
+      "processed_point_count": 90,
+      "stride": 3
+    },
+    "5a7z_A": {
+      "max_points": null,
+      "original_ca_count": 250,
+      "processed_point_count": 84,
+      "stride": 3
+    },
+    "5ap8_A": {
+      "max_points": null,
+      "original_ca_count": 151,
+      "processed_point_count": 51,
+      "stride": 3
+    },
+    "5apg_A": {
+      "max_points": null,
+      "original_ca_count": 184,
+      "processed_point_count": 62,
+      "stride": 3
+    },
+    "5bu6_B": {
+      "max_points": null,
+      "original_ca_count": 264,
+      "processed_point_count": 88,
+      "stride": 3
+    },
+    "5c50_B": {
+      "max_points": null,
+      "original_ca_count": 185,
+      "processed_point_count": 62,
+      "stride": 3
+    },
+    "5c77_A": {
+      "max_points": null,
+      "original_ca_count": 203,
+      "processed_point_count": 68,
+      "stride": 3
+    },
+    "5ce1_A": {
+      "max_points": null,
+      "original_ca_count": 361,
+      "processed_point_count": 121,
+      "stride": 3
+    },
+    "5cjl_A": {
+      "max_points": null,
+      "original_ca_count": 257,
+      "processed_point_count": 86,
+      "stride": 3
+    },
+    "5da0_A": {
+      "max_points": null,
+      "original_ca_count": 467,
+      "processed_point_count": 156,
+      "stride": 3
+    },
+    "5ew5_A": {
+      "max_points": null,
+      "original_ca_count": 490,
+      "processed_point_count": 164,
+      "stride": 3
+    },
+    "5f1b_A": {
+      "max_points": null,
+      "original_ca_count": 158,
+      "processed_point_count": 53,
+      "stride": 3
+    },
+    "5fql_A": {
+      "max_points": null,
+      "original_ca_count": 506,
+      "processed_point_count": 169,
+      "stride": 3
+    },
+    "5g2v_A": {
+      "max_points": null,
+      "original_ca_count": 494,
+      "processed_point_count": 165,
+      "stride": 3
+    },
+    "5gsl_A": {
+      "max_points": null,
+      "original_ca_count": 775,
+      "processed_point_count": 259,
+      "stride": 3
+    },
+    "5hj3_C": {
+      "max_points": null,
+      "original_ca_count": 159,
+      "processed_point_count": 53,
+      "stride": 3
+    },
+    "5kem_A": {
+      "max_points": null,
+      "original_ca_count": 232,
+      "processed_point_count": 78,
+      "stride": 3
+    },
+    "5m87_A": {
+      "max_points": null,
+      "original_ca_count": 494,
+      "processed_point_count": 165,
+      "stride": 3
+    },
+    "5nj9_A": {
+      "max_points": null,
+      "original_ca_count": 480,
+      "processed_point_count": 160,
+      "stride": 3
+    },
+    "5xnu_A": {
+      "max_points": null,
+      "original_ca_count": 323,
+      "processed_point_count": 108,
+      "stride": 3
+    },
+    "5znm_A": {
+      "max_points": null,
+      "original_ca_count": 358,
+      "processed_point_count": 120,
+      "stride": 3
+    },
+    "5zya_D": {
+      "max_points": null,
+      "original_ca_count": 85,
+      "processed_point_count": 29,
+      "stride": 3
+    },
+    "6ac6_A": {
+      "max_points": null,
+      "original_ca_count": 1154,
+      "processed_point_count": 385,
+      "stride": 3
+    },
+    "6acg_A": {
+      "max_points": null,
+      "original_ca_count": 1065,
+      "processed_point_count": 355,
+      "stride": 3
+    },
+    "6d05_A": {
+      "max_points": null,
+      "original_ca_count": 641,
+      "processed_point_count": 214,
+      "stride": 3
+    },
+    "6dzy_A": {
+      "max_points": null,
+      "original_ca_count": 537,
+      "processed_point_count": 179,
+      "stride": 3
+    },
+    "6emv_A": {
+      "max_points": null,
+      "original_ca_count": 170,
+      "processed_point_count": 57,
+      "stride": 3
+    },
+    "6f2w_A": {
+      "max_points": null,
+      "original_ca_count": 433,
+      "processed_point_count": 145,
+      "stride": 3
+    },
+    "6fij_A": {
+      "max_points": null,
+      "original_ca_count": 1275,
+      "processed_point_count": 425,
+      "stride": 3
+    },
+    "6fny_A": {
+      "max_points": null,
+      "original_ca_count": 515,
+      "processed_point_count": 172,
+      "stride": 3
+    },
+    "6hc7_A": {
+      "max_points": null,
+      "original_ca_count": 406,
+      "processed_point_count": 136,
+      "stride": 3
+    },
+    "6hhm_A": {
+      "max_points": null,
+      "original_ca_count": 459,
+      "processed_point_count": 153,
+      "stride": 3
+    },
+    "6hix_BG": {
+      "max_points": null,
+      "original_ca_count": 319,
+      "processed_point_count": 107,
+      "stride": 3
+    },
+    "6i7s_A": {
+      "max_points": null,
+      "original_ca_count": 461,
+      "processed_point_count": 154,
+      "stride": 3
+    },
+    "6j66_A": {
+      "max_points": null,
+      "original_ca_count": 474,
+      "processed_point_count": 158,
+      "stride": 3
+    },
+    "6ki1_A": {
+      "max_points": null,
+      "original_ca_count": 385,
+      "processed_point_count": 129,
+      "stride": 3
+    },
+    "6kku_A": {
+      "max_points": null,
+      "original_ca_count": 537,
+      "processed_point_count": 179,
+      "stride": 3
+    },
+    "6mlk_A": {
+      "max_points": null,
+      "original_ca_count": 257,
+      "processed_point_count": 86,
+      "stride": 3
+    },
+    "6nd4_N": {
+      "max_points": null,
+      "original_ca_count": 678,
+      "processed_point_count": 226,
+      "stride": 3
+    },
+    "6npk_A": {
+      "max_points": null,
+      "original_ca_count": 472,
+      "processed_point_count": 158,
+      "stride": 3
+    },
+    "6npl_A": {
+      "max_points": null,
+      "original_ca_count": 861,
+      "processed_point_count": 287,
+      "stride": 3
+    },
+    "6o7a_A": {
+      "max_points": null,
+      "original_ca_count": 506,
+      "processed_point_count": 169,
+      "stride": 3
+    },
+    "6qn0_A": {
+      "max_points": null,
+      "original_ca_count": 260,
+      "processed_point_count": 87,
+      "stride": 3
+    },
+    "6qqm_A": {
+      "max_points": null,
+      "original_ca_count": 277,
+      "processed_point_count": 93,
+      "stride": 3
+    },
+    "6qqw_A": {
+      "max_points": null,
+      "original_ca_count": 212,
+      "processed_point_count": 71,
+      "stride": 3
+    },
+    "6qqz_A": {
+      "max_points": null,
+      "original_ca_count": 212,
+      "processed_point_count": 71,
+      "stride": 3
+    },
+    "6qx9_BP": {
+      "max_points": null,
+      "original_ca_count": 100,
+      "processed_point_count": 34,
+      "stride": 3
+    },
+    "6rvx_A": {
+      "max_points": null,
+      "original_ca_count": 430,
+      "processed_point_count": 144,
+      "stride": 3
+    },
+    "6scf_A": {
+      "max_points": null,
+      "original_ca_count": 113,
+      "processed_point_count": 38,
+      "stride": 3
+    },
+    "6sj9_A": {
+      "max_points": null,
+      "original_ca_count": 642,
+      "processed_point_count": 214,
+      "stride": 3
+    },
+    "6uev_A": {
+      "max_points": null,
+      "original_ca_count": 219,
+      "processed_point_count": 73,
+      "stride": 3
+    },
+    "6zr9_A": {
+      "max_points": null,
+      "original_ca_count": 258,
+      "processed_point_count": 86,
+      "stride": 3
+    },
+    "7cww_A": {
+      "max_points": null,
+      "original_ca_count": 350,
+      "processed_point_count": 117,
+      "stride": 3
+    },
+    "7qi6_5": {
+      "max_points": null,
+      "original_ca_count": 393,
+      "processed_point_count": 131,
+      "stride": 3
+    },
+    "8axz_A": {
+      "max_points": null,
+      "original_ca_count": 379,
+      "processed_point_count": 127,
+      "stride": 3
+    }
+  },
+  "inputs": {
+    "backbones_path": "data/knotprot/research_2026_10/external/backbones.npz",
+    "backbones_sha256": "2583627238493e0f50ee38d0a197df68a6c2c2c3825ebadef3f04db90708c113",
+    "labels_path": "data/knotprot/research_2026_10/external/knotprot_labels.csv",
+    "labels_sha256": "c3abfc706d5f995b1508571576edffb5e36f2601fb591114d1db3790b278496d"
+  },
+  "matched_chain_ids": [
+    "2hfx_A",
+    "2o3a_A",
+    "2ofz_A",
+    "2qmm_A",
+    "2qwv_A",
+    "2qzu_A",
+    "2rh3_A",
+    "2v3j_A",
+    "2v64_A",
+    "2vea_A",
+    "2vqr_A",
+    "2w5q_A",
+    "2wit_A",
+    "2wxz_C",
+    "2xq2_A",
+    "2xr9_A",
+    "2xtj_A",
+    "2yfk_A",
+    "2zkt_A",
+    "3a7s_A",
+    "3b1b_A",
+    "3b5q_A",
+    "3bbd_A",
+    "3bjx_A",
+    "3cm8_A",
+    "3csy_I",
+    "3cwo_X",
+    "3dcm_X",
+    "3e2d_A",
+    "3ed7_A",
+    "3en9_A",
+    "3fr7_A",
+    "3fsg_A",
+    "3gi8_C",
+    "3gyq_A",
+    "3ic6_A",
+    "3ihr_A",
+    "3ilk_A",
+    "3iqk_A",
+    "3j7y_5",
+    "3j7y_s",
+    "3jyw_E",
+    "3kty_A",
+    "3l1l_A",
+    "3l8u_A",
+    "3lxq_A",
+    "3m7v_A",
+    "3mfb_A",
+    "3mlg_A",
+    "3mt5_A",
+    "3o0p_A",
+    "3o7b_A",
+    "3pzl_A",
+    "3q3q_A",
+    "3qe7_A",
+    "3qtd_A",
+    "3rfy_A",
+    "3s88_I",
+    "3sig_A",
+    "3v5u_A",
+    "3x2d_A",
+    "4bin_A",
+    "4bxw_A",
+    "4cbp_A",
+    "4chj_A",
+    "4cng_A",
+    "4djk_A",
+    "4dz4_A",
+    "4fmw_A",
+    "4gge_A",
+    "4gw9_A",
+    "4h6v_A",
+    "4ig7_A",
+    "4j3c_A",
+    "4j7h_A",
+    "4jwh_A",
+    "4k1c_A",
+    "4kav_A",
+    "4kjr_A",
+    "4kpp_A",
+    "4ky9_A",
+    "4l69_A",
+    "4l7i_A",
+    "4lrv_A",
+    "4miv_A",
+    "4o6b_A",
+    "4oyg_A",
+    "4oyg_B",
+    "4oyg_C",
+    "4oyg_D",
+    "4oyg_E",
+    "4oyg_F",
+    "4qrv_A",
+    "4tzo_A",
+    "4v7h_BE",
+    "4wgv_A",
+    "4wkk_A",
+    "4yzf_A",
+    "5a42_A",
+    "5a7y_A",
+    "5a7z_A",
+    "5ap8_A",
+    "5apg_A",
+    "5bu6_B",
+    "5c50_B",
+    "5c77_A",
+    "5ce1_A",
+    "5cjl_A",
+    "5da0_A",
+    "5ew5_A",
+    "5f1b_A",
+    "5fql_A",
+    "5g2v_A",
+    "5gsl_A",
+    "5hj3_C",
+    "5kem_A",
+    "5m87_A",
+    "5nj9_A",
+    "5xnu_A",
+    "5znm_A",
+    "5zya_D",
+    "6ac6_A",
+    "6acg_A",
+    "6d05_A",
+    "6dzy_A",
+    "6emv_A",
+    "6f2w_A",
+    "6fij_A",
+    "6fny_A",
+    "6hc7_A",
+    "6hhm_A",
+    "6hix_BG",
+    "6i7s_A",
+    "6j66_A",
+    "6ki1_A",
+    "6kku_A",
+    "6mlk_A",
+    "6nd4_N",
+    "6npk_A",
+    "6npl_A",
+    "6o7a_A",
+    "6qn0_A",
+    "6qqm_A",
+    "6qqw_A",
+    "6qqz_A",
+    "6qx9_BP",
+    "6rvx_A",
+    "6scf_A",
+    "6sj9_A",
+    "6uev_A",
+    "6zr9_A",
+    "7cww_A",
+    "7qi6_5",
+    "8axz_A"
+  ],
+  "matched_chain_ids_sha256": "4742509b7ab1d80e2940bb4b327829fb1acfcf6ce8bc88bf4b10ee84fdeaa695",
+  "outputs": {
+    "dataset_path": "data/knotprot/research_2026_10/external/hybrid_dataset_stride3_uncapped.npz",
+    "dataset_sha256": "b7f455d36a9eb0c3a07f26afcd6c5a54da8afcd77937543c645b7c5b532bab1b",
+    "manifest_path": "data/knotprot/research_2026_10/external/hybrid_manifest_stride3_uncapped.csv",
+    "manifest_sha256": "93140efd96e86b7debb2f8ccf6289a756062e1ef725c51a1dccc48f1fc06eb5c"
+  },
+  "parameters": {
+    "limit": null,
+    "max_points": null,
+    "offset": 0,
+    "stride": 3,
+    "viewpoints": 32
+  },
+  "schema_version": 1,
+  "warning": "Projection-derived features are heuristic; subsampling is not guaranteed to preserve topology."
+}

@@ -10,6 +10,8 @@ import numpy as np
 class ProteinBackbone:
     chain_id: str
     ca_coords: np.ndarray
+    residue_ids: Optional[Tuple[str, ...]] = None
+    gap_after: Optional[np.ndarray] = None
 
 
 @dataclass(frozen=True)
@@ -24,9 +26,24 @@ class Crossing:
 
 
 def extract_ca_polyline(pdb_path: str, chain_id: Optional[str] = None) -> ProteinBackbone:
-    chains: Dict[str, List[Tuple[int, np.ndarray]]] = {}
+    # Select one C-alpha per residue, preferring the highest-occupancy alternate
+    # location (blank altLoc wins ties). Keep insertion codes to avoid collapsing
+    # distinct residues that share a sequence number.
+    chains: Dict[str, Dict[Tuple[int, str], Tuple[float, str, np.ndarray]]] = {}
+    saw_model = False
+    in_first_model = False
     with open(pdb_path, "r") as f:
         for line in f:
+            if line.startswith("MODEL"):
+                if saw_model:
+                    break
+                saw_model = True
+                in_first_model = True
+                continue
+            if line.startswith("ENDMDL") and in_first_model:
+                break
+            if saw_model and not in_first_model:
+                continue
             if not line.startswith("ATOM"):
                 continue
             atom_name = line[12:16].strip()
@@ -35,12 +52,19 @@ def extract_ca_polyline(pdb_path: str, chain_id: Optional[str] = None) -> Protei
             chain = line[21].strip() or "_"
             try:
                 res_seq = int(line[22:26].strip())
+                insertion = line[26].strip()
                 x = float(line[30:38].strip())
                 y = float(line[38:46].strip())
                 z = float(line[46:54].strip())
+                occupancy = float(line[54:60].strip() or 0.0)
             except ValueError:
                 continue
-            chains.setdefault(chain, []).append((res_seq, np.array([x, y, z], dtype=float)))
+            altloc = line[16].strip()
+            residue_key = (res_seq, insertion)
+            candidate = (occupancy, altloc, np.array([x, y, z], dtype=float))
+            prior = chains.setdefault(chain, {}).get(residue_key)
+            if prior is None or (occupancy, altloc == "") > (prior[0], prior[1] == ""):
+                chains[chain][residue_key] = candidate
 
     if not chains:
         raise ValueError("No CA atoms found in PDB file.")
@@ -51,9 +75,15 @@ def extract_ca_polyline(pdb_path: str, chain_id: Optional[str] = None) -> Protei
     if chain_id not in chains:
         raise ValueError(f"Chain '{chain_id}' not found in PDB file.")
 
-    coords = sorted(chains[chain_id], key=lambda t: t[0])
-    ca_coords = np.stack([c for _, c in coords], axis=0)
-    return ProteinBackbone(chain_id=chain_id, ca_coords=ca_coords)
+    residues = sorted(chains[chain_id].items(), key=lambda t: (t[0][0], t[0][1]))
+    ca_coords = np.stack([value[2] for _, value in residues], axis=0)
+    residue_ids = tuple(f"{seq}{icode}" for (seq, icode), _ in residues)
+    gap_after = np.array([
+        (residues[i + 1][0][0] - residues[i][0][0] > 1)
+        for i in range(len(residues) - 1)
+    ], dtype=bool)
+    return ProteinBackbone(chain_id=chain_id, ca_coords=ca_coords,
+                           residue_ids=residue_ids, gap_after=gap_after)
 
 
 def sample_viewpoints(n: int = 32) -> np.ndarray:
@@ -106,19 +136,42 @@ def _seg_intersect(p1, p2, q1, q2):
     return None
 
 
-def detect_crossings(xy: np.ndarray, depth: np.ndarray) -> List[Crossing]:
+def detect_crossings(xy: np.ndarray, depth: np.ndarray,
+                     gap_after: Optional[np.ndarray] = None) -> List[Crossing]:
     n = len(xy)
+    if gap_after is None:
+        gap_after = np.zeros(max(0, n - 1), dtype=bool)
+    if len(gap_after) != max(0, n - 1):
+        raise ValueError("gap_after must have one entry per adjacent point pair")
     crossings: List[Crossing] = []
     for i in range(n - 1):
+        if gap_after[i]:
+            continue
         p1, p2 = xy[i], xy[i + 1]
-        for j in range(i + 2, n - 1):
-            if j == i + 1:
-                continue
-            q1, q2 = xy[j], xy[j + 1]
-            hit = _seg_intersect(p1, p2, q1, q2)
-            if hit is None:
-                continue
-            t, u, pt = hit
+        js = np.arange(i + 2, n - 1)
+        if not len(js):
+            continue
+        js = js[~gap_after[js]]
+        if not len(js):
+            continue
+        q1, q2 = xy[js], xy[js + 1]
+        r = p2 - p1
+        s = q2 - q1
+        rx_s = r[0] * s[:, 1] - r[1] * s[:, 0]
+        qmp = q1 - p1
+        qmpxr = qmp[:, 0] * r[1] - qmp[:, 1] * r[0]
+        valid_denominator = np.abs(rx_s) >= 1e-9
+        t_values = np.zeros(len(js), dtype=float)
+        u_values = np.zeros(len(js), dtype=float)
+        t_values[valid_denominator] = (
+            qmp[valid_denominator, 0] * s[valid_denominator, 1]
+            - qmp[valid_denominator, 1] * s[valid_denominator, 0]
+        ) / rx_s[valid_denominator]
+        u_values[valid_denominator] = qmpxr[valid_denominator] / rx_s[valid_denominator]
+        valid = valid_denominator & (t_values > 0) & (t_values < 1) & (u_values > 0) & (u_values < 1)
+        for pos in np.flatnonzero(valid):
+            j, t, u = int(js[pos]), float(t_values[pos]), float(u_values[pos])
+            pt = p1 + t * r
             # compute depth at intersection along each segment
             zi = depth[i] + t * (depth[i + 1] - depth[i])
             zj = depth[j] + u * (depth[j + 1] - depth[j])
@@ -157,4 +210,3 @@ def gauss_code_from_crossings(crossings: List[Crossing], n_points: int = 0) -> L
     for _, __, cid, is_over in events:
         gauss.append(cid if is_over else -cid)
     return gauss
-

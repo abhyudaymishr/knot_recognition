@@ -1,0 +1,1498 @@
+{
+  "chains_changed_by_preprocessing": [
+    "2hfx_A",
+    "2o3a_A",
+    "2ofz_A",
+    "2qmm_A",
+    "2qwv_A",
+    "2qzu_A",
+    "2rh3_A",
+    "2v3j_A",
+    "2v64_A",
+    "2vea_A",
+    "2vqr_A",
+    "2w5q_A",
+    "2wit_A",
+    "2wxz_C",
+    "2xq2_A",
+    "2xr9_A",
+    "2xtj_A",
+    "2yfk_A",
+    "2zkt_A",
+    "3a7s_A",
+    "3b1b_A",
+    "3b5q_A",
+    "3bbd_A",
+    "3bjx_A",
+    "3cm8_A",
+    "3csy_I",
+    "3cwo_X",
+    "3dcm_X",
+    "3e2d_A",
+    "3ed7_A",
+    "3en9_A",
+    "3fr7_A",
+    "3fsg_A",
+    "3gi8_C",
+    "3gyq_A",
+    "3ic6_A",
+    "3ihr_A",
+    "3ilk_A",
+    "3iqk_A",
+    "3j7y_5",
+    "3j7y_s",
+    "3jyw_E",
+    "3kty_A",
+    "3l1l_A",
+    "3l8u_A",
+    "3lxq_A",
+    "3m7v_A",
+    "3mfb_A",
+    "3mlg_A",
+    "3mt5_A",
+    "3o0p_A",
+    "3o7b_A",
+    "3pzl_A",
+    "3q3q_A",
+    "3qe7_A",
+    "3qtd_A",
+    "3rfy_A",
+    "3s88_I",
+    "3sig_A",
+    "3v5u_A",
+    "3x2d_A",
+    "4bin_A",
+    "4bxw_A",
+    "4cbp_A",
+    "4chj_A",
+    "4cng_A",
+    "4djk_A",
+    "4dz4_A",
+    "4fmw_A",
+    "4gge_A",
+    "4gw9_A",
+    "4h6v_A",
+    "4ig7_A",
+    "4j3c_A",
+    "4j7h_A",
+    "4jwh_A",
+    "4k1c_A",
+    "4kav_A",
+    "4kjr_A",
+    "4kpp_A",
+    "4ky9_A",
+    "4l69_A",
+    "4l7i_A",
+    "4lrv_A",
+    "4miv_A",
+    "4o6b_A",
+    "4oyg_A",
+    "4oyg_B",
+    "4oyg_C",
+    "4oyg_D",
+    "4oyg_E",
+    "4oyg_F",
+    "4qrv_A",
+    "4tzo_A",
+    "4v7h_BE",
+    "4wgv_A",
+    "4wkk_A",
+    "4yzf_A",
+    "5a42_A",
+    "5a7y_A",
+    "5a7z_A",
+    "5ap8_A",
+    "5apg_A",
+    "5bu6_B",
+    "5c50_B",
+    "5c77_A",
+    "5ce1_A",
+    "5cjl_A",
+    "5da0_A",
+    "5ew5_A",
+    "5f1b_A",
+    "5fql_A",
+    "5g2v_A",
+    "5gsl_A",
+    "5hj3_C",
+    "5kem_A",
+    "5m87_A",
+    "5nj9_A",
+    "5xnu_A",
+    "5znm_A",
+    "5zya_D",
+    "6ac6_A",
+    "6acg_A",
+    "6d05_A",
+    "6dzy_A",
+    "6emv_A",
+    "6f2w_A",
+    "6fij_A",
+    "6fny_A",
+    "6hc7_A",
+    "6hhm_A",
+    "6hix_BG",
+    "6i7s_A",
+    "6j66_A",
+    "6ki1_A",
+    "6kku_A",
+    "6mlk_A",
+    "6nd4_N",
+    "6npk_A",
+    "6npl_A",
+    "6o7a_A",
+    "6qn0_A",
+    "6qqm_A",
+    "6qqw_A",
+    "6qqz_A",
+    "6qx9_BP",
+    "6rvx_A",
+    "6scf_A",
+    "6sj9_A",
+    "6uev_A",
+    "6zr9_A",
+    "7cww_A",
+    "7qi6_5",
+    "8axz_A"
+  ],
+  "development_source": "data/knotprot/research_2026_10/development/hybrid_dataset.npz",
+  "external_full": "data/knotprot/research_2026_10/external/hybrid_dataset_fullres.npz",
+  "external_reduced": "data/knotprot/research_2026_10/external/hybrid_dataset.npz",
+  "full_parameters": {
+    "limit": null,
+    "max_points": null,
+    "offset": 0,
+    "stride": 1,
+    "viewpoints": 32
+  },
+  "label_check": "K/S labels are identical because the original KnotProt chain annotation is carried through; this is not an independent topology check.",
+  "metrics": {
+    "hybrid/full": {
+      "accuracy": 0.6298701298701299,
+      "balanced_accuracy": 0.6036823349736976,
+      "brier_score": 0.434141677361431,
+      "chain_bootstrap_95ci": {
+        "accuracy": [
+          0.5714285714285714,
+          0.6818181818181818
+        ],
+        "balanced_accuracy": [
+          0.5453928389614797,
+          0.6620566774138809
+        ],
+        "macro_f1": [
+          0.4864052927064547,
+          0.6426237272081459
+        ]
+      },
+      "confusion_matrix": [
+        [
+          19,
+          52
+        ],
+        [
+          5,
+          78
+        ]
+      ],
+      "ece_10_bins": 0.11540006041160844,
+      "log_loss": 0.6316006438216805,
+      "macro_f1": 0.5661971830985916,
+      "n_chains": 154,
+      "per_class_recall": {
+        "K": 0.2676056338028169,
+        "S": 0.9397590361445783
+      }
+    },
+    "hybrid/reduced": {
+      "accuracy": 0.7012987012987013,
+      "balanced_accuracy": 0.7055828949601222,
+      "brier_score": 0.4116551196434991,
+      "chain_bootstrap_95ci": {
+        "accuracy": [
+          0.6298701298701299,
+          0.7727272727272727
+        ],
+        "balanced_accuracy": [
+          0.6332088919056508,
+          0.7739691159002206
+        ],
+        "macro_f1": [
+          0.6291038154392192,
+          0.7715791454921889
+        ]
+      },
+      "confusion_matrix": [
+        [
+          54,
+          17
+        ],
+        [
+          29,
+          54
+        ]
+      ],
+      "ece_10_bins": 0.07027334494089642,
+      "log_loss": 0.6061294738548015,
+      "macro_f1": 0.7012987012987013,
+      "n_chains": 154,
+      "per_class_recall": {
+        "K": 0.7605633802816901,
+        "S": 0.6506024096385542
+      }
+    },
+    "image/full": {
+      "accuracy": 0.6233766233766234,
+      "balanced_accuracy": 0.5966400814525709,
+      "brier_score": 0.4345710850230065,
+      "chain_bootstrap_95ci": {
+        "accuracy": [
+          0.5714285714285714,
+          0.6818181818181818
+        ],
+        "balanced_accuracy": [
+          0.5413202104191414,
+          0.656965891735958
+        ],
+        "macro_f1": [
+          0.4793779580797837,
+          0.6313089363365418
+        ]
+      },
+      "confusion_matrix": [
+        [
+          18,
+          53
+        ],
+        [
+          5,
+          78
+        ]
+      ],
+      "ece_10_bins": 0.1152322982890769,
+      "log_loss": 0.6282104472479308,
+      "macro_f1": 0.5559753430105389,
+      "n_chains": 154,
+      "per_class_recall": {
+        "K": 0.2535211267605634,
+        "S": 0.9397590361445783
+      }
+    },
+    "image/reduced": {
+      "accuracy": 0.7142857142857143,
+      "balanced_accuracy": 0.7176310877312064,
+      "brier_score": 0.40894549463576696,
+      "chain_bootstrap_95ci": {
+        "accuracy": [
+          0.6428571428571429,
+          0.7792207792207793
+        ],
+        "balanced_accuracy": [
+          0.648203376887833,
+          0.7840043271678261
+        ],
+        "macro_f1": [
+          0.6427215590331969,
+          0.7791835357624831
+        ]
+      },
+      "confusion_matrix": [
+        [
+          54,
+          17
+        ],
+        [
+          27,
+          56
+        ]
+      ],
+      "ece_10_bins": 0.08050159509981136,
+      "log_loss": 0.6014571337423703,
+      "macro_f1": 0.7142375168690958,
+      "n_chains": 154,
+      "per_class_recall": {
+        "K": 0.7605633802816901,
+        "S": 0.6746987951807228
+      }
+    },
+    "projection_features/full": {
+      "accuracy": 0.564935064935065,
+      "balanced_accuracy": 0.5302053283556762,
+      "brier_score": 0.47805242656327546,
+      "chain_bootstrap_95ci": {
+        "accuracy": [
+          0.5324675324675324,
+          0.6038961038961039
+        ],
+        "balanced_accuracy": [
+          0.49499406075004243,
+          0.5704225352112676
+        ],
+        "macro_f1": [
+          0.367965367965368,
+          0.49697456492637215
+        ]
+      },
+      "confusion_matrix": [
+        [
+          6,
+          65
+        ],
+        [
+          2,
+          81
+        ]
+      ],
+      "ece_10_bins": 0.07887437095572739,
+      "log_loss": 0.6696420331027826,
+      "macro_f1": 0.4296611574816207,
+      "n_chains": 154,
+      "per_class_recall": {
+        "K": 0.08450704225352113,
+        "S": 0.9759036144578314
+      }
+    },
+    "projection_features/reduced": {
+      "accuracy": 0.7142857142857143,
+      "balanced_accuracy": 0.7105039877821144,
+      "brier_score": 0.4186875686797251,
+      "chain_bootstrap_95ci": {
+        "accuracy": [
+          0.6428571428571429,
+          0.7792207792207793
+        ],
+        "balanced_accuracy": [
+          0.6360936704564738,
+          0.7788902087222127
+        ],
+        "macro_f1": [
+          0.6360724617225458,
+          0.7786233722306781
+        ]
+      },
+      "confusion_matrix": [
+        [
+          47,
+          24
+        ],
+        [
+          20,
+          63
+        ]
+      ],
+      "ece_10_bins": 0.1123625378009855,
+      "log_loss": 0.6072614783389353,
+      "macro_f1": 0.7111679454390452,
+      "n_chains": 154,
+      "per_class_recall": {
+        "K": 0.6619718309859155,
+        "S": 0.7590361445783133
+      }
+    }
+  },
+  "n_chains_changed_by_preprocessing": 154,
+  "per_modality_prediction_flips_on_changed_chains": {
+    "hybrid": {
+      "count": 59,
+      "total_changed": 154
+    },
+    "image": {
+      "count": 58,
+      "total_changed": 154
+    },
+    "projection_features": {
+      "count": 59,
+      "total_changed": 154
+    }
+  },
+  "projection_feature_drift_on_changed_chains": [
+    {
+      "key": "2hfx_A",
+      "mean_feature_cosine": 0.9891838431358337,
+      "mean_feature_l1": 0.002857571467757225,
+      "reduced_points": 87,
+      "uncapped_points": 259
+    },
+    {
+      "key": "2o3a_A",
+      "mean_feature_cosine": 0.8774690628051758,
+      "mean_feature_l1": 0.011651098728179932,
+      "reduced_points": 54,
+      "uncapped_points": 161
+    },
+    {
+      "key": "2ofz_A",
+      "mean_feature_cosine": 0.9490851759910583,
+      "mean_feature_l1": 0.0064632343128323555,
+      "reduced_points": 44,
+      "uncapped_points": 132
+    },
+    {
+      "key": "2qmm_A",
+      "mean_feature_cosine": 0.9555801153182983,
+      "mean_feature_l1": 0.0056575448252260685,
+      "reduced_points": 65,
+      "uncapped_points": 195
+    },
+    {
+      "key": "2qwv_A",
+      "mean_feature_cosine": 0.954308032989502,
+      "mean_feature_l1": 0.0058940439485013485,
+      "reduced_points": 63,
+      "uncapped_points": 188
+    },
+    {
+      "key": "2qzu_A",
+      "mean_feature_cosine": 0.9961787462234497,
+      "mean_feature_l1": 0.0018656507600098848,
+      "reduced_points": 155,
+      "uncapped_points": 465
+    },
+    {
+      "key": "2rh3_A",
+      "mean_feature_cosine": 0.7347612977027893,
+      "mean_feature_l1": 0.022463887929916382,
+      "reduced_points": 41,
+      "uncapped_points": 121
+    },
+    {
+      "key": "2v3j_A",
+      "mean_feature_cosine": 0.9706456661224365,
+      "mean_feature_l1": 0.00477468129247427,
+      "reduced_points": 73,
+      "uncapped_points": 217
+    },
+    {
+      "key": "2v64_A",
+      "mean_feature_cosine": 0.960558295249939,
+      "mean_feature_l1": 0.00590553367510438,
+      "reduced_points": 70,
+      "uncapped_points": 210
+    },
+    {
+      "key": "2vea_A",
+      "mean_feature_cosine": 0.9948846101760864,
+      "mean_feature_l1": 0.0020674816332757473,
+      "reduced_points": 167,
+      "uncapped_points": 500
+    },
+    {
+      "key": "2vqr_A",
+      "mean_feature_cosine": 0.9968106150627136,
+      "mean_feature_l1": 0.001618248992599547,
+      "reduced_points": 171,
+      "uncapped_points": 511
+    },
+    {
+      "key": "2w5q_A",
+      "mean_feature_cosine": 0.9935082197189331,
+      "mean_feature_l1": 0.0021762268152087927,
+      "reduced_points": 142,
+      "uncapped_points": 424
+    },
+    {
+      "key": "2wit_A",
+      "mean_feature_cosine": 0.9910017848014832,
+      "mean_feature_l1": 0.0026831061113625765,
+      "reduced_points": 177,
+      "uncapped_points": 531
+    },
+    {
+      "key": "2wxz_C",
+      "mean_feature_cosine": 0.9952566623687744,
+      "mean_feature_l1": 0.0019713572692126036,
+      "reduced_points": 138,
+      "uncapped_points": 413
+    },
+    {
+      "key": "2xq2_A",
+      "mean_feature_cosine": 0.9926676750183105,
+      "mean_feature_l1": 0.002456213813275099,
+      "reduced_points": 180,
+      "uncapped_points": 538
+    },
+    {
+      "key": "2xr9_A",
+      "mean_feature_cosine": 0.998942494392395,
+      "mean_feature_l1": 0.0008399186772294343,
+      "reduced_points": 261,
+      "uncapped_points": 783
+    },
+    {
+      "key": "2xtj_A",
+      "mean_feature_cosine": 0.9852129220962524,
+      "mean_feature_l1": 0.0033679534681141376,
+      "reduced_points": 81,
+      "uncapped_points": 242
+    },
+    {
+      "key": "2yfk_A",
+      "mean_feature_cosine": 0.9919456243515015,
+      "mean_feature_l1": 0.002560534281656146,
+      "reduced_points": 129,
+      "uncapped_points": 385
+    },
+    {
+      "key": "2zkt_A",
+      "mean_feature_cosine": 0.9911394715309143,
+      "mean_feature_l1": 0.0026716249994933605,
+      "reduced_points": 110,
+      "uncapped_points": 330
+    },
+    {
+      "key": "3a7s_A",
+      "mean_feature_cosine": 0.9628790616989136,
+      "mean_feature_l1": 0.005022063851356506,
+      "reduced_points": 68,
+      "uncapped_points": 204
+    },
+    {
+      "key": "3b1b_A",
+      "mean_feature_cosine": 0.9936959147453308,
+      "mean_feature_l1": 0.0022636225912719965,
+      "reduced_points": 104,
+      "uncapped_points": 310
+    },
+    {
+      "key": "3b5q_A",
+      "mean_feature_cosine": 0.9959530830383301,
+      "mean_feature_l1": 0.0018212527502328157,
+      "reduced_points": 155,
+      "uncapped_points": 464
+    },
+    {
+      "key": "3bbd_A",
+      "mean_feature_cosine": 0.9639477729797363,
+      "mean_feature_l1": 0.0055472468957304955,
+      "reduced_points": 68,
+      "uncapped_points": 204
+    },
+    {
+      "key": "3bjx_A",
+      "mean_feature_cosine": 0.9727063179016113,
+      "mean_feature_l1": 0.004595601465553045,
+      "reduced_points": 104,
+      "uncapped_points": 311
+    },
+    {
+      "key": "3cm8_A",
+      "mean_feature_cosine": 0.9911999702453613,
+      "mean_feature_l1": 0.0027933355886489153,
+      "reduced_points": 145,
+      "uncapped_points": 435
+    },
+    {
+      "key": "3csy_I",
+      "mean_feature_cosine": 0.9804641008377075,
+      "mean_feature_l1": 0.0037552497815340757,
+      "reduced_points": 79,
+      "uncapped_points": 236
+    },
+    {
+      "key": "3cwo_X",
+      "mean_feature_cosine": 0.9734496474266052,
+      "mean_feature_l1": 0.004405464977025986,
+      "reduced_points": 79,
+      "uncapped_points": 236
+    },
+    {
+      "key": "3dcm_X",
+      "mean_feature_cosine": 0.9454959630966187,
+      "mean_feature_l1": 0.0065977000631392,
+      "reduced_points": 63,
+      "uncapped_points": 188
+    },
+    {
+      "key": "3e2d_A",
+      "mean_feature_cosine": 0.9960722923278809,
+      "mean_feature_l1": 0.0018112402176484466,
+      "reduced_points": 168,
+      "uncapped_points": 502
+    },
+    {
+      "key": "3ed7_A",
+      "mean_feature_cosine": 0.9894081354141235,
+      "mean_feature_l1": 0.00291892746463418,
+      "reduced_points": 95,
+      "uncapped_points": 284
+    },
+    {
+      "key": "3en9_A",
+      "mean_feature_cosine": 0.9962118864059448,
+      "mean_feature_l1": 0.0017091557383537292,
+      "reduced_points": 173,
+      "uncapped_points": 519
+    },
+    {
+      "key": "3fr7_A",
+      "mean_feature_cosine": 0.9936364889144897,
+      "mean_feature_l1": 0.0022237380035221577,
+      "reduced_points": 165,
+      "uncapped_points": 495
+    },
+    {
+      "key": "3fsg_A",
+      "mean_feature_cosine": 0.9799066781997681,
+      "mean_feature_l1": 0.0040765246376395226,
+      "reduced_points": 89,
+      "uncapped_points": 267
+    },
+    {
+      "key": "3gi8_C",
+      "mean_feature_cosine": 0.9873638153076172,
+      "mean_feature_l1": 0.0032877796329557896,
+      "reduced_points": 145,
+      "uncapped_points": 435
+    },
+    {
+      "key": "3gyq_A",
+      "mean_feature_cosine": 0.969403088092804,
+      "mean_feature_l1": 0.005064405035227537,
+      "reduced_points": 87,
+      "uncapped_points": 261
+    },
+    {
+      "key": "3ic6_A",
+      "mean_feature_cosine": 0.956964373588562,
+      "mean_feature_l1": 0.005876356270164251,
+      "reduced_points": 71,
+      "uncapped_points": 213
+    },
+    {
+      "key": "3ihr_A",
+      "mean_feature_cosine": 0.9719850420951843,
+      "mean_feature_l1": 0.0048820022493600845,
+      "reduced_points": 94,
+      "uncapped_points": 282
+    },
+    {
+      "key": "3ilk_A",
+      "mean_feature_cosine": 0.9384645819664001,
+      "mean_feature_l1": 0.0069275228306651115,
+      "reduced_points": 80,
+      "uncapped_points": 239
+    },
+    {
+      "key": "3iqk_A",
+      "mean_feature_cosine": 0.9853001832962036,
+      "mean_feature_l1": 0.0034392266534268856,
+      "reduced_points": 86,
+      "uncapped_points": 257
+    },
+    {
+      "key": "3j7y_5",
+      "mean_feature_cosine": 0.9907941818237305,
+      "mean_feature_l1": 0.002730185631662607,
+      "reduced_points": 126,
+      "uncapped_points": 376
+    },
+    {
+      "key": "3j7y_s",
+      "mean_feature_cosine": 0.9915885925292969,
+      "mean_feature_l1": 0.002767399651929736,
+      "reduced_points": 124,
+      "uncapped_points": 370
+    },
+    {
+      "key": "3jyw_E",
+      "mean_feature_cosine": 0.9732271432876587,
+      "mean_feature_l1": 0.0047297291457653046,
+      "reduced_points": 79,
+      "uncapped_points": 237
+    },
+    {
+      "key": "3kty_A",
+      "mean_feature_cosine": 0.9256279468536377,
+      "mean_feature_l1": 0.007644681725651026,
+      "reduced_points": 56,
+      "uncapped_points": 167
+    },
+    {
+      "key": "3l1l_A",
+      "mean_feature_cosine": 0.9856103658676147,
+      "mean_feature_l1": 0.0034844919573515654,
+      "reduced_points": 141,
+      "uncapped_points": 423
+    },
+    {
+      "key": "3l8u_A",
+      "mean_feature_cosine": 0.9031864404678345,
+      "mean_feature_l1": 0.009572798386216164,
+      "reduced_points": 52,
+      "uncapped_points": 154
+    },
+    {
+      "key": "3lxq_A",
+      "mean_feature_cosine": 0.9941844344139099,
+      "mean_feature_l1": 0.002158769406378269,
+      "reduced_points": 137,
+      "uncapped_points": 409
+    },
+    {
+      "key": "3m7v_A",
+      "mean_feature_cosine": 0.9951571226119995,
+      "mean_feature_l1": 0.001918545225635171,
+      "reduced_points": 134,
+      "uncapped_points": 401
+    },
+    {
+      "key": "3mfb_A",
+      "mean_feature_cosine": 0.9442790746688843,
+      "mean_feature_l1": 0.0067581115290522575,
+      "reduced_points": 50,
+      "uncapped_points": 150
+    },
+    {
+      "key": "3mlg_A",
+      "mean_feature_cosine": 0.7277829647064209,
+      "mean_feature_l1": 0.023412998765707016,
+      "reduced_points": 54,
+      "uncapped_points": 161
+    },
+    {
+      "key": "3mt5_A",
+      "mean_feature_cosine": 0.9980868101119995,
+      "mean_feature_l1": 0.0013027057284489274,
+      "reduced_points": 198,
+      "uncapped_points": 593
+    },
+    {
+      "key": "3o0p_A",
+      "mean_feature_cosine": 0.9793505668640137,
+      "mean_feature_l1": 0.00423604529350996,
+      "reduced_points": 65,
+      "uncapped_points": 194
+    },
+    {
+      "key": "3o7b_A",
+      "mean_feature_cosine": 0.9644691944122314,
+      "mean_feature_l1": 0.005506709683686495,
+      "reduced_points": 72,
+      "uncapped_points": 216
+    },
+    {
+      "key": "3pzl_A",
+      "mean_feature_cosine": 0.9818618297576904,
+      "mean_feature_l1": 0.003835126757621765,
+      "reduced_points": 97,
+      "uncapped_points": 290
+    },
+    {
+      "key": "3q3q_A",
+      "mean_feature_cosine": 0.997188150882721,
+      "mean_feature_l1": 0.0014932149788364768,
+      "reduced_points": 176,
+      "uncapped_points": 526
+    },
+    {
+      "key": "3qe7_A",
+      "mean_feature_cosine": 0.983022928237915,
+      "mean_feature_l1": 0.003870262298732996,
+      "reduced_points": 136,
+      "uncapped_points": 407
+    },
+    {
+      "key": "3qtd_A",
+      "mean_feature_cosine": 0.9957767724990845,
+      "mean_feature_l1": 0.001810986315831542,
+      "reduced_points": 148,
+      "uncapped_points": 442
+    },
+    {
+      "key": "3rfy_A",
+      "mean_feature_cosine": 0.9863914251327515,
+      "mean_feature_l1": 0.003283875761553645,
+      "reduced_points": 119,
+      "uncapped_points": 356
+    },
+    {
+      "key": "3s88_I",
+      "mean_feature_cosine": 0.9821822047233582,
+      "mean_feature_l1": 0.00371655635535717,
+      "reduced_points": 83,
+      "uncapped_points": 249
+    },
+    {
+      "key": "3sig_A",
+      "mean_feature_cosine": 0.9753461480140686,
+      "mean_feature_l1": 0.004572934005409479,
+      "reduced_points": 89,
+      "uncapped_points": 265
+    },
+    {
+      "key": "3v5u_A",
+      "mean_feature_cosine": 0.9571406841278076,
+      "mean_feature_l1": 0.005861767567694187,
+      "reduced_points": 99,
+      "uncapped_points": 297
+    },
+    {
+      "key": "3x2d_A",
+      "mean_feature_cosine": 0.9502668976783752,
+      "mean_feature_l1": 0.006333646364510059,
+      "reduced_points": 52,
+      "uncapped_points": 156
+    },
+    {
+      "key": "4bin_A",
+      "mean_feature_cosine": 0.9904293417930603,
+      "mean_feature_l1": 0.0027137596625834703,
+      "reduced_points": 116,
+      "uncapped_points": 348
+    },
+    {
+      "key": "4bxw_A",
+      "mean_feature_cosine": 0.9926502704620361,
+      "mean_feature_l1": 0.002443084493279457,
+      "reduced_points": 96,
+      "uncapped_points": 286
+    },
+    {
+      "key": "4cbp_A",
+      "mean_feature_cosine": 0.958686888217926,
+      "mean_feature_l1": 0.005569645669311285,
+      "reduced_points": 69,
+      "uncapped_points": 207
+    },
+    {
+      "key": "4chj_A",
+      "mean_feature_cosine": 0.9058401584625244,
+      "mean_feature_l1": 0.009407227858901024,
+      "reduced_points": 42,
+      "uncapped_points": 124
+    },
+    {
+      "key": "4cng_A",
+      "mean_feature_cosine": 0.9155782461166382,
+      "mean_feature_l1": 0.009011182934045792,
+      "reduced_points": 52,
+      "uncapped_points": 156
+    },
+    {
+      "key": "4djk_A",
+      "mean_feature_cosine": 0.9889539480209351,
+      "mean_feature_l1": 0.003116003004834056,
+      "reduced_points": 151,
+      "uncapped_points": 451
+    },
+    {
+      "key": "4dz4_A",
+      "mean_feature_cosine": 0.9866851568222046,
+      "mean_feature_l1": 0.0034009269438683987,
+      "reduced_points": 105,
+      "uncapped_points": 313
+    },
+    {
+      "key": "4fmw_A",
+      "mean_feature_cosine": 0.9478327035903931,
+      "mean_feature_l1": 0.006552755832672119,
+      "reduced_points": 60,
+      "uncapped_points": 178
+    },
+    {
+      "key": "4gge_A",
+      "mean_feature_cosine": 0.9854296445846558,
+      "mean_feature_l1": 0.003430208656936884,
+      "reduced_points": 86,
+      "uncapped_points": 257
+    },
+    {
+      "key": "4gw9_A",
+      "mean_feature_cosine": 0.9958286285400391,
+      "mean_feature_l1": 0.0016849733656272292,
+      "reduced_points": 210,
+      "uncapped_points": 628
+    },
+    {
+      "key": "4h6v_A",
+      "mean_feature_cosine": 0.988591194152832,
+      "mean_feature_l1": 0.0031390469521284103,
+      "reduced_points": 91,
+      "uncapped_points": 272
+    },
+    {
+      "key": "4ig7_A",
+      "mean_feature_cosine": 0.9685401916503906,
+      "mean_feature_l1": 0.0049996813759207726,
+      "reduced_points": 77,
+      "uncapped_points": 231
+    },
+    {
+      "key": "4j3c_A",
+      "mean_feature_cosine": 0.9710443615913391,
+      "mean_feature_l1": 0.0049021015875041485,
+      "reduced_points": 78,
+      "uncapped_points": 232
+    },
+    {
+      "key": "4j7h_A",
+      "mean_feature_cosine": 0.9963006973266602,
+      "mean_feature_l1": 0.0018319813534617424,
+      "reduced_points": 149,
+      "uncapped_points": 446
+    },
+    {
+      "key": "4jwh_A",
+      "mean_feature_cosine": 0.9254865646362305,
+      "mean_feature_l1": 0.008042672649025917,
+      "reduced_points": 62,
+      "uncapped_points": 185
+    },
+    {
+      "key": "4k1c_A",
+      "mean_feature_cosine": 0.9745195508003235,
+      "mean_feature_l1": 0.004854491446167231,
+      "reduced_points": 125,
+      "uncapped_points": 374
+    },
+    {
+      "key": "4kav_A",
+      "mean_feature_cosine": 0.9891124963760376,
+      "mean_feature_l1": 0.002885941881686449,
+      "reduced_points": 112,
+      "uncapped_points": 334
+    },
+    {
+      "key": "4kjr_A",
+      "mean_feature_cosine": 0.9676965475082397,
+      "mean_feature_l1": 0.0052161081694066525,
+      "reduced_points": 109,
+      "uncapped_points": 325
+    },
+    {
+      "key": "4kpp_A",
+      "mean_feature_cosine": 0.9769349694252014,
+      "mean_feature_l1": 0.004364576656371355,
+      "reduced_points": 132,
+      "uncapped_points": 395
+    },
+    {
+      "key": "4ky9_A",
+      "mean_feature_cosine": 0.9874712228775024,
+      "mean_feature_l1": 0.003052111715078354,
+      "reduced_points": 92,
+      "uncapped_points": 276
+    },
+    {
+      "key": "4l69_A",
+      "mean_feature_cosine": 0.9668809175491333,
+      "mean_feature_l1": 0.005511004477739334,
+      "reduced_points": 82,
+      "uncapped_points": 244
+    },
+    {
+      "key": "4l7i_A",
+      "mean_feature_cosine": 0.9894365668296814,
+      "mean_feature_l1": 0.0028290448244661093,
+      "reduced_points": 135,
+      "uncapped_points": 404
+    },
+    {
+      "key": "4lrv_A",
+      "mean_feature_cosine": 0.6604188680648804,
+      "mean_feature_l1": 0.028500456362962723,
+      "reduced_points": 36,
+      "uncapped_points": 107
+    },
+    {
+      "key": "4miv_A",
+      "mean_feature_cosine": 0.9967026114463806,
+      "mean_feature_l1": 0.0016193765914067626,
+      "reduced_points": 162,
+      "uncapped_points": 484
+    },
+    {
+      "key": "4o6b_A",
+      "mean_feature_cosine": 0.9908291101455688,
+      "mean_feature_l1": 0.002710166620090604,
+      "reduced_points": 107,
+      "uncapped_points": 319
+    },
+    {
+      "key": "4oyg_A",
+      "mean_feature_cosine": 0.9765217304229736,
+      "mean_feature_l1": 0.004618636332452297,
+      "reduced_points": 137,
+      "uncapped_points": 411
+    },
+    {
+      "key": "4oyg_B",
+      "mean_feature_cosine": 0.9808005094528198,
+      "mean_feature_l1": 0.0041090152226388454,
+      "reduced_points": 137,
+      "uncapped_points": 411
+    },
+    {
+      "key": "4oyg_C",
+      "mean_feature_cosine": 0.9816639423370361,
+      "mean_feature_l1": 0.004013113211840391,
+      "reduced_points": 137,
+      "uncapped_points": 411
+    },
+    {
+      "key": "4oyg_D",
+      "mean_feature_cosine": 0.9782335162162781,
+      "mean_feature_l1": 0.004253840539604425,
+      "reduced_points": 137,
+      "uncapped_points": 411
+    },
+    {
+      "key": "4oyg_E",
+      "mean_feature_cosine": 0.9750359654426575,
+      "mean_feature_l1": 0.004894366022199392,
+      "reduced_points": 137,
+      "uncapped_points": 411
+    },
+    {
+      "key": "4oyg_F",
+      "mean_feature_cosine": 0.9794485569000244,
+      "mean_feature_l1": 0.004250125959515572,
+      "reduced_points": 137,
+      "uncapped_points": 411
+    },
+    {
+      "key": "4qrv_A",
+      "mean_feature_cosine": 0.990139365196228,
+      "mean_feature_l1": 0.0026187675539404154,
+      "reduced_points": 101,
+      "uncapped_points": 301
+    },
+    {
+      "key": "4tzo_A",
+      "mean_feature_cosine": 0.9768717288970947,
+      "mean_feature_l1": 0.0043161301873624325,
+      "reduced_points": 79,
+      "uncapped_points": 236
+    },
+    {
+      "key": "4v7h_BE",
+      "mean_feature_cosine": 0.9732271432876587,
+      "mean_feature_l1": 0.0047297291457653046,
+      "reduced_points": 79,
+      "uncapped_points": 237
+    },
+    {
+      "key": "4wgv_A",
+      "mean_feature_cosine": 0.9760131239891052,
+      "mean_feature_l1": 0.004751683212816715,
+      "reduced_points": 132,
+      "uncapped_points": 395
+    },
+    {
+      "key": "4wkk_A",
+      "mean_feature_cosine": 0.9952214956283569,
+      "mean_feature_l1": 0.001894509419798851,
+      "reduced_points": 163,
+      "uncapped_points": 488
+    },
+    {
+      "key": "4yzf_A",
+      "mean_feature_cosine": 0.9877663850784302,
+      "mean_feature_l1": 0.0033944949973374605,
+      "reduced_points": 159,
+      "uncapped_points": 475
+    },
+    {
+      "key": "5a42_A",
+      "mean_feature_cosine": 0.9997878074645996,
+      "mean_feature_l1": 0.0003956316504627466,
+      "reduced_points": 300,
+      "uncapped_points": 1597
+    },
+    {
+      "key": "5a7y_A",
+      "mean_feature_cosine": 0.9713277816772461,
+      "mean_feature_l1": 0.004876033868640661,
+      "reduced_points": 90,
+      "uncapped_points": 270
+    },
+    {
+      "key": "5a7z_A",
+      "mean_feature_cosine": 0.9704065322875977,
+      "mean_feature_l1": 0.004894377663731575,
+      "reduced_points": 84,
+      "uncapped_points": 250
+    },
+    {
+      "key": "5ap8_A",
+      "mean_feature_cosine": 0.9299081563949585,
+      "mean_feature_l1": 0.0077595179900527,
+      "reduced_points": 51,
+      "uncapped_points": 151
+    },
+    {
+      "key": "5apg_A",
+      "mean_feature_cosine": 0.9489596486091614,
+      "mean_feature_l1": 0.006511813495308161,
+      "reduced_points": 62,
+      "uncapped_points": 184
+    },
+    {
+      "key": "5bu6_B",
+      "mean_feature_cosine": 0.980217456817627,
+      "mean_feature_l1": 0.003906243946403265,
+      "reduced_points": 88,
+      "uncapped_points": 264
+    },
+    {
+      "key": "5c50_B",
+      "mean_feature_cosine": 0.9495673179626465,
+      "mean_feature_l1": 0.006729829125106335,
+      "reduced_points": 62,
+      "uncapped_points": 185
+    },
+    {
+      "key": "5c77_A",
+      "mean_feature_cosine": 0.9634051322937012,
+      "mean_feature_l1": 0.005438216961920261,
+      "reduced_points": 68,
+      "uncapped_points": 203
+    },
+    {
+      "key": "5ce1_A",
+      "mean_feature_cosine": 0.9958486557006836,
+      "mean_feature_l1": 0.0017446104902774096,
+      "reduced_points": 121,
+      "uncapped_points": 361
+    },
+    {
+      "key": "5cjl_A",
+      "mean_feature_cosine": 0.9855000972747803,
+      "mean_feature_l1": 0.0034129228442907333,
+      "reduced_points": 86,
+      "uncapped_points": 257
+    },
+    {
+      "key": "5da0_A",
+      "mean_feature_cosine": 0.9896308779716492,
+      "mean_feature_l1": 0.0029741530306637287,
+      "reduced_points": 156,
+      "uncapped_points": 467
+    },
+    {
+      "key": "5ew5_A",
+      "mean_feature_cosine": 0.9930241107940674,
+      "mean_feature_l1": 0.002331031486392021,
+      "reduced_points": 164,
+      "uncapped_points": 490
+    },
+    {
+      "key": "5f1b_A",
+      "mean_feature_cosine": 0.952734112739563,
+      "mean_feature_l1": 0.00669054826721549,
+      "reduced_points": 53,
+      "uncapped_points": 158
+    },
+    {
+      "key": "5fql_A",
+      "mean_feature_cosine": 0.997113049030304,
+      "mean_feature_l1": 0.001535054063424468,
+      "reduced_points": 169,
+      "uncapped_points": 506
+    },
+    {
+      "key": "5g2v_A",
+      "mean_feature_cosine": 0.9958462715148926,
+      "mean_feature_l1": 0.0018576013389974833,
+      "reduced_points": 165,
+      "uncapped_points": 494
+    },
+    {
+      "key": "5gsl_A",
+      "mean_feature_cosine": 0.998866081237793,
+      "mean_feature_l1": 0.0009295049821957946,
+      "reduced_points": 259,
+      "uncapped_points": 775
+    },
+    {
+      "key": "5hj3_C",
+      "mean_feature_cosine": 0.9479846954345703,
+      "mean_feature_l1": 0.006787252612411976,
+      "reduced_points": 53,
+      "uncapped_points": 159
+    },
+    {
+      "key": "5kem_A",
+      "mean_feature_cosine": 0.9670979976654053,
+      "mean_feature_l1": 0.005147940944880247,
+      "reduced_points": 78,
+      "uncapped_points": 232
+    },
+    {
+      "key": "5m87_A",
+      "mean_feature_cosine": 0.9891380667686462,
+      "mean_feature_l1": 0.003071616170927882,
+      "reduced_points": 165,
+      "uncapped_points": 494
+    },
+    {
+      "key": "5nj9_A",
+      "mean_feature_cosine": 0.9971153140068054,
+      "mean_feature_l1": 0.0015074396505951881,
+      "reduced_points": 160,
+      "uncapped_points": 480
+    },
+    {
+      "key": "5xnu_A",
+      "mean_feature_cosine": 0.9875977635383606,
+      "mean_feature_l1": 0.003109332639724016,
+      "reduced_points": 108,
+      "uncapped_points": 323
+    },
+    {
+      "key": "5znm_A",
+      "mean_feature_cosine": 0.9940245151519775,
+      "mean_feature_l1": 0.0021923999302089214,
+      "reduced_points": 120,
+      "uncapped_points": 358
+    },
+    {
+      "key": "5zya_D",
+      "mean_feature_cosine": 0.7609413266181946,
+      "mean_feature_l1": 0.019037775695323944,
+      "reduced_points": 29,
+      "uncapped_points": 85
+    },
+    {
+      "key": "6ac6_A",
+      "mean_feature_cosine": 0.9993813633918762,
+      "mean_feature_l1": 0.000727782491594553,
+      "reduced_points": 300,
+      "uncapped_points": 1154
+    },
+    {
+      "key": "6acg_A",
+      "mean_feature_cosine": 0.9992092251777649,
+      "mean_feature_l1": 0.0007967494311742485,
+      "reduced_points": 300,
+      "uncapped_points": 1065
+    },
+    {
+      "key": "6d05_A",
+      "mean_feature_cosine": 0.9980714917182922,
+      "mean_feature_l1": 0.001216646283864975,
+      "reduced_points": 214,
+      "uncapped_points": 641
+    },
+    {
+      "key": "6dzy_A",
+      "mean_feature_cosine": 0.9927487373352051,
+      "mean_feature_l1": 0.002341748680919409,
+      "reduced_points": 179,
+      "uncapped_points": 537
+    },
+    {
+      "key": "6emv_A",
+      "mean_feature_cosine": 0.9331262111663818,
+      "mean_feature_l1": 0.0076588778756558895,
+      "reduced_points": 57,
+      "uncapped_points": 170
+    },
+    {
+      "key": "6f2w_A",
+      "mean_feature_cosine": 0.985700249671936,
+      "mean_feature_l1": 0.003325139405205846,
+      "reduced_points": 145,
+      "uncapped_points": 433
+    },
+    {
+      "key": "6fij_A",
+      "mean_feature_cosine": 0.9992852807044983,
+      "mean_feature_l1": 0.000778739049565047,
+      "reduced_points": 300,
+      "uncapped_points": 1275
+    },
+    {
+      "key": "6fny_A",
+      "mean_feature_cosine": 0.9968851208686829,
+      "mean_feature_l1": 0.0015830851625651121,
+      "reduced_points": 172,
+      "uncapped_points": 515
+    },
+    {
+      "key": "6hc7_A",
+      "mean_feature_cosine": 0.9949878454208374,
+      "mean_feature_l1": 0.0020182866137474775,
+      "reduced_points": 136,
+      "uncapped_points": 406
+    },
+    {
+      "key": "6hhm_A",
+      "mean_feature_cosine": 0.9958432912826538,
+      "mean_feature_l1": 0.0018421162385493517,
+      "reduced_points": 153,
+      "uncapped_points": 459
+    },
+    {
+      "key": "6hix_BG",
+      "mean_feature_cosine": 0.9788651466369629,
+      "mean_feature_l1": 0.004273546393960714,
+      "reduced_points": 107,
+      "uncapped_points": 319
+    },
+    {
+      "key": "6i7s_A",
+      "mean_feature_cosine": 0.9888513088226318,
+      "mean_feature_l1": 0.002912930678576231,
+      "reduced_points": 154,
+      "uncapped_points": 461
+    },
+    {
+      "key": "6j66_A",
+      "mean_feature_cosine": 0.9959156513214111,
+      "mean_feature_l1": 0.0019030949333682656,
+      "reduced_points": 158,
+      "uncapped_points": 474
+    },
+    {
+      "key": "6ki1_A",
+      "mean_feature_cosine": 0.9865508079528809,
+      "mean_feature_l1": 0.0033368177246302366,
+      "reduced_points": 129,
+      "uncapped_points": 385
+    },
+    {
+      "key": "6kku_A",
+      "mean_feature_cosine": 0.9940316677093506,
+      "mean_feature_l1": 0.0020880461670458317,
+      "reduced_points": 179,
+      "uncapped_points": 537
+    },
+    {
+      "key": "6mlk_A",
+      "mean_feature_cosine": 0.9756845235824585,
+      "mean_feature_l1": 0.00446691457182169,
+      "reduced_points": 86,
+      "uncapped_points": 257
+    },
+    {
+      "key": "6nd4_N",
+      "mean_feature_cosine": 0.9990431070327759,
+      "mean_feature_l1": 0.0009153267601504922,
+      "reduced_points": 226,
+      "uncapped_points": 678
+    },
+    {
+      "key": "6npk_A",
+      "mean_feature_cosine": 0.9903430938720703,
+      "mean_feature_l1": 0.002732435707002878,
+      "reduced_points": 158,
+      "uncapped_points": 472
+    },
+    {
+      "key": "6npl_A",
+      "mean_feature_cosine": 0.997545063495636,
+      "mean_feature_l1": 0.001412062207236886,
+      "reduced_points": 287,
+      "uncapped_points": 861
+    },
+    {
+      "key": "6o7a_A",
+      "mean_feature_cosine": 0.9965405464172363,
+      "mean_feature_l1": 0.0016552616143599153,
+      "reduced_points": 169,
+      "uncapped_points": 506
+    },
+    {
+      "key": "6qn0_A",
+      "mean_feature_cosine": 0.9862980842590332,
+      "mean_feature_l1": 0.0032966765575110912,
+      "reduced_points": 87,
+      "uncapped_points": 260
+    },
+    {
+      "key": "6qqm_A",
+      "mean_feature_cosine": 0.9898658990859985,
+      "mean_feature_l1": 0.002770128194242716,
+      "reduced_points": 93,
+      "uncapped_points": 277
+    },
+    {
+      "key": "6qqw_A",
+      "mean_feature_cosine": 0.9253700971603394,
+      "mean_feature_l1": 0.0081483768299222,
+      "reduced_points": 71,
+      "uncapped_points": 212
+    },
+    {
+      "key": "6qqz_A",
+      "mean_feature_cosine": 0.9258987903594971,
+      "mean_feature_l1": 0.008168315514922142,
+      "reduced_points": 71,
+      "uncapped_points": 212
+    },
+    {
+      "key": "6qx9_BP",
+      "mean_feature_cosine": 0.8208160996437073,
+      "mean_feature_l1": 0.015177073888480663,
+      "reduced_points": 34,
+      "uncapped_points": 100
+    },
+    {
+      "key": "6rvx_A",
+      "mean_feature_cosine": 0.9861563444137573,
+      "mean_feature_l1": 0.0033787123393267393,
+      "reduced_points": 144,
+      "uncapped_points": 430
+    },
+    {
+      "key": "6scf_A",
+      "mean_feature_cosine": 0.8293044567108154,
+      "mean_feature_l1": 0.014354057610034943,
+      "reduced_points": 38,
+      "uncapped_points": 113
+    },
+    {
+      "key": "6sj9_A",
+      "mean_feature_cosine": 0.9981929659843445,
+      "mean_feature_l1": 0.0011994908563792706,
+      "reduced_points": 214,
+      "uncapped_points": 642
+    },
+    {
+      "key": "6uev_A",
+      "mean_feature_cosine": 0.9363934993743896,
+      "mean_feature_l1": 0.007600455544888973,
+      "reduced_points": 73,
+      "uncapped_points": 219
+    },
+    {
+      "key": "6zr9_A",
+      "mean_feature_cosine": 0.987373411655426,
+      "mean_feature_l1": 0.003065212396904826,
+      "reduced_points": 86,
+      "uncapped_points": 258
+    },
+    {
+      "key": "7cww_A",
+      "mean_feature_cosine": 0.9751313328742981,
+      "mean_feature_l1": 0.004769227467477322,
+      "reduced_points": 117,
+      "uncapped_points": 350
+    },
+    {
+      "key": "7qi6_5",
+      "mean_feature_cosine": 0.9914369583129883,
+      "mean_feature_l1": 0.0025811095256358385,
+      "reduced_points": 131,
+      "uncapped_points": 393
+    },
+    {
+      "key": "8axz_A",
+      "mean_feature_cosine": 0.9910905361175537,
+      "mean_feature_l1": 0.002734995447099209,
+      "reduced_points": 127,
+      "uncapped_points": 379
+    }
+  ],
+  "question": "Does the preprocessing variant change the derived input or model predictions?",
+  "reduced_parameters": {
+    "limit": null,
+    "max_points": 300,
+    "offset": 0,
+    "stride": 3,
+    "viewpoints": 32
+  },
+  "source_knotprot_labels_recomputed_after_subsampling": false,
+  "viewpoints": 32
+}

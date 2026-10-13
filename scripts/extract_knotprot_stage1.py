@@ -9,6 +9,7 @@ knot_recognition.protein.extract_ca_polyline, and outputs:
 
 import argparse
 import csv
+import hashlib
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
@@ -55,11 +56,16 @@ def main() -> None:
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
 
     target_chains = load_chains_filter(chains_csv)
+    if target_chains is None or not target_chains:
+        raise FileNotFoundError(
+            f"A non-empty chain list is required at {chains_csv}; refusing automatic longest-chain selection."
+        )
     pdb_files = sorted(pdb_dir.glob("*.pdb"))
     if not pdb_files:
         raise FileNotFoundError(f"No .pdb files found in '{pdb_dir}'.")
 
     backbones: Dict[str, np.ndarray] = {}
+    residue_metadata: Dict[str, np.ndarray] = {}
     manifest_rows: List[Dict[str, str]] = []
 
     for pdb_path in pdb_files:
@@ -79,12 +85,20 @@ def main() -> None:
                 chain_norm = bb.chain_id.strip() or "_"
                 key = f"{pdb_id}_{chain_norm}"
                 backbones[key] = bb.ca_coords
+                # Reserved arrays remain in the NPZ to preserve residue-level
+                # provenance and allow projection code to avoid crossing gaps.
+                residue_metadata[f"__residue_ids__{key}"] = np.asarray(bb.residue_ids, dtype=str)
+                residue_metadata[f"__gap_after__{key}"] = np.asarray(bb.gap_after, dtype=bool)
+                gap_count = int(np.count_nonzero(bb.gap_after)) if bb.gap_after is not None else 0
                 manifest_rows.append(
                     {
                         "key": key,
                         "pdb_id": pdb_id,
                         "chain_id": chain_norm,
                         "num_ca": str(len(bb.ca_coords)),
+                        "residue_gap_count": str(gap_count),
+                        "residue_ids_sha256": hashlib.sha256(
+                            "\n".join(bb.residue_ids or ()).encode()).hexdigest(),
                         "path": str(pdb_path),
                     }
                 )
@@ -100,12 +114,13 @@ def main() -> None:
     if not backbones:
         raise RuntimeError("No backbones were successfully extracted.")
 
-    np.savez_compressed(out_path, **backbones)
+    np.savez_compressed(out_path, **backbones, **residue_metadata)
     print(f"Saved {len(backbones)} backbones to {out_path}")
 
 
     with manifest_path.open("w", newline="") as f:
-        fieldnames = ["key", "pdb_id", "chain_id", "num_ca", "path"]
+        fieldnames = ["key", "pdb_id", "chain_id", "num_ca", "residue_gap_count",
+                      "residue_ids_sha256", "path"]
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(manifest_rows)

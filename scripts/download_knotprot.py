@@ -1,5 +1,7 @@
 import argparse
 import csv
+import hashlib
+import json
 import os
 import time
 from pathlib import Path
@@ -49,6 +51,22 @@ def main() -> None:
         except Exception as exc:
             print(f"[{i}/{len(rows)}] failed {pdb_id}: {exc}")
         time.sleep(args.sleep)
+
+    # Freeze the exact downloaded coordinate files by checksum, since an RCSB
+    # accession can be revised without changing its identifier.
+    records = []
+    for pdb_path in sorted(out_dir.glob("*.pdb")):
+        h = hashlib.sha256()
+        with pdb_path.open("rb") as f:
+            for block in iter(lambda: f.read(1024 * 1024), b""):
+                h.update(block)
+        records.append({"pdb_id": pdb_path.stem.lower(), "url":
+                        f"https://files.rcsb.org/download/{pdb_path.name}",
+                        "sha256": h.hexdigest(), "bytes": pdb_path.stat().st_size})
+    manifest = out_dir / "download_manifest.json"
+    manifest.write_text(json.dumps({"schema_version": 1, "files": records},
+                                   indent=2, sort_keys=True) + "\n")
+    print(f"Wrote checksummed coordinate manifest to {manifest}")
 
 
 if __name__ == "__main__":
