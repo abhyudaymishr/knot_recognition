@@ -169,3 +169,16 @@ def make_instance(word: Sequence[int], seed: int, wobble: float = 0.25) -> List[
     rng = np.random.default_rng(seed)
     curves = braid_closure_curves(word, rng=rng, wobble=wobble, samples_per_step=10)
     return [chaikin(c, 3) for c in curves]
+
+
+def gt_mask(ann: Dict[str, Any], width_scale: float = 1.0) -> np.ndarray:
+    """Rasterise the annotated centrelines at the annotated cable width (ground-truth cable mask)."""
+    import cv2
+
+    W, H = ann["image_size"]
+    m = np.zeros((H, W), np.uint8)
+    w = max(1, int(round(ann["cable_width_px"] * width_scale)))
+    for comp in ann["components"]:
+        P = np.round(np.asarray(comp) * 16).astype(np.int32).reshape(-1, 1, 2)
+        cv2.polylines(m, [P], True, 1, w, lineType=cv2.LINE_8, shift=4)
+    return m.astype(bool)

@@ -39,14 +39,18 @@ def cable_mask(image: np.ndarray) -> np.ndarray:
 
 
 def euler_check(image: np.ndarray, n_detected: int, cable_width_px: Optional[float] = None,
-                open_ends: int = 0, mask: Optional[np.ndarray] = None) -> Dict[str, Any]:
+                open_ends: int = 0, mask: Optional[np.ndarray] = None, one_sided: bool = False,
+                min_area_frac: float = 0.6) -> Dict[str, Any]:
+    """``one_sided``: flag only when the image implies MORE crossings than detected.
+    A missed crossing always adds an unexplained face; a deficit of holes usually means
+    a small face (between tightly packed crossings) fell below the area cut-off."""
     import cv2
 
     fg = cable_mask(image) if mask is None else mask
     fg_u8 = fg.astype(np.uint8)
     n_fg, lab_fg, st_fg, _ = cv2.connectedComponentsWithStats(fg_u8, connectivity=8)
     w = cable_width_px or 8.0
-    min_area = max(9.0, (0.6 * w) ** 2)
+    min_area = max(9.0, (min_area_frac * w) ** 2)
     pieces = int(sum(1 for i in range(1, n_fg) if st_fg[i, cv2.CC_STAT_AREA] >= 4 * min_area))
     n_bg, lab_bg, st_bg, _ = cv2.connectedComponentsWithStats((~fg).astype(np.uint8), connectivity=4)
     H, W = fg.shape
@@ -58,7 +62,8 @@ def euler_check(image: np.ndarray, n_detected: int, cable_width_px: Optional[flo
                    note="free cable ends present: Euler count does not apply")
         return out
     implied = holes - pieces
-    out.update(applicable=True, implied_crossings=implied, consistent=implied == n_detected)
+    out.update(applicable=True, implied_crossings=implied,
+               consistent=(implied <= n_detected) if one_sided else (implied == n_detected))
     if implied != n_detected:
         out["note"] = (f"the image implies {implied} crossing(s) but {n_detected} were detected; "
                        "abstain and request a clearer view")

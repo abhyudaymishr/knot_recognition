@@ -79,7 +79,7 @@ All aggregates carry 95% bootstrap intervals that resample **cables**, not image
 4. Non-neural baseline and a learned crossing detector trained on the train split.
 5. Multi-view fusion: crossings matched across views; over/under by majority with abstention.
 
-## 7. Known limitations of the current traverser (from the synthetic run)
+## 7. Known limitations of the skeleton traverser (from the synthetic run)
 
 - Crossings are found as skeleton junctions; thick or outlined cables produce many
   spurious junctions and reject true crossings as "not crossing-like".
@@ -89,3 +89,33 @@ All aggregates carry 95% bootstrap intervals that resample **cables**, not image
   share one pairing key; traversal cannot pass through it.
 - Its PD code orders arcs by angle and does not encode crossing type; use
   `cable.from_traversal` for any topological answer.
+
+## 8. Knot-aware NanoTransformer (synthetic_v1 results)
+
+`src/knot_recognition/knot_aware.py` keeps the NanoTransformer's encoder blocks but
+predicts structure instead of a 250-way label: a soft cable mask, a crossing heatmap,
+the over-strand axis at each crossing and the strand axis elsewhere, plus a crossing
+count. Input = RGB + an FFT-cleaned grey channel (mirror-padded homomorphic filter +
+Wiener shrinkage, `cable/denoise.py`). `cable/neural_parser.py` turns the maps into a
+geometric `Diagram`: measure-stable mask (most persistent superlevel set), skeleton cut
+at crossings, straightest arm pairing, over/under from the predicted axis, tracing.
+Confidence = sigmoid(kappa * margin) shrunk by the consistency of 8 test-time views
+(c^gamma), so a view that does not show over/under (a silhouette) cannot produce a
+confident type.
+
+Training: 2,000 renders of random braids, plain-light and wood backgrounds only;
+cables disjoint from the benchmark. kappa fitted on the benchmark train split;
+gamma and parser settings chosen on a separate dev set (`scripts/make_parser_dev_set.py`).
+
+| Sessions | Crossing P / R | Over/under | Pairing | Answered | Wrong answers |
+| --- | --- | --- | --- | --- | --- |
+| Photo-like (S1-S4), old traverser | 0.11 / 0.16 | 0.49 | -- | 0-2% | 10 without the Euler gate |
+| Photo-like (S1-S4), knot-aware | 0.93 / 0.90 | 1.00 | 1.00 | 52% | 0 |
+| Unseen backgrounds (S3, S4), knot-aware | 0.85 / 0.81 | 1.00 | 1.00 | 31% | 0 |
+| Silhouettes (no over/under visible), knot-aware | 1.00 / 1.00 | 0.57 | -- | 0% | 0 |
+
+Remaining abstentions come mostly from mask topology (skeleton branches and loose
+ends where strands pass close together), not from crossings or over/under.
+FFT + measure-stable segmentation alone (no network, `results/knotbench_photo/denoise_ablation.json`)
+helps dim and cluttered scenes but hurts wood grain; it is used as an input channel and
+post-processing step, not as the segmenter.

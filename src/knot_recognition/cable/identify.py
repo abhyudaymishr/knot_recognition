@@ -30,8 +30,11 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 import snappy
 from spherogram.links.simplify import deconnect_sum
 
+import os
+
 ROOT = Path(__file__).resolve().parents[3]
-KNOTINFO = ROOT / "data" / "knotinfo" / "knotinfo_full_dataset.json"
+# Override with KNOTINFO_PATH when the package is bundled elsewhere (e.g. the Hugging Face Space).
+KNOTINFO = Path(os.environ.get("KNOTINFO_PATH", ROOT / "data" / "knotinfo" / "knotinfo_full_dataset.json"))
 
 PRACTICAL_NAMES = {
     "0_1": "no knot (unknot)",
@@ -217,7 +220,9 @@ def type_key(res: Dict[str, Any]) -> str:
     """Short hashable label used when aggregating over uncertain readings."""
     if res.get("components", 1) > 1:
         parts = ",".join(sorted(c["type"] for c in res["component_types"]))
-        return f"link[{parts}|{res['split']}|lk={res['linking_matrix']}]"
+        # an image fixes no orientation, so linking numbers are compared up to sign
+        lk = [[abs(v) for v in row] for row in res["linking_matrix"]]
+        return f"link[{parts}|{res['split']}|lk={lk}]"
     if res.get("type") and "?" not in res["type"]:
         chir = [s.get("chirality") for s in res.get("summands", []) if s.get("chirality") in ("mirror of tabulated",)]
         return res["type"] + ("*" * len(chir) if res["type"] not in ("3_1 # 3_1", "3_1 # 3_1*") else "")
