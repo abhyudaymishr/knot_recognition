@@ -51,6 +51,7 @@ from typing import Any, Dict, List, Optional, Tuple
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
+import networkx as nx
 import numpy as np
 import snappy
 import torch
@@ -60,6 +61,36 @@ from sklearn.linear_model import Ridge
 from sklearn.metrics import roc_auc_score
 
 from knot_recognition.r_gno import SignedMessagePassingLayer
+
+
+def pd_to_simple_bipartite_graph(pd_list: List[Tuple[int, int, int, int]]) -> nx.Graph:
+    """Converts a planar diagram into an abstract simple bipartite graph (crossings and arcs)."""
+    G = nx.Graph()
+    n = len(pd_list)
+    try:
+        L = snappy.Link(list(pd_list))
+        signs = [c.sign for c in L.crossings]
+    except Exception:
+        signs = [1] * n
+    for i, s in enumerate(signs[:n]):
+        G.add_node(f"c_{i}", ntype="crossing", sign=str(s))
+    arc_to_crossings: Dict[int, List[Tuple[int, int]]] = {}
+    for c_idx, c in enumerate(pd_list):
+        for port_idx, arc in enumerate(c[:4]):
+            arc_to_crossings.setdefault(arc, []).append((c_idx, port_idx))
+    for arc, endpoints in arc_to_crossings.items():
+        arc_node = f"a_{arc}"
+        G.add_node(arc_node, ntype="arc", sign="0")
+        for c_idx, p_idx in endpoints:
+            is_over = "1" if p_idx in (1, 3) else "0"
+            G.add_edge(f"c_{c_idx}", arc_node, port=str(p_idx), is_over=is_over)
+    return G
+
+
+def compute_wl_graph_hash(pd_list: List[Tuple[int, int, int, int]], iterations: int = 4) -> str:
+    """Computes a label-invariant Weisfeiler-Lehman graph hash of a planar diagram."""
+    G = pd_to_simple_bipartite_graph(pd_list)
+    return nx.weisfeiler_lehman_graph_hash(G, node_attr="sign", edge_attr="is_over", iterations=iterations)
 
 
 # ==============================================================================
@@ -461,8 +492,14 @@ def run_task1_benchmark(
             # Alexander
             alex_embs[k].append(alex_feats)
 
+    # Weisfeiler-Lehman graph hashes
+    wl_hashes: Dict[str, List[str]] = {}
+    for k in test_knot_names:
+        wl_hashes[k] = [compute_wl_graph_hash(d) for d in canonical_per_knot[k]]
+
     models_to_test = [
         ("snappy_hash", "Canonical Hash / Exact Match Baseline"),
+        ("wl_hash", "Weisfeiler–Lehman Graph Hash Baseline"),
         ("pure_gnn_raw", "Pure Graph GNN (Raw Input, Untrained)"),
         ("pure_gnn_canon", "Pure Graph GNN (Canonical Input, Untrained)"),
         ("trained_can_gnn", "Pure Graph GNN (Canonical Input, Contrastive Trained)"),
@@ -495,6 +532,8 @@ def run_task1_benchmark(
         for k1, d1, k2, d2, is_pos, is_alt in eval_pairs:
             if m_key == "snappy_hash":
                 sim = 1.0 if (canonical_per_knot[k1][d1] == canonical_per_knot[k2][d2]) else 0.0
+            elif m_key == "wl_hash":
+                sim = 1.0 if (wl_hashes[k1][d1] == wl_hashes[k2][d2]) else 0.0
             elif m_key == "pure_gnn_raw":
                 sim = float(np.dot(raw_gnn_embs[k1][d1], raw_gnn_embs[k2][d2]))
             elif m_key == "pure_gnn_canon":
@@ -542,6 +581,82 @@ def run_task1_benchmark(
         }
 
         print(f"{m_label:<48} | {auroc_all:.3f} ± {1.96*stderr_knot:.3f} (95% CI)  | {auroc_alt:<20.3f} | {auroc_non:<16.3f}")
+
+    # -------------------------------------------------------------------------
+    # Evaluation on Distinct Base Origins Across All Non-Alternating Knots
+    # -------------------------------------------------------------------------
+    non_alt_knots_list = [k for k in test_knot_names if not is_knot_alternating(k)]
+    print(f"\n--- Distinct Base Origin Evaluation Across All Non-Alternating Knots ({len(non_alt_knots_list)} Knots) ---")
+    ki_can_diags = {}
+    sp_can_diags = {}
+    identical_base_count = 0
+    valid_non_alt = []
+
+    for k in non_alt_knots_list:
+        try:
+            pd_ki = [tuple(c[:4]) for c in knots_db[k]["pd"]]
+            L_sp = snappy.Link(k)
+            pd_sp = [tuple(c[:4]) for c in L_sp.PD_code()]
+        except Exception:
+            continue
+        d_ki = canonicalize_pd_snappy(safe_randomize_pd(pd_ki, seed=seed + 10)[0])
+        d_sp = canonicalize_pd_snappy(safe_randomize_pd(pd_sp, seed=seed + 20)[0])
+        if d_ki == d_sp:
+            identical_base_count += 1
+        ki_can_diags[k] = d_ki
+        sp_can_diags[k] = d_sp
+        valid_non_alt.append(k)
+
+    print(f"Identical Canonical Forms (KnotInfo vs SnapPy): {identical_base_count} / {len(valid_non_alt)} "
+          f"({(identical_base_count/max(1, len(valid_non_alt)))*100:.1f}%)")
+
+    # Embeddings
+    with torch.no_grad():
+        ki_embs_na = {k: untrained_gnn(*build_pure_graph_tensors(ki_can_diags[k], device=device)).cpu().numpy() for k in valid_non_alt}
+        sp_embs_na = {k: untrained_gnn(*build_pure_graph_tensors(sp_can_diags[k], device=device)).cpu().numpy() for k in valid_non_alt}
+        wl_ki_na = {k: compute_wl_graph_hash(ki_can_diags[k]) for k in valid_non_alt}
+        wl_sp_na = {k: compute_wl_graph_hash(sp_can_diags[k]) for k in valid_non_alt}
+
+    diff_base_pairs_y = []
+    diff_base_sims_gnn = []
+    diff_base_sims_wl = []
+    pos_cos = []
+    neg_cos = []
+
+    for k_pos in valid_non_alt:
+        sim_gnn_pos = float(np.dot(ki_embs_na[k_pos], sp_embs_na[k_pos]))
+        sim_wl_pos = 1.0 if wl_ki_na[k_pos] == wl_sp_na[k_pos] else 0.0
+        diff_base_pairs_y.append(1)
+        diff_base_sims_gnn.append(sim_gnn_pos)
+        diff_base_sims_wl.append(sim_wl_pos)
+        pos_cos.append(sim_gnn_pos)
+
+        c_k = knots_db[k_pos]["crossings"]
+        same_c_pool = [x for x in valid_non_alt if knots_db[x]["crossings"] == c_k and x != k_pos]
+        for _ in range(5):
+            k_neg = rng.choice(same_c_pool) if same_c_pool else rng.choice([x for x in valid_non_alt if x != k_pos])
+            sim_gnn_neg = float(np.dot(ki_embs_na[k_pos], sp_embs_na[k_neg]))
+            sim_wl_neg = 1.0 if wl_ki_na[k_pos] == wl_sp_na[k_neg] else 0.0
+            diff_base_pairs_y.append(0)
+            diff_base_sims_gnn.append(sim_gnn_neg)
+            diff_base_sims_wl.append(sim_wl_neg)
+            neg_cos.append(sim_gnn_neg)
+
+    auroc_diff_gnn = float(roc_auc_score(diff_base_pairs_y, diff_base_sims_gnn))
+    auroc_diff_wl = float(roc_auc_score(diff_base_pairs_y, diff_base_sims_wl))
+    print(f"Untrained GNN AUROC on Distinct Base Diagrams: {auroc_diff_gnn:.4f} "
+          f"(Mean Pos Cosine: {np.mean(pos_cos):.4f}, Mean Neg Cosine: {np.mean(neg_cos):.4f})")
+    print(f"Weisfeiler-Lehman Hash AUROC on Distinct Base Diagrams: {auroc_diff_wl:.4f} "
+          f"(Pos Match Rate: {sum(diff_base_sims_wl[i] for i in range(len(diff_base_pairs_y)) if diff_base_pairs_y[i]==1)}/{len(valid_non_alt)})")
+
+    results["distinct_base_origin_non_alternating"] = {
+        "num_knots": len(valid_non_alt),
+        "identical_canonical_rate_pct": (identical_base_count / max(1, len(valid_non_alt))) * 100.0,
+        "untrained_gnn_auroc": auroc_diff_gnn,
+        "mean_positive_cosine": float(np.mean(pos_cos)),
+        "mean_negative_cosine": float(np.mean(neg_cos)),
+        "wl_hash_auroc": auroc_diff_wl,
+    }
 
     return results
 
@@ -658,8 +773,20 @@ def run_task2_benchmark(
         y_train_matrix.append(row_y)
         mask_train_matrix.append(row_m)
 
-    y_train_t = torch.tensor(y_train_matrix, dtype=torch.float32, device=device)
-    mask_train_t = torch.tensor(mask_train_matrix, dtype=torch.float32, device=device)
+    y_raw_arr = np.array(y_train_matrix, dtype=np.float32)
+    m_raw_arr = np.array(mask_train_matrix, dtype=np.float32)
+    target_means = np.zeros(4, dtype=np.float32)
+    target_stds = np.ones(4, dtype=np.float32)
+    for i in range(4):
+        valid_vals = y_raw_arr[m_raw_arr[:, i] > 0, i]
+        target_means[i] = np.mean(valid_vals)
+        target_stds[i] = np.std(valid_vals) if np.std(valid_vals) > 1e-5 else 1.0
+
+    y_train_norm = (y_raw_arr - target_means) / target_stds
+    y_train_norm_t = torch.tensor(y_train_norm, dtype=torch.float32, device=device)
+    mask_train_t = torch.tensor(m_raw_arr, dtype=torch.float32, device=device)
+    means_t = torch.tensor(target_means, dtype=torch.float32, device=device)
+    stds_t = torch.tensor(target_stds, dtype=torch.float32, device=device)
 
     # Subsets of test knots: All, Alternating, Non-Alternating
     subsets = {
@@ -676,29 +803,53 @@ def run_task2_benchmark(
     for s_idx, seed_val in enumerate(seeds):
         torch.manual_seed(seed_val)
         multi_gnn = MultiTaskGNN(in_dim=7, hidden_dim=64, num_layers=4, num_targets=4).to(device)
-        multi_opt = torch.optim.Adam(multi_gnn.parameters(), lr=1e-3, weight_decay=1e-4)
+        multi_opt = torch.optim.AdamW(multi_gnn.parameters(), lr=1e-3, weight_decay=1e-4)
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(multi_opt, T_max=80)
+        batch_size = 32
 
         # Train Supervised GNN
         multi_gnn.train()
         indices = list(range(len(train_knots)))
-        for epoch in range(1, 26):
+        for epoch in range(1, 81):
             random.seed(seed_val + epoch)
             random.shuffle(indices)
-            for idx in indices:
-                multi_opt.zero_grad()
+            multi_opt.zero_grad()
+            for step, idx in enumerate(indices):
                 nf, ei, ef = train_graph_data[idx]
-                _, pred = multi_gnn(nf, ei, ef)
-                diff = (pred - y_train_t[idx]) * mask_train_t[idx]
-                loss = torch.mean(diff ** 2)
+                _, pred_norm = multi_gnn(nf, ei, ef)
+                loss = F.smooth_l1_loss(pred_norm * mask_train_t[idx], y_train_norm_t[idx] * mask_train_t[idx], reduction="mean") / batch_size
                 loss.backward()
-                multi_opt.step()
+                if (step + 1) % batch_size == 0 or (step + 1) == len(indices):
+                    multi_opt.step()
+                    multi_opt.zero_grad()
+            scheduler.step()
+
+        # Check training set convergence on seed 42 to verify GNN matches/beats linear fit on training set
+        if s_idx == 0:
+            multi_gnn.eval()
+            with torch.no_grad():
+                tr_preds = []
+                for nf, ei, ef in train_graph_data:
+                    _, pred_norm = multi_gnn(nf, ei, ef)
+                    tr_preds.append((pred_norm * stds_t + means_t).cpu().numpy())
+            tr_preds = np.array(tr_preds)
+            print("\n  --- Training Set Convergence Verification (Seed 42) ---")
+            for ti, tgt_name in enumerate(targets):
+                val_mask = m_raw_arr[:, ti] > 0
+                gnn_tr_mae = np.mean(np.abs(tr_preds[val_mask, ti] - y_raw_arr[val_mask, ti]))
+                reg_tr = Ridge(alpha=1.0)
+                reg_tr.fit(X_train_lin[val_mask], y_raw_arr[val_mask, ti])
+                lin_tr_mae = np.mean(np.abs(reg_tr.predict(X_train_lin[val_mask]) - y_raw_arr[val_mask, ti]))
+                mean_tr_mae = np.mean(np.abs(y_raw_arr[val_mask, ti] - target_means[ti]))
+                print(f"  {tgt_name:<20}: GNN Train MAE = {gnn_tr_mae:.3f} | Linear [c,w] Train MAE = {lin_tr_mae:.3f} | Mean MAE = {mean_tr_mae:.3f}")
 
         multi_gnn.eval()
         t_preds = []
         for nf, ei, ef in test_graph_data:
             with torch.no_grad():
-                _, pred = multi_gnn(nf, ei, ef)
-                t_preds.append(pred.cpu().numpy())
+                _, pred_norm = multi_gnn(nf, ei, ef)
+                pred_unnorm = pred_norm * stds_t + means_t
+                t_preds.append(pred_unnorm.cpu().numpy())
         seed_supervised_preds.append(np.array(t_preds, dtype=np.float32))
 
         # Untrained Canonical GNN (Ridge probe)
@@ -844,10 +995,11 @@ def main():
     parser = argparse.ArgumentParser(description="Run Rigorous Audited Task 1 and Task 2 Benchmarks")
     parser.add_argument("--seed", type=int, default=42, help="Primary random seed")
     parser.add_argument("--seeds", type=int, nargs="+", default=[42, 43, 44, 45, 46], help="Random seeds for multi-seed Task 2")
+    parser.add_argument("--device", type=str, default="cpu", help="PyTorch computation device (cpu or mps)")
     parser.add_argument("--output", type=str, default="results/rigorous_tasks_benchmark.json", help="Output JSON path")
     args = parser.parse_args()
 
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = torch.device(args.device)
     print(f"Device: {device} | Primary Seed: {args.seed} | Seeds: {args.seeds}")
 
     db_path = Path("data/knotinfo/knotinfo_full_dataset.json")
