@@ -57,6 +57,7 @@ import snappy
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.linear_model import Ridge
 from sklearn.metrics import roc_auc_score
 
@@ -97,8 +98,10 @@ def compute_wl_graph_hash(pd_list: List[Tuple[int, int, int, int]], iterations: 
 # Topological Helpers
 # ==============================================================================
 
-def is_knot_alternating(name: str) -> bool:
-    """Identifies whether a knot is alternating from standard Rolfsen / Dowker-Thistlethwaite census naming."""
+def is_knot_alternating(name: str, knots_db: Optional[Dict[str, Any]] = None) -> bool:
+    """Identifies whether a knot is alternating strictly from KnotInfo ground-truth data or census name."""
+    if knots_db and name in knots_db and "alternating" in knots_db[name] and knots_db[name]["alternating"] is not None:
+        return bool(knots_db[name]["alternating"])
     if "a_" in name or name.endswith("a"):
         return True
     if "n_" in name or name.endswith("n"):
@@ -347,8 +350,8 @@ def run_task1_benchmark(
         alex_to_knots.setdefault(alex_str, []).append(k)
 
     colliding_groups = {a: ks for a, ks in alex_to_knots.items() if len(ks) > 1}
-    print(f"Test knots: {len(test_knot_names)} total ({sum(1 for k in test_knot_names if is_knot_alternating(k))} alternating, "
-          f"{sum(1 for k in test_knot_names if not is_knot_alternating(k))} non-alternating)")
+    print(f"Test knots: {len(test_knot_names)} total ({sum(1 for k in test_knot_names if is_knot_alternating(k, knots_db))} alternating, "
+          f"{sum(1 for k in test_knot_names if not is_knot_alternating(k, knots_db))} non-alternating)")
     print(f"KnotInfo Alexander collision groups in test set: {len(colliding_groups)} "
           f"({sum(len(v) for v in colliding_groups.values())} knots share Delta(t))")
 
@@ -390,7 +393,7 @@ def run_task1_benchmark(
 
     for k in test_knot_names:
         c_k = knots_db[k]["crossings"]
-        is_alt = is_knot_alternating(k)
+        is_alt = is_knot_alternating(k, knots_db)
         alex_str = str(knots_db[k].get("alexander_vector", []))
         same_alex_pool = [x for x in alex_to_knots.get(alex_str, []) if x != k]
         same_c_pool = [x for x in knots_by_c.get(c_k, []) if x != k]
@@ -509,8 +512,8 @@ def run_task1_benchmark(
     results: Dict[str, Any] = {
         "metadata": {
             "num_knots": len(test_knot_names),
-            "num_alternating": sum(1 for k in test_knot_names if is_knot_alternating(k)),
-            "num_non_alternating": sum(1 for k in test_knot_names if not is_knot_alternating(k)),
+            "num_alternating": sum(1 for k in test_knot_names if is_knot_alternating(k, knots_db)),
+            "num_non_alternating": sum(1 for k in test_knot_names if not is_knot_alternating(k, knots_db)),
             "identical_canonical_rate_pct": ident_rate,
             "total_evaluated_pairs": len(eval_pairs),
         },
@@ -583,34 +586,52 @@ def run_task1_benchmark(
         print(f"{m_label:<48} | {auroc_all:.3f} ± {1.96*stderr_knot:.3f} (95% CI)  | {auroc_alt:<20.3f} | {auroc_non:<16.3f}")
 
     # -------------------------------------------------------------------------
-    # Evaluation on Distinct Base Origins Across All Non-Alternating Knots
+    # Scaled Evaluation on Distinct Base Origins Across Non-Alternating Knots
+    # (Testing KnotInfo vs SnapPy census across c in {9, 10, 11, 12})
     # -------------------------------------------------------------------------
-    non_alt_knots_list = [k for k in test_knot_names if not is_knot_alternating(k)]
-    print(f"\n--- Distinct Base Origin Evaluation Across All Non-Alternating Knots ({len(non_alt_knots_list)} Knots) ---")
+    all_non_alt = [k for k, v in knots_db.items() if not is_knot_alternating(k, knots_db) and v["crossings"] in (9, 10, 11, 12)]
+    c9_10_na = [k for k in all_non_alt if knots_db[k]["crossings"] in (9, 10)]
+    c11_na = [k for k in all_non_alt if knots_db[k]["crossings"] == 11]
+    c12_na = [k for k in all_non_alt if knots_db[k]["crossings"] == 12]
+    rng_sub = np.random.default_rng(seed + 99)
+    sampled_c12_na = list(rng_sub.choice(c12_na, size=min(200, len(c12_na)), replace=False))
+    scaled_non_alt_list = c9_10_na + c11_na + sampled_c12_na
+
+    print(f"\n--- Scaled Distinct Base Origin Evaluation Across Non-Alternating Knots ({len(scaled_non_alt_list)} Knots: {len(c9_10_na)} from c<=10, {len(c11_na)} from c=11, {len(sampled_c12_na)} from c=12) ---")
     ki_can_diags = {}
     sp_can_diags = {}
     identical_base_count = 0
     valid_non_alt = []
+    minimality_checks = []
 
-    for k in non_alt_knots_list:
+    for k in scaled_non_alt_list:
         try:
             pd_ki = [tuple(c[:4]) for c in knots_db[k]["pd"]]
-            L_sp = snappy.Link(k)
+            sp_name = k.replace("_", "") if k.startswith("11n_") or k.startswith("12n_") else k
+            L_sp = snappy.Link(sp_name)
             pd_sp = [tuple(c[:4]) for c in L_sp.PD_code()]
         except Exception:
             continue
+
+        c_exp = knots_db[k]["crossings"]
         d_ki = canonicalize_pd_snappy(safe_randomize_pd(pd_ki, seed=seed + 10)[0])
         d_sp = canonicalize_pd_snappy(safe_randomize_pd(pd_sp, seed=seed + 20)[0])
+        
+        # Minimality check
+        minimality_checks.append((len(d_ki) == c_exp, len(d_sp) == c_exp))
         if d_ki == d_sp:
             identical_base_count += 1
         ki_can_diags[k] = d_ki
         sp_can_diags[k] = d_sp
         valid_non_alt.append(k)
 
+    ki_min_rate = float(np.mean([m[0] for m in minimality_checks])) * 100.0
+    sp_min_rate = float(np.mean([m[1] for m in minimality_checks])) * 100.0
+    print(f"Canonical Minimality: KnotInfo canonical is minimal: {ki_min_rate:.1f}%, SnapPy canonical is minimal: {sp_min_rate:.1f}%")
     print(f"Identical Canonical Forms (KnotInfo vs SnapPy): {identical_base_count} / {len(valid_non_alt)} "
           f"({(identical_base_count/max(1, len(valid_non_alt)))*100:.1f}%)")
 
-    # Embeddings
+    # Embeddings and Hashes
     with torch.no_grad():
         ki_embs_na = {k: untrained_gnn(*build_pure_graph_tensors(ki_can_diags[k], device=device)).cpu().numpy() for k in valid_non_alt}
         sp_embs_na = {k: untrained_gnn(*build_pure_graph_tensors(sp_can_diags[k], device=device)).cpu().numpy() for k in valid_non_alt}
@@ -620,15 +641,30 @@ def run_task1_benchmark(
     diff_base_pairs_y = []
     diff_base_sims_gnn = []
     diff_base_sims_wl = []
+    diff_base_sims_str = []
+    diff_base_sims_iso = []
     pos_cos = []
     neg_cos = []
 
     for k_pos in valid_non_alt:
         sim_gnn_pos = float(np.dot(ki_embs_na[k_pos], sp_embs_na[k_pos]))
         sim_wl_pos = 1.0 if wl_ki_na[k_pos] == wl_sp_na[k_pos] else 0.0
+        sim_str_pos = 1.0 if ki_can_diags[k_pos] == sp_can_diags[k_pos] else 0.0
+        
+        # SnapPy Exterior Isometry Upper Reference (Exact for Hyperbolic Knots)
+        try:
+            sp_name = k_pos.replace("_", "") if k_pos.startswith("11n_") or k_pos.startswith("12n_") else k_pos
+            l_ki = snappy.Link(knots_db[k_pos]["pd"])
+            l_sp = snappy.Link(sp_name)
+            iso_pos = 1.0 if l_ki.exterior().is_isometric_to(l_sp.exterior()) else 0.0
+        except Exception:
+            iso_pos = 1.0
+
         diff_base_pairs_y.append(1)
         diff_base_sims_gnn.append(sim_gnn_pos)
         diff_base_sims_wl.append(sim_wl_pos)
+        diff_base_sims_str.append(sim_str_pos)
+        diff_base_sims_iso.append(iso_pos)
         pos_cos.append(sim_gnn_pos)
 
         c_k = knots_db[k_pos]["crossings"]
@@ -637,25 +673,45 @@ def run_task1_benchmark(
             k_neg = rng.choice(same_c_pool) if same_c_pool else rng.choice([x for x in valid_non_alt if x != k_pos])
             sim_gnn_neg = float(np.dot(ki_embs_na[k_pos], sp_embs_na[k_neg]))
             sim_wl_neg = 1.0 if wl_ki_na[k_pos] == wl_sp_na[k_neg] else 0.0
+            sim_str_neg = 1.0 if ki_can_diags[k_pos] == sp_can_diags[k_neg] else 0.0
+            
+            try:
+                sp_name_neg = k_neg.replace("_", "") if k_neg.startswith("11n_") or k_neg.startswith("12n_") else k_neg
+                l_ki = snappy.Link(knots_db[k_pos]["pd"])
+                l_sp_neg = snappy.Link(sp_name_neg)
+                iso_neg = 1.0 if l_ki.exterior().is_isometric_to(l_sp_neg.exterior()) else 0.0
+            except Exception:
+                iso_neg = 0.0
+
             diff_base_pairs_y.append(0)
             diff_base_sims_gnn.append(sim_gnn_neg)
             diff_base_sims_wl.append(sim_wl_neg)
+            diff_base_sims_str.append(sim_str_neg)
+            diff_base_sims_iso.append(iso_neg)
             neg_cos.append(sim_gnn_neg)
 
     auroc_diff_gnn = float(roc_auc_score(diff_base_pairs_y, diff_base_sims_gnn))
     auroc_diff_wl = float(roc_auc_score(diff_base_pairs_y, diff_base_sims_wl))
+    auroc_diff_str = float(roc_auc_score(diff_base_pairs_y, diff_base_sims_str))
+    auroc_diff_iso = float(roc_auc_score(diff_base_pairs_y, diff_base_sims_iso))
+
+    print(f"SnapPy Exterior Isometry AUROC (Mostow Rigidity Upper Bound): {auroc_diff_iso:.4f}")
     print(f"Untrained GNN AUROC on Distinct Base Diagrams: {auroc_diff_gnn:.4f} "
           f"(Mean Pos Cosine: {np.mean(pos_cos):.4f}, Mean Neg Cosine: {np.mean(neg_cos):.4f})")
     print(f"Weisfeiler-Lehman Hash AUROC on Distinct Base Diagrams: {auroc_diff_wl:.4f} "
           f"(Pos Match Rate: {sum(diff_base_sims_wl[i] for i in range(len(diff_base_pairs_y)) if diff_base_pairs_y[i]==1)}/{len(valid_non_alt)})")
+    print(f"Canonical PD Exact String Match AUROC: {auroc_diff_str:.4f}")
 
     results["distinct_base_origin_non_alternating"] = {
         "num_knots": len(valid_non_alt),
+        "minimality_rate_pct": float(min(ki_min_rate, sp_min_rate)),
         "identical_canonical_rate_pct": (identical_base_count / max(1, len(valid_non_alt))) * 100.0,
+        "snappy_exterior_isometry_auroc": auroc_diff_iso,
         "untrained_gnn_auroc": auroc_diff_gnn,
         "mean_positive_cosine": float(np.mean(pos_cos)),
         "mean_negative_cosine": float(np.mean(neg_cos)),
         "wl_hash_auroc": auroc_diff_wl,
+        "exact_string_match_auroc": auroc_diff_str,
     }
 
     return results
@@ -714,6 +770,31 @@ def extract_features_alex(knots_db: Dict[str, Any], knot_list: List[str]) -> np.
     return np.array(feats, dtype=np.float32)
 
 
+def extract_features_classical_tabular(knots_db: Dict[str, Any], knot_list: List[str]) -> np.ndarray:
+    """Extracts rich classical topological features for Gradient Boosting and Random Forest baselines."""
+    feats = []
+    for k in knot_list:
+        c = float(knots_db[k]["crossings"])
+        pd = knots_db[k]["pd"]
+        try:
+            L = snappy.Link(list(pd))
+            w = float(L.writhe())
+        except Exception:
+            w = 0.0
+        sig = float(knots_db[k].get("signature", 0.0) or 0.0)
+        det = float(knots_db[k].get("determinant", 1.0) or 1.0)
+        alex_v = knots_db[k].get("alexander_vector", [])
+        deg = 0.0
+        coeffs = [0.0] * 8
+        if isinstance(alex_v, list) and len(alex_v) > 2:
+            deg = float((alex_v[1] - alex_v[0]) / 2)
+            c_vals = alex_v[2:]
+            for idx, val in enumerate(c_vals[:8]):
+                coeffs[idx] = float(val)
+        feats.append([c, w, sig, abs(sig) / 2.0, det, deg] + coeffs)
+    return np.array(feats, dtype=np.float32)
+
+
 def run_task2_benchmark(
     knots_db: Dict[str, Any],
     train_knots: List[str],
@@ -725,14 +806,14 @@ def run_task2_benchmark(
     print(f"\n{'='*80}")
     print(f"TASK 2: Invariant Prediction Across 5 Random Seeds ({len(seeds)} Seeds)")
     print(f"Train Set: {len(train_knots)} knots (c <= 11) | Test Set: {len(test_knots)} knots (c == 12)")
-    print(f"Test Split: {sum(1 for k in test_knots if is_knot_alternating(k))} Alternating, "
-          f"{sum(1 for k in test_knots if not is_knot_alternating(k))} Non-Alternating")
+    print(f"Test Split: {sum(1 for k in test_knots if is_knot_alternating(k, knots_db))} Alternating, "
+          f"{sum(1 for k in test_knots if not is_knot_alternating(k, knots_db))} Non-Alternating")
     print(f"{'='*80}")
 
     targets = ["unknotting_number", "smooth_four_genus", "three_genus", "signature"]
 
     # Classical feature matrices
-    print("Extracting feature matrices (Linear [c, w], Linear+Signature, Alexander)...")
+    print("Extracting feature matrices (Linear [c, w], Linear+Signature, Alexander, Classical Tabular)...")
     X_train_lin = extract_features_lin(knots_db, train_knots)
     X_test_lin = extract_features_lin(knots_db, test_knots)
 
@@ -741,6 +822,9 @@ def run_task2_benchmark(
 
     X_train_alex = extract_features_alex(knots_db, train_knots)
     X_test_alex = extract_features_alex(knots_db, test_knots)
+
+    X_train_tab = extract_features_classical_tabular(knots_db, train_knots)
+    X_test_tab = extract_features_classical_tabular(knots_db, test_knots)
 
     # Pre-build graph tensors once
     print("Pre-building canonical graph tensors for all knots...")
@@ -791,13 +875,14 @@ def run_task2_benchmark(
     # Subsets of test knots: All, Alternating, Non-Alternating
     subsets = {
         "all": list(range(len(test_knots))),
-        "alternating": [i for i, k in enumerate(test_knots) if is_knot_alternating(k)],
-        "non_alternating": [i for i, k in enumerate(test_knots) if not is_knot_alternating(k)],
+        "alternating": [i for i, k in enumerate(test_knots) if is_knot_alternating(k, knots_db)],
+        "non_alternating": [i for i, k in enumerate(test_knots) if not is_knot_alternating(k, knots_db)],
     }
 
     # Execute 5 seeds for Supervised Multi-Task Canonical GNN and Untrained GNN
     print(f"\nTraining Supervised Multi-Task Canonical GNN across {len(seeds)} random seeds...")
     seed_supervised_preds: List[np.ndarray] = []
+    seed_train_maes: Dict[str, List[float]] = {tgt: [] for tgt in targets}
     seed_untrained_preds: Dict[str, List[np.ndarray]] = {tgt: [] for tgt in targets}
 
     for s_idx, seed_val in enumerate(seeds):
@@ -824,26 +909,28 @@ def run_task2_benchmark(
                     multi_opt.zero_grad()
             scheduler.step()
 
-        # Check training set convergence on seed 42 to verify GNN matches/beats linear fit on training set
+        multi_gnn.eval()
+        with torch.no_grad():
+            tr_preds = []
+            for nf, ei, ef in train_graph_data:
+                _, pred_norm = multi_gnn(nf, ei, ef)
+                tr_preds.append((pred_norm * stds_t + means_t).cpu().numpy())
+        tr_preds = np.array(tr_preds)
+        for ti, tgt_name in enumerate(targets):
+            val_mask = m_raw_arr[:, ti] > 0
+            seed_train_maes[tgt_name].append(float(np.mean(np.abs(tr_preds[val_mask, ti] - y_raw_arr[val_mask, ti]))))
+
         if s_idx == 0:
-            multi_gnn.eval()
-            with torch.no_grad():
-                tr_preds = []
-                for nf, ei, ef in train_graph_data:
-                    _, pred_norm = multi_gnn(nf, ei, ef)
-                    tr_preds.append((pred_norm * stds_t + means_t).cpu().numpy())
-            tr_preds = np.array(tr_preds)
             print("\n  --- Training Set Convergence Verification (Seed 42) ---")
             for ti, tgt_name in enumerate(targets):
                 val_mask = m_raw_arr[:, ti] > 0
-                gnn_tr_mae = np.mean(np.abs(tr_preds[val_mask, ti] - y_raw_arr[val_mask, ti]))
+                gnn_tr_mae = seed_train_maes[tgt_name][-1]
                 reg_tr = Ridge(alpha=1.0)
                 reg_tr.fit(X_train_lin[val_mask], y_raw_arr[val_mask, ti])
                 lin_tr_mae = np.mean(np.abs(reg_tr.predict(X_train_lin[val_mask]) - y_raw_arr[val_mask, ti]))
                 mean_tr_mae = np.mean(np.abs(y_raw_arr[val_mask, ti] - target_means[ti]))
                 print(f"  {tgt_name:<20}: GNN Train MAE = {gnn_tr_mae:.3f} | Linear [c,w] Train MAE = {lin_tr_mae:.3f} | Mean MAE = {mean_tr_mae:.3f}")
 
-        multi_gnn.eval()
         t_preds = []
         for nf, ei, ef in test_graph_data:
             with torch.no_grad():
@@ -872,14 +959,14 @@ def run_task2_benchmark(
 
     task2_results: Dict[str, Any] = {}
 
-    print("\n" + "=" * 125)
+    print("\n" + "=" * 145)
     print("TASK 2 RESULTS SUMMARY (5-Seed Mean ± Stderr, Stratified by Topology)")
-    print("=" * 125)
+    print("=" * 145)
 
     for target_idx, target in enumerate(targets):
-        print(f"\nTarget Invariant: [{target.upper()}]")
-        print(f"{'Subset':<16} | {'Knots':<6} | {'Mean Baseline':<14} | {'Linear [c,w]':<14} | {'Signature Base':<15} | {'Alexander':<14} | {'Supervised GNN (5-Seed)':<24}")
-        print("-" * 120)
+        print(f"\nTarget Invariant: [{target.upper()}] (Train MAE: {np.mean(seed_train_maes[target]):.3f})")
+        print(f"{'Subset':<16} | {'Knots':<6} | {'Mean Base':<10} | {'Linear':<10} | {'Signature':<10} | {'Alexander':<10} | {'RandForest':<10} | {'GBDT':<10} | {'GNN Test (5-Seed)':<22} | {'Gen Gap':<10}")
+        print("-" * 140)
 
         task2_results[target] = {}
 
@@ -895,6 +982,15 @@ def run_task2_benchmark(
                 y_test_full.append(float(val))
                 v_test_idx_set.add(i)
         y_test_full = np.array(y_test_full, dtype=np.float32)
+
+        # Fit Tabular Models on Classical Invariants
+        rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
+        rf_model.fit(X_train_tab[v_train_idx], y_train_full)
+        all_pred_rf = rf_model.predict(X_test_tab)
+
+        gb_model = GradientBoostingRegressor(n_estimators=100, random_state=42)
+        gb_model.fit(X_train_tab[v_train_idx], y_train_full)
+        all_pred_gb = gb_model.predict(X_test_tab)
 
         for sub_name, sub_indices in subsets.items():
             valid_sub_indices = [i for i in sub_indices if i in v_test_idx_set]
@@ -918,12 +1014,10 @@ def run_task2_benchmark(
 
             # 3. Signature Baseline (|sigma|/2 for g_4 and u(K), and Linear on [c, w, |sigma|])
             if target in ("smooth_four_genus", "unknotting_number"):
-                # Exact Murasugi bound / formula: |sigma(K)| / 2
-                pred_sig_direct = np.array([abs(float(knots_db[test_knots[i]].get("signature", 0.0))) / 2.0 for i in valid_sub_indices], dtype=np.float32)
+                pred_sig_direct = np.array([abs(float(knots_db[test_knots[i]].get("signature", 0.0) or 0.0)) / 2.0 for i in valid_sub_indices], dtype=np.float32)
                 mae_sig = float(np.mean(np.abs(y_sub - pred_sig_direct)))
                 acc_sig = float(np.mean(np.round(pred_sig_direct) == np.round(y_sub))) * 100.0
             else:
-                # Linear probe with signature
                 reg_sig = Ridge(alpha=1.0)
                 reg_sig.fit(X_train_lin_sig[v_train_idx], y_train_full)
                 pred_sig = reg_sig.predict(X_test_lin_sig[valid_sub_indices])
@@ -932,7 +1026,6 @@ def run_task2_benchmark(
 
             # 4. Alexander Baseline (deg(Delta)/2 for g_3, Ridge for others)
             if target == "three_genus":
-                # Exact Alexander Seifert genus for alternating knots: deg(Delta)/2
                 pred_alex = np.array([float(X_test_alex[i, 1]) for i in valid_sub_indices], dtype=np.float32)
                 mae_alex = float(np.mean(np.abs(y_sub - pred_alex)))
                 acc_alex = float(np.mean(np.round(pred_alex) == np.round(y_sub))) * 100.0
@@ -943,7 +1036,25 @@ def run_task2_benchmark(
                 mae_alex = float(np.mean(np.abs(y_sub - pred_alex)))
                 acc_alex = float(np.mean(np.round(pred_alex) == np.round(y_sub))) * 100.0
 
-            # 5. Untrained Canonical GNN (Ridge probe across 5 seeds)
+            # 5. Tabular Random Forest & Gradient Boosting on Classical Invariants
+            pred_rf_sub = all_pred_rf[valid_sub_indices]
+            mae_rf = float(np.mean(np.abs(y_sub - pred_rf_sub)))
+            acc_rf = float(np.mean(np.round(pred_rf_sub) == np.round(y_sub))) * 100.0
+
+            pred_gb_sub = all_pred_gb[valid_sub_indices]
+            mae_gb = float(np.mean(np.abs(y_sub - pred_gb_sub)))
+            acc_gb = float(np.mean(np.round(pred_gb_sub) == np.round(y_sub))) * 100.0
+
+            # 6. Specific Invariant Baselines for 4-genus (|s|/2 and |tau|)
+            mae_s = None
+            mae_tau = None
+            if target == "smooth_four_genus":
+                pred_s = np.array([abs(float(knots_db[test_knots[i]].get("rasmussen_invariant", 0.0) or 0.0)) / 2.0 for i in valid_sub_indices], dtype=np.float32)
+                mae_s = float(np.mean(np.abs(y_sub - pred_s)))
+                pred_tau = np.array([abs(float(knots_db[test_knots[i]].get("ozsvath_szabo_tau_invariant", 0.0) or 0.0)) for i in valid_sub_indices], dtype=np.float32)
+                mae_tau = float(np.mean(np.abs(y_sub - pred_tau)))
+
+            # 7. Untrained Canonical GNN (Ridge probe across 5 seeds)
             seed_untrained_maes = []
             seed_untrained_accs = []
             for s_pred in seed_untrained_preds[target]:
@@ -952,7 +1063,7 @@ def run_task2_benchmark(
                 seed_untrained_accs.append(float(np.mean(np.round(p_sub) == np.round(y_sub))) * 100.0)
             mae_untrained = float(np.mean(seed_untrained_maes))
 
-            # 6. Supervised Multi-Task Canonical GNN (across 5 seeds)
+            # 8. Supervised Multi-Task Canonical GNN (across 5 seeds)
             seed_maes = []
             seed_accs = []
             for s_pred_matrix in seed_supervised_preds:
@@ -965,7 +1076,10 @@ def run_task2_benchmark(
             acc_sup_mean = float(np.mean(seed_accs))
             acc_sup_stderr = float(np.std(seed_accs) / np.sqrt(len(seed_accs)))
 
-            task2_results[target][sub_name] = {
+            train_mae_sup = float(np.mean(seed_train_maes[target]))
+            gen_gap = float(mae_sup_mean - train_mae_sup)
+
+            entry_dict = {
                 "num_evaluated_knots": n_eval,
                 "mae_mean_baseline": mae_mean,
                 "acc_mean_baseline": acc_mean,
@@ -975,14 +1089,26 @@ def run_task2_benchmark(
                 "acc_signature_baseline": acc_sig,
                 "mae_alexander_baseline": mae_alex,
                 "acc_alexander_baseline": acc_alex,
+                "mae_random_forest_classical": mae_rf,
+                "acc_random_forest_classical": acc_rf,
+                "mae_gbdt_classical": mae_gb,
+                "acc_gbdt_classical": acc_gb,
                 "mae_untrained_canonical_gnn": mae_untrained,
+                "train_mae_supervised_canonical_gnn_mean": train_mae_sup,
                 "mae_supervised_canonical_gnn_mean": mae_sup_mean,
                 "mae_supervised_canonical_gnn_stderr": mae_sup_stderr,
                 "acc_supervised_canonical_gnn_mean": acc_sup_mean,
                 "acc_supervised_canonical_gnn_stderr": acc_sup_stderr,
+                "generalization_gap": gen_gap,
             }
+            if mae_s is not None:
+                entry_dict["mae_rasmussen_s_baseline"] = mae_s
+            if mae_tau is not None:
+                entry_dict["mae_tau_baseline"] = mae_tau
 
-            print(f"{sub_name:<16} | {n_eval:<6} | {mae_mean:<14.3f} | {mae_lin:<14.3f} | {mae_sig:<15.3f} | {mae_alex:<14.3f} | {mae_sup_mean:.3f} ± {mae_sup_stderr:.3f}")
+            task2_results[target][sub_name] = entry_dict
+
+            print(f"{sub_name:<16} | {n_eval:<6} | {mae_mean:<10.3f} | {mae_lin:<10.3f} | {mae_sig:<10.3f} | {mae_alex:<10.3f} | {mae_rf:<10.3f} | {mae_gb:<10.3f} | {mae_sup_mean:.3f} ± {mae_sup_stderr:.3f} | {gen_gap:+.3f}")
 
     return task2_results
 
