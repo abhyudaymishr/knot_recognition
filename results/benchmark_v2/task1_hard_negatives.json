@@ -1,0 +1,1245 @@
+{
+  "train_set": "all knots 3<=c<=8 plus alternating knots c in {9,10}; knot-disjoint from the non-alternating test knots",
+  "train_knots": 199,
+  "slices": {
+    "c<=10": 50,
+    "c=11": 185,
+    "c=12": 100
+  },
+  "encoders": "per backbone: untrained (frozen random), supervised (knot-ID cross-entropy), contrastive (NT-Xent over presentations); 5 seeds; parameter-matched",
+  "certificate_note": "Exterior isometry (SnapPy) is a certificate of equivalence and is reported as the ceiling, not as a competitor. Non-hyperbolic pairs fall back to knot Floer homology equality (an invariant, not a certificate).",
+  "results": {
+    "c<=10_random": {
+      "num_knots": 50,
+      "num_pairs": 100,
+      "certificate_ceiling": {
+        "auroc": 1.0
+      },
+      "face_histogram": {
+        "auroc": 0.9372
+      },
+      "wl_hash": {
+        "auroc": 0.53
+      },
+      "mpnn_untrained": {
+        "auroc_mean": 0.6230399999999999,
+        "auroc_std": 0.014691711949259027,
+        "seeds": [
+          0.6316,
+          0.6252000000000001,
+          0.6064,
+          0.6448,
+          0.6072
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.52119,
+          0.7204099999999999
+        ]
+      },
+      "mpnn_supervised": {
+        "auroc_mean": 0.62224,
+        "auroc_std": 0.047329043937100634,
+        "seeds": [
+          0.6584000000000001,
+          0.58,
+          0.5664,
+          0.614,
+          0.6924
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.5756000000000001,
+          0.7799999999999999
+        ]
+      },
+      "mpnn_contrastive": {
+        "auroc_mean": 0.64208,
+        "auroc_std": 0.039797406950704724,
+        "seeds": [
+          0.6448000000000002,
+          0.6084,
+          0.684,
+          0.5868,
+          0.6864
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.57156,
+          0.77923
+        ]
+      },
+      "gin_untrained": {
+        "auroc_mean": 0.6746399999999999,
+        "auroc_std": 0.016768732808414632,
+        "seeds": [
+          0.6456,
+          0.686,
+          0.6928000000000001,
+          0.6816,
+          0.6672
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.59479,
+          0.7784
+        ]
+      },
+      "gin_supervised": {
+        "auroc_mean": 0.7388,
+        "auroc_std": 0.04936330621018009,
+        "seeds": [
+          0.6583999999999999,
+          0.7516,
+          0.7536,
+          0.7208,
+          0.8096
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.73519,
+          0.88081
+        ]
+      },
+      "gin_contrastive": {
+        "auroc_mean": 0.8400399999999999,
+        "auroc_std": 0.09690047677901278,
+        "seeds": [
+          0.8884,
+          0.8728,
+          0.8855999999999999,
+          0.906,
+          0.6474000000000001
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.8443900000000001,
+          0.96602
+        ]
+      },
+      "gps_untrained": {
+        "auroc_mean": 0.6213599999999999,
+        "auroc_std": 0.026118009112487912,
+        "seeds": [
+          0.574,
+          0.6247999999999999,
+          0.6176,
+          0.6468,
+          0.6436000000000001
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.5411900000000001,
+          0.74
+        ]
+      },
+      "gps_supervised": {
+        "auroc_mean": 0.626,
+        "auroc_std": 0.046099023850836605,
+        "seeds": [
+          0.6176,
+          0.5523999999999999,
+          0.6199999999999999,
+          0.6452,
+          0.6948
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.57833,
+          0.7836299999999999
+        ]
+      },
+      "gps_contrastive": {
+        "auroc_mean": 0.6558400000000001,
+        "auroc_std": 0.05987806276091435,
+        "seeds": [
+          0.5628000000000001,
+          0.6319999999999999,
+          0.7276,
+          0.714,
+          0.6428
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.5804,
+          0.7992199999999999
+        ]
+      },
+      "subgraph_untrained": {
+        "auroc_mean": 0.6353199999999999,
+        "auroc_std": 0.010344157771418637,
+        "seeds": [
+          0.6438,
+          0.6508,
+          0.6275999999999999,
+          0.6312000000000001,
+          0.6232
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.54038,
+          0.7400100000000001
+        ]
+      },
+      "subgraph_supervised": {
+        "auroc_mean": 0.63576,
+        "auroc_std": 0.03612298990947452,
+        "seeds": [
+          0.6728,
+          0.5748000000000001,
+          0.6524000000000001,
+          0.6156,
+          0.6632
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.5759700000000001,
+          0.77761
+        ]
+      },
+      "subgraph_contrastive": {
+        "auroc_mean": 0.65584,
+        "auroc_std": 0.04802439380148383,
+        "seeds": [
+          0.6192,
+          0.6436000000000001,
+          0.7428,
+          0.6663999999999999,
+          0.6072000000000001
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.62518,
+          0.81241
+        ]
+      }
+    },
+    "c<=10_hard_geometric": {
+      "num_knots": 50,
+      "num_pairs": 150,
+      "certificate_ceiling": {
+        "auroc": 1.0
+      },
+      "face_histogram": {
+        "auroc": 0.3207
+      },
+      "wl_hash": {
+        "auroc": 0.53
+      },
+      "mpnn_untrained": {
+        "auroc_mean": 0.38971999999999996,
+        "auroc_std": 0.01668417214008534,
+        "seeds": [
+          0.3926,
+          0.4174,
+          0.373,
+          0.3938,
+          0.3718
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.280995,
+          0.492805
+        ]
+      },
+      "mpnn_supervised": {
+        "auroc_mean": 0.45332,
+        "auroc_std": 0.03418504936372038,
+        "seeds": [
+          0.46299999999999997,
+          0.4066,
+          0.42079999999999995,
+          0.4814,
+          0.49479999999999996
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.31299499999999997,
+          0.5154249999999999
+        ]
+      },
+      "mpnn_contrastive": {
+        "auroc_mean": 0.43712,
+        "auroc_std": 0.033865758518007556,
+        "seeds": [
+          0.38079999999999997,
+          0.45020000000000004,
+          0.4382,
+          0.4308,
+          0.48560000000000003
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.327975,
+          0.5296150000000001
+        ]
+      },
+      "gin_untrained": {
+        "auroc_mean": 0.42788000000000004,
+        "auroc_std": 0.02377354832581794,
+        "seeds": [
+          0.397,
+          0.4069,
+          0.4590000000000001,
+          0.4271,
+          0.4494
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.33697999999999995,
+          0.5194150000000001
+        ]
+      },
+      "gin_supervised": {
+        "auroc_mean": 0.48276,
+        "auroc_std": 0.02606619266406203,
+        "seeds": [
+          0.4832,
+          0.4590000000000001,
+          0.5070000000000001,
+          0.4488,
+          0.5158
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.37257500000000005,
+          0.555625
+        ]
+      },
+      "gin_contrastive": {
+        "auroc_mean": 0.48347999999999997,
+        "auroc_std": 0.039945683120958114,
+        "seeds": [
+          0.4678,
+          0.5166,
+          0.5017999999999999,
+          0.5187999999999999,
+          0.4124
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.42056499999999997,
+          0.5664
+        ]
+      },
+      "gps_untrained": {
+        "auroc_mean": 0.38114,
+        "auroc_std": 0.02213012426535377,
+        "seeds": [
+          0.3666,
+          0.39640000000000003,
+          0.34450000000000003,
+          0.39619999999999994,
+          0.402
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.28016499999999994,
+          0.48461999999999994
+        ]
+      },
+      "gps_supervised": {
+        "auroc_mean": 0.48575999999999997,
+        "auroc_std": 0.03173222967268454,
+        "seeds": [
+          0.5256000000000001,
+          0.4781999999999999,
+          0.4356,
+          0.47579999999999995,
+          0.5136
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.36697,
+          0.57462
+        ]
+      },
+      "gps_contrastive": {
+        "auroc_mean": 0.42656,
+        "auroc_std": 0.021545263980745327,
+        "seeds": [
+          0.4034,
+          0.4194,
+          0.4638000000000001,
+          0.43579999999999997,
+          0.41039999999999993
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.30518999999999996,
+          0.48782499999999995
+        ]
+      },
+      "subgraph_untrained": {
+        "auroc_mean": 0.37920000000000004,
+        "auroc_std": 0.014920053619206593,
+        "seeds": [
+          0.3664,
+          0.3812,
+          0.4068,
+          0.3754,
+          0.3662
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.29118,
+          0.488805
+        ]
+      },
+      "subgraph_supervised": {
+        "auroc_mean": 0.48288000000000003,
+        "auroc_std": 0.03461273753981327,
+        "seeds": [
+          0.45780000000000004,
+          0.44060000000000005,
+          0.49879999999999997,
+          0.47700000000000004,
+          0.5402
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.36915499999999996,
+          0.5668249999999999
+        ]
+      },
+      "subgraph_contrastive": {
+        "auroc_mean": 0.46163999999999994,
+        "auroc_std": 0.03245166251519329,
+        "seeds": [
+          0.4472,
+          0.413,
+          0.4998,
+          0.49560000000000004,
+          0.4526
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.37074500000000005,
+          0.556025
+        ]
+      }
+    },
+    "c=11_random": {
+      "num_knots": 185,
+      "num_pairs": 370,
+      "certificate_ceiling": {
+        "auroc": 1.0
+      },
+      "face_histogram": {
+        "auroc": 0.8667348429510592
+      },
+      "wl_hash": {
+        "auroc": 0.5351351351351351
+      },
+      "mpnn_untrained": {
+        "auroc_mean": 0.6561256391526662,
+        "auroc_std": 0.006767782999750855,
+        "seeds": [
+          0.646062819576333,
+          0.6596347699050402,
+          0.6565960555149744,
+          0.6661212563915268,
+          0.6522132943754566
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6051373265157048,
+          0.7183944485025566
+        ]
+      },
+      "mpnn_supervised": {
+        "auroc_mean": 0.6472286340394449,
+        "auroc_std": 0.012221492350344152,
+        "seeds": [
+          0.6639298758217678,
+          0.6481227173119064,
+          0.6258290723155588,
+          0.6501095690284879,
+          0.6481519357195034
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6116194302410519,
+          0.7179269539810081
+        ]
+      },
+      "mpnn_contrastive": {
+        "auroc_mean": 0.655690284879474,
+        "auroc_std": 0.022425374329750676,
+        "seeds": [
+          0.6670854638422206,
+          0.6542878013148284,
+          0.6654492330168005,
+          0.6134696859021184,
+          0.6781592403214025
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6227392257121986,
+          0.7274243973703433
+        ]
+      },
+      "gin_untrained": {
+        "auroc_mean": 0.6767567567567567,
+        "auroc_std": 0.005377084118625654,
+        "seeds": [
+          0.6716435354273192,
+          0.6785975164353543,
+          0.6824251278305332,
+          0.6818845872899927,
+          0.6692330168005844
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6326647187728269,
+          0.7389101533966398
+        ]
+      },
+      "gin_supervised": {
+        "auroc_mean": 0.7526369612856099,
+        "auroc_std": 0.03800018981077597,
+        "seeds": [
+          0.7405113221329439,
+          0.7213148283418553,
+          0.7090138787436084,
+          0.7820598977355735,
+          0.8102848794740687
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.7475383491599707,
+          0.8328473338203068
+        ]
+      },
+      "gin_contrastive": {
+        "auroc_mean": 0.802436815193572,
+        "auroc_std": 0.07404674932244898,
+        "seeds": [
+          0.8252154857560263,
+          0.8278743608473338,
+          0.8421329437545654,
+          0.860482103725347,
+          0.6564791818845873
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.8307830533235939,
+          0.8994799123447772
+        ]
+      },
+      "gps_untrained": {
+        "auroc_mean": 0.657300219138057,
+        "auroc_std": 0.019104786876978263,
+        "seeds": [
+          0.6254784514243974,
+          0.6516581446311176,
+          0.6653031409788167,
+          0.6839152666179694,
+          0.660146092037984
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6221154127100074,
+          0.7327487216946676
+        ]
+      },
+      "gps_supervised": {
+        "auroc_mean": 0.6396260043827612,
+        "auroc_std": 0.019857698253227588,
+        "seeds": [
+          0.6483856829802775,
+          0.6120672023374727,
+          0.6344485025566107,
+          0.6718772826880934,
+          0.6313513513513513
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.591172388604821,
+          0.705100073046019
+        ]
+      },
+      "gps_contrastive": {
+        "auroc_mean": 0.6717136596055515,
+        "auroc_std": 0.03515554916616604,
+        "seeds": [
+          0.6261212563915266,
+          0.697764791818846,
+          0.708400292184076,
+          0.6942001460920381,
+          0.632081811541271
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6607932797662527,
+          0.7650978816654493
+        ]
+      },
+      "subgraph_untrained": {
+        "auroc_mean": 0.6597311906501095,
+        "auroc_std": 0.007578060869236855,
+        "seeds": [
+          0.663608473338203,
+          0.6672899926953981,
+          0.6452593133674215,
+          0.6605697589481374,
+          0.6619284149013879
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6055514974433893,
+          0.7176676406135866
+        ]
+      },
+      "subgraph_supervised": {
+        "auroc_mean": 0.6465799853907962,
+        "auroc_std": 0.02394445489796396,
+        "seeds": [
+          0.6913367421475529,
+          0.6402337472607743,
+          0.6189335281227173,
+          0.641899196493791,
+          0.6404967129291453
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6061490138787435,
+          0.7180723155588021
+        ]
+      },
+      "subgraph_contrastive": {
+        "auroc_mean": 0.6926398831263697,
+        "auroc_std": 0.025064820517965887,
+        "seeds": [
+          0.6951643535427319,
+          0.6821037253469687,
+          0.7320672023374727,
+          0.6990211833455077,
+          0.6548429510591672
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6801490138787436,
+          0.7816267348429511
+        ]
+      }
+    },
+    "c=11_hard_geometric": {
+      "num_knots": 185,
+      "num_pairs": 555,
+      "certificate_ceiling": {
+        "auroc": 1.0
+      },
+      "face_histogram": {
+        "auroc": 0.23034331628926225
+      },
+      "wl_hash": {
+        "auroc": 0.5351351351351351
+      },
+      "mpnn_untrained": {
+        "auroc_mean": 0.3885653761869978,
+        "auroc_std": 0.017802005469999594,
+        "seeds": [
+          0.39231555880204527,
+          0.42107377647918187,
+          0.3817896274653031,
+          0.37789627465303144,
+          0.36975164353542733
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.32835609934258575,
+          0.42961979547114687
+        ]
+      },
+      "mpnn_supervised": {
+        "auroc_mean": 0.46081519357195033,
+        "auroc_std": 0.017678612909152267,
+        "seeds": [
+          0.45136596055514977,
+          0.46647187728268813,
+          0.4351935719503287,
+          0.4622498173849525,
+          0.4887947406866326
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.37696018991964936,
+          0.48109094229364496
+        ]
+      },
+      "mpnn_contrastive": {
+        "auroc_mean": 0.47652593133674215,
+        "auroc_std": 0.033502154620235515,
+        "seeds": [
+          0.45542731921110297,
+          0.5047918188458729,
+          0.46908692476260044,
+          0.43022644265887516,
+          0.5230971512052595
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.4302070854638423,
+          0.5318056975894814
+        ]
+      },
+      "gin_untrained": {
+        "auroc_mean": 0.4013265157048941,
+        "auroc_std": 0.00669421807170501,
+        "seeds": [
+          0.398436815193572,
+          0.39404674945215484,
+          0.4034550766983199,
+          0.4132797662527392,
+          0.39741417092768444
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.3424481373265157,
+          0.4401568663257852
+        ]
+      },
+      "gin_supervised": {
+        "auroc_mean": 0.5073279766252738,
+        "auroc_std": 0.029694011706999517,
+        "seeds": [
+          0.5228487947406866,
+          0.5010080350620891,
+          0.4527538349159971,
+          0.5222644265887508,
+          0.5377647918188458
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.45175127830533235,
+          0.5444149013878744
+        ]
+      },
+      "gin_contrastive": {
+        "auroc_mean": 0.47717019722425136,
+        "auroc_std": 0.04750416947366473,
+        "seeds": [
+          0.4682834185536888,
+          0.4979254930606282,
+          0.48952520087655227,
+          0.5369174579985391,
+          0.393199415631848
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.44800693937180425,
+          0.538918918918919
+        ]
+      },
+      "gps_untrained": {
+        "auroc_mean": 0.381799853907962,
+        "auroc_std": 0.012279371339040583,
+        "seeds": [
+          0.36315558802045284,
+          0.38826150474799126,
+          0.3714390065741417,
+          0.39431701972242517,
+          0.3918261504747992
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.321936449963477,
+          0.42496420745069385
+        ]
+      },
+      "gps_supervised": {
+        "auroc_mean": 0.4931132213294376,
+        "auroc_std": 0.022247476911530985,
+        "seeds": [
+          0.49195032870708544,
+          0.46176771365960556,
+          0.518290723155588,
+          0.5171512052593134,
+          0.4764061358655953
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.408617969320672,
+          0.510899926953981
+        ]
+      },
+      "gps_contrastive": {
+        "auroc_mean": 0.4545931336742147,
+        "auroc_std": 0.04489492815474878,
+        "seeds": [
+          0.3884660336011687,
+          0.48714390065741414,
+          0.49395178962746533,
+          0.49094229364499636,
+          0.4124616508400293
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.38903579254930604,
+          0.48735281227173116
+        ]
+      },
+      "subgraph_untrained": {
+        "auroc_mean": 0.38476260043827615,
+        "auroc_std": 0.009617712765784636,
+        "seeds": [
+          0.3944411979547115,
+          0.37165814463111757,
+          0.3908327246165084,
+          0.3745872899926954,
+          0.39229364499634767
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.33109970781592407,
+          0.42915850986121257
+        ]
+      },
+      "subgraph_supervised": {
+        "auroc_mean": 0.4789393718042366,
+        "auroc_std": 0.03171311313532435,
+        "seeds": [
+          0.5257852447041635,
+          0.49855368882395906,
+          0.4369028487947407,
+          0.4805843681519357,
+          0.4528707085463843
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.39608071585098614,
+          0.5003173849525201
+        ]
+      },
+      "subgraph_contrastive": {
+        "auroc_mean": 0.47018845872899934,
+        "auroc_std": 0.027082397784640715,
+        "seeds": [
+          0.47532505478451426,
+          0.4453615777940102,
+          0.5203360116873631,
+          0.45016800584368155,
+          0.4597516435354273
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.436054784514244,
+          0.5409693206720234
+        ]
+      }
+    },
+    "c=12_random": {
+      "num_knots": 100,
+      "num_pairs": 200,
+      "certificate_ceiling": {
+        "auroc": 1.0
+      },
+      "face_histogram": {
+        "auroc": 0.90915
+      },
+      "wl_hash": {
+        "auroc": 0.515
+      },
+      "mpnn_untrained": {
+        "auroc_mean": 0.67581,
+        "auroc_std": 0.007152370236502058,
+        "seeds": [
+          0.6650999999999999,
+          0.6805,
+          0.6732,
+          0.68625,
+          0.6739999999999999
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6127949999999999,
+          0.7442475000000001
+        ]
+      },
+      "mpnn_supervised": {
+        "auroc_mean": 0.65302,
+        "auroc_std": 0.020434421939462856,
+        "seeds": [
+          0.655,
+          0.6621,
+          0.6185,
+          0.6484000000000001,
+          0.6811000000000001
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6256825,
+          0.7636200000000001
+        ]
+      },
+      "mpnn_contrastive": {
+        "auroc_mean": 0.7495,
+        "auroc_std": 0.0446461644489199,
+        "seeds": [
+          0.757,
+          0.7866,
+          0.7877,
+          0.6654,
+          0.7508
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.7441675,
+          0.8571
+        ]
+      },
+      "gin_untrained": {
+        "auroc_mean": 0.69677,
+        "auroc_std": 0.012264566849261352,
+        "seeds": [
+          0.6736,
+          0.7087,
+          0.7048500000000001,
+          0.6995,
+          0.6972
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6447924999999999,
+          0.7643125000000001
+        ]
+      },
+      "gin_supervised": {
+        "auroc_mean": 0.76378,
+        "auroc_std": 0.01616037128286351,
+        "seeds": [
+          0.7576,
+          0.7412000000000001,
+          0.7591,
+          0.7711,
+          0.7899
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.758695,
+          0.8630025
+        ]
+      },
+      "gin_contrastive": {
+        "auroc_mean": 0.8344099999999999,
+        "auroc_std": 0.0758987905041971,
+        "seeds": [
+          0.8661,
+          0.8391,
+          0.8731999999999999,
+          0.9051,
+          0.68855
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.8642850000000001,
+          0.9351025000000001
+        ]
+      },
+      "gps_untrained": {
+        "auroc_mean": 0.6843400000000001,
+        "auroc_std": 0.01831216535530414,
+        "seeds": [
+          0.6620499999999999,
+          0.6623,
+          0.7040000000000001,
+          0.69795,
+          0.6954
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6197925,
+          0.7556149999999999
+        ]
+      },
+      "gps_supervised": {
+        "auroc_mean": 0.6441,
+        "auroc_std": 0.03418286120265534,
+        "seeds": [
+          0.5959,
+          0.6163,
+          0.6669999999999999,
+          0.6908,
+          0.6505000000000001
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6247849999999999,
+          0.770925
+        ]
+      },
+      "gps_contrastive": {
+        "auroc_mean": 0.74178,
+        "auroc_std": 0.03902544810761305,
+        "seeds": [
+          0.6848000000000001,
+          0.7582,
+          0.7683,
+          0.7894,
+          0.7081999999999999
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.7240975,
+          0.8441474999999999
+        ]
+      },
+      "subgraph_untrained": {
+        "auroc_mean": 0.68834,
+        "auroc_std": 0.011182951309918166,
+        "seeds": [
+          0.6961,
+          0.7043,
+          0.6714,
+          0.6854,
+          0.6845
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6202975000000001,
+          0.757035
+        ]
+      },
+      "subgraph_supervised": {
+        "auroc_mean": 0.6582600000000001,
+        "auroc_std": 0.017507552655925414,
+        "seeds": [
+          0.6782000000000001,
+          0.6728999999999999,
+          0.6334,
+          0.6421,
+          0.6647
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.62539,
+          0.7645074999999999
+        ]
+      },
+      "subgraph_contrastive": {
+        "auroc_mean": 0.7198599999999999,
+        "auroc_std": 0.015536357359432764,
+        "seeds": [
+          0.6957,
+          0.7245,
+          0.7259000000000001,
+          0.742,
+          0.7111999999999999
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.6755924999999999,
+          0.8061025
+        ]
+      }
+    },
+    "c=12_hard_geometric": {
+      "num_knots": 100,
+      "num_pairs": 300,
+      "certificate_ceiling": {
+        "auroc": 1.0
+      },
+      "face_histogram": {
+        "auroc": 0.266675
+      },
+      "wl_hash": {
+        "auroc": 0.515
+      },
+      "mpnn_untrained": {
+        "auroc_mean": 0.4101,
+        "auroc_std": 0.012286344045321232,
+        "seeds": [
+          0.41054999999999997,
+          0.40997500000000003,
+          0.4287,
+          0.41135000000000005,
+          0.38992499999999997
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.34119625,
+          0.48268625
+        ]
+      },
+      "mpnn_supervised": {
+        "auroc_mean": 0.47515999999999997,
+        "auroc_std": 0.02729282689645761,
+        "seeds": [
+          0.44425000000000003,
+          0.4713,
+          0.46295000000000003,
+          0.47125,
+          0.52605
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.38723375,
+          0.5347124999999999
+        ]
+      },
+      "mpnn_contrastive": {
+        "auroc_mean": 0.50564,
+        "auroc_std": 0.022760786453899187,
+        "seeds": [
+          0.4921000000000001,
+          0.5408000000000001,
+          0.4987499999999999,
+          0.47575,
+          0.5208
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.45079375000000005,
+          0.59452375
+        ]
+      },
+      "gin_untrained": {
+        "auroc_mean": 0.441265,
+        "auroc_std": 0.014579125488176577,
+        "seeds": [
+          0.4205,
+          0.45874999999999994,
+          0.43194999999999995,
+          0.4565,
+          0.43862500000000004
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.37056812499999997,
+          0.5126812499999999
+        ]
+      },
+      "gin_supervised": {
+        "auroc_mean": 0.5248299999999999,
+        "auroc_std": 0.02699447350847945,
+        "seeds": [
+          0.5182,
+          0.5226999999999999,
+          0.4969,
+          0.5104500000000001,
+          0.5759
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.44229625,
+          0.5829637500000001
+        ]
+      },
+      "gin_contrastive": {
+        "auroc_mean": 0.54301,
+        "auroc_std": 0.05910339584152505,
+        "seeds": [
+          0.5461499999999999,
+          0.5827499999999999,
+          0.54325,
+          0.6079,
+          0.43499999999999994
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.51429375,
+          0.64016
+        ]
+      },
+      "gps_untrained": {
+        "auroc_mean": 0.419995,
+        "auroc_std": 0.01100186802320407,
+        "seeds": [
+          0.426675,
+          0.43285,
+          0.40025,
+          0.42175000000000007,
+          0.41845
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.33999375000000004,
+          0.48478874999999994
+        ]
+      },
+      "gps_supervised": {
+        "auroc_mean": 0.45286,
+        "auroc_std": 0.033286955402980316,
+        "seeds": [
+          0.4103,
+          0.4199,
+          0.47380000000000005,
+          0.49905,
+          0.46125000000000005
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.35354874999999997,
+          0.49846999999999997
+        ]
+      },
+      "gps_contrastive": {
+        "auroc_mean": 0.49152000000000007,
+        "auroc_std": 0.07762912211277416,
+        "seeds": [
+          0.37185,
+          0.5291,
+          0.5354,
+          0.58725,
+          0.434
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.42053,
+          0.5758074999999999
+        ]
+      },
+      "subgraph_untrained": {
+        "auroc_mean": 0.397315,
+        "auroc_std": 0.021155186125392498,
+        "seeds": [
+          0.42734999999999995,
+          0.41085,
+          0.40049999999999997,
+          0.3789,
+          0.368975
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.33019624999999997,
+          0.47235375
+        ]
+      },
+      "subgraph_supervised": {
+        "auroc_mean": 0.48118,
+        "auroc_std": 0.012981471411207547,
+        "seeds": [
+          0.47909999999999997,
+          0.48765,
+          0.4580000000000001,
+          0.49699999999999994,
+          0.48414999999999997
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.40047625,
+          0.5408725
+        ]
+      },
+      "subgraph_contrastive": {
+        "auroc_mean": 0.47449,
+        "auroc_std": 0.017170422242915297,
+        "seeds": [
+          0.47325000000000006,
+          0.44444999999999996,
+          0.47304999999999997,
+          0.4949,
+          0.48679999999999995
+        ],
+        "seed_mean_score_auroc_ci95_knot_bootstrap": [
+          0.38137999999999994,
+          0.52064
+        ]
+      }
+    }
+  },
+  "runtime": {
+    "certificate_sec_per_pair": {
+      "median": 0.0013435014998322004,
+      "mean": 0.0014668728817368874,
+      "p95": 0.002077240250059731
+    },
+    "certificate_methods": {
+      "isometry": 1331,
+      "hfk_fallback": 5
+    },
+    "wl_hash_sec_per_diagram": 0.0007067338268662656,
+    "encoders": {
+      "mpnn_untrained": {
+        "params": 110272,
+        "train_sec_mean": 0.07531085014343261,
+        "embed_sec_per_diagram": 0.0005462326104479058
+      },
+      "mpnn_supervised": {
+        "params": 123207,
+        "train_sec_mean": 24.317711305618285,
+        "embed_sec_per_diagram": 0.0005691887113433909
+      },
+      "mpnn_contrastive": {
+        "params": 110272,
+        "train_sec_mean": 6.36300106048584,
+        "embed_sec_per_diagram": 0.0005423253716416279
+      },
+      "gin_untrained": {
+        "params": 106620,
+        "train_sec_mean": 0.0651461124420166,
+        "embed_sec_per_diagram": 0.0005579817608953302
+      },
+      "gin_supervised": {
+        "params": 119555,
+        "train_sec_mean": 16.988348627090453,
+        "embed_sec_per_diagram": 0.0006463560811940325
+      },
+      "gin_contrastive": {
+        "params": 106620,
+        "train_sec_mean": 3.9287595748901367,
+        "embed_sec_per_diagram": 0.0004623690832836269
+      },
+      "gps_untrained": {
+        "params": 118600,
+        "train_sec_mean": 0.16793417930603027,
+        "embed_sec_per_diagram": 0.0006897226570148252
+      },
+      "gps_supervised": {
+        "params": 131535,
+        "train_sec_mean": 41.76264081001282,
+        "embed_sec_per_diagram": 0.0005406935543284016
+      },
+      "gps_contrastive": {
+        "params": 118600,
+        "train_sec_mean": 10.986344003677369,
+        "embed_sec_per_diagram": 0.0005726800408956478
+      },
+      "subgraph_untrained": {
+        "params": 110336,
+        "train_sec_mean": 0.07859725952148437,
+        "embed_sec_per_diagram": 0.00405699346716411
+      },
+      "subgraph_supervised": {
+        "params": 123271,
+        "train_sec_mean": 190.05036768913268,
+        "embed_sec_per_diagram": 0.004300004752835979
+      },
+      "subgraph_contrastive": {
+        "params": 110336,
+        "train_sec_mean": 49.22432456016541,
+        "embed_sec_per_diagram": 0.004421357569253949
+      }
+    }
+  }
+}

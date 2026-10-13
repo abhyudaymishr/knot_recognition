@@ -1,0 +1,18 @@
+\begin{tabular}{l r cccccccc}
+\toprule
+ & & \multicolumn{2}{c}{Trivial} & \multicolumn{2}{c}{Diagram-only trees} & \multicolumn{4}{c}{Graph backbones (param.-matched)}\\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-10}
+Target & $N$ & Mean & Lin.\ $[c,w]$ & RF & GBDT & Signed MPNN & GIN & GPS & Subgraph (DS-GNN)\\
+\midrule
+$u(K)$ & 1628 & 0.489 & 0.471 & $0.432\pm0.003$ & $0.426\pm0.003$ & \textbf{$0.396\pm0.013$} & $0.408\pm0.017$ & $0.436\pm0.018$ & $0.401\pm0.008$\\
+$g_4(K)$ & 2176 & 0.597 & 0.524 & $0.388\pm0.009$ & $0.385\pm0.004$ & $0.363\pm0.018$ & \textbf{$0.361\pm0.008$} & $0.366\pm0.011$ & $0.364\pm0.022$\\
+$g_3(K)$ & 2176 & 0.855 & \textbf{0.619} & $0.744\pm0.003$ & $0.723\pm0.014$ & $0.729\pm0.022$ & $0.669\pm0.024$ & $0.747\pm0.038$ & $0.693\pm0.074$\\
+$\sigma(K)$ & 2176 & 2.325 & \textbf{0.921} & $0.989\pm0.007$ & $0.974\pm0.011$ & $1.004\pm0.041$ & $0.947\pm0.020$ & $1.008\pm0.044$ & $0.974\pm0.048$\\
+\midrule
+\multicolumn{10}{l}{\emph{Oracle inputs (not competitors): trees given $\sigma$, $\det$, Alexander coefficients; classical formulas}}\\
+\flag{$u(K)$} & & \multicolumn{8}{l}{\flag{RF $0.372\pm0.011$, GBDT $0.373\pm0.011$; closed form 0.848}}\\
+\flag{$g_4(K)$} & & \multicolumn{8}{l}{\flag{RF $0.137\pm0.006$, GBDT $0.310\pm0.029$; closed form 0.271}}\\
+\flag{$g_3(K)$} & & \multicolumn{8}{l}{\flag{RF $0.056\pm0.001$, GBDT $0.056\pm0.000$ (formula input); closed form 0.015}}\\
+\flag{$\sigma(K)$} & & \multicolumn{8}{l}{\flag{RF $0.857\pm0.005$, GBDT $0.858\pm0.008$ ($\sigma$ columns removed)}}\\
+\bottomrule
+\end{tabular}

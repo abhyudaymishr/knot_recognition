@@ -1,0 +1,306 @@
+% =====================================================================
+%  KnotBench -- NeurIPS / ICML submission skeleton
+%  Track: Datasets & Benchmarks (default). See \maintrack switch below.
+%  Every table is generated: python scripts/make_paper_tables.py (results/benchmark_v2/*.json).
+%  \todo{} marks items blocked by gaps listed in the paper blueprint.
+% =====================================================================
+\documentclass{article}
+
+% --- Style: drop the official file (e.g. neurips_2027.sty) next to this .tex.
+%     For D&B use the track option the call specifies (e.g. [datasets]/[db]).
+\IfFileExists{neurips_2027.sty}
+  {\usepackage{neurips_2027}}               % anonymous submission by default
+  {\usepackage[margin=1in]{geometry}\usepackage[numbers]{natbib}}  % fallback so the draft compiles
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{nicefrac}
+\usepackage[expansion=false]{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{longtable}
+
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\newcommand{\flag}[1]{\textcolor{gray}{#1}}   % greyed, non-competing rows
+\newtheorem{proposition}{Proposition}
+
+% Set to true to build the main-track (methods) variant
+\newif\ifmaintrack \maintrackfalse
+
+\title{KnotBench: A Leakage-Free Benchmark for\\Machine Learning on Knot Diagrams}
+
+\author{Anonymous Authors}  % keep anonymous for review
+
+\begin{document}
+\maketitle
+
+% ---------------------------------------------------------------------
+\begin{abstract}
+Machine learning on knot diagrams is increasingly used to predict knot
+invariants and to decide knot equivalence, yet reported gains are rarely
+measured against exact simplification, classical invariants, or tree models
+given the same inputs. We introduce \textsc{KnotBench}, built entirely from
+KnotInfo, with knot-level splits by crossing number (train $c{\le}10$,
+validate $c{=}11$, test on 2{,}176 knots with $c{=}12$), two presentations per
+knot, size-matched pairs, hard geometric negatives, and controls that isolate
+what learning adds. Four parameter-matched graph backbones (signed MPNN, GIN,
+GPS, and a node-marking subgraph GNN) beat diagram-only tree ensembles on
+unknotting number and smooth 4-genus, but none beats a two-parameter
+$[c,w]$ regression on signature or Seifert genus at 250 training knots; that
+gap closes at 636 training knots. On hard negatives drawn from distinct
+presentations, trained encoders reach only 0.45--0.54 AUROC while an exact
+hyperbolic certificate scores 1.000 at 1.3\,ms per pair. We reproduce the
+natural-slope result of Davies et al.\ and document five evaluation pitfalls
+with measured effect sizes. Data, code and a one-command protocol are released.
+\end{abstract}
+
+% ---------------------------------------------------------------------
+\section{Introduction}\label{sec:intro}
+% Para 1: why ML for knots (Davies et al. 2021). Para 2: evaluation shortcuts
+% inflate results (Fig. 1). Para 3: what KnotBench does. Para 4: findings.
+\todo{prose}
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.0cm}
+  Fig.~1 (teaser): verification AUROC on hard geometric negatives per slice --
+  face histogram (0.23--0.32), best untrained (0.40--0.44), best trained
+  (0.48--0.54), exterior-isometry certificate (1.000).\vspace{1.0cm}}}
+  \caption{On distinct presentations with hard negatives, learned encoders stay
+  near chance while an exact certificate is perfect and fast. Data:
+  \texttt{results/benchmark\_v2/task1\_hard\_negatives.json}.}
+  \label{fig:teaser}
+\end{figure}
+
+\paragraph{Contributions.}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Benchmark.} Knot-level splits by crossing number from KnotInfo;
+        verification across two presentations with size-matched and hard
+        geometric negatives; invariant prediction with a held-out validation
+        slice and no test-set tuning.
+  \item \textbf{Fair and oracle baselines.} Diagram-only tree ensembles see the
+        same information as the graph models; oracle rows that read classical
+        invariants ($\sigma$, $\det$, Alexander) are reported separately.
+  \item \textbf{Matched backbones and controls.} Four backbones at
+        $\approx$110k parameters; untrained and shuffled-label controls;
+        paired, Holm-corrected tests for every claimed difference.
+  \item \textbf{Pitfall taxonomy and a reproduction} of the Davies et al.\
+        signature result inside the leakage-free split.
+  \ifmaintrack
+  \item \textbf{Method.} \todo{non-local architecture}
+  \fi
+\end{enumerate}
+Code and data: \todo{anonymous link}.
+
+% ---------------------------------------------------------------------
+\section{Background and Related Work}\label{sec:related}
+\paragraph{Knot diagrams and invariants.} PD codes, Reidemeister moves
+$R_1$--$R_3$, flypes~\cite{menasco1993classification}; targets $\sigma$, $g_3$,
+$g_4$, $u$.
+\paragraph{Machine learning for knots.} Davies et al.~\cite{davies2021advancing}
+related signature to cusp geometry, later proved as a natural-slope
+inequality~\cite{davies2022signature}. \todo{Hughes; Jejjala et al.; Gukov et al.}
+\paragraph{GNN expressivity.} 1-WL bound~\cite{xu2019powerful}; subgraph
+GNNs~\cite{bevilacqua2022equivariant}; graph transformers~\cite{rampasek2022gps}.
+\paragraph{Benchmark leakage.} \todo{}
+
+% ---------------------------------------------------------------------
+\section{Benchmark Design}\label{sec:benchmark}
+\subsection{Data and splits}
+All 2{,}978 knots up to 12 crossings and their labels come from
+KnotInfo~\cite{knotinfo}. Invariant prediction trains on $c{\le}10$ (250
+knots), selects checkpoints per target on $c{=}11$ (552) and tests on $c{=}12$
+(2{,}176; $u(K)$ on the 1{,}628 with an exact value).
+\subsection{Verification pairs}
+Both presentations of a knot (PD code and braid closure) come from KnotInfo,
+which avoids the Perko-pair renumbering at $10_{161}$--$10_{165}$. Diagrams are
+$R_1/R_2$-reduced and relabelled. Hard negatives are the two nearest
+neighbours in face-degree histogram space $[c,n_+,n_-,w,h_2,\dots,h_{10}]$.
+Encoders train on all knots with $3{\le}c{\le}8$ plus alternating knots with
+$c\in\{9,10\}$ (199 knots), knot-disjoint from the non-alternating test knots.
+\subsection{Metrics and statistics}
+AUROC and MAE, mean $\pm$ std over seeds $\{42,\dots,46\}$. Differences are
+tested with paired knot-level bootstrap and Holm correction over all 52
+comparisons (Appendix~\ref{app:stats}).
+
+% ---------------------------------------------------------------------
+\section{Models, Baselines and Controls}\label{sec:models}
+\begin{proposition}[Confluent $R_1/R_2$ reduction]
+Exhaustive $R_1$-curl and $R_2$-bigon removal terminates in $O(|V|)$ steps and
+its result is independent of move order. \todo{state precisely; proof in
+Appendix~\ref{app:proof}}
+\end{proposition}
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item \textbf{Backbones} (hidden width chosen so each has $\approx$110k
+        parameters; 4 layers; AdamW, 60 epochs, batch 32): signed MPNN,
+        GINE~\cite{xu2019powerful}, GPS~\cite{rampasek2022gps}, DS-GNN with
+        node marking~\cite{bevilacqua2022equivariant}.
+  \item \textbf{Diagram-only trees}: RF and GBDT on the 13 diagram features above.
+  \item \textbf{Oracle trees} (not competitors): diagram features plus
+        $\sigma$, $|\sigma|/2$, $\det$, Alexander coefficients; $\sigma$ columns
+        removed when $\sigma$ is the target.
+  \item \textbf{Classical}: WL hash, $|\sigma|/2$ bound, $\deg\Delta/2$, exterior
+        isometry certificate (ceiling).
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Results}\label{sec:results}
+
+\begin{table}[t]
+\centering\small
+\caption{Invariant prediction on unseen $c{=}12$ knots (train $c{\le}10$,
+checkpoint on $c{=}11$), MAE, mean $\pm$ std over 5 seeds. Bold: best non-oracle
+entry. Grey rows read classical invariants and are not competitors.}
+\label{tab:task2}
+\begin{adjustbox}{max width=\linewidth}
+\input{tables/task2}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\caption{Verification across distinct presentations (AUROC, mean $\pm$ std over
+5 seeds). Ceiling = exterior isometry certificate. Backbone columns show the
+better of supervised and contrastive training; Untrained is the best of the four
+untrained backbones.}
+\label{tab:task1}
+\begin{adjustbox}{max width=\linewidth}
+\input{tables/task1}
+\end{adjustbox}
+\end{table}
+
+\paragraph{Graph models beat diagram-only trees, not classical invariants.}
+On $u(K)$ and $g_4(K)$ every backbone except GPS on $u$ beats diagram-only RF
+(e.g.\ GIN $-0.035$ MAE on $u$, $-0.034$ on $g_4$; $p_\text{Holm}{=}0.010$).
+Trees given $\sigma$ reach 0.137 on $g_4$, so the earlier ``RF beats GNN''
+result came from oracle inputs.
+\paragraph{Signature and Seifert genus are data-limited.} At 250 training
+knots no diagram model beats linear $[c,w]$ on $\sigma$ (GIN $+0.007$, n.s.) or
+$g_3$. With 636 training knots GIN reaches 0.718 on $\sigma$ and 0.472 on $g_3$
+versus 0.919 and 0.613 for $[c,w]$ (Table~\ref{tab:curve}).
+\paragraph{Learning adds little on hard negatives.} Training lifts the best
+encoder from 0.40--0.44 to 0.48--0.54 AUROC (significant at $c{=}11,12$, not
+at $c{\le}10$); all remain far below the certificate.
+\paragraph{Cost.} The certificate costs 1.3\,ms per pair (median), comparable
+to a single encoder forward pass (Table~\ref{tab:runtime}).
+\paragraph{Reproducing Davies et al.} Hyperbolic invariants predict $\sigma$
+far better than any diagram model (Table~\ref{tab:davies}).
+
+\begin{table}[t]
+\centering\small
+\caption{Learning curve: test MAE on $c{=}12$ as the training set grows
+(validation fixed at 30\% of $c{=}11$).}
+\label{tab:curve}
+\begin{adjustbox}{max width=\linewidth}
+\input{tables/learning_curve}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\caption{Signature from hyperbolic invariants of the complement (Davies et al.\
+setting vs.\ the KnotBench crossing split); 5 seeds; ``exact'' rounds to the
+nearest even integer.}
+\label{tab:davies}
+\input{tables/davies}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\caption{Runtime on one CPU core.}
+\label{tab:runtime}
+\input{tables/runtime}
+\end{table}
+
+% ---------------------------------------------------------------------
+\section{A Taxonomy of Pitfalls}\label{sec:pitfalls}
+\begin{table}[h]
+\centering\small
+\caption{Pitfalls, how to detect them, and measured effect.}
+\label{tab:pitfalls}
+\begin{tabular}{p{3.2cm}p{4.2cm}p{4.3cm}}
+\toprule
+Pitfall & Detection / fix & Measured effect \\
+\midrule
+Traversal-order leakage & Cyclic relabel + orientation reversal; face-degree features & Chord AUROC $0.918\to0.401$ \\
+Diagram-size imbalance & Match step schedules for positives/negatives & Spurious $0.000\to0.512$ AUROC \\
+Encoder as graph hash & Untrained and shuffled-label controls; hard negatives & Untrained $0.95$ on easy pairs, $0.40$ on hard \\
+Oracle / label leakage & Audit features against label definitions & $\sigma$ MAE $0.010$ (leak); $g_4$ $0.388\to0.137$ with $\sigma$ \\
+Multi-task checkpointing & Per-target selection on validation & Joint vs.\ per-target selection \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------
+\section{Relevance to Scientific Practice}\label{sec:impact}
+\textsc{KnotBench} answers a practical question for working scientists: when
+should a learned model replace or complement an exact method? For knot
+equivalence it should not: an exterior-isometry certificate is correct on every
+test pair at 1.3\,ms per pair, while trained encoders stay near chance on hard
+negatives. For invariants without fast algorithms---unknotting number and
+smooth 4-genus---all four graph backbones carry significant signal beyond
+diagram-only baselines, which makes them useful for ranking open cases (548 of
+2{,}176 twelve-crossing knots lack an exact $u(K)$ in KnotInfo) but not for
+settling them. The same protocol applies to knotted proteins, circular DNA and
+polymer simulations, where knot identification runs at database scale: screen
+with exact invariants, and adopt a learned model only if it beats them on accuracy
+and cost under a knot-disjoint split. The oracle-input pitfall
+($g_4$ MAE $0.388\to0.137$ once $\sigma$, which helps define the labels, is an input)
+is a general hazard for scientific benchmarks whose labels come from bounds.
+
+\section{Reproducibility Statement}\label{sec:repro}
+All headline numbers are produced on CPU with seeds $\{42,\dots,46\}$ by one
+script and written to JSON, from which every table is generated. Repeated runs,
+different hash seeds and thread counts give bit-identical test predictions
+(identical SHA-256 over all 2{,}176 predictions). The full suite takes about
+2 CPU-hours with no GPU. One earlier value was platform-dependent: the learned
+gain in the $c{\le}8$ protocol was $+0.008$ AUROC on Apple MPS with unseeded
+initialisation and is $+0.027$ [$+0.013$, $+0.042$] on seeded CPU runs; we
+report the latter. We release pinned dependencies (SnapPy, spherogram,
+scikit-learn, database\_knotinfo), data with checksums, and record the commit,
+package versions and data hash in every results file. \todo{confirm once the
+lockfile, Dockerfile and DOI exist; add cross-platform tolerance}
+
+% ---------------------------------------------------------------------
+\section{Limitations}\label{sec:limits}
+Crossing numbers $\le 12$; synthetic perturbations; KnotInfo labels for $u$ and
+$g_4$ exist where classical bounds meet, which biases the solved subset; $R_3$
+is not canonicalized; 5 of 1{,}336 certificate pairs are non-hyperbolic and use
+knot Floer homology equality instead; the learned gain in the $c{\le}8$ protocol
+(+0.027 AUROC on CPU) differs from the earlier MPS run (+0.008).
+
+\section{Conclusion}\label{sec:conclusion}
+\todo{two sentences + how to submit results to the benchmark}
+
+% ---------------------------------------------------------------------
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+\section{Proof of Confluent $R_1/R_2$ Reduction}\label{app:proof}
+\todo{from docs/reidemeister\_invariance\_theory.md}
+\section{Statistical Tests}\label{app:stats}
+Paired knot-level bootstrap; $\Delta$ is MAE(A)$-$MAE(B) for Task 2 and
+AUROC(A)$-$AUROC(B) for Task 1, computed on seed-averaged predictions; Holm correction over the full family. Resampling floors $p$ at $1/\text{reps}$.
+{\footnotesize\input{tables/statistics}}
+\section{Secondary Protocol (train $c{\le}11$, no validation)}
+Reported in \texttt{results/rigorous\_tasks\_benchmark.json}
+(\texttt{task2\_invariants}); superseded by Table~\ref{tab:task2}.
+\section{Hyperparameters and Selection Rules}\todo{}
+\section{Compute}\todo{hardware, CPU-hours, per-run time}
+\section{Datasheet for KnotBench}\todo{motivation, composition, collection,
+uses, distribution, maintenance; Croissant metadata}
+
+\clearpage
+\section*{NeurIPS Paper Checklist}
+\todo{official checklist}
+
+\end{document}

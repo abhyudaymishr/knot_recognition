@@ -1,0 +1,59 @@
+\begin{longtable}{p{8.2cm} r c r r}
+\toprule
+Comparison (A vs B) & $\Delta$ & 95\% CI & $p$ & $p_\text{Holm}$\\
+\midrule
+\endhead
+gain / canonical\_r1r2 vs random\_canon & +0.027 & [+0.013, +0.042] & 0.0005 & 0.010\\
+gain / canonical\_r1r2 vs shuffled\_canon & +0.029 & [+0.015, +0.045] & 0.0005 & 0.010\\
+gain / canonical\_r1r2 vs fixed\_chord\_canon & +0.058 & [+0.038, +0.079] & 0.0005 & 0.010\\
+task1 / c$\le$10\_hard\_geometric / gin\_contrastive vs gin\_untrained & +0.072 & [-0.029, +0.167] & 0.1680 & 1.000\\
+task1 / c$\le$10\_hard\_geometric / gin\_contrastive vs face\_histogram & +0.175 & [+0.073, +0.270] & 0.0005 & 0.010\\
+task1 / c=11\_hard\_geometric / gin\_supervised vs gin\_untrained & +0.106 & [+0.074, +0.139] & 0.0005 & 0.010\\
+task1 / c=11\_hard\_geometric / gin\_supervised vs face\_histogram & +0.268 & [+0.224, +0.311] & 0.0005 & 0.010\\
+task1 / c=12\_hard\_geometric / gin\_contrastive vs gin\_untrained & +0.135 & [+0.069, +0.202] & 0.0005 & 0.010\\
+task1 / c=12\_hard\_geometric / gin\_contrastive vs face\_histogram & +0.309 & [+0.237, +0.380] & 0.0005 & 0.010\\
+task2 / unknotting\_number / gnn\_mpnn vs rf\_diagram & -0.041 & [-0.057, -0.025] & 0.0002 & 0.010\\
+task2 / unknotting\_number / gnn\_gin vs rf\_diagram & -0.035 & [-0.051, -0.019] & 0.0002 & 0.010\\
+task2 / unknotting\_number / gnn\_gps vs rf\_diagram & -0.006 & [-0.022, +0.011] & 0.5028 & 1.000\\
+task2 / unknotting\_number / gnn\_subgraph vs rf\_diagram & -0.038 & [-0.054, -0.021] & 0.0002 & 0.010\\
+task2 / unknotting\_number / gnn\_mpnn vs linear\_cw & -0.081 & [-0.094, -0.069] & 0.0002 & 0.010\\
+task2 / unknotting\_number / gnn\_gin vs linear\_cw & -0.075 & [-0.088, -0.062] & 0.0002 & 0.010\\
+task2 / unknotting\_number / gnn\_gps vs linear\_cw & -0.046 & [-0.061, -0.031] & 0.0002 & 0.010\\
+task2 / unknotting\_number / gnn\_subgraph vs linear\_cw & -0.078 & [-0.091, -0.065] & 0.0002 & 0.010\\
+task2 / unknotting\_number / rf\_oracle vs rf\_diagram & -0.060 & [-0.071, -0.050] & 0.0002 & 0.010\\
+task2 / unknotting\_number / rf\_diagram vs linear\_cw & -0.040 & [-0.057, -0.023] & 0.0002 & 0.010\\
+task2 / smooth\_four\_genus / gnn\_mpnn vs rf\_diagram & -0.037 & [-0.051, -0.023] & 0.0002 & 0.010\\
+task2 / smooth\_four\_genus / gnn\_gin vs rf\_diagram & -0.034 & [-0.047, -0.020] & 0.0002 & 0.010\\
+task2 / smooth\_four\_genus / gnn\_gps vs rf\_diagram & -0.027 & [-0.040, -0.013] & 0.0002 & 0.010\\
+task2 / smooth\_four\_genus / gnn\_subgraph vs rf\_diagram & -0.042 & [-0.055, -0.028] & 0.0002 & 0.010\\
+task2 / smooth\_four\_genus / gnn\_mpnn vs linear\_cw & -0.175 & [-0.188, -0.162] & 0.0002 & 0.010\\
+task2 / smooth\_four\_genus / gnn\_gin vs linear\_cw & -0.171 & [-0.186, -0.156] & 0.0002 & 0.010\\
+task2 / smooth\_four\_genus / gnn\_gps vs linear\_cw & -0.165 & [-0.178, -0.151] & 0.0002 & 0.010\\
+task2 / smooth\_four\_genus / gnn\_subgraph vs linear\_cw & -0.179 & [-0.193, -0.166] & 0.0002 & 0.010\\
+task2 / smooth\_four\_genus / gnn\_subgraph vs gnn\_mpnn & -0.005 & [-0.007, -0.002] & 0.0008 & 0.010\\
+task2 / smooth\_four\_genus / rf\_oracle vs rf\_diagram & -0.250 & [-0.265, -0.235] & 0.0002 & 0.010\\
+task2 / smooth\_four\_genus / rf\_diagram vs linear\_cw & -0.138 & [-0.156, -0.119] & 0.0002 & 0.010\\
+task2 / three\_genus / gnn\_mpnn vs rf\_diagram & -0.029 & [-0.043, -0.015] & 0.0002 & 0.010\\
+task2 / three\_genus / gnn\_gin vs rf\_diagram & -0.086 & [-0.101, -0.070] & 0.0002 & 0.010\\
+task2 / three\_genus / gnn\_gps vs rf\_diagram & -0.002 & [-0.015, +0.013] & 0.8184 & 1.000\\
+task2 / three\_genus / gnn\_subgraph vs rf\_diagram & -0.079 & [-0.093, -0.066] & 0.0002 & 0.010\\
+task2 / three\_genus / gnn\_mpnn vs linear\_cw & +0.095 & [+0.075, +0.116] & 0.0002 & 0.010\\
+task2 / three\_genus / gnn\_gin vs linear\_cw & +0.039 & [+0.020, +0.058] & 0.0002 & 0.010\\
+task2 / three\_genus / gnn\_gps vs linear\_cw & +0.123 & [+0.102, +0.143] & 0.0002 & 0.010\\
+task2 / three\_genus / gnn\_subgraph vs linear\_cw & +0.045 & [+0.026, +0.065] & 0.0002 & 0.010\\
+task2 / three\_genus / gnn\_gin vs gnn\_mpnn & -0.057 & [-0.062, -0.051] & 0.0002 & 0.010\\
+task2 / three\_genus / rf\_oracle vs rf\_diagram & -0.687 & [-0.709, -0.666] & 0.0002 & 0.010\\
+task2 / three\_genus / rf\_diagram vs linear\_cw & +0.124 & [+0.105, +0.144] & 0.0002 & 0.010\\
+task2 / signature / gnn\_mpnn vs rf\_diagram & -0.022 & [-0.053, +0.008] & 0.1488 & 1.000\\
+task2 / signature / gnn\_gin vs rf\_diagram & -0.059 & [-0.090, -0.030] & 0.0002 & 0.010\\
+task2 / signature / gnn\_gps vs rf\_diagram & -0.006 & [-0.035, +0.024] & 0.7384 & 1.000\\
+task2 / signature / gnn\_subgraph vs rf\_diagram & -0.058 & [-0.088, -0.030] & 0.0002 & 0.010\\
+task2 / signature / gnn\_mpnn vs linear\_cw & +0.043 & [+0.019, +0.068] & 0.0012 & 0.010\\
+task2 / signature / gnn\_gin vs linear\_cw & +0.006 & [-0.020, +0.032] & 0.6304 & 1.000\\
+task2 / signature / gnn\_gps vs linear\_cw & +0.060 & [+0.034, +0.086] & 0.0002 & 0.010\\
+task2 / signature / gnn\_subgraph vs linear\_cw & +0.007 & [-0.016, +0.031] & 0.5432 & 1.000\\
+task2 / signature / gnn\_gin vs gnn\_mpnn & -0.037 & [-0.054, -0.020] & 0.0002 & 0.010\\
+task2 / signature / rf\_oracle vs rf\_diagram & -0.134 & [-0.162, -0.108] & 0.0002 & 0.010\\
+task2 / signature / rf\_diagram vs linear\_cw & +0.066 & [+0.040, +0.092] & 0.0002 & 0.010\\
+\bottomrule
+\end{longtable}

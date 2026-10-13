@@ -1,0 +1,13 @@
+\begin{tabular}{l c c c c}
+\toprule
+ & \multicolumn{2}{c}{Random 80/20 (Davies et al.\ setting)} & \multicolumn{2}{c}{KnotBench $c\le10\to c=12$}\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Predictor of $\sigma(K)$ & MAE & Exact acc. & MAE & Exact acc.\\
+\midrule
+Mean & 2.292 & -- & 2.316 & --\\
+Natural slope / 2 (formula) & 0.713 & 0.739 & 0.686 & 0.739\\
+MLP (hyperbolic inv.) & $0.501\pm0.013$ & 0.862 & $0.596\pm0.011$ & 0.831\\
+GBDT (hyperbolic inv.) & $0.424\pm0.003$ & 0.873 & $0.542\pm0.005$ & 0.808\\
+RF (hyperbolic inv.) & $0.344\pm0.002$ & 0.868 & $0.476\pm0.002$ & 0.804\\
+\bottomrule
+\end{tabular}

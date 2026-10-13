@@ -1,0 +1,12 @@
+\begin{tabular}{l r r}
+\toprule
+Method & Params & Time per diagram / pair\\
+\midrule
+Exterior isometry (certificate) & -- & 1.3 ms (median), 2.1 ms (p95)\\
+WL hash & -- & 0.71 ms\\
+Signed MPNN encoder & 123,207 & 0.57 ms\\
+GIN encoder & 119,555 & 0.65 ms\\
+GPS encoder & 131,535 & 0.54 ms\\
+Subgraph (DS-GNN) encoder & 123,271 & 4.30 ms\\
+\bottomrule
+\end{tabular}

@@ -1,0 +1,84 @@
+{
+  "features": [
+    "volume",
+    "chern_simons",
+    "mu_re",
+    "mu_im",
+    "lam_re",
+    "lam_im",
+    "shape_re",
+    "shape_im",
+    "cusp_volume",
+    "slope"
+  ],
+  "n_hyperbolic": 2968,
+  "excluded_non_hyperbolic": [
+    "0_1",
+    "3_1",
+    "5_1",
+    "7_1",
+    "8_19",
+    "9_1",
+    "10_124",
+    "11a_363",
+    "11a_367",
+    "12a_1242"
+  ],
+  "crossing_split_c<=10_to_c=12": {
+    "n_train": 243,
+    "n_test": 2175,
+    "natural_slope_formula": {
+      "sign": 1.0,
+      "mae": 0.6859883509004389,
+      "exact_acc": 0.7393103448275862
+    },
+    "gbdt": {
+      "mae_mean": 0.5424785731625232,
+      "mae_std": 0.004775690038180692,
+      "exact_acc_mean": 0.8078160919540229,
+      "exact_acc_std": 0.003757759400772895
+    },
+    "rf": {
+      "mae_mean": 0.4755206130268199,
+      "mae_std": 0.0017207954386325843,
+      "exact_acc_mean": 0.8039540229885057,
+      "exact_acc_std": 0.0027981837341982227
+    },
+    "mlp": {
+      "mae_mean": 0.5955473308062598,
+      "mae_std": 0.01110581664061951,
+      "exact_acc_mean": 0.8306206896551723,
+      "exact_acc_std": 0.0039293536770982065
+    },
+    "mean_baseline_mae": 2.31589044983681
+  },
+  "random_80_20_split": {
+    "n_train": 2374,
+    "n_test": 594,
+    "natural_slope_formula": {
+      "sign": 1.0,
+      "mae": 0.7134643830936437,
+      "exact_acc": 0.7390572390572391
+    },
+    "gbdt": {
+      "mae_mean": 0.4236946182692594,
+      "mae_std": 0.0025909657379306465,
+      "exact_acc_mean": 0.873063973063973,
+      "exact_acc_std": 0.0037794519058322214
+    },
+    "rf": {
+      "mae_mean": 0.34377553310886644,
+      "mae_std": 0.001904461026264273,
+      "exact_acc_mean": 0.868013468013468,
+      "exact_acc_std": 0.004338080379368742
+    },
+    "mlp": {
+      "mae_mean": 0.5007883760928675,
+      "mae_std": 0.013476316463852089,
+      "exact_acc_mean": 0.8622895622895623,
+      "exact_acc_std": 0.004689693022620929
+    },
+    "mean_baseline_mae": 2.2916358190157684
+  },
+  "note": "Davies et al. trained on a random split of a large census; the random_80_20 row mirrors that setting within c<=12. The crossing split is the leakage-free KnotBench protocol. Signature is never an input; features come only from the hyperbolic structure of the complement."
+}

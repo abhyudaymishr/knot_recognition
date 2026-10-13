@@ -1335,6 +1335,9 @@ def run_task2_validation_holdout(
     for ti, tgt in enumerate(targets):
         v_tr = m_tr[:, ti] > 0
         v_te = m_te[:, ti] > 0
+        if tgt == "signature":
+            # Label leakage: sigma(K) is an input column of the classical tabular matrix.
+            continue
         for s in seeds:
             rf = RandomForestRegressor(n_estimators=100, random_state=s)
             rf.fit(X_tr_tab[v_tr], y_tr[v_tr, ti])
@@ -1431,8 +1434,9 @@ def run_task2_validation_holdout(
         valid = m_te[:, ti] > 0
         n_val = int(sum(valid))
         f_str = f"{sig_bound_u:.3f}" if tgt == "unknotting_number" else (f"{sig_bound_g4:.3f}" if tgt == "smooth_four_genus" else "---")
-        rf_m, rf_s = np.mean(rf_holdout_maes[tgt]), np.std(rf_holdout_maes[tgt])
-        gb_m, gb_s = np.mean(gb_holdout_maes[tgt]), np.std(gb_holdout_maes[tgt])
+        leaked = tgt == "signature"
+        rf_m, rf_s = (None, None) if leaked else (np.mean(rf_holdout_maes[tgt]), np.std(rf_holdout_maes[tgt]))
+        gb_m, gb_s = (None, None) if leaked else (np.mean(gb_holdout_maes[tgt]), np.std(gb_holdout_maes[tgt]))
         j_m, j_s = np.mean(joint_seed_maes[tgt]), np.std(joint_seed_maes[tgt])
         p_m, p_s = np.mean(pertgt_seed_maes[tgt]), np.std(pertgt_seed_maes[tgt])
 
@@ -1441,16 +1445,21 @@ def run_task2_validation_holdout(
             "mean_predictor_mae": mean_maes[tgt],
             "linear_cw_mae": lin_maes[tgt],
             "formula_bound_mae": sig_bound_g4 if tgt == "smooth_four_genus" else (sig_bound_u if tgt == "unknotting_number" else None),
-            "rf_mae_mean": float(rf_m),
-            "rf_mae_std": float(rf_s),
-            "gbdt_mae_mean": float(gb_m),
-            "gbdt_mae_std": float(gb_s),
+            "rf_mae_mean": None if leaked else float(rf_m),
+            "rf_mae_std": None if leaked else float(rf_s),
+            "gbdt_mae_mean": None if leaked else float(gb_m),
+            "gbdt_mae_std": None if leaked else float(gb_s),
+            "rf_gbdt_status": ("DROPPED (Label Leakage: signature is in input feature set)" if leaked
+                               else ("FORMULA INPUT (deg(Delta)/2 fed as exact input feature)" if tgt == "three_genus"
+                                     else "ORACLE FEATURES (sigma, det, Alexander coefficients; see benchmark_v2 for diagram-only)")),
             "gnn_joint_val_mae_mean": float(j_m),
             "gnn_joint_val_mae_std": float(j_s),
             "gnn_pertgt_val_mae_mean": float(p_m),
             "gnn_pertgt_val_mae_std": float(p_s),
         }
-        print(f"{tgt:<20} | {n_val:<10} | {mean_maes[tgt]:<10.3f} | {lin_maes[tgt]:<10.3f} | {f_str:<10} | {rf_m:.3f} ± {rf_s:.3f} | {gb_m:.3f} ± {gb_s:.3f} | {j_m:.3f} ± {j_s:.3f}   | {p_m:.3f} ± {p_s:.3f}")
+        rf_txt = "[DROPPED]" if leaked else f"{rf_m:.3f} ± {rf_s:.3f}"
+        gb_txt = "[DROPPED]" if leaked else f"{gb_m:.3f} ± {gb_s:.3f}"
+        print(f"{tgt:<20} | {n_val:<10} | {mean_maes[tgt]:<10.3f} | {lin_maes[tgt]:<10.3f} | {f_str:<10} | {rf_txt:<14} | {gb_txt:<14} | {j_m:.3f} ± {j_s:.3f}   | {p_m:.3f} ± {p_s:.3f}")
 
     return holdout_results
 

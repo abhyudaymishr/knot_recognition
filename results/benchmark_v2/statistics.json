@@ -1,0 +1,536 @@
+{
+  "method": {
+    "task2": "Paired knot-level bootstrap (5,000 resamples) on seed-averaged predictions; MAE(A) - MAE(B); two-sided p; Holm correction across the whole family.",
+    "task1": "Knot-cluster paired bootstrap (2,000 resamples) of AUROC differences on seed-averaged scores; Holm-corrected.",
+    "learned_gain": "Per seed, both models are scored on identical sampler pairs; anchors resampled jointly; differences averaged over 5 seeds."
+  },
+  "task2": {
+    "task2/unknotting_number/gnn_mpnn_vs_rf_diagram": {
+      "mae_diff": -0.04119956166124885,
+      "ci95": [
+        -0.05718863874583103,
+        -0.02491189453515751
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/unknotting_number/gnn_gin_vs_rf_diagram": {
+      "mae_diff": -0.034997863074945415,
+      "ci95": [
+        -0.05103332738018661,
+        -0.01904764291562533
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/unknotting_number/gnn_gps_vs_rf_diagram": {
+      "mae_diff": -0.00566084397307692,
+      "ci95": [
+        -0.021704454476250988,
+        0.01069823749395316
+      ],
+      "p": 0.5028,
+      "p_holm": 1.0
+    },
+    "task2/unknotting_number/gnn_subgraph_vs_rf_diagram": {
+      "mae_diff": -0.03757352152296482,
+      "ci95": [
+        -0.054237688417982016,
+        -0.021108130504661038
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/unknotting_number/gnn_mpnn_vs_linear_cw": {
+      "mae_diff": -0.08133951049504742,
+      "ci95": [
+        -0.0938464402642952,
+        -0.06895712881181032
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/unknotting_number/gnn_gin_vs_linear_cw": {
+      "mae_diff": -0.07513781190874397,
+      "ci95": [
+        -0.08817085041451173,
+        -0.06240193584359245
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/unknotting_number/gnn_gps_vs_linear_cw": {
+      "mae_diff": -0.045800792806875476,
+      "ci95": [
+        -0.06065333593147393,
+        -0.03117112358244104
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/unknotting_number/gnn_subgraph_vs_linear_cw": {
+      "mae_diff": -0.07771347035676339,
+      "ci95": [
+        -0.09102211207860275,
+        -0.06465634413375346
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/unknotting_number/rf_oracle_vs_rf_diagram": {
+      "mae_diff": -0.06030347636597637,
+      "ci95": [
+        -0.07107002615772502,
+        -0.04970891438184055
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/unknotting_number/rf_diagram_vs_linear_cw": {
+      "mae_diff": -0.04013994883379856,
+      "ci95": [
+        -0.057341513489646244,
+        -0.023428150134340107
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/smooth_four_genus/gnn_mpnn_vs_rf_diagram": {
+      "mae_diff": -0.03708153328583924,
+      "ci95": [
+        -0.05069814084272266,
+        -0.022882674759393738
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/smooth_four_genus/gnn_gin_vs_rf_diagram": {
+      "mae_diff": -0.03380820533112439,
+      "ci95": [
+        -0.04727860474756598,
+        -0.019985618533966756
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/smooth_four_genus/gnn_gps_vs_rf_diagram": {
+      "mae_diff": -0.026858983746747746,
+      "ci95": [
+        -0.04028359143496651,
+        -0.013297667574014271
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/smooth_four_genus/gnn_subgraph_vs_rf_diagram": {
+      "mae_diff": -0.04161040390486594,
+      "ci95": [
+        -0.054785591009710345,
+        -0.027947091810108512
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/smooth_four_genus/gnn_mpnn_vs_linear_cw": {
+      "mae_diff": -0.17476531636392015,
+      "ci95": [
+        -0.1881015261577861,
+        -0.16164652356662482
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/smooth_four_genus/gnn_gin_vs_linear_cw": {
+      "mae_diff": -0.1714919884092053,
+      "ci95": [
+        -0.18624463539743183,
+        -0.15639973973013516
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/smooth_four_genus/gnn_gps_vs_linear_cw": {
+      "mae_diff": -0.16454276682482868,
+      "ci95": [
+        -0.17802575333937948,
+        -0.15110769122898587
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/smooth_four_genus/gnn_subgraph_vs_linear_cw": {
+      "mae_diff": -0.17929418698294686,
+      "ci95": [
+        -0.19277883682485836,
+        -0.16613392582442543
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/smooth_four_genus/gnn_subgraph_vs_gnn_mpnn": {
+      "mae_diff": -0.004528870619026708,
+      "ci95": [
+        -0.007343327923793285,
+        -0.0018350377184142483
+      ],
+      "p": 0.0008,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/smooth_four_genus/rf_oracle_vs_rf_diagram": {
+      "mae_diff": -0.24998364865832698,
+      "ci95": [
+        -0.264929126628516,
+        -0.23453493691842267
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/smooth_four_genus/rf_diagram_vs_linear_cw": {
+      "mae_diff": -0.1376837830780809,
+      "ci95": [
+        -0.15609826359615142,
+        -0.11916459494538954
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/three_genus/gnn_mpnn_vs_rf_diagram": {
+      "mae_diff": -0.02890023420304301,
+      "ci95": [
+        -0.0431913026422344,
+        -0.014501316537100016
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/three_genus/gnn_gin_vs_rf_diagram": {
+      "mae_diff": -0.08565191200191524,
+      "ci95": [
+        -0.10079430179229362,
+        -0.07040905655030333
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/three_genus/gnn_gps_vs_rf_diagram": {
+      "mae_diff": -0.0016001497797276175,
+      "ci95": [
+        -0.015390711997346035,
+        0.012861054030107733
+      ],
+      "p": 0.8184,
+      "p_holm": 1.0
+    },
+    "task2/three_genus/gnn_subgraph_vs_rf_diagram": {
+      "mae_diff": -0.0793492577101223,
+      "ci95": [
+        -0.09325204484791336,
+        -0.06566580953966814
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/three_genus/gnn_mpnn_vs_linear_cw": {
+      "mae_diff": 0.09543614888766598,
+      "ci95": [
+        0.07519692118632625,
+        0.11571798894819256
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/three_genus/gnn_gin_vs_linear_cw": {
+      "mae_diff": 0.03868447108879374,
+      "ci95": [
+        0.020158695017961793,
+        0.05754804291971882
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/three_genus/gnn_gps_vs_linear_cw": {
+      "mae_diff": 0.12273623331098138,
+      "ci95": [
+        0.10239571280133673,
+        0.14328016265385607
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/three_genus/gnn_subgraph_vs_linear_cw": {
+      "mae_diff": 0.04498712538058672,
+      "ci95": [
+        0.025774227950782887,
+        0.06472040438179438
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/three_genus/gnn_gin_vs_gnn_mpnn": {
+      "mae_diff": -0.056751677798872247,
+      "ci95": [
+        -0.06243657037925822,
+        -0.050631299115831835
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/three_genus/rf_oracle_vs_rf_diagram": {
+      "mae_diff": -0.686840436667091,
+      "ci95": [
+        -0.708554648498012,
+        -0.6660063526165675
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/three_genus/rf_diagram_vs_linear_cw": {
+      "mae_diff": 0.12433638309070899,
+      "ci95": [
+        0.1053250544358411,
+        0.14423268986060991
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/signature/gnn_mpnn_vs_rf_diagram": {
+      "mae_diff": -0.0222187436120641,
+      "ci95": [
+        -0.05267941536266564,
+        0.007546752571842748
+      ],
+      "p": 0.1488,
+      "p_holm": 1.0
+    },
+    "task2/signature/gnn_gin_vs_rf_diagram": {
+      "mae_diff": -0.059116468777115766,
+      "ci95": [
+        -0.09028406601044,
+        -0.02958583722341721
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/signature/gnn_gps_vs_rf_diagram": {
+      "mae_diff": -0.005530229943756254,
+      "ci95": [
+        -0.034564119202833685,
+        0.02374807060538542
+      ],
+      "p": 0.7384,
+      "p_holm": 1.0
+    },
+    "task2/signature/gnn_subgraph_vs_rf_diagram": {
+      "mae_diff": -0.05848631952714943,
+      "ci95": [
+        -0.08751153573763082,
+        -0.0300874849741328
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/signature/gnn_mpnn_vs_linear_cw": {
+      "mae_diff": 0.04338641035399918,
+      "ci95": [
+        0.01861839711587145,
+        0.06828338192298382
+      ],
+      "p": 0.0012,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/signature/gnn_gin_vs_linear_cw": {
+      "mae_diff": 0.006488685188947525,
+      "ci95": [
+        -0.019837397293294413,
+        0.03240613895796216
+      ],
+      "p": 0.6304,
+      "p_holm": 1.0
+    },
+    "task2/signature/gnn_gps_vs_linear_cw": {
+      "mae_diff": 0.06007492402230702,
+      "ci95": [
+        0.03421887752238833,
+        0.08617070724219836
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/signature/gnn_subgraph_vs_linear_cw": {
+      "mae_diff": 0.007118834438913855,
+      "ci95": [
+        -0.01602076459687174,
+        0.030546000278754693
+      ],
+      "p": 0.5432,
+      "p_holm": 1.0
+    },
+    "task2/signature/gnn_gin_vs_gnn_mpnn": {
+      "mae_diff": -0.03689772516505166,
+      "ci95": [
+        -0.05370226110270563,
+        -0.02031257041218183
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/signature/rf_oracle_vs_rf_diagram": {
+      "mae_diff": -0.134307719726148,
+      "ci95": [
+        -0.16168965732860374,
+        -0.10792935822908711
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    },
+    "task2/signature/rf_diagram_vs_linear_cw": {
+      "mae_diff": 0.06560515396606328,
+      "ci95": [
+        0.039627569150835866,
+        0.09161184292824617
+      ],
+      "p": 0.0002,
+      "p_holm": 0.010400000000000001
+    }
+  },
+  "task1": {
+    "task1/c<=10_hard_geometric/gin_contrastive_vs_gin_untrained": {
+      "diff": 0.07179999999999997,
+      "ci95": [
+        -0.029000000000000026,
+        0.16721000000000014
+      ],
+      "p_boot": 0.168,
+      "seed_diffs": [
+        0.07179999999999997
+      ],
+      "seeds_positive": 1,
+      "p_holm": 1.0
+    },
+    "task1/c<=10_hard_geometric/gin_contrastive_vs_face_histogram": {
+      "diff": 0.17470000000000002,
+      "ci95": [
+        0.07319249999999998,
+        0.26970249999999996
+      ],
+      "p_boot": 0.0005,
+      "seed_diffs": [
+        0.17470000000000002
+      ],
+      "seeds_positive": 1,
+      "p_holm": 0.010400000000000001
+    },
+    "task1/c=11_hard_geometric/gin_supervised_vs_gin_untrained": {
+      "diff": 0.10592403214024837,
+      "ci95": [
+        0.07371822498173847,
+        0.13906793279766244
+      ],
+      "p_boot": 0.0005,
+      "seed_diffs": [
+        0.10592403214024837
+      ],
+      "seeds_positive": 1,
+      "p_holm": 0.010400000000000001
+    },
+    "task1/c=11_hard_geometric/gin_supervised_vs_face_histogram": {
+      "diff": 0.26761139517896276,
+      "ci95": [
+        0.22373721694667648,
+        0.3112717311906501
+      ],
+      "p_boot": 0.0005,
+      "seed_diffs": [
+        0.26761139517896276
+      ],
+      "seeds_positive": 1,
+      "p_holm": 0.010400000000000001
+    },
+    "task1/c=12_hard_geometric/gin_contrastive_vs_gin_untrained": {
+      "diff": 0.13542500000000002,
+      "ci95": [
+        0.06899375000000006,
+        0.202026875
+      ],
+      "p_boot": 0.0005,
+      "seed_diffs": [
+        0.13542500000000002
+      ],
+      "seeds_positive": 1,
+      "p_holm": 0.010400000000000001
+    },
+    "task1/c=12_hard_geometric/gin_contrastive_vs_face_histogram": {
+      "diff": 0.308775,
+      "ci95": [
+        0.23714562499999997,
+        0.37951
+      ],
+      "p_boot": 0.0005,
+      "seed_diffs": [
+        0.308775
+      ],
+      "seeds_positive": 1,
+      "p_holm": 0.010400000000000001
+    }
+  },
+  "learned_gain": {
+    "gain/canonical_r1r2_vs_random_canon": {
+      "diff": 0.027421907538525536,
+      "ci95": [
+        0.013391920033319463,
+        0.04233277800916285
+      ],
+      "p_boot": 0.0005,
+      "seed_diffs": [
+        0.030154102457309317,
+        0.035985006247396645,
+        0.02523948354852157,
+        0.02573927530195752,
+        0.01999167013744263
+      ],
+      "seeds_positive": 5,
+      "auroc_a_mean": 0.9792419825072886,
+      "auroc_b_mean": 0.9518200749687631,
+      "p_holm": 0.010400000000000001
+    },
+    "gain/canonical_r1r2_vs_shuffled_canon": {
+      "diff": 0.02934610578925447,
+      "ci95": [
+        0.01522532278217408,
+        0.04499875052061641
+      ],
+      "p_boot": 0.0005,
+      "seed_diffs": [
+        0.02865472719700113,
+        0.03948354852144953,
+        0.037650978758850484,
+        0.023323615160349864,
+        0.01761765930862136
+      ],
+      "seeds_positive": 5,
+      "auroc_a_mean": 0.9792419825072886,
+      "auroc_b_mean": 0.9498958767180341,
+      "p_holm": 0.010400000000000001
+    },
+    "gain/canonical_r1r2_vs_fixed_chord_canon": {
+      "diff": 0.05767596834652213,
+      "ci95": [
+        0.03842857142857145,
+        0.07896084964598094
+      ],
+      "p_boot": 0.0005,
+      "seed_diffs": [
+        0.06176593086214055,
+        0.05206164098292354,
+        0.0659308621407746,
+        0.05514369012911269,
+        0.05347771761765929
+      ],
+      "seeds_positive": 5,
+      "auroc_a_mean": 0.9792419825072886,
+      "auroc_b_mean": 0.9215660141607664,
+      "p_holm": 0.010400000000000001
+    }
+  },
+  "family_size": 52
+}
