@@ -160,14 +160,22 @@ Crucially, **a polynomial-time confluent canonicalization layer can only reduce 
 3. **Algebraic Invariant Superiority**: The exact non-learned feature baseline ($\Delta(t) + c + w$) decisively outperforms all learned GNN encoders on unseen knots (AUROC 0.980 on $c=9$ and 0.959 on $c=10$, with signature MAE 1.937 beating trivial baselines).
 4. **Visual Layout vs Graph Structure**: The rendered-image ViT excels at diagram discrimination (AUROC 1.000) by exploiting global 2D spatial layout, an embedding mechanism fundamentally distinct from local 4-valent message passing.
 
-#### Reproduce the Benchmark:
+#### Reproduce the Protocols:
 ```bash
+# 1. Honest Reidemeister Protocol on c <= 8 -> c in {9, 10}
 python scripts/run_honest_protocol.py \
   --epochs 15 \
   --seeds 42 43 44 45 46 \
   --cache data/benchmark_diagrams_cache.json \
   --output results/honest_reidemeister_benchmark.json
+
+# 2. Fully Audited Rigorous Task 1 & Task 2 Benchmarks (Independent Backtrack + Full KnotInfo c=12 Scale)
+python scripts/run_rigorous_tasks.py \
+  --seed 42 \
+  --output results/rigorous_tasks_benchmark.json
 ```
+
+See [docs/honest_reidemeister_protocol.md](docs/honest_reidemeister_protocol.md) for detailed mathematical breakdowns, confidence intervals, and full empirical tables.
 
 ### 4. 2D ResNet Image Classification Workflow
 > **Note on Model Checkpoints**:

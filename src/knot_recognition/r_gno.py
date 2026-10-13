@@ -331,16 +331,18 @@ class RGNO(nn.Module):
                 # Bidirectional edge
                 src_list.extend([c1, c2])
                 dst_list.extend([c2, c1])
-                # Edge attr: relative port difference and orientation sign
-                edge_attr_list.append([float(p1 - p2), 1.0])
-                edge_attr_list.append([float(p2 - p1), -1.0])
+                # Edge attr: [p1, p2, is_over1, is_over2]
+                is_over1 = 1.0 if p1 in (1, 3) else 0.0
+                is_over2 = 1.0 if p2 in (1, 3) else 0.0
+                edge_attr_list.append([float(p1), float(p2), is_over1, is_over2])
+                edge_attr_list.append([float(p2), float(p1), is_over2, is_over1])
 
         if src_list:
             edge_index = torch.tensor([src_list, dst_list], dtype=torch.long, device=device)
             edge_feats = torch.tensor(edge_attr_list, dtype=torch.float32, device=device)
         else:
             edge_index = torch.empty((2, 0), dtype=torch.long, device=device)
-            edge_feats = torch.empty((0, 2), device=device)
+            edge_feats = torch.empty((0, 4), device=device)
 
         return node_feats, edge_index, edge_feats
 

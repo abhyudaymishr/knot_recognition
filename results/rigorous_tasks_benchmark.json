@@ -1,0 +1,112 @@
+{
+  "metadata": {
+    "seed": 42,
+    "timestamp": "2026-10-13 09:31:41",
+    "device": "mps"
+  },
+  "task1_verification": {
+    "metadata": {
+      "num_knots": 214,
+      "identical_canonical_rate_pct": 0.0,
+      "total_evaluated_pairs": 1712
+    },
+    "scores": {
+      "snappy_hash": {
+        "label": "Canonical Hash / Exact Match Baseline",
+        "overall_auroc": 0.5,
+        "overall_stderr": 0.0,
+        "non_identical_auroc": 0.5
+      },
+      "pure_gnn_raw": {
+        "label": "Pure Graph GNN (Raw Input, Untrained)",
+        "overall_auroc": 2.9114624275773724e-05,
+        "overall_stderr": 2.117803430083259e-05,
+        "non_identical_auroc": 2.9114624275773724e-05
+      },
+      "pure_gnn_canon": {
+        "label": "Pure Graph GNN (Canonical Input, Untrained)",
+        "overall_auroc": 0.9879261653128367,
+        "overall_stderr": 0.0020652828317676256,
+        "non_identical_auroc": 0.9879261653128367
+      },
+      "trained_can_gnn": {
+        "label": "Pure Graph GNN (Canonical Input, Contrastive Trained)",
+        "overall_auroc": 0.9500633243077998,
+        "overall_stderr": 0.004400991698895923,
+        "non_identical_auroc": 0.9500633243077998
+      },
+      "alexander_poly": {
+        "label": "Alexander Polynomial Baseline",
+        "overall_auroc": 1.0,
+        "overall_stderr": 2.3111135221866393e-17,
+        "non_identical_auroc": 1.0
+      }
+    }
+  },
+  "task2_invariants": {
+    "unknotting_number": {
+      "num_evaluated_test_knots": 1628,
+      "total_test_knots": 2176,
+      "mae_mean": 0.44855186343193054,
+      "acc_mean": 66.70761670761671,
+      "mae_linear": 0.4464438259601593,
+      "acc_linear": 68.73464373464373,
+      "mae_alexander": 0.777556300163269,
+      "acc_alexander": 53.37837837837838,
+      "mae_raw_gnn": 0.4360690116882324,
+      "acc_raw_gnn": 66.70761670761671,
+      "mae_canonical_gnn": 0.4360690712928772,
+      "acc_canonical_gnn": 66.70761670761671,
+      "mae_supervised_gnn": 0.4089977741241455,
+      "acc_supervised_gnn": 69.16461916461917
+    },
+    "smooth_four_genus": {
+      "num_evaluated_test_knots": 2176,
+      "total_test_knots": 2176,
+      "mae_mean": 0.621918261051178,
+      "acc_mean": 63.46507352941176,
+      "mae_linear": 0.5161564946174622,
+      "acc_linear": 62.72977941176471,
+      "mae_alexander": 0.8762600421905518,
+      "acc_alexander": 48.575367647058826,
+      "mae_raw_gnn": 0.6073848605155945,
+      "acc_raw_gnn": 61.39705882352941,
+      "mae_canonical_gnn": 0.6073848605155945,
+      "acc_canonical_gnn": 61.39705882352941,
+      "mae_supervised_gnn": 0.3803659975528717,
+      "acc_supervised_gnn": 72.10477941176471
+    },
+    "three_genus": {
+      "num_evaluated_test_knots": 2176,
+      "total_test_knots": 2176,
+      "mae_mean": 0.6059668064117432,
+      "acc_mean": 46.46139705882353,
+      "mae_linear": 0.6149333119392395,
+      "acc_linear": 45.818014705882355,
+      "mae_alexander": 0.14091068506240845,
+      "acc_alexander": 95.68014705882352,
+      "mae_raw_gnn": 0.6000316739082336,
+      "acc_raw_gnn": 46.46139705882353,
+      "mae_canonical_gnn": 0.6000316739082336,
+      "acc_canonical_gnn": 46.46139705882353,
+      "mae_supervised_gnn": 0.625382125377655,
+      "acc_supervised_gnn": 46.599264705882355
+    },
+    "signature": {
+      "num_evaluated_test_knots": 2176,
+      "total_test_knots": 2176,
+      "mae_mean": 2.3249871730804443,
+      "acc_mean": 0.0,
+      "mae_linear": 0.9192405939102173,
+      "acc_linear": 36.53492647058824,
+      "mae_alexander": 3.217231273651123,
+      "acc_alexander": 11.856617647058822,
+      "mae_raw_gnn": 2.2957167625427246,
+      "acc_raw_gnn": 0.2757352941176471,
+      "mae_canonical_gnn": 2.2957167625427246,
+      "acc_canonical_gnn": 0.2757352941176471,
+      "mae_supervised_gnn": 1.0153532028198242,
+      "acc_supervised_gnn": 34.237132352941174
+    }
+  }
+}
