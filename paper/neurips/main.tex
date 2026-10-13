@@ -254,7 +254,12 @@ polymer simulations, where knot identification runs at database scale: screen
 with exact invariants, and adopt a learned model only if it beats them on accuracy
 and cost under a knot-disjoint split. The oracle-input pitfall
 ($g_4$ MAE $0.388\to0.137$ once $\sigma$, which helps define the labels, is an input)
-is a general hazard for scientific benchmarks whose labels come from bounds.
+is a general hazard for scientific benchmarks whose labels come from bounds. For physical tangles (cables, ropes, threads) the same split applies:
+learn perception, compute topology. A companion photo benchmark with the
+same splits and metrics (crossing precision/recall, over/under accuracy, topology
+accuracy with abstention, cable-level confidence intervals) is released with
+synthetic renders; on these, the current skeleton-based photo parser recovers
+only a minority of crossings, so perception, not topology, is the open problem.
 
 \section{Reproducibility Statement}\label{sec:repro}
 All headline numbers are produced on CPU with seeds $\{42,\dots,46\}$ by one
@@ -276,6 +281,16 @@ $g_4$ exist where classical bounds meet, which biases the solved subset; $R_3$
 is not canonicalized; 5 of 1{,}336 certificate pairs are non-hyperbolic and use
 knot Floer homology equality instead; the learned gain in the $c{\le}8$ protocol
 (+0.027 AUROC on CPU) differs from the earlier MPS run (+0.008).
+
+\paragraph{Topology is not effort.} \textsc{KnotBench} scores combinatorial
+quantities: crossing number, unknotting number and equivalence. How hard a
+physical cable, rope or thread is to undo also depends on its bending
+stiffness, friction, tension and how tightly it is pulled (ropelength). A
+diagram with fewer crossings can take more work to untie, and two tangles of the
+same knot type can differ greatly in effort. Our untangling steps
+(Reidemeister~I/II moves) and unknotting numbers are therefore lower bounds on
+the number of manipulations, not predictions of force or time; physical claims
+need mechanical models or experiments.
 
 \section{Conclusion}\label{sec:conclusion}
 \todo{two sentences + how to submit results to the benchmark}

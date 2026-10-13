@@ -100,6 +100,10 @@ class TraversalResult:
     classification: Optional[Dict[str, Any]] = None
     similar_knots: List[Dict[str, Any]] = field(default_factory=list)
     consensus: Optional[Dict[str, Any]] = None
+    # Internal structures kept for downstream geometry (cable.from_traversal); not serialised.
+    skeleton_graph: Optional[Any] = None
+    pairing: Optional[Dict[Any, Any]] = None
+    image_shape: Optional[Tuple[int, int]] = None
 
 
 # ==============================================================================
@@ -276,6 +280,9 @@ class KnotTraverser:
                 f"{sum(i.status == 'rejected' for i in intersections)} rejected junction candidate(s) "
                 "were excluded from Gauss/PD codes."
             ] if any(i.status != "resolved" for i in intersections) else [],
+            skeleton_graph=SG,
+            pairing=pairing,
+            image_shape=(int(gray.shape[0]), int(gray.shape[1])),
         )
 
     # --------------------------------------------------------------------------

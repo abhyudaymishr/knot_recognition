@@ -20,3 +20,6 @@ paper/**/*.fls
 paper/**/*.log
 paper/**/*.out
 paper/**/main.pdf
+
+# KnotBench-Photo synthetic renders (regenerate with scripts/run_knotbench_photo.py)
+data/knotbench_photo/*/images/
