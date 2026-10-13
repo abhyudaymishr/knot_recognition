@@ -65,6 +65,31 @@ def _load_nanotransformer_model():
         return None
 
 
+@lru_cache(maxsize=1)
+def _geometric_engine():
+    """Cable topology tools + knot-aware NanoTransformer (geometry-derived PD codes).
+
+    The traverser's own PD code orders a crossing's arms by angle and does not say
+    which strand is on top, so invariants are never computed from it here.
+    """
+    import os
+
+    os.environ.setdefault("KNOTINFO_PATH", str(ROOT / "runtime" / "knotinfo_full_dataset.json"))
+    import knot_recognition.cable.identify as identify
+    import knot_recognition.cable.moves as moves
+    import knot_recognition.cable.uncertainty as uncertainty
+    from knot_recognition.cable.from_traversal import diagram_from_traversal
+
+    model, parse = None, None
+    ck = ROOT / "runtime" / "knot_aware_nanotransformer.pth"
+    if ck.exists():
+        from knot_recognition.knot_aware import load
+        from knot_recognition.cable.neural_parser import parse
+        model = load(ck)
+    return {"identify": identify, "moves": moves, "uncertainty": uncertainty,
+            "from_traversal": diagram_from_traversal, "model": model, "parse": parse}
+
+
 def _knotgen():
     # Knotgen is repo-local and uses SymPy for its invariant calculations.
     spec = importlib.util.spec_from_file_location("cable_knotgen", ROOT / "runtime" / "Knotgen" / "knotgen.py")
@@ -200,81 +225,75 @@ def classify_and_retrieve_similar(image, top_k=5):
 def analyze_views(images, open_ends):
     if not images:
         return None, "Upload at least one clear view of the cable."
-
-    engine = KnotTraverser()
-    views = images if isinstance(images, list) else [images]
-    reports, overlays, signatures = [], [], []
     try:
-        kg, census = _candidate_index()
+        eng = _geometric_engine()
     except Exception as exc:
-        return None, f"Invariant engine could not start: {exc}"
-
+        return None, f"Topology engine could not start: {exc}"
+    views = images if isinstance(images, list) else [images]
+    reports, overlays, answers = [], [], []
     for i, image in enumerate(views, start=1):
         if image is None:
             continue
+        if isinstance(image, (tuple, list)):
+            image = image[0]
         if isinstance(image, (str, Path)):
             image = Image.open(image).convert("RGB")
         elif not isinstance(image, Image.Image):
             image = Image.fromarray(np.asarray(image).astype("uint8")).convert("RGB")
+        arr = np.asarray(image.resize((512, 512)))
+        row = {"view": i}
         try:
-            result = engine.process_image(np.asarray(image))
+            if eng["model"] is not None:
+                D, rep = eng["parse"](arr, eng["model"])
+                row["parser"] = "knot-aware NanoTransformer"
+            else:
+                res = KnotTraverser().process_image(arr)
+                D, rep = eng["from_traversal"](res)
+                rep.setdefault("abstain_reasons", [])
+                row["parser"] = "skeleton traverser (fallback)"
         except Exception as exc:
-            reports.append({
-                "view": i,
-                "status": "Image processing failed; another view is needed",
-                "detail": str(exc),
-            })
+            row["status"] = "Image processing failed; another view is needed"
+            row["detail"] = str(exc)
+            reports.append(row)
             continue
-        overlays.append(result.annotated_image.to_pil() if result.annotated_image is not None else image)
-        ambiguous = [x.crossing_id for x in result.intersections if x.status != "resolved"]
-        row = {
-            "view": i,
-            "crossing_candidates": len(result.intersections),
-            "unresolved_crossing_ids": ambiguous,
-            "pd_code": result.pd_string,
-            "warnings": result.warnings,
-        }
-        if not result.intersections:
-            row["status"] = "No crossing diagram recovered"
-        elif ambiguous:
-            row["status"] = "Needs another view or manual crossing review"
-        elif open_ends:
-            row["status"] = "Open ends: invariant classification withheld"
-            row["closure"] = "No closure has been applied. Open cable topology depends on the selected closure."
-        else:
+        reasons = list(rep.get("abstain_reasons", []))
+        if open_ends and "free cable ends" not in " ".join(reasons):
+            reasons.append("free cable ends: record a closure before naming a type")
+        row["crossings_detected"] = len(D.crossings) if D is not None else 0
+        overlay = image.resize((512, 512))
+        if D is not None and D.is_closed and not reasons:
             try:
-                pd = _diagram_from_result(result.pd_code)
-                knot = kg.from_pd(pd, name=f"view_{i}")
-                sig = (str(knot.alexander()), int(knot.determinant()), len(knot.crossings))
-                signatures.append(sig)
-                row["status"] = "Resolved diagram; invariant fingerprint computed"
-                row["invariants"] = {"alexander_polynomial": sig[0], "determinant": sig[1], "crossings": sig[2]}
-                row["census_candidates"] = census.get(sig, [])
+                u = eng["uncertainty"].propagate(D, threshold=0.95, max_uncertain=8)
+                row["type_distribution"] = u["distribution"][:5]
+                row["most_likely"] = u["most_likely"]
+                row["probability"] = round(u["most_likely_probability"], 3)
+                if u["decision"] == "report":
+                    row["status"] = "Type reported"
+                    answers.append(u["most_likely"])
+                    red = eng["moves"].reduce_diagram(D)
+                    row["untangling_steps"] = [s["instruction"] for s in red["steps"]]
+                    row["conclusion"] = red["conclusion"]
+                    overlay = eng["moves"].overlay_steps(overlay, red)
+                else:
+                    row["status"] = "Uncertain over/under: another view is needed"
+                    row["photograph_crossing_next"] = (u["next_best_views"] or [{}])[0].get("cid")
             except Exception as exc:
-                row["status"] = "Diagram consistency check failed"
+                row["status"] = "Diagram check failed"
                 row["detail"] = str(exc)
+        else:
+            row["status"] = "Abstained"
+            row["reasons"] = reasons
+        overlays.append(overlay)
         reports.append(row)
 
-    if len(views) < 2:
-        recommendation = "Capture a second view from a substantially different angle; one photograph can hide crossings and cable segments."
-    elif len(signatures) >= 2 and len(set(signatures)) > 1:
-        recommendation = "The views disagree. Capture another angle and inspect the marked crossings; no knot label is reported."
-    elif any(r["status"] != "Resolved diagram; invariant fingerprint computed" for r in reports):
-        recommendation = "At least one view is unresolved. Capture a close-up or a new angle that exposes the uncertain crossing(s)."
-    elif signatures:
-        labels = next((r.get("census_candidates", []) for r in reports if r.get("invariants")), [])
-        recommendation = (
-            f"Invariant match candidates: {', '.join(labels)}. These are candidates, not proof of exact identity;"
-            " the Alexander polynomial and determinant do not uniquely identify every knot."
-            if labels else
-            "The diagram has a computed invariant fingerprint, but no matching entry was found in the bundled census."
-        )
+    if len(set(answers)) > 1:
+        recommendation = "The views disagree (" + ", ".join(sorted(set(answers))) + "). No type is reported; capture another angle."
+    elif answers:
+        recommendation = (f"All answering views agree: {answers[0]}. Types come from a geometry-derived diagram; "
+                          "the knot name is certified where the report says so.")
     else:
-        recommendation = "No reliable invariant fingerprint was obtained; capture a clearer view and review the crossing overlay."
-
-    if open_ends:
-        recommendation += " Open cable ends are currently left unclosed; specify and record a physical closure before assigning a knot type."
-    return overlays, "## Assessment\n" + recommendation + "\n\n```json\n" + json.dumps(reports, indent=2) + "\n```"
+        recommendation = "No view passed every check. Follow the reasons listed per view (another angle, a close-up, or a recorded closure)."
+    return overlays, "## Assessment\n" + recommendation + "\n\n```json\n" + json.dumps(reports, indent=2, default=str) + "\n```"
 
 
 # ==============================================================================

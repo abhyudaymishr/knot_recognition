@@ -7,3 +7,5 @@ sympy>=1.13,<2
 Pillow>=10,<13
 torch>=2.0.0
 torchvision>=0.15.0
+snappy>=3.1,<4
+scipy>=1.10,<2

@@ -23,3 +23,10 @@ paper/**/main.pdf
 
 # KnotBench-Photo synthetic renders (regenerate with scripts/run_knotbench_photo.py)
 data/knotbench_photo/*/images/
+
+# knot-aware training tensors and dev-set renders (regenerate with scripts/make_knot_aware_data.py, scripts/make_parser_dev_set.py)
+data/knot_aware/*.npz
+data/knot_aware/parser_dev/images/
+
+# Git bundle archives
+*.bundle
