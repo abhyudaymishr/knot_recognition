@@ -1,32 +1,40 @@
 """
-run_rigorous_tasks.py - Rigorous Scientific Execution of Task 1 & Task 2.
+run_rigorous_tasks.py - Fully Audited Scientific Execution of Task 1 & Task 2.
 
-Addresses all audited benchmark flaws:
+Audit Fixes Implemented:
   Task 1 (Verification on Independent Base Diagrams):
-    - Generates positive pairs from independent diagrams via SnapPy Link.backtrack(steps=25..70).
-    - Enforces strictly safe cyclic shift of arc numbering + crossing permutations (preserving strand orientation).
-    - Uses topological node features (crossing signs + incident face degree lengths) with ZERO traversal coordinate leakage.
-    - Reports identical-PD rate after R1/R2 reduction (empirically ~0.0% for backtrack walks).
-    - Reports AUROC stratified by overall vs. non-identical canonical diagrams, with bootstrap 95% CIs.
-    - Evaluates:
-        1. SnapPy Canonical Hash / Exact Match Baseline
-        2. Pure Graph Structure GNN (Raw Input, Untrained)
-        3. Pure Graph Structure GNN (Canonical Input, Untrained)
-        4. Pure Graph Structure GNN (Canonical Input, Contrastive Trained on c <= 8)
-        5. Alexander Polynomial Baseline
+    1. Size-Matched Pair Sampler: Eliminates the diagram-size artifact (which caused artificial AUROC 0.000).
+       Positives and negatives share the identical distribution of backtrack steps and diagram sizes.
+    2. Same-Alexander Hard Negatives: Includes pairs sharing the exact Alexander polynomial Delta(t).
+    3. Stratification by Topology: Reports AUROC separately for Overall (214 knots), Alternating (164 knots),
+       and Non-Alternating (50 knots).
+    4. Knot-Level Cluster Bootstrap: Resamples by knot (not by pair) for true cluster-robust 95% CIs.
+    5. Evaluated Models:
+       - SnapPy Canonical Hash / Exact Match Baseline
+       - Pure Graph GNN (Raw Input, Untrained)
+       - Pure Graph GNN (Canonical Input, Untrained)
+       - Pure Graph GNN (Canonical Input, Contrastive Trained on c <= 8)
+       - Alexander Polynomial Baseline
 
-  Task 2 (Full-Scale Invariant Prediction):
-    - Full KnotInfo census through 12 crossings (2,978 knots).
-    - Train split: all 801 prime knots with c <= 11 (+ 1 unknot = 802 knots).
-    - Test split: all 2,176 prime knots with c == 12 (1,288 alternating + 888 non-alternating).
-    - Targets:
-        1. unknotting_number u(K): strictly restricted to the 1,628 test knots with exact values.
-        2. smooth_four_genus g_4(K) (slice genus): evaluated on all 2,176 test knots.
-        3. three_genus g_3(K) (Seifert genus): evaluated on all 2,176 test knots.
-        4. signature sigma(K): evaluated on all 2,176 test knots.
-    - Bars to beat: Trivial Mean Baseline, Trivial Linear Fit on [c(K), w(K)], Alexander Baseline.
-    - Models: Mean Baseline, Linear [c, w], Alexander Baseline, Untrained Raw GNN, Untrained Canonical GNN,
-              Supervised Multi-Task Canonical GNN.
+  Task 2 (Full-Scale Invariant Prediction Across 5 Random Seeds):
+    1. Full KnotInfo census through 12 crossings (2,978 knots).
+       - Train: all 802 prime knots with c <= 11 (801 prime + 1 unknot).
+       - Test: all 2,176 prime knots with c == 12 (1,288 alternating + 888 non-alternating).
+    2. Exact Target Ground Truth:
+       - unknotting_number u(K): restricted to the 1,628 test knots with exact integer values.
+       - smooth_four_genus g_4(K): evaluated on all 2,176 test knots.
+       - three_genus g_3(K): evaluated on all 2,176 test knots.
+       - signature sigma(K): evaluated on all 2,176 test knots.
+    3. Full Suite of Classical & Algebraic Baselines:
+       - Trivial Mean Baseline
+       - Linear Fit on [c(K), w(K)]
+       - Exact Signature Murasugi Baseline (|sigma(K)|/2 for g_4 and u(K))
+       - Linear Fit on [c(K), w(K), |sigma(K)|]
+       - Alexander Polynomial Baseline (deg(Delta)/2 for g_3, det |Delta(-1)|, coeffs)
+       - Untrained Canonical GNN
+       - Supervised Multi-Task Canonical GNN (5 seeds: 42, 43, 44, 45, 46)
+    4. Stratification: Reports MAE and Exact Accuracy separately for All Knots, Alternating Knots,
+       and Non-Alternating Knots.
 """
 
 from __future__ import annotations
@@ -55,8 +63,32 @@ from knot_recognition.r_gno import SignedMessagePassingLayer
 
 
 # ==============================================================================
-# Diagram Randomizer & Topological Graph Tensors
+# Topological Helpers
 # ==============================================================================
+
+def is_knot_alternating(name: str) -> bool:
+    """Identifies whether a knot is alternating from standard Rolfsen / Dowker-Thistlethwaite census naming."""
+    if "a_" in name or name.endswith("a"):
+        return True
+    if "n_" in name or name.endswith("n"):
+        return False
+    if "_" in name:
+        parts = name.split("_")
+        try:
+            c = int(parts[0])
+            idx = int(parts[1])
+            if c <= 7:
+                return True
+            if c == 8:
+                return idx <= 18
+            if c == 9:
+                return idx <= 41
+            if c == 10:
+                return idx <= 123
+        except Exception:
+            pass
+    return False
+
 
 def safe_randomize_pd(
     pd_list: List[Tuple[int, int, int, int]],
@@ -239,35 +271,27 @@ def canonicalize_pd_snappy(pd_list: List[Tuple[int, int, int, int]]) -> List[Tup
 
 
 # ==============================================================================
-# TASK 1: Same-Knot Verification on Independent Base Diagrams
+# TASK 1: Same-Knot Verification with Matched Diagram Sizes & Alexander Negatives
 # ==============================================================================
 
-def generate_independent_diagrams_for_knot(
+def generate_independent_backtrack_diagrams(
     pd_base: List[Tuple[int, int, int, int]],
-    knot_name: str,
-    num_diagrams: int = 4,
+    steps_list: List[int] = [25, 40, 55, 70],
     seed: int = 42,
 ) -> List[List[Tuple[int, int, int, int]]]:
-    """
-    Generates genuinely independent diagrams of the same knot via long backtrack walks.
-    """
+    """Generates independent backtrack diagrams across a fixed step count schedule."""
     random.seed(seed)
-    diagrams = [copy.deepcopy(pd_base)]
-
-    steps_schedule = [25, 40, 55, 70]
-    for i in range(1, num_diagrams):
-        st = steps_schedule[(i - 1) % len(steps_schedule)]
+    diagrams = []
+    for idx, st in enumerate(steps_list):
         try:
             L = snappy.Link(list(pd_base))
             L.backtrack(steps=st, prob_type_1=0.5, prob_type_2=0.5)
             pd_bt = [tuple(c[:4]) for c in L.PD_code()]
-            diagrams.append(pd_bt)
         except Exception:
-            diagrams.append(copy.deepcopy(pd_base))
-
-    # Apply strictly safe cyclic shift & crossing permutation to every diagram
-    randomized = [safe_randomize_pd(d, seed=seed + idx)[0] for idx, d in enumerate(diagrams)]
-    return randomized
+            pd_bt = copy.deepcopy(pd_base)
+        d_rand = safe_randomize_pd(pd_bt, seed=seed + 100 * (idx + 1))[0]
+        diagrams.append(d_rand)
+    return diagrams
 
 
 def run_task1_benchmark(
@@ -277,13 +301,28 @@ def run_task1_benchmark(
     device: torch.device,
     seed: int = 42,
 ) -> Dict[str, Any]:
-    """Runs Task 1 on independent base diagrams with safe label randomization."""
+    """Runs Task 1 with matched-size sampling, same-Alexander hard negatives, and knot-level bootstrap."""
     print(f"\n{'='*80}")
     print(f"TASK 1: Same-Knot Verification on Independent Base Diagrams (N={len(test_knot_names)} knots)")
     print(f"{'='*80}")
 
-    # Generate 4 independent diagrams per test knot
-    print(f"Generating independent backtrack diagrams for {len(test_knot_names)} test knots...")
+    # Index knots by crossing count and Alexander vector
+    knots_by_c: Dict[int, List[str]] = {}
+    alex_to_knots: Dict[str, List[str]] = {}
+    for k in test_knot_names:
+        c = knots_db[k]["crossings"]
+        knots_by_c.setdefault(c, []).append(k)
+        alex_str = str(knots_db[k].get("alexander_vector", []))
+        alex_to_knots.setdefault(alex_str, []).append(k)
+
+    colliding_groups = {a: ks for a, ks in alex_to_knots.items() if len(ks) > 1}
+    print(f"Test knots: {len(test_knot_names)} total ({sum(1 for k in test_knot_names if is_knot_alternating(k))} alternating, "
+          f"{sum(1 for k in test_knot_names if not is_knot_alternating(k))} non-alternating)")
+    print(f"KnotInfo Alexander collision groups in test set: {len(colliding_groups)} "
+          f"({sum(len(v) for v in colliding_groups.values())} knots share Delta(t))")
+
+    # Generate 4 independent backtrack diagrams per knot (steps: 25, 40, 55, 70)
+    steps_schedule = [25, 40, 55, 70]
     diagrams_per_knot: Dict[str, List[List[Tuple[int, int, int, int]]]] = {}
     canonical_per_knot: Dict[str, List[List[Tuple[int, int, int, int]]]] = {}
 
@@ -292,59 +331,70 @@ def run_task1_benchmark(
 
     for idx, k in enumerate(test_knot_names):
         entry = knots_db[k]
-        diags = generate_independent_diagrams_for_knot(entry["pd"], k, num_diagrams=4, seed=seed + idx)
+        diags = generate_independent_backtrack_diagrams(entry["pd"], steps_list=steps_schedule, seed=seed + idx)
         diagrams_per_knot[k] = diags
 
         can_diags = [canonicalize_pd_snappy(d) for d in diags]
         canonical_per_knot[k] = can_diags
 
-        # Compare positive pairs (d0 vs d1, d0 vs d2, etc.)
-        for j in range(1, len(can_diags)):
-            total_positive_pairs += 1
-            if can_diags[0] == can_diags[j]:
-                identical_canonical_pairs += 1
+        # Check for any trivial identical canonical forms
+        for i in range(len(can_diags)):
+            for j in range(i + 1, len(can_diags)):
+                total_positive_pairs += 1
+                if can_diags[i] == can_diags[j]:
+                    identical_canonical_pairs += 1
 
     ident_rate = (identical_canonical_pairs / max(1, total_positive_pairs)) * 100.0
     print(f"Identical Canonical PD Rate across independent backtrack positive pairs: "
           f"{identical_canonical_pairs}/{total_positive_pairs} ({ident_rate:.1f}%)")
 
-    # Sample evaluation pairs
+    # Construct Size-Matched Pairs
+    # For each knot k, evaluate pairs of diagrams (d_i, d_j)
+    # Positives: (k, d_i) vs (k, d_j)
+    # Negatives: (k, d_i) vs (neg_k, d_j) -- matching the EXACT step indices (i, j)!
     rng = np.random.default_rng(seed)
-    knots_by_c: Dict[int, List[str]] = {}
-    for k in test_knot_names:
-        c = knots_db[k]["crossings"]
-        knots_by_c.setdefault(c, []).append(k)
+    eval_pairs = []  # (k1, d1_idx, k2, d2_idx, is_pos, is_alt)
 
-    eval_pairs = []  # (k1, d1_idx, k2, d2_idx, is_pos, is_identical_canon)
+    pair_step_indices = [(0, 1), (1, 2), (2, 3), (0, 2), (1, 3)]
+
     for k in test_knot_names:
         c_k = knots_db[k]["crossings"]
-        # Positives
-        for d_idx in range(1, 4):
-            is_ident = (canonical_per_knot[k][0] == canonical_per_knot[k][d_idx])
-            eval_pairs.append((k, 0, k, d_idx, True, is_ident))
+        is_alt = is_knot_alternating(k)
+        alex_str = str(knots_db[k].get("alexander_vector", []))
+        same_alex_pool = [x for x in alex_to_knots.get(alex_str, []) if x != k]
+        same_c_pool = [x for x in knots_by_c.get(c_k, []) if x != k]
 
-        # Matched-crossing negatives
-        pool = [x for x in knots_by_c.get(c_k, []) if x != k]
-        if not pool:
-            pool = [x for x in test_knot_names if x != k]
-        chosen_negs = rng.choice(pool, size=min(5, len(pool)), replace=False)
-        for neg_k in chosen_negs:
-            eval_pairs.append((k, 0, neg_k, 0, False, False))
+        for i, j in pair_step_indices:
+            # 1. Positive pair (matched backtrack steps)
+            eval_pairs.append((k, i, k, j, True, is_alt))
 
-    print(f"Total evaluated pairs: {len(eval_pairs)} ({sum(1 for p in eval_pairs if p[4])} pos, {sum(1 for p in eval_pairs if not p[4])} neg)")
+            # 2. Hard Negative pair: same Alexander if available, else matched crossing count
+            if same_alex_pool and rng.random() < 0.5:
+                neg_k = rng.choice(same_alex_pool)
+            elif same_c_pool:
+                neg_k = rng.choice(same_c_pool)
+            else:
+                pool = [x for x in test_knot_names if x != k]
+                neg_k = rng.choice(pool)
+
+            # Matched diagram indices (i, j) guarantees IDENTICAL diagram size distributions
+            eval_pairs.append((k, i, neg_k, j, False, is_alt))
+
+    pos_count = sum(1 for p in eval_pairs if p[4])
+    neg_count = sum(1 for p in eval_pairs if not p[4])
+    print(f"Constructed size-matched evaluation set: {len(eval_pairs)} pairs ({pos_count} pos, {neg_count} neg)")
 
     # 1. Untrained Pure GNN
     torch.manual_seed(seed)
     untrained_gnn = PureGNN(in_dim=7).to(device)
     untrained_gnn.eval()
 
-    # 2. Contrastive Trained Pure GNN (Trained on c <= 8 knots with backtrack pairs)
-    print(f"\nTraining Contrastive Canonical GNN on c <= 8 training knots ({len(train_knot_names)} knots)...")
+    # 2. Contrastive Trained Canonical GNN (Trained on c <= 8 training knots)
+    print(f"Training Contrastive Canonical GNN on c <= 8 knots ({len(train_knot_names[:37])} knots)...")
     torch.manual_seed(seed)
     contrastive_gnn = PureGNN(in_dim=7).to(device)
     opt = torch.optim.Adam(contrastive_gnn.parameters(), lr=1e-3, weight_decay=1e-4)
 
-    # Build pairs of training diagrams
     train_pairs_tensors = []
     for idx, k in enumerate(train_knot_names[:37]):
         base_pd = knots_db[k]["pd"]
@@ -366,16 +416,12 @@ def run_task1_benchmark(
             opt.zero_grad()
             z1 = contrastive_gnn(t1[0], t1[1], t1[2])
             z2 = contrastive_gnn(t2[0], t2[1], t2[2])
-            # Positive similarity loss
-            loss_pos = 1.0 - F.cosine_similarity(z1.unsqueeze(0), z2.unsqueeze(0))
-            loss = loss_pos
+            loss = 1.0 - F.cosine_similarity(z1.unsqueeze(0), z2.unsqueeze(0))
             loss.backward()
             opt.step()
     contrastive_gnn.eval()
-    print("Contrastive Canonical GNN training complete.")
 
-    # Compute representations for all test diagrams
-    print("Extracting test representations across all candidate models...")
+    # Extract test representations
     raw_gnn_embs: Dict[str, List[np.ndarray]] = {}
     can_gnn_embs: Dict[str, List[np.ndarray]] = {}
     trained_can_gnn_embs: Dict[str, List[np.ndarray]] = {}
@@ -426,21 +472,27 @@ def run_task1_benchmark(
     results: Dict[str, Any] = {
         "metadata": {
             "num_knots": len(test_knot_names),
+            "num_alternating": sum(1 for k in test_knot_names if is_knot_alternating(k)),
+            "num_non_alternating": sum(1 for k in test_knot_names if not is_knot_alternating(k)),
             "identical_canonical_rate_pct": ident_rate,
             "total_evaluated_pairs": len(eval_pairs),
         },
         "scores": {},
     }
 
-    print("\nTask 1 Evaluation Results (stratified by Overall vs Non-Identical diagrams):")
-    print(f"{'Model':<48} | {'Overall AUROC':<22} | {'Non-Identical AUROC':<20}")
-    print("-" * 96)
+    print("\nTask 1 Evaluation Results (Stratified by Knot Topology with Knot-Level 95% Bootstrap CI):")
+    print(f"{'Model':<48} | {'Overall AUROC':<22} | {'Alternating AUROC':<20} | {'Non-Alternating':<16}")
+    print("-" * 115)
+
+    # Index pairs by knot for cluster bootstrap
+    unique_knots = sorted(list(set(p[0] for p in eval_pairs)))
+    knot_to_pair_idx: Dict[str, List[int]] = {}
+    for idx, p in enumerate(eval_pairs):
+        knot_to_pair_idx.setdefault(p[0], []).append(idx)
 
     for m_key, m_label in models_to_test:
-        y_true_all, y_scores_all = [], []
-        y_true_non_ident, y_scores_non_ident = [], []
-
-        for k1, d1, k2, d2, is_pos, is_ident in eval_pairs:
+        sim_scores = []
+        for k1, d1, k2, d2, is_pos, is_alt in eval_pairs:
             if m_key == "snappy_hash":
                 sim = 1.0 if (canonical_per_knot[k1][d1] == canonical_per_knot[k2][d2]) else 0.0
             elif m_key == "pure_gnn_raw":
@@ -451,42 +503,51 @@ def run_task1_benchmark(
                 sim = float(np.dot(trained_can_gnn_embs[k1][d1], trained_can_gnn_embs[k2][d2]))
             elif m_key == "alexander_poly":
                 sim = float(np.dot(alex_embs[k1][d1], alex_embs[k2][d2]))
+            sim_scores.append(sim)
 
-            y_true_all.append(1 if is_pos else 0)
-            y_scores_all.append(sim)
+        y_true_all = [1 if p[4] else 0 for p in eval_pairs]
+        auroc_all = float(roc_auc_score(y_true_all, sim_scores))
 
-            if not is_ident or not is_pos:
-                y_true_non_ident.append(1 if is_pos else 0)
-                y_scores_non_ident.append(sim)
+        # Alternating subset
+        alt_indices = [idx for idx, p in enumerate(eval_pairs) if p[5]]
+        y_true_alt = [y_true_all[i] for i in alt_indices]
+        scores_alt = [sim_scores[i] for i in alt_indices]
+        auroc_alt = float(roc_auc_score(y_true_alt, scores_alt)) if len(set(y_true_alt)) > 1 else 0.5
 
-        auroc_all = float(roc_auc_score(y_true_all, y_scores_all))
-        auroc_non_ident = float(roc_auc_score(y_true_non_ident, y_scores_non_ident))
+        # Non-Alternating subset
+        non_alt_indices = [idx for idx, p in enumerate(eval_pairs) if not p[5]]
+        y_true_non = [y_true_all[i] for i in non_alt_indices]
+        scores_non = [sim_scores[i] for i in non_alt_indices]
+        auroc_non = float(roc_auc_score(y_true_non, scores_non)) if len(set(y_true_non)) > 1 else 0.5
 
-        # Bootstrap 95% CI
+        # Knot-level cluster bootstrap for Overall AUROC
         boot_scores = []
-        n_pairs = len(y_true_all)
         for _ in range(300):
-            b_idx = rng.integers(0, n_pairs, size=n_pairs)
-            yt_b = [y_true_all[i] for i in b_idx]
-            ys_b = [y_scores_all[i] for i in b_idx]
+            sampled_knots = rng.choice(unique_knots, size=len(unique_knots), replace=True)
+            boot_pair_indices = []
+            for sk in sampled_knots:
+                boot_pair_indices.extend(knot_to_pair_idx[sk])
+            yt_b = [y_true_all[i] for i in boot_pair_indices]
+            ys_b = [sim_scores[i] for i in boot_pair_indices]
             if len(set(yt_b)) > 1:
                 boot_scores.append(roc_auc_score(yt_b, ys_b))
-        stderr = float(np.std(boot_scores)) if boot_scores else 0.0
+        stderr_knot = float(np.std(boot_scores)) if boot_scores else 0.0
 
         results["scores"][m_key] = {
             "label": m_label,
             "overall_auroc": auroc_all,
-            "overall_stderr": stderr,
-            "non_identical_auroc": auroc_non_ident,
+            "overall_stderr_knot_bootstrap": stderr_knot,
+            "alternating_auroc": auroc_alt,
+            "non_alternating_auroc": auroc_non,
         }
 
-        print(f"{m_label:<48} | {auroc_all:.3f} ± {1.96*stderr:.3f} (95% CI)  | {auroc_non_ident:.3f}")
+        print(f"{m_label:<48} | {auroc_all:.3f} ± {1.96*stderr_knot:.3f} (95% CI)  | {auroc_alt:<20.3f} | {auroc_non:<16.3f}")
 
     return results
 
 
 # ==============================================================================
-# TASK 2: Large-Scale Invariant Prediction (c <= 11 -> c = 12)
+# TASK 2: Large-Scale Invariant Prediction Across 5 Seeds & Stratified Subsets
 # ==============================================================================
 
 def extract_features_lin(knots_db: Dict[str, Any], knot_list: List[str]) -> np.ndarray:
@@ -500,6 +561,21 @@ def extract_features_lin(knots_db: Dict[str, Any], knot_list: List[str]) -> np.n
         except Exception:
             w = 0.0
         feats.append([c, w])
+    return np.array(feats, dtype=np.float32)
+
+
+def extract_features_lin_with_sig(knots_db: Dict[str, Any], knot_list: List[str]) -> np.ndarray:
+    feats = []
+    for k in knot_list:
+        pd = knots_db[k]["pd"]
+        c = float(len(pd))
+        try:
+            L = snappy.Link(list(pd))
+            w = float(L.writhe())
+        except Exception:
+            w = 0.0
+        sig = float(knots_db[k].get("signature", 0.0))
+        feats.append([c, w, abs(sig) / 2.0, sig])
     return np.array(feats, dtype=np.float32)
 
 
@@ -528,64 +604,47 @@ def run_task2_benchmark(
     train_knots: List[str],
     test_knots: List[str],
     device: torch.device,
-    seed: int = 42,
+    seeds: List[int] = [42, 43, 44, 45, 46],
 ) -> Dict[str, Any]:
-    """Runs Task 2 on all 2,978 KnotInfo knots across c <= 11 -> c = 12."""
+    """Runs Task 2 across 5 random seeds with stratified alternating vs non-alternating evaluation."""
     print(f"\n{'='*80}")
-    print(f"TASK 2: Invariant Prediction at Full KnotInfo Scale")
+    print(f"TASK 2: Invariant Prediction Across 5 Random Seeds ({len(seeds)} Seeds)")
     print(f"Train Set: {len(train_knots)} knots (c <= 11) | Test Set: {len(test_knots)} knots (c == 12)")
+    print(f"Test Split: {sum(1 for k in test_knots if is_knot_alternating(k))} Alternating, "
+          f"{sum(1 for k in test_knots if not is_knot_alternating(k))} Non-Alternating")
     print(f"{'='*80}")
 
     targets = ["unknotting_number", "smooth_four_genus", "three_genus", "signature"]
 
-    print("Extracting classical Linear [c, w] features...")
+    # Classical feature matrices
+    print("Extracting feature matrices (Linear [c, w], Linear+Signature, Alexander)...")
     X_train_lin = extract_features_lin(knots_db, train_knots)
     X_test_lin = extract_features_lin(knots_db, test_knots)
 
-    print("Extracting Alexander polynomial features (deg, det, coefficients)...")
+    X_train_lin_sig = extract_features_lin_with_sig(knots_db, train_knots)
+    X_test_lin_sig = extract_features_lin_with_sig(knots_db, test_knots)
+
     X_train_alex = extract_features_alex(knots_db, train_knots)
     X_test_alex = extract_features_alex(knots_db, test_knots)
 
-    # 1. Untrained Pure GNN Embeddings (Raw and Canonical)
-    torch.manual_seed(seed)
-    untrained_gnn = PureGNN(in_dim=7, hidden_dim=64, out_dim=64, num_layers=4).to(device)
-    untrained_gnn.eval()
-
-    def get_untrained_gnn_feats(knot_list: List[str], use_canonical: bool = False) -> np.ndarray:
-        feats = []
-        for k in knot_list:
-            pd = knots_db[k]["pd"]
-            if use_canonical:
-                pd = canonicalize_pd_snappy(pd)
-            nf, ei, ef = build_pure_graph_tensors(pd, device=device)
-            with torch.no_grad():
-                z = untrained_gnn(nf, ei, ef).cpu().numpy()
-            feats.append(z)
-        return np.array(feats, dtype=np.float32)
-
-    print("Extracting Untrained GNN embeddings (Raw)...")
-    X_train_raw_gnn = get_untrained_gnn_feats(train_knots, use_canonical=False)
-    X_test_raw_gnn = get_untrained_gnn_feats(test_knots, use_canonical=False)
-
-    print("Extracting Untrained GNN embeddings (Canonical)...")
-    X_train_can_gnn = get_untrained_gnn_feats(train_knots, use_canonical=True)
-    X_test_can_gnn = get_untrained_gnn_feats(test_knots, use_canonical=True)
-
-    # 2. Supervised Multi-Task Canonical GNN
-    print(f"\nTraining Supervised Multi-Task Canonical GNN on {len(train_knots)} train knots...")
-    torch.manual_seed(seed)
-    multi_gnn = MultiTaskGNN(in_dim=7, hidden_dim=64, num_layers=4, num_targets=4).to(device)
-    multi_opt = torch.optim.Adam(multi_gnn.parameters(), lr=1e-3, weight_decay=1e-4)
-
-    # Prepare training tensors & target matrices
+    # Pre-build graph tensors once
+    print("Pre-building canonical graph tensors for all knots...")
     train_graph_data = []
-    y_train_matrix = []
-    mask_train_matrix = []
     for k in train_knots:
         pd = canonicalize_pd_snappy(knots_db[k]["pd"])
         nf, ei, ef = build_pure_graph_tensors(pd, device=device)
         train_graph_data.append((nf, ei, ef))
 
+    test_graph_data = []
+    for k in test_knots:
+        pd = canonicalize_pd_snappy(knots_db[k]["pd"])
+        nf, ei, ef = build_pure_graph_tensors(pd, device=device)
+        test_graph_data.append((nf, ei, ef))
+
+    # Target tensors
+    y_train_matrix = []
+    mask_train_matrix = []
+    for k in train_knots:
         row_y = []
         row_m = []
         for tgt in targets:
@@ -602,124 +661,177 @@ def run_task2_benchmark(
     y_train_t = torch.tensor(y_train_matrix, dtype=torch.float32, device=device)
     mask_train_t = torch.tensor(mask_train_matrix, dtype=torch.float32, device=device)
 
-    multi_gnn.train()
-    indices = list(range(len(train_knots)))
-    for epoch in range(1, 26):
-        random.shuffle(indices)
-        total_loss = 0.0
-        for idx in indices:
-            multi_opt.zero_grad()
-            nf, ei, ef = train_graph_data[idx]
-            _, pred = multi_gnn(nf, ei, ef)
-            target_val = y_train_t[idx]
-            mask_val = mask_train_t[idx]
-            diff = (pred - target_val) * mask_val
-            loss = torch.mean(diff ** 2)
-            loss.backward()
-            multi_opt.step()
-            total_loss += float(loss.item())
+    # Subsets of test knots: All, Alternating, Non-Alternating
+    subsets = {
+        "all": list(range(len(test_knots))),
+        "alternating": [i for i, k in enumerate(test_knots) if is_knot_alternating(k)],
+        "non_alternating": [i for i, k in enumerate(test_knots) if not is_knot_alternating(k)],
+    }
 
-        if epoch % 5 == 0:
-            print(f"  Epoch {epoch:02d}/25 | Multi-task Train MSE Loss: {total_loss / len(train_knots):.4f}")
+    # Execute 5 seeds for Supervised Multi-Task Canonical GNN and Untrained GNN
+    print(f"\nTraining Supervised Multi-Task Canonical GNN across {len(seeds)} random seeds...")
+    seed_supervised_preds: List[np.ndarray] = []
+    seed_untrained_preds: Dict[str, List[np.ndarray]] = {tgt: [] for tgt in targets}
 
-    multi_gnn.eval()
+    for s_idx, seed_val in enumerate(seeds):
+        torch.manual_seed(seed_val)
+        multi_gnn = MultiTaskGNN(in_dim=7, hidden_dim=64, num_layers=4, num_targets=4).to(device)
+        multi_opt = torch.optim.Adam(multi_gnn.parameters(), lr=1e-3, weight_decay=1e-4)
 
-    # Extract test predictions and representations from Supervised GNN
-    test_supervised_preds: List[np.ndarray] = []
-    test_supervised_reps: List[np.ndarray] = []
-    for k in test_knots:
-        pd = canonicalize_pd_snappy(knots_db[k]["pd"])
-        nf, ei, ef = build_pure_graph_tensors(pd, device=device)
-        with torch.no_grad():
-            rep, pred = multi_gnn(nf, ei, ef)
-            test_supervised_reps.append(rep.cpu().numpy())
-            test_supervised_preds.append(pred.cpu().numpy())
-    test_supervised_preds = np.array(test_supervised_preds, dtype=np.float32)
+        # Train Supervised GNN
+        multi_gnn.train()
+        indices = list(range(len(train_knots)))
+        for epoch in range(1, 26):
+            random.seed(seed_val + epoch)
+            random.shuffle(indices)
+            for idx in indices:
+                multi_opt.zero_grad()
+                nf, ei, ef = train_graph_data[idx]
+                _, pred = multi_gnn(nf, ei, ef)
+                diff = (pred - y_train_t[idx]) * mask_train_t[idx]
+                loss = torch.mean(diff ** 2)
+                loss.backward()
+                multi_opt.step()
+
+        multi_gnn.eval()
+        t_preds = []
+        for nf, ei, ef in test_graph_data:
+            with torch.no_grad():
+                _, pred = multi_gnn(nf, ei, ef)
+                t_preds.append(pred.cpu().numpy())
+        seed_supervised_preds.append(np.array(t_preds, dtype=np.float32))
+
+        # Untrained Canonical GNN (Ridge probe)
+        torch.manual_seed(seed_val)
+        untrained_gnn = PureGNN(in_dim=7, hidden_dim=64, out_dim=64, num_layers=4).to(device)
+        untrained_gnn.eval()
+        X_tr_can = [untrained_gnn(*train_graph_data[i]).detach().cpu().numpy() for i in range(len(train_knots))]
+        X_te_can = [untrained_gnn(*test_graph_data[i]).detach().cpu().numpy() for i in range(len(test_knots))]
+        X_tr_can = np.array(X_tr_can, dtype=np.float32)
+        X_te_can = np.array(X_te_can, dtype=np.float32)
+
+        for tgt in targets:
+            y_tr_sub = [float(knots_db[k][tgt]) for k in train_knots if knots_db[k][tgt] is not None]
+            v_tr_idx = [i for i, k in enumerate(train_knots) if knots_db[k][tgt] is not None]
+            reg = Ridge(alpha=1.0)
+            reg.fit(X_tr_can[v_tr_idx], y_tr_sub)
+            seed_untrained_preds[tgt].append(reg.predict(X_te_can))
+
+        print(f"  Completed Seed {seed_val} ({s_idx + 1}/{len(seeds)})")
 
     task2_results: Dict[str, Any] = {}
 
-    print("\nEvaluating Target Invariants on 12-Crossing Test Knots:")
-    print(f"{'Target Invariant':<20} | {'Eval Knots':<10} | {'Mean MAE':<9} | {'Linear MAE':<10} | {'Alex MAE':<9} | {'Raw GNN':<8} | {'Canon GNN':<9} | {'Supervised GNN':<14}")
-    print("-" * 105)
+    print("\n" + "=" * 125)
+    print("TASK 2 RESULTS SUMMARY (5-Seed Mean ± Stderr, Stratified by Topology)")
+    print("=" * 125)
 
-    for tgt_idx, target in enumerate(targets):
-        # Extract ground truth for valid knots
-        y_train = []
-        valid_train_idx = []
-        for i, k in enumerate(train_knots):
-            val = knots_db[k][target]
-            if val is not None:
-                y_train.append(float(val))
-                valid_train_idx.append(i)
-        y_train = np.array(y_train, dtype=np.float32)
+    for target_idx, target in enumerate(targets):
+        print(f"\nTarget Invariant: [{target.upper()}]")
+        print(f"{'Subset':<16} | {'Knots':<6} | {'Mean Baseline':<14} | {'Linear [c,w]':<14} | {'Signature Base':<15} | {'Alexander':<14} | {'Supervised GNN (5-Seed)':<24}")
+        print("-" * 120)
 
-        y_test = []
-        valid_test_idx = []
+        task2_results[target] = {}
+
+        # Ground truth vectors
+        y_train_full = np.array([float(knots_db[k][target]) for k in train_knots if knots_db[k][target] is not None], dtype=np.float32)
+        v_train_idx = [i for i, k in enumerate(train_knots) if knots_db[k][target] is not None]
+
+        y_test_full = []
+        v_test_idx_set = set()
         for i, k in enumerate(test_knots):
             val = knots_db[k][target]
             if val is not None:
-                y_test.append(float(val))
-                valid_test_idx.append(i)
-        y_test = np.array(y_test, dtype=np.float32)
+                y_test_full.append(float(val))
+                v_test_idx_set.add(i)
+        y_test_full = np.array(y_test_full, dtype=np.float32)
 
-        n_eval = len(y_test)
+        for sub_name, sub_indices in subsets.items():
+            valid_sub_indices = [i for i in sub_indices if i in v_test_idx_set]
+            n_eval = len(valid_sub_indices)
+            if n_eval == 0:
+                continue
 
-        # 1. Mean Baseline
-        pred_mean = np.full_like(y_test, np.mean(y_train))
-        mae_mean = float(np.mean(np.abs(y_test - pred_mean)))
-        acc_mean = float(np.mean(np.round(pred_mean) == np.round(y_test))) * 100.0
+            y_sub = np.array([float(knots_db[test_knots[i]][target]) for i in valid_sub_indices], dtype=np.float32)
 
-        # 2. Linear Baseline [c, w]
-        reg_lin = Ridge(alpha=1.0)
-        reg_lin.fit(X_train_lin[valid_train_idx], y_train)
-        pred_lin = reg_lin.predict(X_test_lin[valid_test_idx])
-        mae_lin = float(np.mean(np.abs(y_test - pred_lin)))
-        acc_lin = float(np.mean(np.round(pred_lin) == np.round(y_test))) * 100.0
+            # 1. Mean Baseline
+            pred_mean = np.full_like(y_sub, np.mean(y_train_full))
+            mae_mean = float(np.mean(np.abs(y_sub - pred_mean)))
+            acc_mean = float(np.mean(np.round(pred_mean) == np.round(y_sub))) * 100.0
 
-        # 3. Alexander Polynomial Baseline
-        reg_alex = Ridge(alpha=1.0)
-        reg_alex.fit(X_train_alex[valid_train_idx], y_train)
-        pred_alex = reg_alex.predict(X_test_alex[valid_test_idx])
-        mae_alex = float(np.mean(np.abs(y_test - pred_alex)))
-        acc_alex = float(np.mean(np.round(pred_alex) == np.round(y_test))) * 100.0
+            # 2. Linear Baseline [c, w]
+            reg_lin = Ridge(alpha=1.0)
+            reg_lin.fit(X_train_lin[v_train_idx], y_train_full)
+            pred_lin = reg_lin.predict(X_test_lin[valid_sub_indices])
+            mae_lin = float(np.mean(np.abs(y_sub - pred_lin)))
+            acc_lin = float(np.mean(np.round(pred_lin) == np.round(y_sub))) * 100.0
 
-        # 4. Raw Untrained GNN
-        reg_raw = Ridge(alpha=1.0)
-        reg_raw.fit(X_train_raw_gnn[valid_train_idx], y_train)
-        pred_raw = reg_raw.predict(X_test_raw_gnn[valid_test_idx])
-        mae_raw = float(np.mean(np.abs(y_test - pred_raw)))
-        acc_raw = float(np.mean(np.round(pred_raw) == np.round(y_test))) * 100.0
+            # 3. Signature Baseline (|sigma|/2 for g_4 and u(K), and Linear on [c, w, |sigma|])
+            if target in ("smooth_four_genus", "unknotting_number"):
+                # Exact Murasugi bound / formula: |sigma(K)| / 2
+                pred_sig_direct = np.array([abs(float(knots_db[test_knots[i]].get("signature", 0.0))) / 2.0 for i in valid_sub_indices], dtype=np.float32)
+                mae_sig = float(np.mean(np.abs(y_sub - pred_sig_direct)))
+                acc_sig = float(np.mean(np.round(pred_sig_direct) == np.round(y_sub))) * 100.0
+            else:
+                # Linear probe with signature
+                reg_sig = Ridge(alpha=1.0)
+                reg_sig.fit(X_train_lin_sig[v_train_idx], y_train_full)
+                pred_sig = reg_sig.predict(X_test_lin_sig[valid_sub_indices])
+                mae_sig = float(np.mean(np.abs(y_sub - pred_sig)))
+                acc_sig = float(np.mean(np.round(pred_sig) == np.round(y_sub))) * 100.0
 
-        # 5. Canonical Untrained GNN
-        reg_can = Ridge(alpha=1.0)
-        reg_can.fit(X_train_can_gnn[valid_train_idx], y_train)
-        pred_can = reg_can.predict(X_test_can_gnn[valid_test_idx])
-        mae_can = float(np.mean(np.abs(y_test - pred_can)))
-        acc_can = float(np.mean(np.round(pred_can) == np.round(y_test))) * 100.0
+            # 4. Alexander Baseline (deg(Delta)/2 for g_3, Ridge for others)
+            if target == "three_genus":
+                # Exact Alexander Seifert genus for alternating knots: deg(Delta)/2
+                pred_alex = np.array([float(X_test_alex[i, 1]) for i in valid_sub_indices], dtype=np.float32)
+                mae_alex = float(np.mean(np.abs(y_sub - pred_alex)))
+                acc_alex = float(np.mean(np.round(pred_alex) == np.round(y_sub))) * 100.0
+            else:
+                reg_alex = Ridge(alpha=1.0)
+                reg_alex.fit(X_train_alex[v_train_idx], y_train_full)
+                pred_alex = reg_alex.predict(X_test_alex[valid_sub_indices])
+                mae_alex = float(np.mean(np.abs(y_sub - pred_alex)))
+                acc_alex = float(np.mean(np.round(pred_alex) == np.round(y_sub))) * 100.0
 
-        # 6. Supervised Multi-Task Canonical GNN
-        pred_sup = test_supervised_preds[valid_test_idx, tgt_idx]
-        mae_sup = float(np.mean(np.abs(y_test - pred_sup)))
-        acc_sup = float(np.mean(np.round(pred_sup) == np.round(y_test))) * 100.0
+            # 5. Untrained Canonical GNN (Ridge probe across 5 seeds)
+            seed_untrained_maes = []
+            seed_untrained_accs = []
+            for s_pred in seed_untrained_preds[target]:
+                p_sub = s_pred[valid_sub_indices]
+                seed_untrained_maes.append(float(np.mean(np.abs(y_sub - p_sub))))
+                seed_untrained_accs.append(float(np.mean(np.round(p_sub) == np.round(y_sub))) * 100.0)
+            mae_untrained = float(np.mean(seed_untrained_maes))
 
-        task2_results[target] = {
-            "num_evaluated_test_knots": n_eval,
-            "total_test_knots": len(test_knots),
-            "mae_mean": mae_mean,
-            "acc_mean": acc_mean,
-            "mae_linear": mae_lin,
-            "acc_linear": acc_lin,
-            "mae_alexander": mae_alex,
-            "acc_alexander": acc_alex,
-            "mae_raw_gnn": mae_raw,
-            "acc_raw_gnn": acc_raw,
-            "mae_canonical_gnn": mae_can,
-            "acc_canonical_gnn": acc_can,
-            "mae_supervised_gnn": mae_sup,
-            "acc_supervised_gnn": acc_sup,
-        }
+            # 6. Supervised Multi-Task Canonical GNN (across 5 seeds)
+            seed_maes = []
+            seed_accs = []
+            for s_pred_matrix in seed_supervised_preds:
+                p_sub = s_pred_matrix[valid_sub_indices, target_idx]
+                seed_maes.append(float(np.mean(np.abs(y_sub - p_sub))))
+                seed_accs.append(float(np.mean(np.round(p_sub) == np.round(y_sub))) * 100.0)
 
-        print(f"{target:<20} | {n_eval:<10} | {mae_mean:<9.3f} | {mae_lin:<10.3f} | {mae_alex:<9.3f} | {mae_raw:<8.3f} | {mae_can:<9.3f} | {mae_sup:<14.3f}")
+            mae_sup_mean = float(np.mean(seed_maes))
+            mae_sup_stderr = float(np.std(seed_maes) / np.sqrt(len(seed_maes)))
+            acc_sup_mean = float(np.mean(seed_accs))
+            acc_sup_stderr = float(np.std(seed_accs) / np.sqrt(len(seed_accs)))
+
+            task2_results[target][sub_name] = {
+                "num_evaluated_knots": n_eval,
+                "mae_mean_baseline": mae_mean,
+                "acc_mean_baseline": acc_mean,
+                "mae_linear_baseline": mae_lin,
+                "acc_linear_baseline": acc_lin,
+                "mae_signature_baseline": mae_sig,
+                "acc_signature_baseline": acc_sig,
+                "mae_alexander_baseline": mae_alex,
+                "acc_alexander_baseline": acc_alex,
+                "mae_untrained_canonical_gnn": mae_untrained,
+                "mae_supervised_canonical_gnn_mean": mae_sup_mean,
+                "mae_supervised_canonical_gnn_stderr": mae_sup_stderr,
+                "acc_supervised_canonical_gnn_mean": acc_sup_mean,
+                "acc_supervised_canonical_gnn_stderr": acc_sup_stderr,
+            }
+
+            print(f"{sub_name:<16} | {n_eval:<6} | {mae_mean:<14.3f} | {mae_lin:<14.3f} | {mae_sig:<15.3f} | {mae_alex:<14.3f} | {mae_sup_mean:.3f} ± {mae_sup_stderr:.3f}")
 
     return task2_results
 
@@ -729,13 +841,14 @@ def run_task2_benchmark(
 # ==============================================================================
 
 def main():
-    parser = argparse.ArgumentParser(description="Run Rigorous Task 1 and Task 2 Benchmarks")
-    parser.add_argument("--seed", type=int, default=42, help="Random seed")
+    parser = argparse.ArgumentParser(description="Run Rigorous Audited Task 1 and Task 2 Benchmarks")
+    parser.add_argument("--seed", type=int, default=42, help="Primary random seed")
+    parser.add_argument("--seeds", type=int, nargs="+", default=[42, 43, 44, 45, 46], help="Random seeds for multi-seed Task 2")
     parser.add_argument("--output", type=str, default="results/rigorous_tasks_benchmark.json", help="Output JSON path")
     args = parser.parse_args()
 
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-    print(f"Device: {device} | Seed: {args.seed}")
+    print(f"Device: {device} | Primary Seed: {args.seed} | Seeds: {args.seeds}")
 
     db_path = Path("data/knotinfo/knotinfo_full_dataset.json")
     if not db_path.exists():
@@ -752,12 +865,13 @@ def main():
     task1_knots = [k for k, v in knots_db.items() if v["crossings"] in (9, 10)]
     t1_results = run_task1_benchmark(knots_db, train_knots, task1_knots, device=device, seed=args.seed)
 
-    # Task 2: Evaluate on all 2,176 knots at c = 12
-    t2_results = run_task2_benchmark(knots_db, train_knots, test_knots, device=device, seed=args.seed)
+    # Task 2: Evaluate on all 2,176 knots at c = 12 across 5 seeds
+    t2_results = run_task2_benchmark(knots_db, train_knots, test_knots, device=device, seeds=args.seeds)
 
     full_output = {
         "metadata": {
-            "seed": args.seed,
+            "primary_seed": args.seed,
+            "seeds": args.seeds,
             "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
             "device": str(device),
         },
@@ -769,7 +883,7 @@ def main():
     out_p.parent.mkdir(parents=True, exist_ok=True)
     with open(out_p, "w") as f:
         json.dump(full_output, f, indent=2)
-    print(f"\nAll benchmark results successfully saved to {out_p}")
+    print(f"\nAll audited benchmark results successfully saved to {out_p}")
 
 
 if __name__ == "__main__":

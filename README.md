@@ -172,6 +172,7 @@ python scripts/run_honest_protocol.py \
 # 2. Fully Audited Rigorous Task 1 & Task 2 Benchmarks (Independent Backtrack + Full KnotInfo c=12 Scale)
 python scripts/run_rigorous_tasks.py \
   --seed 42 \
+  --seeds 42 43 44 45 46 \
   --output results/rigorous_tasks_benchmark.json
 ```
 

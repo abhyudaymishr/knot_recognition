@@ -154,44 +154,59 @@ Evaluates linear probes trained on $c \le 8$ representations against trivial pre
 
 ## 8. Fully Audited Protocol: Large-Scale Task 1 & Task 2 Benchmarks
 
-Following rigorous scientific auditing, two critical experimental flaws in the initial setup were identified and resolved:
-1. **Coordinate / Traversal Leakage**: Hand-crafted chord lengths $|u_1 - u_2| / 2N$ and raw arc label indices leaked the shared braid traversal cut-point ($0.918 \to 0.401$ AUROC under cyclic relabeling). This was eliminated by replacing all coordinate features with topological planar face degree profiles $[f_1, f_2, f_3, f_4]$ from `snappy.Link.faces()`, achieving 100% invariance under all cyclic shifts ($0.9490 \leftrightarrow 0.9490$).
-2. **Positive Diagram Independence**: In single-braid perturbations, up to 63.6% of positive diagrams reduced to literally identical PD codes. In this audited protocol, positive diagrams are generated via **genuinely independent SnapPy backtrack walks** (`Link.backtrack(steps=25..70)`).
-   - **Identical Canonical PD Rate**: Exactly **0 / 642 (0.0%)** across all evaluated positive pairs!
-3. **KnotInfo Full-Census Scale for Task 2**:
-   - **Train Set**: All 802 knots with $c \le 11$ (801 prime + 1 unknot).
-   - **Test Set**: All 2,176 prime knots with $c = 12$ (1,288 alternating + 888 non-alternating).
-   - **Unknotting Number Ground Truth**: Strictly restricted to the **1,628 test knots** with exact integer values (excluding 548 knots with interval bounds like `'[2, 3]'`).
+Following rigorous scientific auditing, the experimental protocol was audited and updated to address all systematic artifacts:
+1. **Size-Matched Diagram Sampler**: Fixed the diagram-size mismatch in Task 1 that caused an artificial AUROC of $0.000$. Positives and negatives are sampled across identical backtrack step schedules ($[25, 40, 55, 70]$), ensuring matched crossing-count and diagram-density distributions.
+2. **Same-Alexander Hard Negatives**: Explicitly included negative pairs sharing the exact Alexander polynomial $\Delta(t)$, mined from the 21 collision groups (43 knots in $c \in \{9, 10\}$ sharing $\Delta(t)$).
+3. **Knot-Level Cluster Bootstrap**: Standard errors and 95% confidence intervals are computed by resampling clusters of pairs *by knot*, accounting for intra-knot correlation.
+4. **Classical Invariant Baselines Added**:
+   - Exact Murasugi signature bound $|\sigma(K)|/2$ for smooth 4-genus $g_4(K)$ and unknotting number $u(K)$.
+   - Alexander Seifert genus $\text{deg}(\Delta)/2$ for three-genus $g_3(K)$.
+   - Linear fit on $[c(K), w(K), |\sigma(K)|]$.
+5. **Multi-Seed & Stratified Evaluation**: 5 random seeds ($[42, 43, 44, 45, 46]$) with reporting stratified by Alternating vs. Non-Alternating knots.
 
-### 8.1 Audited Task 1 Results: Same-Knot Verification on Independent Base Diagrams
-- Evaluated on $N = 214$ prime knots at $c \in \{9, 10\}$ (642 positive pairs, 1,070 matched-crossing hard negatives; 1,712 total pairs).
-- Strictly safe cyclic shift & crossing permutations applied.
+### 8.1 Task 1: Same-Knot Verification with Matched Sizes & Alexander Collisions
+- Evaluated on $N = 214$ prime knots at $c \in \{9, 10\}$ (164 alternating, 50 non-alternating; 2,140 total pairs).
+- Independent backtrack walks ($25..70$ steps); 0 / 1,284 positive pairs reduce to identical PD codes ($0.0\%$).
 
-| Model Candidate | Overall AUROC (95% Bootstrap CI) | Non-Identical AUROC | Mechanism / Interpretation |
-| :--- | :---: | :---: | :--- |
-| **SnapPy Canonical Hash / Exact Match** | $0.500 \pm 0.000$ | $0.500$ | **Fails completely**: 0% of backtrack pairs share identical PD code. |
-| **Pure Graph GNN (Raw Input, Untrained)** | $0.000 \pm 0.000$ | $0.000$ | **Fails**: Backtrack inflates crossing count to 30–50; raw graph size is uncalibrated. |
-| **Pure Graph GNN (Canonical Input, Untrained)** | **$0.988 \pm 0.004$** | **$0.988$** | **Core Breakthrough**: $R_1/R_2$ reduction normalizes graph size; topology separates knots. |
-| **Pure Graph GNN (Canonical Input, Contrastive)**| $0.950 \pm 0.009$ | $0.950$ | Learned contrastive representations achieve strong invariance across orbits. |
-| **Alexander Polynomial Baseline** | **$1.000 \pm 0.000$** | **$1.000$** | Exact ambient isotopy invariant separates distinct knot classes. |
+| Model Candidate | Overall AUROC (95% Knot CI) | Alternating AUROC ($N=164$) | Non-Alternating AUROC ($N=50$) | Empirical Finding |
+| :--- | :---: | :---: | :---: | :--- |
+| **SnapPy Canonical Hash / Exact Match** | $0.500 \pm 0.000$ | $0.500$ | $0.500$ | Exact matching fails completely: independent backtrack diagrams do not collapse to identical codes. |
+| **Pure Graph GNN (Raw Input, Untrained)** | $0.512 \pm 0.023$ | $0.505$ | $0.534$ | **Resolves 0.000 artifact**: On size-matched pairs, raw graph message passing performs at random chance. |
+| **Pure Graph GNN (Canonical Input, Untrained)** | **$1.000 \pm 0.000$** | **$1.000$** | **$1.000$** | Canonicalization eliminates redundant curls/loops; planar face profiles + signs cleanly separate knots. |
+| **Pure Graph GNN (Canonical Input, Contrastive)**| $0.955 \pm 0.010$ | $0.959$ | $0.944$ | Learned contrastive representations achieve high invariance across orbits. |
+| **Alexander Polynomial Baseline** | $0.954 \pm 0.017$ | $0.954$ | $0.952$ | Drops from $1.000$ to $0.954$ due to same-Alexander hard negatives sharing $\Delta(t)$. |
 
-### 8.2 Audited Task 2 Results: Large-Scale Invariant Prediction on 12-Crossing Knots
-- Train: 802 knots ($c \le 11$) $\longrightarrow$ Test: 2,176 knots ($c = 12$).
-- Evaluates: Trivial Mean Baseline, Linear $[c(K), w(K)]$ Fit, Alexander Polynomial Baseline, Untrained GNNs (Raw/Canonical), and Supervised Multi-Task Canonical GNN.
+### 8.2 Task 2: Large-Scale Invariant Prediction Across 5 Random Seeds
+- Train: 802 knots ($c \le 11$) $\longrightarrow$ Test: 2,176 knots ($c = 12$) (1,288 alternating, 888 non-alternating).
+- Unknotting number restricted to the 1,628 test knots with exact ground truth integer values (1,066 alternating, 562 non-alternating).
+- Supervised Canonical GNN reported as Mean $\pm$ Stderr over 5 random seeds ($[42, 43, 44, 45, 46]$).
 
-| Target Invariant | Evaluated Test Knots | Mean Baseline MAE (Acc) | Linear $[c, w]$ MAE (Acc) | Alexander Baseline MAE (Acc) | Untrained Canonical GNN MAE (Acc) | **Supervised Canonical GNN MAE (Acc)** |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Unknotting Number $u(K)$** | **1,628** | $0.449$ ($66.7\%$) | $0.446$ ($68.7\%$) | $0.778$ ($53.4\%$) | $0.436$ ($66.7\%$) | **$0.409$ ($69.2\%$)** |
-| **Smooth 4-Genus $g_4(K)$** | **2,176** | $0.622$ ($63.5\%$) | $0.516$ ($62.7\%$) | $0.876$ ($48.6\%$) | $0.607$ ($61.4\%$) | **$0.380$ ($72.1\%$)** |
-| **Three-Genus $g_3(K)$** | **2,176** | $0.606$ ($46.5\%$) | $0.615$ ($45.8\%$) | **$0.141$ ($95.7\%$)** | $0.600$ ($46.5\%$) | $0.625$ ($46.6\%$) |
-| **Signature $\sigma(K)$** | **2,176** | $2.325$ ($0.0\%$) | **$0.919$ ($36.5\%$)** | $3.217$ ($11.9\%$) | $2.296$ ($0.3\%$) | **$1.015$ ($34.2\%$)** |
+| Target Invariant | Topology Subset | Test Knots | Mean Baseline MAE | Linear $[c, w]$ MAE | Signature Baseline MAE | Alexander Baseline MAE | **Supervised Canonical GNN (5-Seed MAE)** |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Unknotting Number $u(K)$** | **All Knots** | **1,628** | $0.449$ | **$0.446$** | $0.848$ | $0.778$ | $0.455 \pm 0.033$ |
+| | Alternating | 1,066 | **$0.369$** | $0.375$ | $0.955$ | $0.949$ | $0.404 \pm 0.037$ |
+| | Non-Alternating | 562 | $0.600$ | $0.581$ | $0.644$ | **$0.453$** | $0.552 \pm 0.031$ |
+| **Smooth 4-Genus $g_4(K)$** | **All Knots** | **2,176** | $0.622$ | $0.516$ | **$0.271$** | $0.876$ | $0.441 \pm 0.045$ |
+| | Alternating | 1,288 | $0.567$ | $0.477$ | **$0.264$** | $1.112$ | $0.390 \pm 0.044$ |
+| | Non-Alternating | 888 | $0.701$ | $0.573$ | **$0.280$** | $0.534$ | $0.516 \pm 0.049$ |
+| **Three-Genus $g_3(K)$** | **All Knots** | **2,176** | $0.606$ | $0.615$ | $0.580$ | **$0.015$** | $0.623 \pm 0.026$ |
+| | Alternating | 1,288 | $0.709$ | $0.617$ | $0.595$ | **$0.000$** | $0.698 \pm 0.036$ |
+| | Non-Alternating | 888 | $0.456$ | $0.612$ | $0.559$ | **$0.037$** | $0.514 \pm 0.017$ |
+| **Signature $\sigma(K)$** | **All Knots** | **2,176** | $2.325$ | **$0.919$** | $0.001^\dagger$ | $3.217$ | $1.340 \pm 0.224$ |
+| | Alternating | 1,288 | $2.288$ | **$0.963$** | $0.001^\dagger$ | $3.848$ | $1.281 \pm 0.226$ |
+| | Non-Alternating | 888 | $2.379$ | **$0.855$** | $0.001^\dagger$ | $2.303$ | $1.426 \pm 0.227$ |
 
-### 8.3 Key Empirical Conclusions
-1. **Supervised GNN Outperforms Classical Baselines on 4-Genus & Unknotting Number**:
-   - On **smooth 4-genus $g_4(K)$ (slice genus)**, the Supervised Canonical GNN achieves **$\text{MAE} = 0.380$ and $72.1\%$ exact accuracy**, outperforming the Linear $[c, w]$ baseline ($0.516$, $62.7\%$) and the Mean baseline ($0.622$, $63.5\%$).
-   - On **unknotting number $u(K)$**, the Supervised Canonical GNN achieves **$\text{MAE} = 0.409$ and $69.2\%$ exact accuracy**, outperforming Linear $[c, w]$ ($0.446$, $68.7\%$) and Alexander ($0.778$, $53.4\%$).
-2. **Algebraic Determination of Three-Genus**:
-   - For alternating knots, Seifert genus is given exactly by $\text{deg}(\Delta(t))/2$. The non-learned Alexander baseline achieves **$\text{MAE} = 0.141$ and $95.7\%$ exact accuracy**, decisively establishing where symbolic algebraic invariants dominate message-passing neural approximations.
-3. **Diagram Writhe Governs Signature**:
-   - Signature correlates strongly with diagram writhe ($\sigma \approx w/2$). The linear writhe fit achieves $\text{MAE} = 0.919$, closely tracked by the Supervised GNN at $\text{MAE} = 1.015$, both vastly outperforming the Mean baseline ($2.325$).
+*($^\dagger$Identity probe on signature).*
+
+### 8.3 Rigorous Scientific Conclusions
+1. **Task 1 Resolution**:
+   - The artificial $0.000$ AUROC was confirmed to be a diagram-size artifact resulting from comparing untangled (step 0) diagrams to tangled (step 50) diagrams for positives, while negatives were matched at step 0.
+   - When positive and negative pairs are strictly matched by backtrack step counts, raw graph message passing scores **$0.512 \pm 0.023$ (random chance)**.
+   - Confluent $R_1/R_2$ canonicalization brings diagrams into reduced planar graphs where topological face-degree and crossing sign features achieve **$1.000$ AUROC** without any learned weights.
+2. **Task 2 Reality: Classical Topological Formulas Dominate Learned Models**:
+   - **Smooth 4-Genus**: Murasugi's classical signature bound $|\sigma(K)|/2$ achieves **$\text{MAE} = 0.271$** across all 2,176 test knots ($0.264$ alternating, $0.280$ non-alternating), decisively beating the Supervised GNN ($0.441 \pm 0.045$). The apparent earlier improvement of the GNN over linear $[c, w]$ ($0.516$) was an artifact of omitting the standard signature baseline.
+   - **Three-Genus**: Alexander polynomial degree $\text{deg}(\Delta)/2$ predicts Seifert genus with **$\text{MAE} = 0.015$** ($100\%$ exact accuracy on alternating knots), overwhelmingly outperforming the GNN ($0.623 \pm 0.026$).
+   - **Unknotting Number**: Across 5 random seeds, the Supervised GNN achieves **$\text{MAE} = 0.455 \pm 0.033$**, which is statistically indistinguishable from the trivial linear baseline ($0.446$) and mean baseline ($0.449$). On non-alternating knots, the Alexander polynomial baseline ($0.453$) outperforms the GNN ($0.552 \pm 0.031$).
+   - **Signature**: Diagram writhe alone provides a better linear predictor ($\text{MAE} = 0.919$) than the Supervised GNN ($\text{MAE} = 1.340 \pm 0.224$).
+
 
