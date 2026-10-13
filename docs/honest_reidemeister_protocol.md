@@ -150,44 +150,55 @@ Evaluates linear probes trained on $c \le 8$ representations against trivial pre
    - On truly unseen knot invariants without local planar formulas ($\sigma(K), u(K)$), no neural graph model outperforms the classical 2-parameter linear baseline $[c(K), w(K)]$, while the non-learned Alexander polynomial baseline outperforms all neural variants ($\text{MAE} = 1.937$).
    - This provides the exact empirical boundary: deterministic topological simplification provides strong diagram verification, but geometric surgery invariants require global algebraic invariants beyond local message passing.
 
----
-
-## 8. Fully Audited Protocol: Large-Scale Task 1 & Task 2 Benchmarks
+---## 8. Fully Audited Protocol: Large-Scale Task 1 & Task 2 Benchmarks
 
 Following rigorous scientific auditing, the experimental protocol was audited and updated to address all systematic artifacts:
 1. **Size-Matched Diagram Sampler**: Fixed the diagram-size mismatch in Task 1 that caused an artificial AUROC of $0.000$. Positives and negatives are sampled across identical backtrack step schedules ($[25, 40, 55, 70]$), ensuring matched crossing-count and diagram-density distributions.
-2. **Ground-Truth Stratification**: Knots are partitioned strictly using KnotInfo's validated `alternating` column, eliminating heuristic name-parsing errors.
-   > **Note on Stratification Correction**: An earlier committed table mistakenly reported $|\sigma|/2$ for 4-genus at $0.000$ on alternating and $0.664$ on non-alternating knots due to a manual transcription error. While Murasugi proved exact equality for three-genus ($g_3 = \text{deg}(\Delta)/2$, which scores an exact **$0.000$ MAE** on alternating knots), for smooth 4-genus $|\sigma|/2$ is only a lower bound. For instance, knot $12a_1$ has $\sigma = 0$ but $g_4 = 1$. Under KnotInfo's ground truth, $|\sigma|/2$ evaluates to **$0.264$** on alternating knots (949 exact, 338 differ by 1, 1 differs by 2) and **$0.280$** on non-alternating knots ($0.271$ overall). Both numbers are now reconciled and verified.
-3. **Scaled Distinct Base Origin Evaluation**: Expanded to $435$ non-alternating knots across $c \in \{9, 10, 11, 12\}$ testing KnotInfo vs. SnapPy census diagrams. All canonicalized diagrams were verified to reach the exact minimal crossing count ($100.0\%$), and SnapPy's exterior isometry (`is_isometric_to`, exact under Mostow rigidity for hyperbolic knots) was added as the upper reference ($0.9954$).
-4. **Strong Tabular & Invariant Baselines Added**:
-   - Random Forest and Gradient Boosted Trees trained on classical invariants ($\det(K), \sigma(K), \text{deg}(\Delta), a_0..a_7, c(K), w(K)$).
-   - Rasmussen invariant $|s|/2$ and Ozsváth–Szabó $|\tau|$ invariants for smooth 4-genus $g_4(K)$ ($0.243$ MAE on non-alternating knots).
-   - Alexander Seifert genus $\text{deg}(\Delta)/2$ for three-genus $g_3(K)$ ($0.015$ overall, $0.000$ alternating).
-   - Linear fit on $[c(K), w(K)]$.
-5. **Per-Target Train-Test Generalization Gap**: Tracking training MAE on $c \le 11$ ($N = 801$) versus test MAE on $c = 12$ ($N = 2,176$).
+2. **Ground-Truth Stratification & Mathematical Correction on Murasugi's Bound**:
+   - Knots are partitioned strictly using KnotInfo's validated `alternating` column.
+   - **Murasugi 4-Genus Bound ($g_4 \ge |\sigma|/2$)**: Murasugi's classical theorem provides only a *lower bound* on smooth 4-genus, not an exact equality for alternating knots. The standard counterexample is knot $8_3$, which is alternating with signature $\sigma(8_3) = 0$ but $g_4(8_3) = 1$ (non-slice). Under KnotInfo ground truth, $|\sigma|/2$ evaluates to **$0.264$ MAE** on alternating knots ($949$ exact, $338$ differ by 1, $1$ differs by 2) and **$0.280$ MAE** on non-alternating knots (**$0.271$ overall**). Both stratified numbers are mathematically exact.
+   - **Exact Three-Genus Theorem ($g_3 = \text{deg}(\Delta)/2$)**: The exact equality that holds for alternating knots is Murasugi's theorem for Seifert three-genus: $g_3(K) = \text{deg}(\Delta(K))/2$. This evaluates to an exact **$0.000$ MAE** on alternating knots and **$0.015$ overall**.
+3. **Scaled Distinct Base Origin Evaluation**: Expanded to $435$ non-alternating knots across $c \in \{9, 10, 11, 12\}$ testing KnotInfo vs. SnapPy census diagrams. All canonicalized diagrams reach minimal crossing count ($100.0\%$). SnapPy's exterior isometry (`is_isometric_to`, exact under Mostow rigidity for hyperbolic knots) serves as the exact upper bound reference ($0.9954$).
+4. **Resolution of Label Leakage and "Formula Inputs" in Tabular Baselines**:
+   - **Signature Row Dropped**: Random Forest and GBDT models fed classical features including $\sigma(K)$ "predicted" signature with MAE $0.003$. This was pure label leakage; the signature row has been dropped.
+   - **Three-Genus Flagged as Formula Input**: Alexander polynomial degree is the Seifert genus formula itself for alternating knots. Tabular performance ($0.046$) is explicitly flagged as "Formula Input: $\text{deg}(\Delta)/2$", not as a learned baseline.
+   - **Label Inference in Tabular Models**: KnotInfo's ground truth for unknotting number and smooth 4-genus is known primarily where classical bounds (signature, Rasmussen $s$, Ozsváth–Szabó $\tau$) meet. Tabular models fed these invariants achieve low MAE ($0.074$ on $g_4$) by reconstructing the mathematical decision rules of the labeling process, not by intuiting knot topology.
+   - **The Solved Subset vs. Unsolved Frontier**: For unknotting number, the $1,628$ test knots evaluated are the mathematically resolved subset where bounds coincide; the roughly $548$ interval-valued knots represent the true unresolved frontier.
+5. **Face-Degree Histogram & Crossing Summary Baseline**: A simple non-neural geometric baseline ($[c, n_+, n_-, w, h_2, \dots, h_{10}]$) reaches **$0.9549$ AUROC**, matching/exceeding the Untrained GNN ($0.9386$).
+6. **Strict Validation Holdout Experiment**: Evaluated with train on $c \le 10$, checkpoint selection on $c = 11$ validation holdout, and test on $c = 12$ with zero test-set hyperparameter tuning.
 
 ---
 
 ### 8.1 Task 1: Same-Knot Verification with Matched Sizes & Scaled Distinct Base Diagrams
-- **Same-Base Backtrack Verification**: Evaluated on $N = 214$ prime knots at $c \in \{9, 10\}$ (164 alternating, 50 non-alternating; 2,140 size-matched pairs).
-- **Scaled Distinct-Base Verification**: Evaluated on $N = 435$ non-alternating knots across $c \in \{9, 10, 11, 12\}$ ($50$ from $c \le 10$, $185$ from $c = 11$, $200$ from $c = 12$) comparing KnotInfo vs. SnapPy census presentations.
 
+#### A. Same-Base Backtrack Verification ($N = 214$ Prime Knots at $c \in \{9, 10\}$, 2,140 Matched Pairs)
 | Evaluation Setting | Model / Baseline Candidate | Overall AUROC (95% Knot CI) | Alternating AUROC ($N=164$) | Non-Alternating AUROC ($N=50$) | Empirical Finding |
 | :--- | :--- | :---: | :---: | :---: | :--- |
 | **Same-Base Backtrack** | **SnapPy Exact String Match** | $0.500 \pm 0.000$ | $0.500$ | $0.500$ | Fails completely due to cyclic arc label shifts ($0.0\%$ string matches). |
-| | **Weisfeiler–Lehman Graph Hash** | **$0.990 \pm 0.006$** | **$0.987$** | **$1.000$** | **Fair Label-Invariant Baseline**: $100.0\%$ positive match rate, $2.06\%$ negative collision rate. |
+| | **Weisfeiler–Lehman Graph Hash** | **$0.990 \pm 0.006$** | **$0.987$** | **$1.000$** | **Label-Invariant Baseline**: $100.0\%$ positive match rate, $2.06\%$ negative collisions. |
 | | **Pure Graph GNN (Raw, Untrained)** | $0.512 \pm 0.024$ | $0.505$ | $0.534$ | **Resolves size artifact**: On size-matched pairs, raw graph message passing is at random chance. |
 | | **Pure Graph GNN (Canonical, Untrained)** | **$1.000 \pm 0.000$** | **$1.000$** | **$1.000$** | Continuous analogue of WL hash on reduced shadows from identical base origin. |
-| | **Pure Graph GNN (Canonical, Contrastive)** | $0.941 \pm 0.012$ | $0.949$ | $0.915$ | Contrastive representation across backtrack walks. |
+| | **Pure Graph GNN (Canonical, Contrastive)** | $0.956 \pm 0.010$ | $0.960$ | $0.944$ | Contrastive representation across backtrack walks. |
 | | **Alexander Polynomial Baseline** | $0.954 \pm 0.016$ | $0.954$ | $0.952$ | Evaluated with same-Alexander hard negatives sharing $\Delta(t)$. |
-| **Scaled Distinct Base** ($N=435$ Non-Alt) | **SnapPy Exterior Isometry** | **$0.9954$** | --- | **$0.9954$** | **Exact Mathematical Upper Bound**: Exact classification via Mostow rigidity. |
-| | **Weisfeiler–Lehman Graph Hash** | **$0.7425$** | --- | **$0.7425$** | Positive match rate drops to $48.5\%$ ($211/435$) on distinct minimal presentations. |
-| | **Untrained Canonical GNN** | **$0.9424$** | --- | **$0.9424$** | Continuous embeddings rank positive pairs higher (mean pos cos $0.9996$ vs neg $0.9978$). |
-| | **Canonical PD String Match** | $0.5000$ | --- | $0.5000$ | Identical canonical forms: $0 / 435$ ($0.0\%$), despite $100.0\%$ reaching minimal crossing count. |
+
+#### B. Scaled Distinct Base Origin Breakdown ($N = 435$ Non-Alternating Knots: KnotInfo vs. SnapPy Census)
+| Crossing Slice | Knots ($N$) | SnapPy Exterior Iso (Upper Bound) | Face Hist Baseline ($[c, n_+, n_-, w, h]$) | WL Graph Hash (Match Rate) | Untrained Pure GNN (5-Seed Mean ± Stderr) | Canonical PD String Match |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **$c \le 10$** | 50 | **$0.9600^\ast$** | **$0.6897$** | $0.5100$ ($2.0\%$) | $0.6462 \pm 0.0037$ | $0.5000$ ($0\%$) |
+| **$c = 11$** | 185 | **$1.0000$** | **$0.9968$** | **$1.0000$** ($100\%^\dagger$) | $1.0000 \pm 0.0000$ | $0.5000$ ($0\%$) |
+| **$c = 12$** | 200 | **$1.0000$** | **$0.9974$** | $0.5625$ ($12.5\%$) | $0.9578 \pm 0.0076$ | $0.5000$ ($0\%$) |
+| **Overall** | **435** | **$0.9954^\ast$** | **$0.9549$** (pos $0.9835$, neg $0.8425$) | **$0.7425$** ($48.5\%^\ddagger$) | **$0.9386 \pm 0.0038$** (pos $0.9996$, neg $0.9978$) | $0.5000$ ($0\%$) |
+
+*Table Notes on Task 1 Breakdown*:
+- $^\ast$ **SnapPy Exterior Isometry Upper Bound**: The gap from $1.0000$ ($0.9600$ at $c \le 10$ and $0.9954$ overall) is caused entirely by non-hyperbolic satellite/torus knots ($10_{124}, 10_{162}, 10_{163}, 10_{164}, 10_{165}$) where hyperbolic Mostow rigidity does not apply to SnapPy's hyperbolic isometry routine.
+- $^\dagger$ **Source Table Confound at $c = 11$**: Both KnotInfo and SnapPy census derived their $11$-crossing presentations from Hoste–Thistlethwaite DT tables; canonicalization yields identical minimal diagrams in $100\%$ of cases.
+- $^\ddagger$ **Discrete WL Hash Bound**: The WL hash's AUROC is mathematically capped at $0.7425$ because discrete $0/1$ scores assign $0$ to the $51.5\%$ unmatched positive pairs, tying them with true negatives in rank ordering.
+- **The 0.94 Untrained GNN Explained**: The Untrained GNN adds **nothing** beyond the simple Face-Degree Histogram baseline ($0.9549$ vs $0.9386$). Furthermore, the Untrained GNN's positive vs negative cosines are compressed into $[0.9978, 0.9996]$ (a tiny margin of $0.0018$ where rankings ride on microscopic numerical fluctuations), whereas the Face Histogram exhibits a natural, robust geometric margin ($0.9835$ vs $0.8425$, margin $0.1410$).
 
 ---
 
 ### 8.2 Task 2: Large-Scale Invariant Prediction Across 5 Random Seeds
+
 - **Train Set**: 802 knots with $c \le 11$ (801 prime + 1 unknot).
 - **Test Set**: 2,176 knots with $c = 12$ ($1,288$ alternating, $888$ non-alternating). Unknotting number evaluated on the 1,628 test knots with exact ground truth integer values ($1,066$ alternating, $562$ non-alternating).
 - **GNN Architecture**: 4-layer permutation-invariant Signed GNN with Smooth L1 loss, target standardization, and CosineAnnealingLR across 5 random seeds ($[42, 43, 44, 45, 46]$).
@@ -200,24 +211,43 @@ Following rigorous scientific auditing, the experimental protocol was audited an
 | **Smooth 4-Genus $g_4(K)$** | **All Knots** | **2,176** | $0.622$ | $0.516$ | $0.271^\ast$ ($0.256^\dagger$) | **$0.074$** | **$0.081$** | $0.331 \pm 0.008$ | $0.192$ | $+0.139$ |
 | | Alternating | 1,288 | $0.567$ | $0.477$ | $0.264^\ast$ | **$0.069$** | **$0.070$** | $0.294 \pm 0.008$ | --- | $+0.102$ |
 | | Non-Alternating | 888 | $0.701$ | $0.573$ | **$0.243^\dagger$** ($0.280^\ast$) | **$0.082$** | **$0.098$** | $0.386 \pm 0.008$ | --- | $+0.194$ |
-| **Three-Genus $g_3(K)$** | **All Knots** | **2,176** | $0.606$ | $0.615$ | **$0.015^\ddagger$** | $0.046$ | $0.049$ | $0.533 \pm 0.017$ | $0.173$ | $+0.361$ |
-| | Alternating | 1,288 | $0.709$ | $0.617$ | **$0.000^\ddagger$** | $0.046$ | $0.046$ | $0.523 \pm 0.020$ | --- | $+0.351$ |
-| | Non-Alternating | 888 | $0.456$ | $0.612$ | **$0.037^\ddagger$** | $0.046$ | $0.053$ | $0.547 \pm 0.014$ | --- | $+0.375$ |
-| **Signature $\sigma(K)$** | **All Knots** | **2,176** | $2.325$ | $0.919$ | **$0.000^\S$** | **$0.003$** | **$0.002$** | $0.832 \pm 0.033$ | $0.446$ | $+0.386$ |
-| | Alternating | 1,288 | $2.288$ | $0.963$ | **$0.000^\S$** | **$0.001$** | **$0.001$** | $0.754 \pm 0.040$ | --- | $+0.308$ |
-| | Non-Alternating | 888 | $2.379$ | $0.855$ | **$0.000^\S$** | **$0.005$** | **$0.003$** | $0.945 \pm 0.024$ | --- | $+0.499$ |
+| **Three-Genus $g_3(K)$** | **All Knots** | **2,176** | $0.606$ | $0.615$ | **$0.015^\ddagger$** | $0.046^\parallel$ | $0.049^\parallel$ | $0.533 \pm 0.017$ | $0.173$ | $+0.361$ |
+| | Alternating | 1,288 | $0.709$ | $0.617$ | **$0.000^\ddagger$** | $0.046^\parallel$ | $0.046^\parallel$ | $0.523 \pm 0.020$ | --- | $+0.351$ |
+| | Non-Alternating | 888 | $0.456$ | $0.612$ | **$0.037^\ddagger$** | $0.046^\parallel$ | $0.053^\parallel$ | $0.547 \pm 0.014$ | --- | $+0.375$ |
+| **Signature $\sigma(K)$** | **All Knots** | **2,176** | $2.325$ | $0.919$ | **$0.000^\S$** | *[Dropped]$^\text{\textpilcrow}$* | *[Dropped]$^\text{\textpilcrow}$* | $0.832 \pm 0.033$ | $0.446$ | $+0.386$ |
+| | Alternating | 1,288 | $2.288$ | $0.963$ | **$0.000^\S$** | *[Dropped]$^\text{\textpilcrow}$* | *[Dropped]$^\text{\textpilcrow}$* | $0.754 \pm 0.040$ | --- | $+0.308$ |
+| | Non-Alternating | 888 | $2.379$ | $0.855$ | **$0.000^\S$** | *[Dropped]$^\text{\textpilcrow}$* | *[Dropped]$^\text{\textpilcrow}$* | $0.945 \pm 0.024$ | --- | $+0.499$ |
 
 *Table Notes*:  
-- $^\ast$ Murasugi bound $|\sigma(K)|/2$.  
+- $^\ast$ Murasugi lower bound $|\sigma(K)|/2$ ($0.264$ alternating, $0.280$ non-alternating, $0.271$ overall).  
 - $^\dagger$ Rasmussen invariant $|s|/2$ and Ozsváth–Szabó $|\tau|$ invariant (identically $0.243$ on non-alternating, $0.256$ overall).  
 - $^\ddagger$ Alexander Seifert genus $\text{deg}(\Delta)/2$ (exact $0.000$ on alternating knots).  
-- $^\S$ Exact Goeritz / Seifert matrix signature.
+- $^\S$ Exact Goeritz / Seifert matrix signature.  
+- $^\parallel$ **Formula Input Flag**: RF/GBDT models for $3$-genus receive Alexander degree as an input feature; this is the algebraic formula itself, not a learned baseline.  
+- $^\text{\textpilcrow}$ **Dropped (Label Leakage)**: Tabular feature matrices included $\sigma(K)$ as an input feature, allowing models to trivially predict $\sigma(K)$ with $\text{MAE} = 0.003$. This row has been dropped.
+
+---
+
+### 8.3 Strict Out-of-Distribution Validation Holdout Experiment
+
+To ensure zero test-set hyperparameter tuning and inspect the crossing generalization gap rigorously:
+- **Train Set**: Knots with $c \le 10$ ($N = 250$).
+- **Validation Holdout**: Knots with $c = 11$ ($N = 552$), used exclusively for checkpoint selection via validation loss.
+- **Test Set**: Knots with $c = 12$ ($N = 2,176$), evaluated out-of-distribution without any test-set tuning.
+- **Node Features**: Intrinsic signed graph topology and normalized face degree profiles ($[s, \text{is\_pos}, \text{is\_neg}, f_1, f_2, f_3, f_4]$) with **no** crossing count or size term ($n/20$).
+
+| Target Invariant | $c = 12$ Test Knots | Out-of-Distribution Test MAE | Comparison to Baselines on $c = 12$ |
+| :--- | :---: | :---: | :--- |
+| **Unknotting Number $u(K)$** | 1,628 | **$0.428$** | Near linear baseline $[c, w]$ ($0.446$) and mean ($0.449$). |
+| **Smooth 4-Genus $g_4(K)$** | 2,176 | **$0.354$** | Substantially worse than classical bound $|\sigma|/2$ ($0.271$) and $|\tau|$ ($0.243$). |
+| **Three-Genus $g_3(K)$** | 2,176 | **$0.730$** | **Worse than the mean baseline** ($0.606$); destroyed by Alexander degree ($0.015$). |
+| **Signature $\sigma(K)$** | 2,176 | **$0.982$** | Worse than linear baseline $[c, w]$ ($0.919$); exact Goeritz signature is $0.000$. |
 
 ---
 
 ## 9. Comprehensive Pitfall Taxonomy for Machine Learning in Knot Theory
 
-The empirical results establish five distinct failure modes and artifacts in geometric topological ML:
+The audited empirical benchmarks establish six fundamental failure modes in geometric topological ML:
 
 ### 9.1 Pitfall 1: Coordinate & Traversal Order Leakage
 - **Mechanism**: Hand-crafted geometric features (such as normalized Gauss chord lengths $|u_1 - u_2| / 2N$) depend on the traversal cut-point where strand numbering begins. In braid-derived datasets, diagrams derived from the same base braid share this cut-point.
@@ -229,69 +259,15 @@ The empirical results establish five distinct failure modes and artifacts in geo
 
 ### 9.3 Pitfall 3: Untrained Encoders as Continuous Graph Hashes on Reduced Shadows
 - **Mechanism**: An untrained random GNN on canonicalized input scored $1.000$ AUROC on backtrack pairs originating from the same base diagram. Confluent $R_1/R_2$ reduction on backtrack walks of the same knot returns the identical or isomorphic minimal shadow; an untrained random network on crossing signs and face profiles acts as a continuous Weisfeiler–Lehman (WL) graph hash.
-- **Audit Measurement**: A discrete Weisfeiler–Lehman graph hash on canonical backtrack diagrams achieves **$0.990 \pm 0.006$ AUROC** ($100.0\%$ positive matches, $2.06\%$ negative collisions). On scaled distinct base diagrams ($N=435$ non-alternating knots), the discrete WL hash drops to **$0.7425$ AUROC** (matching $48.5\%$ of positive pairs), while the untrained GNN achieves **$0.9424$ AUROC** (pos cosine $0.9996$ vs neg cosine $0.9978$). In contrast, SnapPy's exterior isometry baseline (`is_isometric_to`) provides the exact mathematical classification at **$0.9954$ AUROC**.
+- **Audit Measurement**: When tested across $N = 435$ distinct base presentations of non-alternating knots (KnotInfo vs SnapPy census), an untrained GNN scores $0.9386 \pm 0.0038$. However, a non-neural Face-Degree Histogram baseline ($[c, n_+, n_-, w, h_2..h_{10}]$) achieves **$0.9549$ AUROC**, demonstrating that the GNN adds nothing beyond this geometric profile.
 
-### 9.4 Pitfall 4: Neglecting Known Classical Topological Invariants & Strong Tabular Baselines
-- **Mechanism**: Prior work reported small neural gains over trivial 2-parameter linear $[c(K), w(K)]$ baselines, claiming that invariants like $g_4(K)$ or $u(K)$ are unrepresentable by simple models.
-- **Audit Measurement**:
-  - **Random Forest & GBDT on Classical Invariants**: Gradient Boosted Trees and Random Forests trained on classical invariants ($\det(K), \sigma(K), \text{deg}(\Delta), a_0..a_7, c, w$) completely outperform the Supervised GNN on every target: $u(K)$ MAE reaches **$0.324$** (vs GNN $0.411$); $g_4(K)$ MAE reaches **$0.074$** (vs GNN $0.331$).
-  - **Topological Invariants $|s|/2$ and $|\tau|$**: The Rasmussen invariant $|s|/2$ and Ozsváth–Szabó $|\tau|$ invariant achieve **$0.243$ MAE** on non-alternating knots, easily beating the GNN ($0.386$) and $|\sigma|/2$ ($0.280$).
-  - **Three-genus $g_3(K)$**: Alexander polynomial degree $\text{deg}(\Delta(t))/2$ achieves **$\text{MAE} = 0.015$** ($100\%$ accuracy, $\text{MAE} = 0.000$ on alternating knots), rendering neural regression obsolete.
+### 9.4 Pitfall 4: Label Inference and Formula Inputs in Tabular Baselines
+- **Mechanism**: Tabular models fed classical topological invariants achieve low MAE ($0.074$ on $g_4$) not by discovering geometry, but by inferring the decision rules used to construct database tables. KnotInfo values for $g_4$ and $u(K)$ are cataloged where upper and lower bounds meet. Furthermore, feeding $\sigma(K)$ to predict $\sigma(K)$ constitutes direct label leakage (MAE $0.003$), while feeding Alexander degree to predict $g_3(K)$ simply re-evaluates Murasugi's theorem.
+- **Audit Measurement**: Omitting the leaked signature row and flagging 3-genus tabular models as "Formula Input: $\text{deg}(\Delta)/2$" restores benchmark integrity. For unknotting number, the $1,628$ evaluated knots represent the "easy" cases where bounds coincide; the roughly $548$ interval-valued knots remain the true open frontier.
 
-### 9.5 Pitfall 5: Training Optimization Imbalance vs. Out-of-Distribution Generalization Gap
-- **Mechanism**: The previously reported training failure was an optimization bug (batch size 1 updates and unnormalized multi-task MSE across wildly disparate target ranges). When trained with target standardization, Smooth L1 loss, and batch accumulation, the GNN fits the training data well (Signature train MAE $0.446$ vs linear $0.943$; $g_4$ train MAE $0.192$ vs linear $0.490$; $u(K)$ train MAE $0.278$ vs linear $0.472$).
-- **Audit Measurement**: While the architecture has sufficient representational capacity on the training distribution ($c \le 11$), it suffers a substantial out-of-distribution generalization gap when evaluated on $c = 12$ test knots:
-  - Unknotting number: $+0.133$ gap ($0.278 \to 0.411$)
-  - Smooth 4-genus: $+0.139$ gap ($0.192 \to 0.331$)
-  - Three-genus: $+0.361$ gap ($0.173 \to 0.533$, collapsing to the mean baseline)
-  - Signature: $+0.386$ gap ($0.446 \to 0.832$)
-
-*($^\dagger$Identity probe on signature).*
-
-### 8.3 Rigorous Scientific Conclusions
-1. **Task 1 Resolution**:
-   - The artificial $0.000$ AUROC was confirmed to be a diagram-size artifact resulting from comparing untangled (step 0) diagrams to tangled (step 50) diagrams for positives, while negatives were matched at step 0.
-   - When positive and negative pairs are strictly matched by backtrack step counts, raw graph message passing scores **$0.512 \pm 0.024$ (random chance)**.
-   - A label-invariant Weisfeiler–Lehman graph hash on the canonical diagrams achieves **$0.990 \pm 0.006$ AUROC** ($100.0\%$ positive matches on backtrack pairs), showing that the untrained GNN’s $1.000$ AUROC acts as a continuous graph isomorphism hash on simplified shadows from the same base origin.
-   - When tested on **genuinely distinct base diagrams** (KnotInfo vs SnapPy census) across all 50 non-alternating knots, $0/50$ diagrams are identical ($0.0\%$), and AUROC drops to **$0.6635$** (with mean positive cosine $0.9984$ vs mean negative cosine $0.9972$), while the discrete WL hash collapses to **$0.5100$** (matching only $2.0\%$ of positive pairs).
-2. **Task 2: Proper Training vs. Classical Invariant Boundaries**:
-   - Standardizing targets, batch gradient accumulation (batch size 32), and Smooth L1 loss resolve the optimization bottleneck: on the training set, the GNN comfortably outperforms the linear $[c, w]$ fit across all targets:
-     - Unknotting number train MAE: **$0.281$** (beats linear $[c, w]$ $0.472$)
-     - Smooth 4-genus train MAE: **$0.186$** (beats linear $[c, w]$ $0.490$)
-     - Three-genus train MAE: **$0.156$** (beats linear $[c, w]$ $0.530$)
-     - Signature train MAE: **$0.436$** (beats linear $[c, w]$ $0.943$)
-   - On the test set ($c = 12$), the properly trained GNN achieves strong performance on signature ($0.771$ vs linear $0.919$) and unknotting number ($0.403$ vs linear $0.446$).
-   - However, where exact algebraic/topological formulas exist, classical invariants strictly dominate:
-     - Murasugi's classical signature bound $|\sigma(K)|/2$ achieves **$\text{MAE} = 0.271$** on 4-genus ($0.264$ alternating, $0.280$ non-alternating), beating the GNN ($0.319$).
-     - Alexander polynomial degree $\text{deg}(\Delta)/2$ predicts Seifert genus with **$\text{MAE} = 0.015$** ($100\%$ exact on alternating knots), outperforming the GNN ($0.515$).
-
----
-
-## 9. Methodological Audit & Scientific Pitfall Taxonomy
-
-The rigorous iterative audit of this benchmark uncovered fundamental insights into why machine learning models for topological knot invariants frequently report inflated or misleading performance:
-
-### 9.1 Pitfall 1: Coordinate & Traversal Order Leakage
-- **Mechanism**: Hand-crafted geometric features (such as normalized Gauss chord lengths $|u_1 - u_2| / 2N$) depend on the traversal cut-point where strand numbering begins. In braid-derived datasets, diagrams derived from the same base braid share this cut-point.
-- **Audit Measurement**: Under cyclic label shifts alone, chord feature AUROC collapses from **$0.918 \longrightarrow 0.401$**. When cyclic shifts are combined with strand orientation reversal and crossing index permutation, performance collapses to **$0.4908$ (random chance)**. Replacing traversal coordinates with topological planar face degree profiles ($[f_1, f_2, f_3, f_4]$ from `snappy.Link.faces()`) achieves true coordinate invariance ($0.9490 \leftrightarrow 0.9490$).
-
-### 9.2 Pitfall 2: Diagram Size & Backtrack Step Imbalance
-- **Mechanism**: When positive diagram pairs undergo long backtrack walks (25–70 steps, inflating crossing counts to 30–70) while negative pairs are evaluated against compact minimal diagrams (9–10 crossings), graph scale disparity creates artificial class separation.
-- **Audit Measurement**: Raw GNN message passing on uncalibrated diagram sizes yielded an AUROC of **$0.000 \pm 0.000$ (perfect inversion)**. When positive and negative pairs are strictly sampled from identical backtrack step distributions, the AUROC normalizes to **$0.512 \pm 0.024$ (pure random chance)**.
-
-### 9.3 Pitfall 3: Untrained Encoders as Continuous Graph Hashes on Reduced Shadows
-- **Mechanism**: An untrained random GNN on canonicalized input scored $1.000$ AUROC on backtrack pairs originating from the same base diagram. Confluent $R_1/R_2$ reduction on backtrack walks of the same knot returns the identical or isomorphic minimal shadow; an untrained random network on crossing signs and face profiles acts as a continuous Weisfeiler–Lehman (WL) graph hash.
-- **Audit Measurement**: A discrete Weisfeiler–Lehman graph hash on canonical backtrack diagrams achieves **$0.990 \pm 0.006$ AUROC** ($100.0\%$ positive matches, $2.06\%$ negative collisions). However, when tested on **genuinely distinct base diagrams** (KnotInfo vs SnapPy census) across all 50 non-alternating knots (where $0/50$ pairs have identical PD codes), the discrete WL hash collapses to **$0.5100$ AUROC** (matching only $2.0\%$ of positive pairs), while the untrained GNN drops to **$0.6635$ AUROC** (with positive cosines $0.9984$ vs negative cosines $0.9972$). This demonstrates that canonicalization reduces diagrams from the same isotopic orbit to isomorphic shadows, but distinct planar presentations of the same non-alternating knot remain topologically unbridged.
-
-### 9.4 Pitfall 4: Neglecting Known Classical Topological Invariants
-- **Mechanism**: Prior work often claimed that invariants such as smooth 4-genus $g_4(K)$ or three-genus $g_3(K)$ have "no cheap formula," reporting small neural gains over trivial linear $[c(K), w(K)]$ baselines.
-- **Audit Measurement**:
-  - **Smooth 4-genus $g_4(K)$**: For alternating knots, Murasugi's classical theorem proves $g_4(K) = |\sigma(K)|/2$. Evaluating $|\sigma(K)|/2$ yields an **$\text{MAE} = 0.271$**, beating the Supervised GNN ($\text{MAE} = 0.319$). (Exact topological signature $\sigma(K)$ is computable directly from the diagram Seifert/Goeritz matrix in polynomial time).
-  - **Three-genus $g_3(K)$**: Alexander polynomial degree $\text{deg}(\Delta(t))/2$ achieves **$\text{MAE} = 0.015$** ($100\%$ accuracy on alternating knots), rendering neural regression obsolete.
-
-### 9.5 Pitfall 5: Multi-Task Optimization Imbalance vs. Representational Capacity
-- **Mechanism**: When training multi-task GNNs on heterogeneous invariants with vastly different scales ($\sigma \in [-12, 12]$ vs $g_4 \in [0, 4]$), unnormalized MSE loss and batch size 1 updates cause severe optimization failure, resulting in training MAEs worse than the mean baseline.
-- **Audit Measurement**: Standardizing targets and using batched gradient accumulation with Smooth L1 loss enables the GNN to comfortably fit the training data, beating the linear $[c, w]$ fit across all targets (Signature train MAE $0.436$ vs linear $0.943$; $g_4$ train MAE $0.186$ vs linear $0.490$; $g_3$ train MAE $0.156$ vs linear $0.530$; $u(K)$ train MAE $0.281$ vs linear $0.472$). Thus, message passing does not lack representational capacity on the training distribution; the primary challenge lies in out-of-distribution crossing-number extrapolation ($c=12$) relative to exact algebraic/topological invariants.
+### 9.5 Pitfall 5: Multi-Task Optimization Imbalance vs. Generalization Gap
+- **Mechanism**: Optimization failure previously masked model capacity. When trained with target standardization, Smooth L1 loss, and batched gradient accumulation, the GNN comfortably fits training knots ($c \le 11$), beating linear fits across all targets.
+- **Audit Measurement**: However, under a strict validation holdout split ($c \le 10$ train, $c = 11$ val checkpoint, $c = 12$ test), the model exhibits a severe out-of-distribution generalization gap: 3-genus collapses to $0.730$ MAE (worse than the test mean baseline $0.606$), and unknotting number ($0.428$) fails to beat simple linear fits ($0.446$). Local message passing cannot extrapolate geometric surgery invariants to higher crossing numbers.
 
 ---
 
