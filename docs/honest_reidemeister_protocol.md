@@ -209,4 +209,52 @@ Following rigorous scientific auditing, the experimental protocol was audited an
    - **Unknotting Number**: Across 5 random seeds, the Supervised GNN achieves **$\text{MAE} = 0.455 \pm 0.033$**, which is statistically indistinguishable from the trivial linear baseline ($0.446$) and mean baseline ($0.449$). On non-alternating knots, the Alexander polynomial baseline ($0.453$) outperforms the GNN ($0.552 \pm 0.031$).
    - **Signature**: Diagram writhe alone provides a better linear predictor ($\text{MAE} = 0.919$) than the Supervised GNN ($\text{MAE} = 1.340 \pm 0.224$).
 
+---
+
+## 9. Methodological Audit & Scientific Pitfall Taxonomy
+
+The rigorous iterative audit of this benchmark uncovered fundamental insights into why machine learning models for topological knot invariants frequently report inflated or misleading performance.
+
+### 9.1 Pitfall 1: Coordinate & Traversal Order Leakage
+- **Mechanism**: Hand-crafted geometric features (such as normalized Gauss chord lengths $|u_1 - u_2| / 2N$) depend on the traversal cut-point where strand numbering begins. In braid-derived datasets, all diagrams derived from the same base braid share this cut-point.
+- **Audit Proof**: Under strictly safe cyclic shifts $i \mapsto (i + k) \pmod{2N}$, chord feature AUROC collapses from **$0.918 \longrightarrow 0.401$**. Replacing coordinates with topological planar face degree profiles ($[f_1, f_2, f_3, f_4]$ from `snappy.Link.faces()`) achieves true coordinate invariance ($0.9490 \leftrightarrow 0.9490$).
+
+### 9.2 Pitfall 2: Diagram Size & Backtrack Step Imbalance
+- **Mechanism**: When positive diagram pairs undergo long backtrack walks (25–70 steps, inflating crossing counts to 30–70) while negative pairs are evaluated against compact minimal diagrams (9–10 crossings), graph scale disparity creates artificial class separation.
+- **Audit Proof**: Raw GNN message passing on uncalibrated diagram sizes yielded an AUROC of **$0.000 \pm 0.000$ (perfect inversion)**. When positive and negative pairs are strictly sampled from identical backtrack step distributions, the AUROC normalizes to **$0.512 \pm 0.023$ (pure random chance)**.
+
+### 9.3 Pitfall 3: Untrained Encoders as Continuous Graph Hashes
+- **Mechanism**: An untrained random GNN on canonicalized input scored $1.000$ AUROC. This does **not** indicate learned topological comprehension. Rather, confluent $R_1/R_2$ reduction frequently returns the identical or isomorphic minimal shadow for alternating knots; an untrained random network on crossing signs and face profiles acts as a continuous Weisfeiler–Lehman (WL) graph hash.
+- **Audit Proof**: Discrete string matching of PD codes fails ($0.500$ AUROC) solely because arc labels are permuted. Continuous graph embeddings smoothly group isomorphic minimal graphs, achieving high separation without learning.
+
+### 9.4 Pitfall 4: Neglecting Known Classical Topological Invariants
+- **Mechanism**: Prior work often claimed that invariants such as smooth 4-genus $g_4(K)$ or three-genus $g_3(K)$ have "no cheap formula," reporting small neural gains over trivial linear $[c(K), w(K)]$ baselines.
+- **Audit Proof**:
+  - **Smooth 4-genus $g_4(K)$**: For alternating knots, Murasugi's classical theorem proves $g_4(K) = |\sigma(K)|/2$. Evaluating $|\sigma(K)|/2$ yields an **$\text{MAE} = 0.271$**, overwhelmingly beating the Supervised GNN ($\text{MAE} = 0.441 \pm 0.045$). (The exact topological signature $\sigma(K)$ is computable directly from the diagram Seifert/Goeritz matrix and is supplied via KnotInfo).
+  - **Three-genus $g_3(K)$**: Alexander polynomial degree $\text{deg}(\Delta(t))/2$ achieves **$\text{MAE} = 0.015$** ($100\%$ accuracy on alternating knots), rendering neural regression obsolete.
+
+### 9.5 Pitfall 5: Architecture Underfitting on Global Topological Surgery
+- **Diagnostic Check**: Evaluating the 4-layer Multi-Task GNN on the 802 training knots ($c \le 11$) demonstrates that the model is **severely underfitting**:
+  - Unknotting Number $u(K)$: Train MAE = **$0.469$** vs. Train Mean Baseline = **$0.474$**.
+  - Smooth 4-Genus $g_4(K)$: Train MAE = **$0.685$** vs. Train Mean Baseline = **$0.618$**.
+  - Three-Genus $g_3(K)$: Train MAE = **$0.639$** vs. Train Mean Baseline = **$0.533$**.
+  - Signature $\sigma(K)$: Train MAE = **$2.263$** vs. Train Mean Baseline = **$2.266$**.
+- **Conclusion**: Local 4-valent message passing fails to fit global topological surgery invariants even on the training data.
+
+---
+
+## 10. Publication & Strategic Pathways
+
+Given the audited empirical reality, three concrete research pathways exist:
+
+1. **Empirical Audit & Benchmark Manifesto (Recommended for NeurIPS D&B / AI4Science Workshops)**:
+   - Frame the work as a rigorous methodological critique: *"Pitfalls in Machine Learning for Knot Invariants: Traversal Leakage, Diagram-Size Artifacts, and the Dominance of Classical Invariant Baselines."*
+   - Provide the complete benchmark suite, dataset, and controlled evaluation protocol as an open community standard.
+2. **The Non-Alternating Frontier (Long-Term Research)**:
+   - Focus exclusively on targets where classical proxies fail (e.g., unknotting number on non-alternating knots, where Alexander baseline achieves $0.453$).
+   - Develop non-local topological architectures (e.g. persistent homology or global Seifert surface graph networks).
+3. **Repository Archival**:
+   - Retain the audited benchmarks, verified KnotInfo database, and clean test suites as a definitive internal standard.
+
+
 
