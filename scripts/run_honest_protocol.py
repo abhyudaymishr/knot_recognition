@@ -538,13 +538,27 @@ def evaluate_task2_invariants(
 # Full Multi-Seed Experiment Suite
 # ==============================================================================
 
+class FixedChordFeatureBaseline:
+    """Non-neural baseline evaluating mean and max of hand-crafted node features directly."""
+    def __init__(self, mode: str = "r1_r2"):
+        self.mode = mode
+        self.base = BaseKnotGraphModel(mode=mode)
+
+    def __call__(self, pd_list: Sequence[Sequence[int]], signs: Optional[Sequence[int]] = None, device: Optional[torch.device] = None) -> torch.Tensor:
+        red_pd, red_s = self.base.canonicalize_pd(pd_list, signs)
+        nf, ei, ef = build_graph_tensors_from_pd(red_pd, red_s)
+        vec = torch.cat([nf.mean(dim=0), nf.max(dim=0).values], dim=-1)
+        norm = torch.norm(vec, p=2)
+        return (vec / norm) if norm > 0 else vec
+
+
 def run_experiment_suite(
     seeds: List[int] = [42, 43, 44, 45, 46],
     epochs: int = 20,
     dataset_cache: Optional[Path] = None,
     output_json: Optional[Path] = None,
 ) -> Dict[str, Any]:
-    """Runs the full 5-seed protocol across all 12 models and controls."""
+    """Runs the full 5-seed protocol across all models and explicit controls."""
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
     print(f"=== Reidemeister Canonicalization Benchmark (Device: {device}) ===")
 
@@ -558,7 +572,7 @@ def run_experiment_suite(
     triv_9 = bench.evaluate_trivial_predictors(train_knots, test_9)
     triv_10 = bench.evaluate_trivial_predictors(train_knots, test_10)
 
-    # Models list
+    # Models list with explicit symmetric controls
     model_configs = [
         ("raw_gnn", "Raw GNN (No Canonicalization)"),
         ("canonical_r1r2", "Canonical GNN (R1/R2)"),
@@ -567,8 +581,12 @@ def run_experiment_suite(
         ("snappy_simplify", "SnapPy Simplify (Upper Bound)"),
         ("augmented_gnn", "Augmented GNN"),
         ("contrastive_gnn", "Contrastive GNN"),
-        ("shuffled_control", "Shuffled-Label Control"),
-        ("random_control", "Random-Feature Control"),
+        ("fixed_chord_raw", "Fixed Chord Features (Raw Input)"),
+        ("fixed_chord_canon", "Fixed Chord Features (Canonical Input)"),
+        ("random_raw", "Random Untrained GNN (Raw Input)"),
+        ("random_canon", "Random Untrained GNN (Canonical Input)"),
+        ("shuffled_raw", "Shuffled-Label GNN (Raw Input)"),
+        ("shuffled_canon", "Shuffled-Label GNN (Canonical Input)"),
         ("lookup_table", "Lookup-Table Hash"),
         ("non_learned_alex", "Non-Learned Baseline (Alexander+c+w)"),
         ("rendered_vit", "Rendered ViT (Reference Row)"),
@@ -589,9 +607,26 @@ def run_experiment_suite(
                 trained_model = lut
             elif m_key == "non_learned_alex":
                 trained_model = AlexanderFeatureBaseline(bench=bench)
-            elif m_key == "random_control":
+            elif m_key == "fixed_chord_raw":
+                trained_model = FixedChordFeatureBaseline(mode="raw")
+            elif m_key == "fixed_chord_canon":
+                trained_model = FixedChordFeatureBaseline(mode="r1_r2")
+            elif m_key == "random_raw":
                 trained_model = BaseKnotGraphModel(mode="raw").to(device)
                 trained_model.eval()
+            elif m_key == "random_canon":
+                trained_model = BaseKnotGraphModel(mode="r1_r2").to(device)
+                trained_model.eval()
+            elif m_key == "shuffled_raw":
+                base_m = BaseKnotGraphModel(mode="raw")
+                trained_model, _ = train_graph_model(
+                    base_m, dataset["train"], knot_to_idx, epochs=epochs, is_shuffled=True, device=device, seed=seed
+                )
+            elif m_key == "shuffled_canon":
+                base_m = BaseKnotGraphModel(mode="r1_r2")
+                trained_model, _ = train_graph_model(
+                    base_m, dataset["train"], knot_to_idx, epochs=epochs, is_shuffled=True, device=device, seed=seed
+                )
             elif m_key == "rendered_vit":
                 trained_model, _ = train_rendered_vit(
                     dataset["train"], bench, knot_to_idx, epochs=epochs, device=device, seed=seed
@@ -605,11 +640,6 @@ def run_experiment_suite(
                 base_m = BaseKnotGraphModel(mode="raw")
                 trained_model, _ = train_graph_model(
                     base_m, dataset["train"], knot_to_idx, epochs=epochs, is_augmented=True, device=device, seed=seed
-                )
-            elif m_key == "shuffled_control":
-                base_m = BaseKnotGraphModel(mode="r1_r2")
-                trained_model, _ = train_graph_model(
-                    base_m, dataset["train"], knot_to_idx, epochs=epochs, is_shuffled=True, device=device, seed=seed
                 )
             elif m_key == "canonical_r1r2":
                 base_m = BaseKnotGraphModel(mode="r1_r2")
