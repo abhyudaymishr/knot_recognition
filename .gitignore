@@ -10,3 +10,13 @@ dist/
 .ipynb_checkpoints/
 *.xls
 __MACOSX/
+
+# LaTeX build artifacts
+paper/**/*.aux
+paper/**/*.bbl
+paper/**/*.blg
+paper/**/*.fdb_latexmk
+paper/**/*.fls
+paper/**/*.log
+paper/**/*.out
+paper/**/main.pdf

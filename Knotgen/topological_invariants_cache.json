@@ -1,0 +1,1752 @@
+{
+  "3_1": {
+    "determinant": 3.0,
+    "alexander_at_2": 0.25,
+    "crossing_number": 3.0,
+    "braid_index": 2.0,
+    "hyperbolic_volume": 0.0
+  },
+  "4_1": {
+    "determinant": 5.0,
+    "alexander_at_2": 0.14285714285714285,
+    "crossing_number": 4.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 2.029883212819307
+  },
+  "5_1": {
+    "determinant": 5.0,
+    "alexander_at_2": 0.22916666666666666,
+    "crossing_number": 5.0,
+    "braid_index": 2.0,
+    "hyperbolic_volume": 0.0
+  },
+  "5_2": {
+    "determinant": 7.0,
+    "alexander_at_2": 2.1333333333333324,
+    "crossing_number": 5.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 2.828122088330783
+  },
+  "6_1": {
+    "determinant": 9.0,
+    "alexander_at_2": 0.0,
+    "crossing_number": 6.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 3.1639632288831443
+  },
+  "6_2": {
+    "determinant": 11.0,
+    "alexander_at_2": 0.14285714285714282,
+    "crossing_number": 6.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 4.400832516123046
+  },
+  "7_1": {
+    "determinant": 7.0,
+    "alexander_at_2": 0.22395833333333334,
+    "crossing_number": 7.0,
+    "braid_index": 2.0,
+    "hyperbolic_volume": -6.13638865380739e-08
+  },
+  "7_2": {
+    "determinant": 11.0,
+    "alexander_at_2": 0.01984126984126984,
+    "crossing_number": 7.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 3.3317442316411148
+  },
+  "unknot": {
+    "determinant": 1.0,
+    "alexander_at_2": 1.0,
+    "crossing_number": 0.0,
+    "braid_index": 1.0,
+    "hyperbolic_volume": 0.0
+  },
+  "6_3": {
+    "determinant": 13.0,
+    "alexander_at_2": 0.5,
+    "crossing_number": 6.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 5.693021091281302
+  },
+  "7_3": {
+    "determinant": 13.0,
+    "alexander_at_2": 0.06666666666666667,
+    "crossing_number": 7.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 4.592125697027062
+  },
+  "7_4": {
+    "determinant": 15.0,
+    "alexander_at_2": 3.0476190476190474,
+    "crossing_number": 7.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 5.137941201873418
+  },
+  "7_5": {
+    "determinant": 17.0,
+    "alexander_at_2": 0.058333333333333334,
+    "crossing_number": 7.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 6.4435373808505725
+  },
+  "7_6": {
+    "determinant": 19.0,
+    "alexander_at_2": 0.08333333333333333,
+    "crossing_number": 7.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 7.084925953510831
+  },
+  "7_7": {
+    "determinant": 21.0,
+    "alexander_at_2": 0.1,
+    "crossing_number": 7.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 7.643375172359955
+  },
+  "8_1": {
+    "determinant": 13.0,
+    "alexander_at_2": 0.12598425196850388,
+    "crossing_number": 8.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 3.4272052462740175
+  },
+  "8_2": {
+    "determinant": 17.0,
+    "alexander_at_2": 0.008928571428571428,
+    "crossing_number": 8.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 4.935242678280655
+  },
+  "8_3": {
+    "determinant": 17.0,
+    "alexander_at_2": 0.06299212598425195,
+    "crossing_number": 8.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 5.23868410079844
+  },
+  "8_4": {
+    "determinant": 19.0,
+    "alexander_at_2": 0.12903225806451615,
+    "crossing_number": 8.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 5.500486416347234
+  },
+  "8_5": {
+    "determinant": 21.0,
+    "alexander_at_2": 0.42857142857142927,
+    "crossing_number": 8.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 6.997189147792215
+  },
+  "8_6": {
+    "determinant": 23.0,
+    "alexander_at_2": 0.016129032258064516,
+    "crossing_number": 8.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 7.475237429505242
+  },
+  "8_7": {
+    "determinant": 23.0,
+    "alexander_at_2": 0.41071428571428575,
+    "crossing_number": 8.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 7.022196589095254
+  },
+  "8_8": {
+    "determinant": 25.0,
+    "alexander_at_2": 0.6451612903225805,
+    "crossing_number": 8.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 7.801341224440062
+  },
+  "8_9": {
+    "determinant": 25.0,
+    "alexander_at_2": 0.25000000000000006,
+    "crossing_number": 8.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 7.588180223641626
+  },
+  "8_10": {
+    "determinant": 27.0,
+    "alexander_at_2": 1.9285714285714286,
+    "crossing_number": 8.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 8.651148558017082
+  },
+  "8_11": {
+    "determinant": 27.0,
+    "alexander_at_2": 1.2052669311997615e-19,
+    "crossing_number": 8.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 8.286316817806593
+  },
+  "8_12": {
+    "determinant": 29.0,
+    "alexander_at_2": 0.03225806451612903,
+    "crossing_number": 8.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 8.935856927486688
+  },
+  "8_13": {
+    "determinant": 29.0,
+    "alexander_at_2": 0.5161290322580643,
+    "crossing_number": 8.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 8.531232201460414
+  },
+  "8_14": {
+    "determinant": 31.0,
+    "alexander_at_2": 0.2580645161290322,
+    "crossing_number": 8.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 9.217800316021926
+  },
+  "8_15": {
+    "determinant": 33.0,
+    "alexander_at_2": 0.03024193548387097,
+    "crossing_number": 8.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 9.930648293796187
+  },
+  "8_16": {
+    "determinant": 35.0,
+    "alexander_at_2": 1.2142857142857142,
+    "crossing_number": 8.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 10.57902191689927
+  },
+  "8_17": {
+    "determinant": 37.0,
+    "alexander_at_2": 0.035714285714285705,
+    "crossing_number": 8.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 10.985907606284819
+  },
+  "8_18": {
+    "determinant": 45.0,
+    "alexander_at_2": 0.32142857142857145,
+    "crossing_number": 8.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 12.3509062091582
+  },
+  "8_19": {
+    "determinant": 3.0,
+    "alexander_at_2": 22.285714285714306,
+    "crossing_number": 8.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 0.0
+  },
+  "8_20": {
+    "determinant": 9.0,
+    "alexander_at_2": 0.32142857142857145,
+    "crossing_number": 8.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 4.124903251807675
+  },
+  "8_21": {
+    "determinant": 15.0,
+    "alexander_at_2": 0.05357142857142857,
+    "crossing_number": 8.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 6.783713519835127
+  },
+  "9_1": {
+    "determinant": 9.0,
+    "alexander_at_2": 0.22265625,
+    "crossing_number": 9.0,
+    "braid_index": 2.0,
+    "hyperbolic_volume": 0.0
+  },
+  "9_2": {
+    "determinant": 15.0,
+    "alexander_at_2": 0.00588235294117647,
+    "crossing_number": 9.0,
+    "braid_index": 8.0,
+    "hyperbolic_volume": 3.4866601462950437
+  },
+  "9_3": {
+    "determinant": 19.0,
+    "alexander_at_2": 34.13333333333333,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 4.994856404125713
+  },
+  "9_4": {
+    "determinant": 21.0,
+    "alexander_at_2": 10.666666666666648,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 5.556518816346558
+  },
+  "9_5": {
+    "determinant": 23.0,
+    "alexander_at_2": 4.015686274509804,
+    "crossing_number": 9.0,
+    "braid_index": 8.0,
+    "hyperbolic_volume": 5.698441750940059
+  },
+  "9_6": {
+    "determinant": 27.0,
+    "alexander_at_2": 0.05625,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 7.203600761623166
+  },
+  "9_7": {
+    "determinant": 29.0,
+    "alexander_at_2": 0.016865079365079364,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 8.014861457829953
+  },
+  "9_8": {
+    "determinant": 31.0,
+    "alexander_at_2": 0.03174603174603173,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 8.192347962434356
+  },
+  "9_9": {
+    "determinant": 31.0,
+    "alexander_at_2": 0.06041666666666667,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 8.016815565678016
+  },
+  "9_10": {
+    "determinant": 33.0,
+    "alexander_at_2": 12.190476190476192,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 8.77345728205568
+  },
+  "9_11": {
+    "determinant": 33.0,
+    "alexander_at_2": 2.8000000000000016,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 8.288589042858492
+  },
+  "9_12": {
+    "determinant": 35.0,
+    "alexander_at_2": 0.5079365079365077,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 8.83664234388584
+  },
+  "9_13": {
+    "determinant": 37.0,
+    "alexander_at_2": 11.174603174603162,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 9.135094037937277
+  },
+  "9_14": {
+    "determinant": 37.0,
+    "alexander_at_2": 0.25396825396825395,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 8.954989262002547
+  },
+  "9_15": {
+    "determinant": 39.0,
+    "alexander_at_2": 0.7619047619047616,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 9.885498660334438
+  },
+  "9_16": {
+    "determinant": 39.0,
+    "alexander_at_2": 25.6,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 9.883006960018827
+  },
+  "9_17": {
+    "determinant": 39.0,
+    "alexander_at_2": 0.05000000000000003,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 9.474580453499222
+  },
+  "9_18": {
+    "determinant": 41.0,
+    "alexander_at_2": 0.019841269841269837,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 10.057729635581001
+  },
+  "9_19": {
+    "determinant": 41.0,
+    "alexander_at_2": 0.03174603174603175,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 10.032547447836695
+  },
+  "9_20": {
+    "determinant": 41.0,
+    "alexander_at_2": 0.05416666666666666,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 9.644304073800877
+  },
+  "9_21": {
+    "determinant": 43.0,
+    "alexander_at_2": 1.0158730158730163,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 10.183265535681091
+  },
+  "9_22": {
+    "determinant": 43.0,
+    "alexander_at_2": 0.2333333333333333,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 10.620727021239473
+  },
+  "9_23": {
+    "determinant": 45.0,
+    "alexander_at_2": 0.017857142857142856,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 10.61134829405251
+  },
+  "9_24": {
+    "determinant": 45.0,
+    "alexander_at_2": 0.14999999999999997,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 10.83372910894526
+  },
+  "9_25": {
+    "determinant": 47.0,
+    "alexander_at_2": 0.0039682539682539715,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 11.390305147773658
+  },
+  "9_26": {
+    "determinant": 47.0,
+    "alexander_at_2": 0.09166666666666665,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 10.595840514999372
+  },
+  "9_27": {
+    "determinant": 49.0,
+    "alexander_at_2": 0.08333333333333331,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 10.999980958287118
+  },
+  "9_28": {
+    "determinant": 51.0,
+    "alexander_at_2": 0.12499999999999999,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 11.56317701626512
+  },
+  "9_29": {
+    "determinant": 51.0,
+    "alexander_at_2": 0.25,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 12.205856165114719
+  },
+  "9_30": {
+    "determinant": 53.0,
+    "alexander_at_2": 0.016666666666666666,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 11.954526968232035
+  },
+  "9_31": {
+    "determinant": 55.0,
+    "alexander_at_2": 0.1583333333333333,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 11.686312207878109
+  },
+  "9_32": {
+    "determinant": 59.0,
+    "alexander_at_2": 0.33333333333333337,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 13.099899845892523
+  },
+  "9_33": {
+    "determinant": 61.0,
+    "alexander_at_2": 0.18333333333333332,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 13.280455636254791
+  },
+  "9_34": {
+    "determinant": 69.0,
+    "alexander_at_2": 0.04999999999999998,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 14.344581387788963
+  },
+  "9_35": {
+    "determinant": 27.0,
+    "alexander_at_2": 4.517647058823527,
+    "crossing_number": 9.0,
+    "braid_index": 8.0,
+    "hyperbolic_volume": 7.940579247781311
+  },
+  "9_36": {
+    "determinant": 37.0,
+    "alexander_at_2": 2.266666666666667,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 9.884578653127013
+  },
+  "9_37": {
+    "determinant": 45.0,
+    "alexander_at_2": 0.0,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 10.989449592576536
+  },
+  "9_38": {
+    "determinant": 57.0,
+    "alexander_at_2": 0.020833333333333332,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 12.932858702252831
+  },
+  "9_39": {
+    "determinant": 55.0,
+    "alexander_at_2": 0.6349206349206346,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 12.810310003311114
+  },
+  "9_40": {
+    "determinant": 75.0,
+    "alexander_at_2": 0.025,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 15.018342857865122
+  },
+  "9_41": {
+    "determinant": 49.0,
+    "alexander_at_2": 0.055555555555555546,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 12.098936025990785
+  },
+  "9_42": {
+    "determinant": 7.0,
+    "alexander_at_2": 0.06666666666666674,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 4.056860224236821
+  },
+  "9_43": {
+    "determinant": 13.0,
+    "alexander_at_2": 0.6666666666666662,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 5.904085858508102
+  },
+  "9_44": {
+    "determinant": 17.0,
+    "alexander_at_2": 0.16666666666666666,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 7.406767572367504
+  },
+  "9_45": {
+    "determinant": 23.0,
+    "alexander_at_2": 0.058333333333333334,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 8.602031166401503
+  },
+  "9_46": {
+    "determinant": 9.0,
+    "alexander_at_2": 0.0,
+    "crossing_number": 9.0,
+    "braid_index": 8.0,
+    "hyperbolic_volume": 4.751701965517898
+  },
+  "9_47": {
+    "determinant": 27.0,
+    "alexander_at_2": 0.5999999999999999,
+    "crossing_number": 9.0,
+    "braid_index": 4.0,
+    "hyperbolic_volume": 10.049957861274368
+  },
+  "9_48": {
+    "determinant": 27.0,
+    "alexander_at_2": 1.1428571428571428,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 9.531879835800979
+  },
+  "9_49": {
+    "determinant": 25.0,
+    "alexander_at_2": 9.650793650793652,
+    "crossing_number": 9.0,
+    "braid_index": 6.0,
+    "hyperbolic_volume": 9.427073627769277
+  },
+  "10_1": {
+    "determinant": 17.0,
+    "alexander_at_2": 0.003913894324853229,
+    "crossing_number": 10.0,
+    "braid_index": 9.0,
+    "hyperbolic_volume": 3.5261959907353773
+  },
+  "10_2": {
+    "determinant": 23.0,
+    "alexander_at_2": 0.0022321428571428557,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 5.1148414603024
+  },
+  "10_3": {
+    "determinant": 25.0,
+    "alexander_at_2": 0.031311154598825844,
+    "crossing_number": 10.0,
+    "braid_index": 9.0,
+    "hyperbolic_volume": 5.732104786782051
+  },
+  "10_4": {
+    "determinant": 27.0,
+    "alexander_at_2": 0.28346456692913385,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 5.817129692825429
+  },
+  "10_5": {
+    "determinant": 33.0,
+    "alexander_at_2": 6.214285714285711,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 7.373935134274564
+  },
+  "10_6": {
+    "determinant": 37.0,
+    "alexander_at_2": 0.02016129032258064,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 8.390937606724453
+  },
+  "10_7": {
+    "determinant": 43.0,
+    "alexander_at_2": 0.0019685039370078736,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 9.11590639562999
+  },
+  "10_8": {
+    "determinant": 29.0,
+    "alexander_at_2": 0.16129032258064518,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 6.083234837064976
+  },
+  "10_9": {
+    "determinant": 39.0,
+    "alexander_at_2": 1.3928571428571423,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 8.294099675229287
+  },
+  "10_10": {
+    "determinant": 45.0,
+    "alexander_at_2": 0.5669291338582677,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 9.180573644138947
+  },
+  "10_11": {
+    "determinant": 43.0,
+    "alexander_at_2": 0.07874015748031495,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 9.370442441399364
+  },
+  "10_12": {
+    "determinant": 47.0,
+    "alexander_at_2": 2.4516129032258065,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 9.817495190695844
+  },
+  "10_13": {
+    "determinant": 53.0,
+    "alexander_at_2": 0.031496062992125984,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 10.578480190464719
+  },
+  "10_14": {
+    "determinant": 57.0,
+    "alexander_at_2": 0.012096774193548387,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 10.937689414417557
+  },
+  "10_15": {
+    "determinant": 43.0,
+    "alexander_at_2": 0.5483870967741935,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 8.97344932600136
+  },
+  "10_16": {
+    "determinant": 47.0,
+    "alexander_at_2": 0.25196850393700776,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 9.546642305028447
+  },
+  "10_17": {
+    "determinant": 41.0,
+    "alexander_at_2": 1.2678571428571426,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 8.536755599193233
+  },
+  "10_18": {
+    "determinant": 55.0,
+    "alexander_at_2": 0.03149606299212597,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 10.639844271257633
+  },
+  "10_19": {
+    "determinant": 51.0,
+    "alexander_at_2": 0.3870967741935484,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 9.844771302667734
+  },
+  "10_20": {
+    "determinant": 35.0,
+    "alexander_at_2": 0.009842519685039372,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 8.317378718415007
+  },
+  "10_21": {
+    "determinant": 45.0,
+    "alexander_at_2": 0.0,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 9.675141144155305
+  },
+  "10_22": {
+    "determinant": 49.0,
+    "alexander_at_2": 0.7096774193548389,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 9.981866517896332
+  },
+  "10_23": {
+    "determinant": 59.0,
+    "alexander_at_2": 2.064516129032259,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 11.393224634885058
+  },
+  "10_24": {
+    "determinant": 55.0,
+    "alexander_at_2": 0.5039370078740156,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 10.977454736821754
+  },
+  "10_25": {
+    "determinant": 65.0,
+    "alexander_at_2": 0.004032258064516128,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 11.875779603652079
+  },
+  "10_26": {
+    "determinant": 61.0,
+    "alexander_at_2": 0.1290322580645161,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 11.352017557987834
+  },
+  "10_27": {
+    "determinant": 71.0,
+    "alexander_at_2": 0.10483870967741936,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.384131966128571
+  },
+  "10_28": {
+    "determinant": 53.0,
+    "alexander_at_2": 0.881889763779528,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 10.264674946506444
+  },
+  "10_29": {
+    "determinant": 63.0,
+    "alexander_at_2": 0.07258064516129034,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 11.60290524666798
+  },
+  "10_30": {
+    "determinant": 67.0,
+    "alexander_at_2": 0.003937007874015743,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 11.82875756950365
+  },
+  "10_31": {
+    "determinant": 57.0,
+    "alexander_at_2": 0.18897637795275593,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 11.044264031043387
+  },
+  "10_32": {
+    "determinant": 69.0,
+    "alexander_at_2": 0.04838709677419355,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.090936871931914
+  },
+  "10_33": {
+    "determinant": 65.0,
+    "alexander_at_2": 0.12598425196850394,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 11.535673932282336
+  },
+  "10_34": {
+    "determinant": 37.0,
+    "alexander_at_2": 0.8188976377952761,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 8.422266667868566
+  },
+  "10_35": {
+    "determinant": 49.0,
+    "alexander_at_2": 0.06299212598425198,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 10.394496785605323
+  },
+  "10_36": {
+    "determinant": 51.0,
+    "alexander_at_2": 0.005905511811023622,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 10.47618554030524
+  },
+  "10_37": {
+    "determinant": 53.0,
+    "alexander_at_2": 0.22047244094488186,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 10.965810532424642
+  },
+  "10_38": {
+    "determinant": 59.0,
+    "alexander_at_2": 0.003937007874015749,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 11.349313547236825
+  },
+  "10_39": {
+    "determinant": 61.0,
+    "alexander_at_2": 0.004032258064516128,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 11.589518727368468
+  },
+  "10_40": {
+    "determinant": 75.0,
+    "alexander_at_2": 1.935483870967743,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.888740330276486
+  },
+  "10_41": {
+    "determinant": 71.0,
+    "alexander_at_2": 0.008064516129032256,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.376615498635042
+  },
+  "10_42": {
+    "determinant": 81.0,
+    "alexander_at_2": 0.14516129032258066,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.23984836679565
+  },
+  "10_43": {
+    "determinant": 73.0,
+    "alexander_at_2": 0.27419354838709664,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.60259611426208
+  },
+  "10_44": {
+    "determinant": 79.0,
+    "alexander_at_2": 0.056451612903225805,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.9689942050325
+  },
+  "10_45": {
+    "determinant": 89.0,
+    "alexander_at_2": 0.016129032258064516,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.716075984752734
+  },
+  "10_46": {
+    "determinant": 31.0,
+    "alexander_at_2": 2.7142857142857184,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 7.716999809324508
+  },
+  "10_47": {
+    "determinant": 41.0,
+    "alexander_at_2": 7.642857142857133,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 9.385194156727694
+  },
+  "10_48": {
+    "determinant": 49.0,
+    "alexander_at_2": 1.624999999999999,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 10.378901449017832
+  },
+  "10_49": {
+    "determinant": 59.0,
+    "alexander_at_2": 0.029737903225806456,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 11.453193366219926
+  },
+  "10_50": {
+    "determinant": 53.0,
+    "alexander_at_2": 1.0322580645161303,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 11.198889792082563
+  },
+  "10_51": {
+    "determinant": 67.0,
+    "alexander_at_2": 2.580645161290324,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.63137951994411
+  },
+  "10_52": {
+    "determinant": 59.0,
+    "alexander_at_2": 0.5161290322580643,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 11.537548182498973
+  },
+  "10_53": {
+    "determinant": 73.0,
+    "alexander_at_2": 0.010826771653543309,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 12.886847420183463
+  },
+  "10_54": {
+    "determinant": 47.0,
+    "alexander_at_2": 0.6129032258064517,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 10.59131113363909
+  },
+  "10_55": {
+    "determinant": 61.0,
+    "alexander_at_2": 0.009350393700787406,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 12.185540627039735
+  },
+  "10_56": {
+    "determinant": 65.0,
+    "alexander_at_2": 0.25806451612903325,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.398802155808717
+  },
+  "10_57": {
+    "determinant": 79.0,
+    "alexander_at_2": 2.1935483870967745,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.588558502226046
+  },
+  "10_58": {
+    "determinant": 65.0,
+    "alexander_at_2": 0.007874015748031496,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 12.7213306985376
+  },
+  "10_59": {
+    "determinant": 75.0,
+    "alexander_at_2": 0.09677419354838708,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.389944141432718
+  },
+  "10_60": {
+    "determinant": 85.0,
+    "alexander_at_2": 0.040322580645161296,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.980041535708045
+  },
+  "10_61": {
+    "determinant": 33.0,
+    "alexander_at_2": 0.7741935483870969,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 8.458580267591312
+  },
+  "10_62": {
+    "determinant": 45.0,
+    "alexander_at_2": 7.071428571428563,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 10.14146903630351
+  },
+  "10_63": {
+    "determinant": 57.0,
+    "alexander_at_2": 0.010334645669291338,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 11.51169129183895
+  },
+  "10_64": {
+    "determinant": 51.0,
+    "alexander_at_2": 1.8214285714285718,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 10.868092713050993
+  },
+  "10_65": {
+    "determinant": 63.0,
+    "alexander_at_2": 2.3225806451612905,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.076461434489461
+  },
+  "10_66": {
+    "determinant": 75.0,
+    "alexander_at_2": 0.028729838709677418,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.029268870834493
+  },
+  "10_67": {
+    "determinant": 63.0,
+    "alexander_at_2": 4.370956789862816e-19,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 12.42163050542115
+  },
+  "10_68": {
+    "determinant": 57.0,
+    "alexander_at_2": 0.04724409448818898,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 11.637035229302697
+  },
+  "10_69": {
+    "determinant": 87.0,
+    "alexander_at_2": 0.9677419354838711,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 14.12650517067015
+  },
+  "10_70": {
+    "determinant": 67.0,
+    "alexander_at_2": 0.16129032258064466,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.510887730420805
+  },
+  "10_71": {
+    "determinant": 77.0,
+    "alexander_at_2": 0.20967741935483866,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.38522874603995
+  },
+  "10_72": {
+    "determinant": 73.0,
+    "alexander_at_2": 1.032258064516129,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.929594687049695
+  },
+  "10_73": {
+    "determinant": 83.0,
+    "alexander_at_2": 0.044354838709677415,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.70688084237152
+  },
+  "10_74": {
+    "determinant": 63.0,
+    "alexander_at_2": 6.146657985744617e-20,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 12.006036998378073
+  },
+  "10_75": {
+    "determinant": 81.0,
+    "alexander_at_2": 0.29032258064516137,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.430748784284768
+  },
+  "10_76": {
+    "determinant": 57.0,
+    "alexander_at_2": 1.5483870967741944,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 11.512860414469813
+  },
+  "10_77": {
+    "determinant": 63.0,
+    "alexander_at_2": 2.3225806451612905,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.07471168144469
+  },
+  "10_78": {
+    "determinant": 69.0,
+    "alexander_at_2": 0.04233870967741935,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.502099196987686
+  },
+  "10_79": {
+    "determinant": 61.0,
+    "alexander_at_2": 1.839285714285714,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 12.540295218484355
+  },
+  "10_80": {
+    "determinant": 71.0,
+    "alexander_at_2": 0.026713709677419355,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.394044471515974
+  },
+  "10_81": {
+    "determinant": 85.0,
+    "alexander_at_2": 0.3709677419354838,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 14.492667031583338
+  },
+  "10_82": {
+    "determinant": 63.0,
+    "alexander_at_2": 0.08035714285714286,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 12.43147953132619
+  },
+  "10_83": {
+    "determinant": 85.0,
+    "alexander_at_2": 0.12903225806451615,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 14.341256139500096
+  },
+  "10_84": {
+    "determinant": 87.0,
+    "alexander_at_2": 1.548387096774193,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 14.709898781554157
+  },
+  "10_85": {
+    "determinant": 57.0,
+    "alexander_at_2": 0.25446428571428575,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 11.797773659928867
+  },
+  "10_86": {
+    "determinant": 83.0,
+    "alexander_at_2": 1.2903225806451613,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 14.258051849186284
+  },
+  "10_87": {
+    "determinant": 81.0,
+    "alexander_at_2": 7.442523300158541e-17,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 14.273644598070367
+  },
+  "10_88": {
+    "determinant": 101.0,
+    "alexander_at_2": 0.1129032258064516,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 15.646649171780126
+  },
+  "10_89": {
+    "determinant": 99.0,
+    "alexander_at_2": 0.036290322580645164,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 15.566058923120139
+  },
+  "10_90": {
+    "determinant": 77.0,
+    "alexander_at_2": 0.45161290322580633,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.866149863271097
+  },
+  "10_91": {
+    "determinant": 73.0,
+    "alexander_at_2": 1.0892857142857142,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 13.487022420297793
+  },
+  "10_92": {
+    "determinant": 89.0,
+    "alexander_at_2": 1.2903225806451617,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 14.855350171596802
+  },
+  "10_93": {
+    "determinant": 67.0,
+    "alexander_at_2": 0.35483870967741943,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.01646716490768
+  },
+  "10_94": {
+    "determinant": 71.0,
+    "alexander_at_2": 1.0357142857142851,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 13.31156652496759
+  },
+  "10_95": {
+    "determinant": 91.0,
+    "alexander_at_2": 1.8064516129032264,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 15.047852884581213
+  },
+  "10_96": {
+    "determinant": 93.0,
+    "alexander_at_2": 0.09677419354838708,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 15.177851427724608
+  },
+  "10_97": {
+    "determinant": 87.0,
+    "alexander_at_2": 0.37795275590551086,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 14.852746708375896
+  },
+  "10_98": {
+    "determinant": 81.0,
+    "alexander_at_2": 0.0,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 14.412919023550261
+  },
+  "10_99": {
+    "determinant": 81.0,
+    "alexander_at_2": 1.4464285714285716,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 14.334344519045008
+  },
+  "10_100": {
+    "determinant": 65.0,
+    "alexander_at_2": 0.34375,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 12.810882566465487
+  },
+  "10_101": {
+    "determinant": 85.0,
+    "alexander_at_2": 12.598425196850393,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 14.687506837621708
+  },
+  "10_102": {
+    "determinant": 73.0,
+    "alexander_at_2": 0.32258064516129037,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.727343297136713
+  },
+  "10_103": {
+    "determinant": 75.0,
+    "alexander_at_2": 0.1209677419354839,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.874789569933137
+  },
+  "10_104": {
+    "determinant": 77.0,
+    "alexander_at_2": 0.9464285714285713,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 14.107126687552345
+  },
+  "10_105": {
+    "determinant": 91.0,
+    "alexander_at_2": 0.032258064516128976,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 15.181695504612621
+  },
+  "10_106": {
+    "determinant": 75.0,
+    "alexander_at_2": 0.75,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 13.933018994314388
+  },
+  "10_107": {
+    "determinant": 93.0,
+    "alexander_at_2": 0.24193548387096772,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 15.352852697019816
+  },
+  "10_108": {
+    "determinant": 63.0,
+    "alexander_at_2": 0.29032258064516137,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.904623952906519
+  },
+  "10_109": {
+    "determinant": 85.0,
+    "alexander_at_2": 1.3035714285714286,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 14.90020860302684
+  },
+  "10_110": {
+    "determinant": 83.0,
+    "alexander_at_2": 0.0564516129032258,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 14.777462665072862
+  },
+  "10_111": {
+    "determinant": 77.0,
+    "alexander_at_2": 0.516129032258064,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 14.265023013493208
+  },
+  "10_112": {
+    "determinant": 87.0,
+    "alexander_at_2": 0.1875,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 14.755884075953192
+  },
+  "10_113": {
+    "determinant": 111.0,
+    "alexander_at_2": 0.7741935483870969,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 16.473473661468837
+  },
+  "10_114": {
+    "determinant": 93.0,
+    "alexander_at_2": 0.04838709677419355,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 15.304904343443038
+  },
+  "10_115": {
+    "determinant": 109.0,
+    "alexander_at_2": 0.27419354838709675,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 16.638038056436642
+  },
+  "10_116": {
+    "determinant": 95.0,
+    "alexander_at_2": 0.008928571428571433,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 15.423866507314436
+  },
+  "10_117": {
+    "determinant": 103.0,
+    "alexander_at_2": 0.08870967741935486,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 16.125443523976966
+  },
+  "10_118": {
+    "determinant": 97.0,
+    "alexander_at_2": 0.5535714285714286,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 15.545214905676717
+  },
+  "10_119": {
+    "determinant": 101.0,
+    "alexander_at_2": 0.06451612903225812,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 15.938694126282652
+  },
+  "10_120": {
+    "determinant": 105.0,
+    "alexander_at_2": 0.011811023622047244,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 16.271368282159344
+  },
+  "10_121": {
+    "determinant": 115.0,
+    "alexander_at_2": 0.06451612903225806,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 16.974877032190907
+  },
+  "10_122": {
+    "determinant": 105.0,
+    "alexander_at_2": 0.3870967741935482,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 16.410823158610274
+  },
+  "10_123": {
+    "determinant": 121.0,
+    "alexander_at_2": 0.017857142857142853,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 17.085709482982864
+  },
+  "10_124": {
+    "determinant": 1.0,
+    "alexander_at_2": 86.2857142857143,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 0.0
+  },
+  "10_125": {
+    "determinant": 11.0,
+    "alexander_at_2": 1.0357142857142851,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 4.611961374497316
+  },
+  "10_126": {
+    "determinant": 19.0,
+    "alexander_at_2": 0.3303571428571429,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 6.904256123806482
+  },
+  "10_127": {
+    "determinant": 29.0,
+    "alexander_at_2": 0.014112903225806448,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 8.89681675963143
+  },
+  "10_128": {
+    "determinant": 11.0,
+    "alexander_at_2": 28.903225806451584,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 5.860539301740002
+  },
+  "10_129": {
+    "determinant": 25.0,
+    "alexander_at_2": 0.32258064516129026,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 8.901516637278768
+  },
+  "10_130": {
+    "determinant": 17.0,
+    "alexander_at_2": 0.11290322580645161,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 6.778198890046891
+  },
+  "10_131": {
+    "determinant": 31.0,
+    "alexander_at_2": 0.008064516129032256,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 9.465021657265467
+  },
+  "10_132": {
+    "determinant": 5.0,
+    "alexander_at_2": 0.08870967741935486,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 4.056860224236821
+  },
+  "10_133": {
+    "determinant": 19.0,
+    "alexander_at_2": 0.020161290322580645,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 7.798300232166505
+  },
+  "10_134": {
+    "determinant": 23.0,
+    "alexander_at_2": 25.806451612903246,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 8.392922508336978
+  },
+  "10_135": {
+    "determinant": 37.0,
+    "alexander_at_2": 0.41935483870967744,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 10.687174968339626
+  },
+  "10_136": {
+    "determinant": 15.0,
+    "alexander_at_2": 0.1935483870967742,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 7.746274546233129
+  },
+  "10_137": {
+    "determinant": 25.0,
+    "alexander_at_2": 0.01612903225806452,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 9.250556262699872
+  },
+  "10_138": {
+    "determinant": 35.0,
+    "alexander_at_2": 0.03225806451612904,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 10.4672462426709
+  },
+  "10_139": {
+    "determinant": 3.0,
+    "alexander_at_2": 90.85714285714288,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 4.851170757332738
+  },
+  "10_140": {
+    "determinant": 9.0,
+    "alexander_at_2": 0.07258064516129033,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 5.212566822320545
+  },
+  "10_141": {
+    "determinant": 21.0,
+    "alexander_at_2": 0.05357142857142857,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 7.936474229212683
+  },
+  "10_142": {
+    "determinant": 15.0,
+    "alexander_at_2": 30.967741935483875,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 6.770816780739824
+  },
+  "10_143": {
+    "determinant": 27.0,
+    "alexander_at_2": 0.24107142857142858,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 9.07089927001932
+  },
+  "10_144": {
+    "determinant": 39.0,
+    "alexander_at_2": 0.02362204724409448,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 10.796594984133836
+  },
+  "10_145": {
+    "determinant": 3.0,
+    "alexander_at_2": 0.03024193548387097,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 5.044899162918904
+  },
+  "10_146": {
+    "determinant": 33.0,
+    "alexander_at_2": 0.094488188976378,
+    "crossing_number": 10.0,
+    "braid_index": 7.0,
+    "hyperbolic_volume": 10.561016754914696
+  },
+  "10_147": {
+    "determinant": 27.0,
+    "alexander_at_2": 3.1516008440972075e-17,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 9.417590916016746
+  },
+  "10_148": {
+    "determinant": 31.0,
+    "alexander_at_2": 0.27678571428571425,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 10.260243436313669
+  },
+  "10_149": {
+    "determinant": 41.0,
+    "alexander_at_2": 0.05803571428571429,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 11.44272677886197
+  },
+  "10_150": {
+    "determinant": 29.0,
+    "alexander_at_2": 0.9032258064516132,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 10.081362856560819
+  },
+  "10_151": {
+    "determinant": 43.0,
+    "alexander_at_2": 1.6129032258064522,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 11.843044751681143
+  },
+  "10_152": {
+    "determinant": 11.0,
+    "alexander_at_2": 0.0775669642857143,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 8.536065347205609
+  },
+  "10_153": {
+    "determinant": 1.0,
+    "alexander_at_2": 0.5645161290322582,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 7.37434388930671
+  },
+  "10_154": {
+    "determinant": 13.0,
+    "alexander_at_2": 21.161290322580637,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 9.249887443861748
+  },
+  "10_155": {
+    "determinant": 25.0,
+    "alexander_at_2": 0.49999999999999983,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 9.250541613012098
+  },
+  "10_156": {
+    "determinant": 35.0,
+    "alexander_at_2": 0.06854838709677419,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 11.163390642176326
+  },
+  "10_157": {
+    "determinant": 49.0,
+    "alexander_at_2": 6.571428571428571,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 12.665333284998502
+  },
+  "10_158": {
+    "determinant": 45.0,
+    "alexander_at_2": 0.29032258064516137,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.271236358446972
+  },
+  "10_159": {
+    "determinant": 39.0,
+    "alexander_at_2": 0.18750000000000003,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 11.740641037913912
+  },
+  "10_160": {
+    "determinant": 21.0,
+    "alexander_at_2": 1.935483870967743,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 9.203916606090774
+  },
+  "10_161": {
+    "determinant": 5.0,
+    "alexander_at_2": 0.109375,
+    "crossing_number": 10.0,
+    "braid_index": 3.0,
+    "hyperbolic_volume": 5.638772948853054
+  },
+  "10_162": {
+    "determinant": 5.0,
+    "alexander_at_2": 25.290322580645174,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 5.638772948853054
+  },
+  "10_163": {
+    "determinant": 35.0,
+    "alexander_at_2": 0.08064516129032258,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 10.693360546719855
+  },
+  "10_164": {
+    "determinant": 51.0,
+    "alexander_at_2": 0.9677419354838714,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 13.290003068598358
+  },
+  "10_165": {
+    "determinant": 45.0,
+    "alexander_at_2": 0.29032258064516137,
+    "crossing_number": 10.0,
+    "braid_index": 5.0,
+    "hyperbolic_volume": 12.506687930892367
+  }
+}
