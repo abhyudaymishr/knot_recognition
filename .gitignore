@@ -21,12 +21,34 @@ paper/**/*.log
 paper/**/*.out
 paper/**/main.pdf
 
+# Git bundle archives and temporary outputs
+*.bundle
+Claude outputs/
+.real_list_tmp.txt
+
 # KnotBench-Photo synthetic renders (regenerate with scripts/run_knotbench_photo.py)
 data/knotbench_photo/*/images/
 
 # knot-aware training tensors and dev-set renders (regenerate with scripts/make_knot_aware_data.py, scripts/make_parser_dev_set.py)
 data/knot_aware/*.npz
+data/knot_aware/*.pkl
+data/knot_aware/.*_checked
 data/knot_aware/parser_dev/images/
+data/knot_aware/*/
+!data/knot_aware/close_strands/
+!data/knot_aware/parser_dev/
+data/knot_aware/_transfer/
+data/_transfer_eval/
 
-# Git bundle archives
-*.bundle
+# scratch logs of local runs (training logs are kept in results/training/logs)
+/logs/
+
+# Intermediate model training checkpoints and partial caches
+checkpoints/beat_unet/
+checkpoints/recipe/
+checkpoints/strand_pointer/
+checkpoints/uf_pointer/
+checkpoints/knot_aware_nanotransformer_v*.pth
+results/gap_check/*.partial
+results/gap_check/*.pkl
+
