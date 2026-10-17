@@ -1,0 +1,23 @@
+% ---------------------------------------------------------------- 7 limitations, conclusion
+\section{Limitations}\label{sec:limits}
+Both backbones make confident errors on the blind set (\BlindWrong{} and \UPBlindWrong{}), almost
+all on drawings with nearly invisible gaps: confidence is calibrated against view-dependent
+ambiguity, not against consistent misreading. The picture's own gap evidence adds answers on a
+second blind set without adding errors, but it does not remove those errors. The Minkowski
+variants rest on three paired seeds per device, and the plain model was not trained on the GPU,
+so their effect size is uncertain. All quantitative cable results are on renders. No annotated photographs of real cables
+exist yet. On public pictures the system answers drawings and renders but no photograph
+of a physical object, and those pictures informed our choice of training styles. Strands
+that touch (gap below one \cw) and double crossings smaller than a few pixels
+cannot be resolved from one view; multi-view fusion is implemented but untested on real
+data. The output is a knot type, not a physical untangling plan: friction, stiffness
+and tension decide how hard a cable is to undo.
+
+\section{Conclusion}\label{sec:concl}
+Reading the diagram and computing the topology, instead of classifying the image,
+gives a knot recogniser that generalises past a census, explains its answers and
+abstains when the image is not enough. The gain comes from the formulation, not from a
+particular backbone: standard U-Nets do better than our first transformer, and a U-Net with a
+transformer bottleneck does better than both on blind and real pictures. On renders it reads crossings and \ou{} almost
+perfectly and makes no wrong call. The open problem is perception on real photographs,
+for which we release the benchmark protocol, annotation tool and scoring code.

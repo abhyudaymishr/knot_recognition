@@ -1,0 +1,22 @@
+% IEEE TPAMI version (IEEEtran, compsoc journal). Not compiled in this workspace: IEEEtran.cls
+% ships with TeX Live full / Overleaf. IJCV: use Springer Nature's sn-jnl class with the same \input lines.
+% A journal version of a conference paper needs substantial new material and a summary of changes.
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+\usepackage[capitalize]{cleveref}
+\input{../macros}
+\usepackage{hyperref}
+\begin{document}
+\title{Read the Crossings, Compute the Knot: Knot Recognition from Images that Knows When to Abstain}
+\author{Anonymous}
+\IEEEtitleabstractindextext{%
+\input{../sections/abstract}
+\begin{IEEEkeywords}knot recognition, structured prediction, selective prediction, curvilinear structures, topology\end{IEEEkeywords}}
+\maketitle
+\IEEEdisplaynontitleabstractindextext
+\input{../teaser}
+\input{../body}
+% journal-only material: full supplement in the paper body
+\input{../sections/supplement}
+\bibliographystyle{IEEEtran}
+\bibliography{../references}
+\end{document}

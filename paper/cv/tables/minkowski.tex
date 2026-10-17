@@ -1,0 +1,19 @@
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+ & \multicolumn{3}{c}{\bench{}} & Close & Real & Blind v1$^\dagger$ & Blind v2 \\
+Model & ans. & unseen & wrong & ans.\ (wrong) & ans.\ (wrong) & corr.\ / wrong & corr.\ / wrong \\
+\midrule
+Plain model, 3 seeds & 68$\pm$3\% & 37$\pm$5\% & 0 & 49$\pm$2\% (3) & 12$\pm$1 (2) & 78$\pm$12 / 16 & 52$\pm$2 / 2 \\
++ Lebesgue (layer-cake) loss, seed 0 & 66\% & 35\% & 0 & 48\% (1) & 8 (0) & 96 / 7 & 56 / 0 \\
++ Minkowski position bias, seed 0 & 70\% & 43\% & 0 & 48\% (2) & 14 (0) & 82 / 6 & 60 / 1 \\
++ Minkowski content attention, 3 seeds & 72$\pm$4\% & 47$\pm$7\% & 0 & 49$\pm$2\% (4) & 13$\pm$4 (1) & 80$\pm$2 / 17 & 56$\pm$3 / 3 \\
+\midrule
+\multicolumn{8}{@{}l}{\emph{trained on an Apple GPU (MPS); the plain model above was trained on CPU}} \\
++ Lebesgue (layer-cake) loss, 3 seeds & 71$\pm$4\% & 46$\pm$8\% & 0 & -- & 13$\pm$5 (1) & -- & 55$\pm$3 / 2 \\
++ Minkowski position bias, 3 seeds & 73$\pm$3\% & 49$\pm$7\% & 0 & -- & 12$\pm$5 (0) & -- & 55$\pm$6 / 3 \\
++ Minkowski content attention, 3 seeds & 73$\pm$6\% & 48$\pm$12\% & 0 & -- & 12$\pm$3 (0) & -- & 60$\pm$2 / 3 \\
+\midrule
+Frozen model + gap evidence (inference) & 69\% & 40\% & 0 & 48\% (1) & 12 (0) & 84 / 6 & 57 / 1 \\
+U-Net pair (baseline) & 86\% & 74\% & 0 & 50\% (1) & 15 (0) & 129 / 9 & 95 / 1 \\
+\bottomrule
+\end{tabular}

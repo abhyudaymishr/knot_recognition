@@ -1,0 +1,33 @@
+% Method overview (TikZ). Shared by all venue versions.
+\begin{figure*}[t]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small, minimum height=0.95cm, inner sep=3pt},
+  head/.style={draw, rounded corners=2pt, align=center, font=\scriptsize, minimum width=2.1cm, minimum height=0.5cm, inner sep=2pt},
+  gate/.style={draw, rounded corners=2pt, align=left, font=\scriptsize, fill=gray!8, inner sep=3pt},
+  arr/.style={-{Latex[length=2mm]}, thick}]
+\node[box] (img) {Image\\RGB + FFT channel};
+\node[box, right=0.5cm of img] (enc) {Conv stem\\$16{\times}16$ tokens\\+ count token};
+\node[box, right=0.5cm of enc] (tr) {4 transformer\\blocks\\(global attention)};
+\node[box, right=0.5cm of tr] (dec) {U-Net decoder\\$128{\times}128$\\+ $256{\times}256$ branch};
+\node[head, right=0.6cm of dec, yshift=1.5cm] (h1) {cable mask $m$};
+\node[head, below=0.1cm of h1] (h2) {crossing heatmap $h$};
+\node[head, below=0.1cm of h2] (h3) {over-strand axis $\mathbf{o}$};
+\node[head, below=0.1cm of h3] (h4) {strand axis};
+\node[head, below=0.1cm of h4] (h5) {centre-line ridges $c$};
+\node[box, right=0.6cm of h3] (parse) {Parser\\peaks $\to$ ridge skeleton\\$\to$ arms $\to$ pairing\\$\to$ \ou{} $\to$ tracing};
+\node[box, right=0.5cm of parse] (topo) {Diagram\\$\to$ PD code\\$\to$ exact invariants};
+\node[gate, below=0.45cm of parse, xshift=1.4cm] (gates) {Gates: Euler count $\cdot$ four arms $\cdot$ closure\\$\cdot$ two ridges agree $\cdot$ type $p\ge0.95$ (8 views)};
+\node[box, right=0.5cm of topo, fill=gray!8] (out) {Knot type\\or abstain\\with reason};
+\draw[arr] (img) -- (enc); \draw[arr] (enc) -- (tr); \draw[arr] (tr) -- (dec);
+\foreach \h in {h1,h2,h3,h4,h5} \draw[arr] (dec.east) -- (\h.west);
+\foreach \h in {h1,h2,h3,h4,h5} \draw[arr] (\h.east) -- (parse.west);
+\draw[arr] (parse) -- (topo); \draw[arr] (topo) -- (out);
+\draw[arr, dashed] (gates.north) -- ++(0,0.2) -| (out.south);
+\end{tikzpicture}}
+\caption{\textbf{Learn perception, compute topology.} The network predicts the parts of a
+diagram, not a label. A geometric parser assembles them, exact invariants identify the
+knot, and checks that do not trust the network decide whether to answer.}
+\label{fig:method}
+\end{figure*}

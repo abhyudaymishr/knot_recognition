@@ -1,0 +1,112 @@
+% ---------------------------------------------------------------- 3 problem, 4 method
+\section{From pixels to a knot diagram}\label{sec:method}
+
+\paragraph{Diagram model.} A diagram is a set of closed strands (polylines in the
+image plane) and crossings. Each crossing has two passages: an over-strand and an
+under-strand. Its sign is the right-hand rule $\operatorname{sign}(\mathbf{t}_o\times\mathbf{t}_u)$
+on the strand tangents, and the diagram's PD code follows by walking each strand.
+Identification is then exact: a hyperbolic exterior is matched by an isometry
+certificate, and knot Floer homology settles the remaining cases, including the
+unknot and chirality. An image fixes the diagram only if every crossing is visible
+and its \ou{} can be seen. A silhouette shows crossings but not \ou{}, so it fixes
+the projection but not the knot.
+
+\paragraph{Input.} The image is resized to $256\times256$ and given four channels:
+RGB and an FFT-cleaned grey channel (mirror-padded homomorphic filtering, which
+removes slow illumination, followed by Wiener shrinkage).
+
+\paragraph{Networks.} Any network that outputs the maps below can be used. We study two.
+(a) A NanoTransformer (0.86M parameters): a convolutional stem (stride 4) feeds a $16\times16$ token grid plus
+one count token into four transformer blocks (width 128, 4 heads). Global attention
+lets evidence from both sides of a crossing meet. A light U-Net decoder with
+stride-4 and stride-2 skips returns to a $128\times128$ grid, where five heads predict
+(\cref{fig:method}):
+\begin{itemize}
+\item a soft cable mask $m$ (fraction of each cell covered);
+\item a crossing heatmap $h$, trained with a centre-point focal loss;
+\item the over-strand axis $\mathbf{o}=(\cos2\alpha,\sin2\alpha)$ near each crossing;
+\item the strand axis elsewhere, used to pair arms;
+\item a centre-line ridge $c=\exp(-d^2/2\sigma^2)$, where $d$ is the distance to the
+  nearest strand centre-line.
+\end{itemize}
+A full-resolution branch (input-level convolutions fused with the decoder) predicts
+the same ridge on a $256\times256$ grid. On the coarse grid, two centre-lines one
+\cw{} apart are only 1.5--3 cells apart and merge. Axial (doubled-angle) targets make
+a strand and its reverse identical, which is all an image can show. Dihedral
+augmentations transform the axial targets consistently. (b) A pair of standard U-Nets
+(1.6M parameters each, 5 levels from $256^2$ to $16^2$): one predicts the mask and the
+centre-lines, the other the crossing heatmap with the over-strand axis as a per-keypoint
+attribute, as in CenterNet~\cite{zhou2019objects}. (c) A \emph{UNetFormer} (2.9M parameters), a single
+network that predicts every map. It has a U-Net encoder and decoder with skip connections at all five
+resolutions, as in (b), and four transformer blocks (width 192, 6 heads) with a count token on the
+$16\times16$ grid at the bottleneck, as in TransUNet~\cite{chen2021transunet}. The transformer's output
+is added back to the bottleneck through a zero-initialised projection, so training starts from a
+plain U-Net.
+
+\paragraph{Parser.} (i) Crossings are heatmap peaks above 0.35, refined to sub-cell
+position. (ii) The skeleton is taken from the thresholded ridge. Specks below
+$(0.6w)^2$ pixels are removed, where $w$ is the estimated \cw. Short gaps between
+facing ends are bridged, and the skeleton is cut on a disc around each crossing,
+leaving arcs whose ends are the crossing's arms. On cluttered backgrounds the networks draw short
+centre-line pieces on background texture. Of 134 free ends that made the NanoTransformer abstain on
+the benchmark's unseen backgrounds, 128 lay off the cable. A separate piece that carries no
+detected crossing and is open (its skeleton has an end) cannot belong to a closed diagram, so it is
+removed. Closed loops without crossings, such as an unknot or an unlinked component, are kept.
+(iii) Of the three ways to split
+four arms into two strands, we take the one whose strands run straightest. (iv) The
+strand whose axis agrees best with $\mathbf{o}$ is on top. Its probability is
+$p=\tfrac12+\big(\sigma(\kappa\,\Delta)-\tfrac12\big)\,\rho^{\gamma}$, where $\Delta$ is the
+margin between the two strands, $\kappa$ is fitted on the training split, and $\rho$
+is the mean resultant length of $\mathbf{o}$ across eight test-time views
+($\gamma=2$, chosen on a development set). Where the views disagree, as on a
+silhouette, $\rho\to0$ and $p\to\tfrac12$. (v) Tracing arcs through crossings yields
+oriented strands and passages, i.e.\ a diagram.
+
+\paragraph{Gap evidence (optional).} View agreement cannot detect \ou{} evidence that every
+view misreads in the same way. The picture can be checked directly: the strand on top keeps
+its outline through the crossing, and the strand underneath loses it. For each strand through a
+crossing we sample, every half pixel of arc length $t$ in the 512-pixel image, the contrast
+across both of its edges at $\pm w/2$ on the normal. The edge is \emph{missing} where this
+contrast is below $\tau=\GapTau$ times its median on the free part of the strand. The strand's
+interruption is a Lebesgue measure,
+\[ G=\tfrac1w\,\big|\{t\in[-T,T]:\text{edge missing at }t\}\big|,\qquad T=\tfrac{w}{2\sin\theta}+w,\]
+where $\theta$ is the crossing angle. $D=G_{\text{under}}-G_{\text{over}}$ is the picture's
+evidence for the network's reading. It enters the log-odds,
+$\operatorname{logit}p'=\operatorname{logit}p+\lambda D$, and the reading flips if
+$p'<\tfrac12$. $\lambda=\GapLambda$ maximises the likelihood of \GapDevCross{} matched
+crossings on development images; no test image is involved.
+
+\paragraph{Minkowski attention and a Lebesgue loss.} We test three changes to the
+NanoTransformer, each added to the previous one.
+(1)~\emph{Lebesgue (layer-cake) loss.} The parser thresholds the mask at levels
+$t\in[0.15,0.85]$ and the ridges at 0.5. By the layer-cake formula, the mean over
+$t\sim U[a,b]$ of the area of $\{\hat p>t\}\triangle\{m>t\}$ equals
+$\mathbb E\,|\mathrm{clip}(\hat p,a,b)-\mathrm{clip}(m,a,b)|/(b-a)$. We add this term with weight 1
+for the mask ($[0.15,0.85]$) and both ridges ($[0.3,0.7]$). It penalises exactly the pixels
+whose thresholded value depends on the level.
+(2)~\emph{Minkowski position bias.} Each head adds $-\alpha_h\|\mathbf r_i-\mathbf r_j\|_{p_h}$ to
+its logits, where $\mathbf r$ are token positions on the $16\times16$ grid. Both
+$p_h=1+\operatorname{softplus}(\rho_h)$ (initially 2) and $\alpha_h$ (initially 0.2 down to 0.01
+across heads) are learned per block. The $\ell_p$ distance is invariant under the eight flips and
+quarter turns of the square, the group used for test-time views.
+(3)~\emph{Minkowski content attention.} The logits are
+$-t_h\|\mathbf q_i-\mathbf k_j\|_p^p/(p\sqrt d)$, with $p=1$ on two heads and $p=2$ on the other
+two. For $p=2$ this is dot-product attention less a key-norm term. A learned $p$ would require
+a per-coordinate $|\mathbf q-\mathbf k|^p$ tensor, about 400 times slower on a CPU.
+
+\section{Consistency checks and abstention}\label{sec:gates}
+The system reports a type only if all of the following hold; otherwise it abstains
+and names the failed check.
+\begin{enumerate}
+\item \textbf{Euler count.} The projection of $k$ closed curves with $n$ crossings is a
+  4-valent planar graph, so the ridge band has $n+\pi$ bounded faces, where $\pi$ is
+  the number of connected pieces. A missed crossing adds an unexplained face.
+\item \textbf{Four arms.} Every detected crossing has exactly four arms. No skeleton
+  branch point lies away from a detected crossing.
+\item \textbf{Closure.} The traversal closes. Free ends require a recorded closure
+  (a fixture, or ends joined), as for open cables.
+\item \textbf{Two resolutions agree.} The diagram is parsed from both ridges. If both
+  pass, they must give the same type.
+\item \textbf{Type probability.} Uncertain crossings are enumerated over their two
+  readings, weighted by $p$, and the most likely type must reach probability 0.95.
+\end{enumerate}

@@ -1,0 +1,23 @@
+% ---------------------------------------------------------------- abstract
+\begin{abstract}
+Recognising a knot in an image means reading a planar diagram (where the strands
+cross and which strand is on top) and then computing its topology. Image-to-label
+classifiers skip the diagram: they cannot name a knot outside their training census
+and cannot say when an image does not show enough to decide. We split the problem.
+A dense network predicts diagram structure (crossing centres, the over-strand axis,
+cable masks and strand centre-lines); a geometric parser turns the maps into a
+diagram, and exact knot invariants identify it. Checks that do not trust the network
+(an Euler count of faces, a four-arm test at every crossing, agreement across
+test-time views and across two centre-line resolutions) turn likely errors into
+abstentions. The formulation is backbone-agnostic: with a pair of standard U-Nets it
+answers \UPCov\% of photo-like images on \bench{} (\UPUnseenCov\% on unseen
+backgrounds) with no wrong answer and abstains on every silhouette, where a 250-class
+image classifier is right on \ClfBenchAcc\% and a segmentation network alone can name
+nothing. On a blind set of \BlindN{} drawings and renders from sources never used
+during development, scored once, it is right on \UPBlindCorrect{} images and wrong on
+\UPBlindWrong{}; the errors are drawings whose under-strand gaps are one or two pixels
+wide. A U-Net with a transformer bottleneck, trained on the same data, beats the U-Net pair on a
+second blind set at every one of three seeds (\BUUfVtwo{} vs \BUUnetVtwo{} correct of 312, on average) and
+on real pictures, with about as many wrong answers. We release the benchmark, the blind protocol, an annotation tool for real cable
+photographs and all code.
+\end{abstract}

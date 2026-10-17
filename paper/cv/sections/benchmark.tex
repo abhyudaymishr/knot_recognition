@@ -1,0 +1,35 @@
+% ---------------------------------------------------------------- 5 benchmark
+\section{\bench}\label{sec:bench}
+
+\paragraph{Synthetic split.} Cables are random closed braids (2--4 strands, 2--9
+generators) deformed in 3D and projected with a random rotation, so crossings, \ou{}
+and the type are exact. They are rendered as shaded tubes in five sessions:
+studio (S1), wood desk (S2), dim gradient (S3), cluttered texture (S4) and a
+silhouette diagnostic (S0) where \ou{} is invisible. The benchmark has 300 images of
+60 cables. S3 and S4 backgrounds never appear in training.
+
+\paragraph{Splits and metrics.} Splits hold out whole cables and whole sessions;
+views of one cable never straddle splits. We report:
+\begin{itemize}
+\item crossing precision and recall (Hungarian matching within one \cw);
+\item \ou{} and pairing accuracy on matched crossings;
+\item answered fraction and number of wrong answers (topology accuracy counts
+  abstentions as wrong);
+\item 95\% intervals from a bootstrap over cables.
+\end{itemize}
+
+\paragraph{Close-strands stress set.} The set has 100 renders binned by the smallest
+centre-line gap between strand pieces away from crossings, in \cw s (0.6--1.0,
+1.0--1.3, 1.3--1.7, $\ge$1.7), 25 per bin. It is used for development only; its
+seeds are disjoint from training and the benchmark.
+
+\paragraph{Real pictures.} 166 public images of knots (109 drawings, 22 3D renders,
+8 logos and 27 photographs of physical objects), labelled only by knot type. The
+measure is answered, correct (up to mirror image) or wrong.
+
+\paragraph{Real cable photographs.} We provide a capture protocol and a browser
+annotation tool. The protocol covers coax, rope and thread, four backgrounds, three
+lights and three views per session. The tool records crossings with \ou{},
+visibility, free ends and the closure. A scoring script evaluates them with the same
+metrics after letterboxing, never stretching, the images.
+\todo{Report the real cable set here once collected.}

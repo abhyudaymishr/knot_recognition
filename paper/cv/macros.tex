@@ -1,0 +1,23 @@
+% Shared macros for the CV versions (CVPR/ICCV, ECCV, TPAMI/IJCV).
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,fit}
+\usepackage{adjustbox}
+% A table shrinks to the line width when it is wider, and is never enlarged
+% (ECCV is one column, so \columnwidth there is the full text width).
+\newcommand{\fittable}[1]{\adjustbox{max width=\linewidth}{\input{#1}}}
+% Column gap of the full-width tables; a venue may set it before loading these macros.
+\providecommand{\widetabcolsep}{4pt}
+\providecommand{\todo}[1]{{\color{red}#1}}
+\providecommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
+\providecommand{\etal}{et al.\@}
+\newcommand{\method}{KnotSight}            % working name of the system; change freely
+\newcommand{\bench}{KnotBench-Photo}
+\newcommand{\ou}{over/under}
+\newcommand{\cw}{cable width}
+% numbers are written by scripts/make_cv_tables.py into tables/numbers.tex
+\input{../tables/numbers}

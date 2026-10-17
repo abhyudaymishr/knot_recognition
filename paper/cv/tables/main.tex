@@ -1,0 +1,15 @@
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+Method & Params & Cross.\ P & Cross.\ R & O/U & Answered & Unseen ans. & Wrong & Blind: ans.\ / wrong \\
+\midrule
+Image-to-label classifier, forced & 0.67M & -- & -- & -- & 100\% & 100\% & 210 & 308 / 306 \\
+Image-to-label classifier, $p\ge0.95$ & 0.67M & -- & -- & -- & 0\% & -- & 0 & 0 / 0 \\
+Skeleton traverser + gates & -- & 0.11 & 0.16 & 0.49 & 0\% & -- & 0 (10 w/o gate) & -- \\
+\midrule
+Parser + U-Net segmentation only & 1.6M & 0.99 & 0.997 & 0.44 & 0\% & 0\% & 0 & 0 / 0 \\
+Parser + U-Net seg.\ + CenterNet keypoints & 3.1M & 1.00 & 0.98 & 1.00 & 86\% & 74\% & 0 & 138 / 9 \\
+Parser + NanoTransformer, mask skeleton (v1) & 0.86M & 0.93 & 0.90 & 1.00 & 52\% & 31\% & 0 & -- \\
+Parser + NanoTransformer (v3, frozen) & 0.86M & 0.93 & 0.997 & 1.00 & 69\% & 40\% & 0 & 83 / 5 \\
+Parser + NanoTransformer, 3 seeds (mean$\pm$sd) & 0.86M & -- & 0.997 & -- & 68$\pm$3\% & 37$\pm$5\% & 0 total & 84 / 5.3 \\
+\bottomrule
+\end{tabular}

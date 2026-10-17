@@ -1,0 +1,15 @@
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Variant & Cross.\ R & Answered & Unseen & Wrong & Silh.\ ans. \\
+\midrule
+Full (two ridges, Euler gate, 8-view TTA) & 0.997 & 69\% & 40\% & 0 & 0\% \\
+256-grid ridge only & 0.997 & 68\% & 39\% & 0 & 0\% \\
+128-grid ridge only & 0.997 & 62\% & 28\% & 0 & 0\% \\
+without Euler gate & 0.997 & 70\% & 42\% & 0 & 0\% \\
+without test-time views & 0.998 & 57\% & 22\% & 0 & 12\% (6 wrong) \\
+views averaged, no consistency shrink ($\gamma=0$) & 0.997 & 69\% & 40\% & 0 & 62\% (25 wrong) \\
+Mask skeleton, no ridge (v1 model) & 0.90 & 52\% & 31\% & 0 & 0\% \\
+\midrule
+without FFT input channel (retrained, full recipe) & 0.996 & 63\% & 33\% & 0 & 0\% \\
+\bottomrule
+\end{tabular}

@@ -1,0 +1,16 @@
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+ & \multicolumn{3}{c}{Drawings (halo gaps)} & \multicolumn{3}{c}{Renders (new views)} \\
+Model & ans. & correct & wrong & ans. & correct & wrong \\
+\midrule
+Plain, seed 0 (frozen model) & 26 & 26 & 0 & 29 & 28 & 1 \\
+Plain, seed 1 & 21 & 21 & 0 & 31 & 31 & 0 \\
+Plain, seed 2 & 27 & 26 & 1 & 25 & 25 & 0 \\
+Plain without FFT channel & 18 & 17 & 1 & 32 & 32 & 0 \\
++ Lebesgue loss (seed 0) & 26 & 26 & 0 & 30 & 30 & 0 \\
++ Minkowski position bias (seed 0) & 25 & 24 & 1 & 36 & 36 & 0 \\
++ Minkowski content attention (seed 0) & 25 & 24 & 1 & 35 & 35 & 0 \\
+Frozen model + gap evidence & 30 & 30 & 0 & 28 & 27 & 1 \\
+U-Net pair (baseline) & 47 & 46 & 1 & 49 & 49 & 0 \\
+\bottomrule
+\end{tabular}

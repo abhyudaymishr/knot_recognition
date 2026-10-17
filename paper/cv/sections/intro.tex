@@ -1,0 +1,52 @@
+% ---------------------------------------------------------------- 1 introduction
+\section{Introduction}\label{sec:intro}
+
+A tangled cable, a surgical suture, a rope in a robot gripper, a knotted protein~\cite{taylor2000knotted} and a knot drawing in a
+textbook pose the same question: \emph{which knot is this?} The answer is
+topological and exact, but it has to be read from pixels. Two facts make the reading
+hard. First, the decisive evidence is local and occluded: at each crossing one
+strand passes over the other, and a single misread crossing can change the knot.
+Second, many images do not contain the answer at all. A silhouette hides \ou{}, and two
+strands that touch can hide a crossing. A useful system must therefore know when
+not to answer.
+
+Prior learned approaches predict a label from the whole image, such as a knot type from a fixed census or a crossing number~\cite{kauffman2022rectangular,dranowski2025knotdetection}.
+Such a model cannot name a knot it was not trained on, cannot explain its answer
+and returns a label even for a silhouette. Classical pipelines skeletonise the image
+and search for junctions; on our benchmark the skeleton parser finds only
+\BaseRecall{} of crossings and guesses \ou{} at chance (\BaseOU).
+
+We instead \emph{learn perception and compute topology} (\cref{fig:teaser}). A dense
+network predicts the parts a diagram is made of. A parser
+assembles them into a planar diagram with geometric crossing signs, and exact
+invariants (SnapPy, knot Floer homology) name the knot or link. The structure also
+yields checks that do not trust the network. For a 4-valent planar projection the
+number of enclosed faces equals crossings plus connected pieces, so a missed
+crossing leaves an unexplained face. Every crossing must have four arms, the
+\ou{} reading must agree across eight test-time views, and two centre-line
+resolutions must give the same type. When a check fails, the system abstains and says
+why.
+
+\noindent Our contributions are:
+\begin{enumerate}
+\item A structured formulation of knot recognition from images: dense crossing,
+  \ou{}, mask and centre-line maps, read into a diagram whose topology is computed
+  exactly (\cref{sec:method}). It does not depend on the backbone: a 0.86M-parameter
+  transformer and a pair of standard U-Nets both work, and the U-Nets are stronger
+  (\UPCov\% vs \VthreeCov\% answered, \cref{tab:main}).
+\item Consistency checks that convert errors into abstentions. Without test-time view
+  agreement the model answers \NoTTASilCov\% of silhouettes, \NoTTASilWrong{} of them
+  wrongly; the Euler gate removes all \BaseWrongNoGate{} wrong answers of a skeleton
+  parser. With all checks our system gives \VthreeWrong{} wrong answers on
+  \VthreeImages{} photo-like images and 60 silhouettes (\cref{sec:gates,tab:ablation}).
+\item \bench{}: renders with exact ground truth, cable- and session-disjoint splits,
+  topology accuracy with abstention and cable-level bootstrap intervals, plus a
+  protocol and annotation tool for real cable photographs (\cref{sec:bench}).
+\item An analysis of the main failure mode, strands passing within a \cw{}: a
+  full-resolution centre-line head raises coverage at 1.0--1.3 \cw s from
+  \CloseMidVone\% to \CloseMidVthree\%, and a first real-image test answers
+  \RealAns{} of \RealN{} pictures with no error (\cref{sec:exp}).
+\item A blind evaluation protocol: a frozen model, held-out sets frozen by hash, and a ledger
+  that refuses to score a second main model. On \BlindN{} blind drawings and renders the
+  system answers \BlindAns{} and errs on \BlindWrong{}; we analyse these failures.
+\end{enumerate}

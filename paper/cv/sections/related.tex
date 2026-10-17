@@ -1,0 +1,34 @@
+% ---------------------------------------------------------------- 2 related work
+\section{Related work}\label{sec:related}
+
+\paragraph{Knots in images and in data.} Machine learning on knots has mostly used
+symbolic inputs: invariants and diagram codes~\cite{davies2021advancing,davies2022signature},
+with graph networks on diagrams~\cite{xu2019powerful}, and grid diagrams have been
+classified with deep networks~\cite{kauffman2022rectangular}. Closest to us,
+Dranowski \etal~\cite{dranowski2025knotdetection} predict crossing number from
+knot pictures with CNNs and transformers. They propose reconstructing PD codes and
+computing invariants as future work. We build that second stage: diagram
+reconstruction with \ou{}, exact identification and abstention, evaluated with
+cable-disjoint splits. Robotic rope manipulation reads rope state from images as
+keypoints or traced paths for grasping and
+untangling~\cite{nair2017rope,grannen2020untangling,viswanath2023handloom}, not as a
+knot type. Exact identification uses SnapPy~\cite{snappy}, KnotInfo~\cite{knotinfo}
+and knot Floer homology~\cite{ozsvath2004knotfloer}.
+
+\paragraph{Curvilinear structure and line drawings.} Vessel, road and neurite
+extraction recover thin structures and their connectivity~\cite{ronneberger2015unet,bastani2018roadtracer,shit2021cldice}.
+Wireframe parsers predict junctions and line segments~\cite{huang2018wireframe,zhou2019lcnn}, and
+technical-drawing vectorisation recovers strokes~\cite{egiazarian2020vectorization}.
+None of these recovers which strand lies on top at a crossing, which is what makes a
+diagram a knot.
+
+\paragraph{Dense structured prediction.} Our crossing head follows centre-heatmap
+detectors~\cite{zhou2019objects,newell2016hourglass} with a focal
+loss~\cite{lin2017focal}, and our backbone uses transformer
+blocks~\cite{dosovitskiy2021vit}. Foundation features~\cite{kirillov2023sam,oquab2024dinov2}
+are a natural alternative backbone, which we leave as a baseline to add.
+
+\paragraph{Selective prediction.} Abstaining classifiers trade coverage for
+risk~\cite{geifman2017selective}, and calibration aligns confidence with
+accuracy~\cite{guo2017calibration}. Our abstentions come mostly from consistency
+checks grounded in planar topology, not from a learned confidence threshold.

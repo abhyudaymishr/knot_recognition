@@ -1,0 +1,12 @@
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+ & \multicolumn{3}{c}{Drawings (knotR)} & \multicolumn{3}{c}{Renders (POV-Ray)} \\
+Method & ans. & correct & wrong & ans. & correct & wrong \\
+\midrule
+Classifier, forced & 98 & 0 & 98 & 210 & 2 & 208 \\
+Classifier, $p\ge0.95$ & 0 & 0 & 0 & 0 & 0 & 0 \\
+U-Net segmentation + parser & 0 & 0 & 0 & 0 & 0 & 0 \\
+U-Net seg.\ + keypoints + parser & 94 & 86 & 8 & 44 & 43 & 1 \\
+Ours (frozen model) & 42 & 37 & 5 & 41 & 41 & 0 \\
+\bottomrule
+\end{tabular}
