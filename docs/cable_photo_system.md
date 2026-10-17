@@ -23,11 +23,11 @@ The Gradio Space reuses the repository's skeleton and crossing parser. It produc
 
 ## CI and Hugging Face deployment
 
-`.github/workflows/cable-space.yml` checks syntax and imports on pull requests and pushes. On `main`/`master`, it uploads the validated Space directory to `AbhyudayMishr/KnotAssistant` using:
+`.github/workflows/cable-space.yml` refreshes `huggingface_space/` with `scripts/build_space.py` (modules, the trained UNetFormer and its strand-order head, Knotgen, KnotInfo), then checks syntax and imports on pull requests and pushes. On `main`/`master`, it uploads the validated Space directory to `AbhyudayMishr/KnotAssistant` using:
 
 - Secret `KNOTASSISTANT`: a Hugging Face fine-grained token with write access to the target Space.
 
-The Gradio Space already exists and is configured for ZeroGPU. The app callback carries the required ZeroGPU decorator; its current image and invariant calculations are CPU-based. A push to the deployment branch publishes the app automatically; pull requests run validation only.
+The Gradio Space already exists and is configured for ZeroGPU. The NanoTransformer callback carries the required ZeroGPU decorator; the UNetFormer tabs (photo triage and the annotation assistant) and the invariant calculations run on the CPU. A push to the deployment branch publishes the app automatically; pull requests run validation only. To publish without GitHub, double-click `scripts/upload_space.command` on a Mac (or run `python scripts/upload_space.py`): it refreshes the folder, lists it, asks, and uploads it with your own Hugging Face login. See `docs/knotbench_photo_protocol.md` §14.1.
 
 ## Evaluation required before claiming performance
 

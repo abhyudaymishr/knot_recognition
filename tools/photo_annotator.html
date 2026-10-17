@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KnotBench-Photo annotator</title>
+<style>
+  :root { --bg:#fafaf8; --fg:#1d1d1f; --mute:#6b6b70; --line:#d8d8dc; --acc:#2a62c9; --over:#d23c2c; --under:#2a62c9; --panel:#f1f1ee; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#17171a; --fg:#ececf0; --mute:#9a9aa2; --line:#33333a; --acc:#7aa2ff; --panel:#202024; } }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.4 system-ui, sans-serif; background:var(--bg); color:var(--fg); display:grid; grid-template-columns:330px 1fr; height:100vh; }
+  aside { border-right:1px solid var(--line); padding:12px; overflow:auto; }
+  main { position:relative; overflow:auto; }
+  h1 { font-size:16px; margin:0 0 8px; }
+  h2 { font-size:13px; margin:0 0 4px; }
+  label { display:block; font-size:12px; color:var(--mute); margin-top:6px; }
+  input, select, button { font:inherit; width:100%; padding:4px 6px; border:1px solid var(--line); border-radius:4px; background:transparent; color:inherit; }
+  input[type=checkbox] { width:auto; margin:0 6px 0 0; vertical-align:middle; }
+  label.chk { color:var(--fg); font-size:13px; }
+  button { cursor:pointer; margin-top:6px; }
+  button.on { background:var(--acc); color:#fff; border-color:var(--acc); }
+  button:disabled { opacity:.45; cursor:default; }
+  .row { display:flex; gap:6px; } .row > * { flex:1; }
+  .hint { font-size:12px; color:var(--mute); margin:6px 0; min-height:1.4em; }
+  .assist { background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:8px; margin:10px 0; }
+  .reading { font-size:12px; margin-top:6px; }
+  canvas { display:block; cursor:crosshair; }
+  table { width:100%; border-collapse:collapse; font-size:12px; margin-top:6px; }
+  td { border-top:1px solid var(--line); padding:2px; vertical-align:middle; }
+  td select { padding:1px; }
+  td button { margin:0; padding:1px 4px; width:auto; }
+  .src { font-size:11px; color:var(--mute); white-space:nowrap; }
+  td.act { white-space:nowrap; }
+  @media (max-width: 700px) { body { grid-template-columns:1fr; height:auto; } }
+</style>
+</head>
+<body>
+<aside>
+  <h1>KnotBench-Photo annotator</h1>
+  <label>cables.csv (optional: fills type and material from the file name cXX_sY_vZ)</label>
+  <input type="file" id="cablescsv" accept=".csv">
+  <label>Photos</label>
+  <input type="file" id="file" accept="image/*" multiple>
+  <div class="row"><button id="prev">Prev</button><button id="next">Next</button></div>
+  <div class="hint" id="which"></div>
+
+  <div class="assist">
+    <h2>Model suggestions</h2>
+    <div class="hint" id="srv">Checking for the model…</div>
+    <label class="chk"><input type="checkbox" id="auto" checked>Suggest for each new photo</label>
+    <div class="row"><button id="suggest" disabled>Suggest now (S)</button><button id="acceptall" disabled>Accept all (A)</button></div>
+    <div class="row"><button id="acceptx" disabled>Accept crossings only (C)</button><button id="clearsug" disabled>Clear</button></div>
+    <div class="reading" id="reading"></div>
+    <div class="hint">Dashed marks are the model's. Check each one against the photo: flip or delete crossings in the
+      table below. Saved records mark every item as model, corrected or drawn by hand.</div>
+  </div>
+
+  <label>cable_id (one tied cable)</label><input id="cable_id" placeholder="c001">
+  <label>session_id (place / light / day)</label><input id="session_id" placeholder="s1">
+  <div class="row"><div><label>view</label><input id="view" type="number" value="0"></div>
+    <div><label>ground-truth type</label><input id="gt" placeholder="3_1"></div></div>
+  <label>how known</label>
+  <select id="how"><option>tied from a diagram and verified</option><option>tied from a diagram</option></select>
+  <div class="row"><div><label>cable</label><input id="ctype" placeholder="coax RG6"></div>
+    <div><label>diameter mm</label><input id="diam" type="number" step="0.1"></div></div>
+  <label>closure</label>
+  <select id="closure"><option value="sealed">ends joined (heat-shrink / barrel)</option>
+    <option value="fixture">closure fixture (behind)</option></select>
+  <label>fixture id (if fixture)</label><input id="fixture" placeholder="board-A">
+
+  <label>Mode</label>
+  <div class="row"><button data-m="width">Width</button><button data-m="cross">Crossing</button></div>
+  <div class="row"><button data-m="end">Endpoint</button><button data-m="line">Centreline</button></div>
+  <div class="hint" id="hint">Load photos, then pick a mode.</div>
+  <div class="row"><button id="undo">Undo</button><button id="finish">End line</button></div>
+
+  <table id="tbl"></table>
+  <button id="save">Save record for this image</button>
+  <button id="dl">Download records.jsonl</button>
+  <div class="hint" id="status"></div>
+</aside>
+<main><canvas id="cv"></canvas></main>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const cv = $("cv"), ctx = cv.getContext("2d");
+  let files = [], idx = 0, img = null, scale = 1, mode = null;
+  let A = null;        // annotation of the current image
+  let S = null;        // the model's suggestions for the current image (not yet accepted)
+  let server = null;   // model server info, when the page is served by scripts/annotator_server.py
+  let reading = null;  // the model's reading of the current image
+  const records = {};
+  let cables = {};
+  function parseCSV(text) {
+    const rows = [], re = /("([^"]|"")*"|[^,\n]*)(,|\n|$)/g;
+    let row = [], m;
+    text = text.replace(/\r/g, "");
+    while ((m = re.exec(text)) && m[0] !== "") {
+      row.push(m[1].startsWith('"') ? m[1].slice(1, -1).replace(/""/g, '"') : m[1]);
+      if (m[3] !== ",") { rows.push(row); row = []; }
+    }
+    return rows;
+  }
+  function prefill(name) {
+    const m = name.match(/^(c\d+)_(s\w+?)_v(\d+)/i);
+    if (!m) return;
+    $("cable_id").value = m[1]; $("session_id").value = m[2]; $("view").value = +m[3];
+    const c = cables[m[1]];
+    if (c) { $("gt").value = c.ground_truth_type; $("ctype").value = c.material; $("diam").value = c.diameter_mm; $("closure").value = "sealed"; }
+  }
+  const HINT = {
+    width: "Click both edges of the cable, straight across (2 clicks).",
+    cross: "Click the crossing centre, then a point along the TOP strand, then a point along the BOTTOM strand.",
+    end: "Click each free cable end.",
+    line: "Click along a cable's centre-line in travel direction; press End line to finish it (optional)."
+  };
+  // per item provenance: "manual", "model", "model, over/under flipped", "model (under guessed)" ...
+  const fresh = () => ({ width: [], widthSrc: null, crossings: [], ends: [], endSrc: [], lines: [[]], lineSrc: [], pending: [] });
+
+  // ---------------------------------------------------------------- model server
+  async function detect() {
+    if (!location.protocol.startsWith("http")) {
+      $("srv").textContent = "Opened as a file: no suggestions. For them, run  python scripts/annotator_server.py  and use the page it opens.";
+      return;
+    }
+    try {
+      const r = await fetch("api/info");
+      server = await r.json();
+      $("srv").textContent = `Model: ${server.model} (${server.arch}, ${server.model_sha256})` +
+        (server.strand_head ? ` + strand-order head ${server.strand_head}` : "") + ".";
+      $("suggest").disabled = false;
+      if (files.length && $("auto").checked) suggest();
+    } catch (e) {
+      $("srv").textContent = "No model server answered; annotating by hand.";
+    }
+  }
+  async function suggest() {
+    if (!server || !files.length) return;
+    const f = files[idx], at = idx;
+    $("reading").textContent = "Reading the photo…";
+    $("suggest").disabled = true;
+    try {
+      const r = await fetch("api/suggest", { method: "POST", body: f, headers: { "X-Name": f.name } });
+      const out = await r.json();
+      if (at !== idx) return;                                  // moved on to another photo meanwhile
+      if (out.error) { $("reading").textContent = "Model error: " + out.error; return; }
+      S = out;
+      reading = out.reading;
+      const rd = out.reading;
+      $("reading").innerHTML = (rd.answer ? `Model reads <b>${rd.answer}</b> (p ${rd.p.toFixed(2)})` :
+          `Model abstains: ${(rd.abstain_reasons[0] || "no closed diagram")}` + (rd.most_likely ? ` (most likely ${rd.most_likely})` : "")) +
+        `<br>${out.crossings.length} crossing(s)` + (out.crossings.some(c => c.under_guessed) ? " (bottom strand guessed: check it)" : "") +
+        `, ${out.ends.length} free end(s), ${out.lines.length} centre-line piece(s)` + (out.lines_from ? ` from the ${out.lines_from}` : "") +
+        ` · ${out.seconds}s<br><i>The ground-truth type comes from the tie sheet, not from the model.</i>`;
+      $("acceptall").disabled = $("acceptx").disabled = $("clearsug").disabled = false;
+      draw();
+    } catch (e) {
+      $("reading").textContent = "Could not reach the model server.";
+    } finally { $("suggest").disabled = !server; }
+  }
+  function acceptAll(crossingsOnly = false) {
+    if (!S || !A) return;
+    S.crossings.forEach(c => A.crossings.push({ pos: c.pos, o: c.o, u: c.u, vis: "clear", conf: 1,
+      src: c.under_guessed ? "model (bottom strand guessed)" : "model", p_over: c.p_over }));
+    if (crossingsOnly) { S.crossings = []; table(); draw(); return; }
+    if (A.width.length !== 2 && S.width && S.width.seg) { A.width = S.width.seg.map(p => p.slice()); A.widthSrc = "model"; }
+    S.ends.forEach(p => { A.ends.push(p); A.endSrc.push("model"); });
+    if (S.lines.length) {
+      if (A.lines.length && !A.lines[A.lines.length - 1].length) { A.lines.pop(); }
+      S.lines.forEach(L => { A.lines.push(L.map(p => p.slice())); A.lineSrc.push("model, " + S.lines_from); });
+      A.lines.push([]);
+    }
+    S = null;
+    $("acceptall").disabled = $("acceptx").disabled = $("clearsug").disabled = true;
+    table(); draw();
+  }
+
+  // ---------------------------------------------------------------- photos and drawing
+  function load(i) {
+    if (!files.length) return;
+    idx = (i + files.length) % files.length;
+    const f = files[idx];
+    $("which").textContent = `${idx + 1} / ${files.length}: ${f.name}`;
+    prefill(f.name);
+    const r = records[f.name];
+    A = r ? r._raw : fresh();
+    S = null; reading = r && r.assist ? r.assist.model_reading : null;
+    $("reading").textContent = ""; $("acceptall").disabled = $("acceptx").disabled = $("clearsug").disabled = true;
+    const im = new Image();
+    im.onload = () => { img = im; fit(); draw(); table(); if (server && $("auto").checked && !r) suggest(); };
+    im.src = URL.createObjectURL(f);
+  }
+  function fit() {
+    const W = cv.parentElement.clientWidth - 8, H = window.innerHeight - 8;
+    scale = Math.min(W / img.width, H / img.height, 1);
+    cv.width = img.width * scale; cv.height = img.height * scale;
+  }
+  function dot(p, c, r = 4) { ctx.fillStyle = c; ctx.beginPath(); ctx.arc(p[0] * scale, p[1] * scale, r, 0, 7); ctx.fill(); }
+  function ring(p, c, r = 6) {
+    ctx.setLineDash([]);
+    ctx.strokeStyle = "rgba(255,255,255,0.85)"; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(p[0] * scale, p[1] * scale, r, 0, 7); ctx.stroke();
+    ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(p[0] * scale, p[1] * scale, r, 0, 7); ctx.stroke();
+  }
+  function seg(a, b, c, w = 2, dash = null) {
+    if (dash) {                                                  // suggestion: a light halo keeps it readable on any photo
+      ctx.strokeStyle = "rgba(255,255,255,0.85)"; ctx.lineWidth = w + 3; ctx.setLineDash([]); ctx.beginPath();
+      ctx.moveTo(a[0] * scale, a[1] * scale); ctx.lineTo(b[0] * scale, b[1] * scale); ctx.stroke();
+    }
+    ctx.strokeStyle = c; ctx.lineWidth = w; ctx.setLineDash(dash || []); ctx.beginPath();
+    ctx.moveTo(a[0] * scale, a[1] * scale); ctx.lineTo(b[0] * scale, b[1] * scale); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function draw() {
+    if (!img) return;
+    ctx.drawImage(img, 0, 0, cv.width, cv.height);
+    if (S) {                                                     // suggestions: dashed, under the annotation
+      ctx.globalAlpha = 0.9;
+      S.lines.forEach(L => { for (let i = 1; i < L.length; i++) seg(L[i - 1], L[i], "#21a35a", 2, [5, 4]); });
+      if (S.width && S.width.seg) seg(S.width.seg[0], S.width.seg[1], "#f0b000", 3, [4, 3]);
+      S.ends.forEach(p => ring(p, "#9b30d0", 7));
+      S.crossings.forEach(c => {
+        seg(c.pos, c.o, "#d23c2c", 3, [6, 3]); seg(c.pos, c.u, "#2a62c9", 3, c.under_guessed ? [2, 3] : [6, 3]); ring(c.pos, "#111", 6);
+      });
+      ctx.globalAlpha = 1;
+    }
+    if (A.width.length) { A.width.forEach(p => dot(p, "#f0b000")); if (A.width.length === 2) seg(A.width[0], A.width[1], "#f0b000"); }
+    A.lines.forEach(L => { for (let i = 1; i < L.length; i++) seg(L[i - 1], L[i], "#21a35a", 2); L.forEach(p => dot(p, "#21a35a", 2)); });
+    A.ends.forEach(p => dot(p, "#9b30d0", 6));
+    A.crossings.forEach((c, i) => {
+      seg(c.pos, c.o, "#d23c2c", 3); seg(c.pos, c.u, "#2a62c9", 3); dot(c.pos, "#000", 5);
+      ctx.fillStyle = "#fff"; ctx.font = "bold 12px system-ui"; ctx.fillText(String(i + 1), c.pos[0] * scale + 6, c.pos[1] * scale - 6);
+    });
+    A.pending.forEach(p => dot(p, "#ff00aa", 5));
+  }
+  const short = s => !s || s === "manual" ? "hand" : s.startsWith("model, over") ? "model, flipped" : s.includes("guessed") ? "model ?" : "model";
+  function table() {
+    if (!A) { $("tbl").innerHTML = ""; return; }
+    $("tbl").innerHTML = "<tr><td>#</td><td>visibility</td><td>conf.</td><td>from</td><td></td></tr>" + A.crossings.map((c, i) =>
+      `<tr><td>${i + 1}</td><td><select data-i="${i}" data-k="vis">${["clear", "partly_occluded", "occluded"].map(v => `<option ${c.vis === v ? "selected" : ""}>${v}</option>`).join("")}</select></td>
+       <td><select data-i="${i}" data-k="conf">${[1, 0.8, 0.6, 0.5].map(v => `<option ${c.conf == v ? "selected" : ""}>${v}</option>`).join("")}</select></td>
+       <td class="src" title="${c.src || "manual"}${c.p_over != null ? " · model p(over/under) " + (+c.p_over).toFixed(2) : ""}">${short(c.src)}</td>
+       <td class="act"><button data-flip="${i}" title="swap the top and bottom strand">flip</button> <button data-del="${i}" title="delete">×</button></td></tr>`).join("");
+    $("tbl").querySelectorAll("select").forEach(s => s.onchange = () => { A.crossings[+s.dataset.i][s.dataset.k] = s.dataset.k === "conf" ? +s.value : s.value; });
+    $("tbl").querySelectorAll("button[data-flip]").forEach(b => b.onclick = () => {
+      const c = A.crossings[+b.dataset.flip]; [c.o, c.u] = [c.u, c.o];
+      if (c.src && c.src.startsWith("model")) c.src = c.src.includes("flipped") ? c.src.replace(", over/under flipped", "") : "model, over/under flipped";
+      table(); draw();
+    });
+    $("tbl").querySelectorAll("button[data-del]").forEach(b => b.onclick = () => { A.crossings.splice(+b.dataset.del, 1); table(); draw(); });
+  }
+  cv.addEventListener("click", e => {
+    if (!img || !mode) return;
+    const r = cv.getBoundingClientRect();
+    const p = [(e.clientX - r.left) / scale, (e.clientY - r.top) / scale];
+    if (mode === "width") { if (A.width.length >= 2) A.width = []; A.width.push(p); A.widthSrc = "manual"; }
+    else if (mode === "end") { A.ends.push(p); A.endSrc.push("manual"); }
+    else if (mode === "line") { const L = A.lines[A.lines.length - 1]; if (!L.length) A.lineSrc[A.lines.length - 1] = "manual"; L.push(p); }
+    else if (mode === "cross") {
+      A.pending.push(p);
+      if (A.pending.length === 3) { const [c, o, u] = A.pending; A.crossings.push({ pos: c, o, u, vis: "clear", conf: 1, src: "manual" }); A.pending = []; table(); }
+    }
+    draw();
+  });
+  document.querySelectorAll("button[data-m]").forEach(b => b.onclick = () => {
+    mode = b.dataset.m; document.querySelectorAll("button[data-m]").forEach(x => x.classList.toggle("on", x === b));
+    $("hint").textContent = HINT[mode]; A && (A.pending = []); draw();
+  });
+  $("undo").onclick = () => {
+    if (!A) return;
+    if (A.pending.length) A.pending.pop();
+    else if (mode === "cross") A.crossings.pop();
+    else if (mode === "end") { A.ends.pop(); A.endSrc.pop(); }
+    else if (mode === "width") A.width.pop();
+    else if (mode === "line") { const L = A.lines[A.lines.length - 1]; if (L.length) L.pop(); else if (A.lines.length > 1) { A.lines.pop(); A.lineSrc.length = Math.min(A.lineSrc.length, A.lines.length); } }
+    table(); draw();
+  };
+  $("finish").onclick = () => { if (A && A.lines[A.lines.length - 1].length) A.lines.push([]); };
+  $("suggest").onclick = suggest;
+  $("acceptall").onclick = () => acceptAll(false);
+  $("acceptx").onclick = () => acceptAll(true);
+  $("clearsug").onclick = () => { S = null; $("acceptall").disabled = $("acceptx").disabled = $("clearsug").disabled = true; draw(); };
+  document.addEventListener("keydown", e => {
+    if (/^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+    if (e.key === "s" || e.key === "S") suggest();
+    if (e.key === "a" || e.key === "A") acceptAll(false);
+    if (e.key === "c" || e.key === "C") acceptAll(true);
+  });
+  const unit = (a, b) => { const v = [b[0] - a[0], b[1] - a[1]], n = Math.hypot(v[0], v[1]) || 1; return [v[0] / n, v[1] / n]; };
+  $("save").onclick = () => {
+    if (!img) return;
+    const f = files[idx], probs = [];
+    if (A.width.length !== 2) probs.push("cable width");
+    if (!$("cable_id").value || !$("session_id").value) probs.push("cable_id / session_id");
+    if (!$("gt").value) probs.push("ground-truth type");
+    if (probs.length) { $("status").textContent = "Missing: " + probs.join(", "); return; }
+    const id = f.name.replace(/\.[^.]+$/, "");
+    const closure = $("closure").value === "sealed" ? { method: "sealed" } :
+      { method: "fixture", closing_arc_side: "behind", fixture_id: $("fixture").value || null, evidence_image: f.name };
+    const keep = A.lines.map((L, i) => [L, A.lineSrc[i] || "manual"]).filter(([L]) => L.length > 1);
+    const fromModel = s => !!s && s.startsWith("model");
+    records[f.name] = {
+      image_id: id, file: "images/" + f.name, cable_id: $("cable_id").value, session_id: $("session_id").value,
+      view: +$("view").value, source: "real",
+      cable: { type: $("ctype").value, diameter_mm: +$("diam").value || null },
+      capture: { image_size: [img.width, img.height] },
+      ground_truth: { type: $("gt").value, how_known: $("how").value, closure },
+      annotation: {
+        image_size: [img.width, img.height],
+        cable_width_px: Math.hypot(A.width[0][0] - A.width[1][0], A.width[0][1] - A.width[1][1]),
+        cable_width_source: A.widthSrc || "manual",
+        components: keep.map(([L]) => L),
+        components_source: keep.map(([, s]) => s),
+        crossings: A.crossings.map((c, i) => ({ cid: i + 1, pos_px: c.pos, over_tangent_px: unit(c.pos, c.o),
+          under_tangent_px: unit(c.pos, c.u), visibility: c.vis, annotator_confidence: c.conf, source: c.src || "manual" })),
+        endpoints_px: A.ends,
+        endpoints_source: A.ends.map((_, i) => A.endSrc[i] || "manual")
+      },
+      assist: server ? {
+        model: server.model, model_sha256: server.model_sha256, strand_head: server.strand_head, kappa: server.kappa,
+        crossings_from_model: A.crossings.filter(c => fromModel(c.src)).length,
+        crossings_flipped: A.crossings.filter(c => (c.src || "").includes("flipped")).length,
+        crossings_by_hand: A.crossings.filter(c => !fromModel(c.src)).length,
+        model_reading: reading
+      } : null,
+      _raw: JSON.parse(JSON.stringify(A))
+    };
+    $("status").textContent = `Saved ${id} (${A.crossings.length} crossings). ${Object.keys(records).length} record(s) total.`;
+  };
+  $("dl").onclick = () => {
+    const lines = Object.values(records).map(r => { const { _raw, ...o } = r; return JSON.stringify(o); }).join("\n") + "\n";
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([lines], { type: "application/json" }));
+    a.download = "records.jsonl"; a.click();
+  };
+  $("file").onchange = e => { files = [...e.target.files].filter(f => !/reference/i.test(f.name)); load(0); };
+  $("cablescsv").onchange = e => {
+    const r = new FileReader();
+    r.onload = () => {
+      const rows = parseCSV(r.result), head = rows[0];
+      cables = {};
+      rows.slice(1).forEach(x => { if (x.length >= head.length) { const o = {}; head.forEach((h, i) => o[h] = x[i]); cables[o.cable_id] = o; } });
+      $("status").textContent = `Loaded ${Object.keys(cables).length} cables.`;
+      if (files.length) prefill(files[idx].name);
+    };
+    r.readAsText(e.target.files[0]);
+  };
+  $("prev").onclick = () => load(idx - 1);
+  $("next").onclick = () => load(idx + 1);
+  window.addEventListener("resize", () => { if (img) { fit(); draw(); } });
+  detect();
+})();
+</script>
+</body>
+</html>
