@@ -1,0 +1,248 @@
+{
+ "0": {
+  "strand_order": {
+   "joint": {
+    "true": {
+     "links": 0.9835638087712366,
+     "jumps": 0.8253521126760563,
+     "exact": 70,
+     "jumps_relinked": 0.8191549295774648,
+     "recheck_jumps": 0.7605633802816901,
+     "recheck_wrong_long": 50,
+     "recheck_exact": 64,
+     "wrong_long": 122
+    },
+    "ridge": {
+     "links": 0.9722594556792354,
+     "jumps": 0.8063492063492064,
+     "exact": 46,
+     "jumps_relinked": 0.7947089947089947,
+     "recheck_jumps": 0.7444444444444445,
+     "recheck_wrong_long": 134,
+     "recheck_exact": 46,
+     "wrong_long": 203
+    }
+   },
+   "frozen": {
+    "true": {
+     "links": 0.9792967206637693,
+     "jumps": 0.8028169014084507,
+     "exact": 59,
+     "jumps_relinked": 0.8022535211267605,
+     "recheck_jumps": 0.7453521126760564,
+     "recheck_wrong_long": 74,
+     "recheck_exact": 58,
+     "wrong_long": 167
+    },
+    "ridge": {
+     "links": 0.9687737337150202,
+     "jumps": 0.7946287519747235,
+     "exact": 42,
+     "jumps_relinked": 0.7951553449183781,
+     "recheck_jumps": 0.7424960505529226,
+     "recheck_wrong_long": 125,
+     "recheck_exact": 39,
+     "wrong_long": 202
+    }
+   }
+  },
+  "unetformer_val": {
+   "joint": {
+    "loss": 1.6605715179443359,
+    "crossing_precision": 0.933300395256917,
+    "crossing_recall": 0.9328395061728395,
+    "over_axis_within_45deg": 0.9553392150897475,
+    "center_hi": 0.43114869832992553,
+    "mask": 0.13177608728408813
+   },
+   "plain": {
+    "loss": 1.8967512766520183,
+    "crossing_precision": 0.931439764936337,
+    "crossing_recall": 0.9351032448377581,
+    "over_axis_within_45deg": 0.9560085184058412,
+    "center_hi": 0.43820672035217284,
+    "mask": 0.13731385668118795
+   },
+   "control": null
+  },
+  "parser": {
+   "joint": null,
+   "plain": {
+    "kb": 0.8958333333333334,
+    "kb_unseen": 0.8083333333333333,
+    "kb_wrong": 0,
+    "close": 0.51,
+    "close_wrong": 1,
+    "real": 25,
+    "real_wrong": 1,
+    "b2": 113,
+    "b2_wrong": 1
+   },
+   "control": null
+  }
+ },
+ "1": {
+  "strand_order": {
+   "joint": {
+    "true": {
+     "links": 0.9758198340576847,
+     "jumps": 0.7904225352112676,
+     "exact": 51,
+     "jumps_relinked": 0.7921126760563381,
+     "recheck_jumps": 0.7414084507042253,
+     "recheck_wrong_long": 65,
+     "recheck_exact": 58,
+     "wrong_long": 129
+    },
+    "ridge": {
+     "links": 0.96932979931844,
+     "jumps": 0.7969061876247505,
+     "exact": 39,
+     "jumps_relinked": 0.8018962075848304,
+     "recheck_jumps": 0.7584830339321357,
+     "recheck_wrong_long": 116,
+     "recheck_exact": 43,
+     "wrong_long": 188
+    }
+   },
+   "frozen": {
+    "true": {
+     "links": 0.9779006980113262,
+     "jumps": 0.8056338028169014,
+     "exact": 69,
+     "jumps_relinked": 0.7977464788732395,
+     "recheck_jumps": 0.7436619718309859,
+     "recheck_wrong_long": 70,
+     "recheck_exact": 60,
+     "wrong_long": 148
+    },
+    "ridge": {
+     "links": 0.9704773318523282,
+     "jumps": 0.8092783505154639,
+     "exact": 48,
+     "jumps_relinked": 0.8005154639175258,
+     "recheck_jumps": 0.7463917525773196,
+     "recheck_wrong_long": 120,
+     "recheck_exact": 39,
+     "wrong_long": 183
+    }
+   }
+  },
+  "unetformer_val": {
+   "joint": {
+    "loss": 1.943916441599528,
+    "crossing_precision": 0.9232283464566929,
+    "crossing_recall": 0.9241379310344827,
+    "over_axis_within_45deg": 0.9543656829936112,
+    "center_hi": 0.44143025716145834,
+    "mask": 0.13792968094348906
+   },
+   "plain": {
+    "loss": 1.8864157056808473,
+    "crossing_precision": 0.9205653021442495,
+    "crossing_recall": 0.930083702609552,
+    "over_axis_within_45deg": 0.9580772741101308,
+    "center_hi": 0.43911773204803467,
+    "mask": 0.13699806253115335
+   },
+   "control": null
+  },
+  "parser": {
+   "joint": null,
+   "plain": {
+    "kb": 0.9291666666666667,
+    "kb_unseen": 0.875,
+    "kb_wrong": 0,
+    "close": 0.53,
+    "close_wrong": 2,
+    "real": 27,
+    "real_wrong": 1,
+    "b2": 108,
+    "b2_wrong": 1
+   },
+   "control": null
+  }
+ },
+ "2": {
+  "strand_order": {
+   "joint": {
+    "true": {
+     "links": 0.9824575266693006,
+     "jumps": 0.8208450704225352,
+     "exact": 63,
+     "jumps_relinked": 0.8123943661971831,
+     "recheck_jumps": 0.7470422535211267,
+     "recheck_wrong_long": 59,
+     "recheck_exact": 60,
+     "wrong_long": 122
+    },
+    "ridge": {
+     "links": 0.970488644988032,
+     "jumps": 0.8196218702095044,
+     "exact": 48,
+     "jumps_relinked": 0.8002043944813491,
+     "recheck_jumps": 0.7547266223811957,
+     "recheck_wrong_long": 135,
+     "recheck_exact": 42,
+     "wrong_long": 199
+    }
+   },
+   "frozen": {
+    "true": {
+     "links": 0.9783221388120638,
+     "jumps": 0.8005633802816902,
+     "exact": 58,
+     "jumps_relinked": 0.7949295774647888,
+     "recheck_jumps": 0.7380281690140845,
+     "recheck_wrong_long": 82,
+     "recheck_exact": 54,
+     "wrong_long": 148
+    },
+    "ridge": {
+     "links": 0.9692464953271028,
+     "jumps": 0.8011634056054997,
+     "exact": 44,
+     "jumps_relinked": 0.7932310946589106,
+     "recheck_jumps": 0.7477525118984664,
+     "recheck_wrong_long": 125,
+     "recheck_exact": 40,
+     "wrong_long": 208
+    }
+   }
+  },
+  "unetformer_val": {
+   "joint": {
+    "loss": 1.7886472606658936,
+    "crossing_precision": 0.9173718267794922,
+    "crossing_recall": 0.9119247897080653,
+    "over_axis_within_45deg": 0.9549741405536963,
+    "center_hi": 0.4397061228752136,
+    "mask": 0.13493774155775706
+   },
+   "plain": {
+    "loss": 1.887938068707784,
+    "crossing_precision": 0.9250367466927977,
+    "crossing_recall": 0.92959133431807,
+    "over_axis_within_45deg": 0.9557042896257986,
+    "center_hi": 0.4354677100976308,
+    "mask": 0.134622975786527
+   },
+   "control": null
+  },
+  "parser": {
+   "joint": null,
+   "plain": {
+    "kb": 0.8875,
+    "kb_unseen": 0.7916666666666666,
+    "kb_wrong": 0,
+    "close": 0.55,
+    "close_wrong": 2,
+    "real": 24,
+    "real_wrong": 1,
+    "b2": 111,
+    "b2_wrong": 1
+   },
+   "control": null
+  }
+ }
+}

@@ -1,0 +1,84 @@
+{
+ "images": [
+  150,
+  300
+ ],
+ "results": {
+  "true": {
+   "head alone": {
+    "jumps_found": 0.7104225352112676,
+    "wrong_long_links": 189,
+    "images_without_wrong_long_link": 83,
+    "images_every_link_right": 37
+   },
+   "straight balanced": {
+    "jumps_found": 0.6687323943661971,
+    "wrong_long_links": 94,
+    "images_without_wrong_long_link": 103,
+    "images_every_link_right": 37
+   },
+   "straight strict": {
+    "jumps_found": 0.5205633802816901,
+    "wrong_long_links": 27,
+    "images_without_wrong_long_link": 132,
+    "images_every_link_right": 26
+   },
+   "curved relink": {
+    "jumps_found": 0.7487323943661972,
+    "wrong_long_links": 174,
+    "images_without_wrong_long_link": 89,
+    "images_every_link_right": 50
+   },
+   "curved relink + straight balanced": {
+    "jumps_found": 0.6946478873239437,
+    "wrong_long_links": 78,
+    "images_without_wrong_long_link": 114,
+    "images_every_link_right": 48
+   },
+   "curved relink + straight strict": {
+    "jumps_found": 0.5346478873239436,
+    "wrong_long_links": 33,
+    "images_without_wrong_long_link": 127,
+    "images_every_link_right": 35
+   }
+  },
+  "ridge": {
+   "head alone": {
+    "jumps_found": 0.7251184834123223,
+    "wrong_long_links": 247,
+    "images_without_wrong_long_link": 71,
+    "images_every_link_right": 30
+   },
+   "straight balanced": {
+    "jumps_found": 0.6882569773565034,
+    "wrong_long_links": 140,
+    "images_without_wrong_long_link": 87,
+    "images_every_link_right": 29
+   },
+   "straight strict": {
+    "jumps_found": 0.5608214849921012,
+    "wrong_long_links": 68,
+    "images_without_wrong_long_link": 110,
+    "images_every_link_right": 23
+   },
+   "curved relink": {
+    "jumps_found": 0.7377567140600316,
+    "wrong_long_links": 276,
+    "images_without_wrong_long_link": 66,
+    "images_every_link_right": 40
+   },
+   "curved relink + straight balanced": {
+    "jumps_found": 0.6945760926803581,
+    "wrong_long_links": 134,
+    "images_without_wrong_long_link": 85,
+    "images_every_link_right": 37
+   },
+   "curved relink + straight strict": {
+    "jumps_found": 0.5703001579778831,
+    "wrong_long_links": 73,
+    "images_without_wrong_long_link": 106,
+    "images_every_link_right": 27
+   }
+  }
+ }
+}

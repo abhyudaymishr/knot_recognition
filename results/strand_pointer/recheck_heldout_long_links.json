@@ -1,0 +1,36 @@
+{
+ "images": [
+  150,
+  300
+ ],
+ "results": {
+  "true": {
+   "head alone": {
+    "jumps_found": 0.7104225352112676,
+    "wrong_long_links": 189,
+    "images_without_wrong_long_link": 83,
+    "long_links_right": 0.864516129032258
+   },
+   "curved re-check + relink": {
+    "jumps_found": 0.7487323943661972,
+    "wrong_long_links": 174,
+    "images_without_wrong_long_link": 89,
+    "long_links_right": 0.8796680497925311
+   }
+  },
+  "ridge": {
+   "head alone": {
+    "jumps_found": 0.7251184834123223,
+    "wrong_long_links": 247,
+    "images_without_wrong_long_link": 71,
+    "long_links_right": 0.8250708215297451
+   },
+   "curved re-check + relink": {
+    "jumps_found": 0.7377567140600316,
+    "wrong_long_links": 276,
+    "images_without_wrong_long_link": 66,
+    "long_links_right": 0.8123725356900068
+   }
+  }
+ }
+}

@@ -1,0 +1,413 @@
+{
+ "head": "/home/claude/knot_recognition/checkpoints/strand_pointer/smoke3_s0.pth",
+ "images": [
+  0,
+  150
+ ],
+ "results": {
+  "true": {
+   "head alone": {
+    "jumps_found": 0.6793201133144476,
+    "long_links_right": 0.8376193975018369,
+    "wrong_long_links": 221,
+    "images_without_wrong_long_link": 73,
+    "link_recall": 0.9604308639261376,
+    "jumps": 1765
+   },
+   "40 deg, ridge mean 0.3, min 0.0": {
+    "jumps_found": 0.568271954674221,
+    "long_links_right": 0.9245837414299706,
+    "wrong_long_links": 77,
+    "images_without_wrong_long_link": 104,
+    "link_recall": 0.9550450648494174,
+    "jumps": 1765
+   },
+   "40 deg, ridge mean 0.3, min 0.1": {
+    "jumps_found": 0.5059490084985836,
+    "long_links_right": 0.9597238204833142,
+    "wrong_long_links": 35,
+    "images_without_wrong_long_link": 127,
+    "link_recall": 0.9520224225104419,
+    "jumps": 1765
+   },
+   "40 deg, ridge mean 0.4, min 0.0": {
+    "jumps_found": 0.5575070821529745,
+    "long_links_right": 0.9315206445115811,
+    "wrong_long_links": 68,
+    "images_without_wrong_long_link": 111,
+    "link_recall": 0.9545229720817762,
+    "jumps": 1765
+   },
+   "40 deg, ridge mean 0.4, min 0.1": {
+    "jumps_found": 0.5059490084985836,
+    "long_links_right": 0.9597238204833142,
+    "wrong_long_links": 35,
+    "images_without_wrong_long_link": 127,
+    "link_recall": 0.9520224225104419,
+    "jumps": 1765
+   },
+   "40 deg, ridge mean 0.5, min 0.0": {
+    "jumps_found": 0.5473087818696883,
+    "long_links_right": 0.9389233954451346,
+    "wrong_long_links": 59,
+    "images_without_wrong_long_link": 115,
+    "link_recall": 0.9540283578808529,
+    "jumps": 1765
+   },
+   "40 deg, ridge mean 0.5, min 0.1": {
+    "jumps_found": 0.5059490084985836,
+    "long_links_right": 0.9597238204833142,
+    "wrong_long_links": 35,
+    "images_without_wrong_long_link": 127,
+    "link_recall": 0.9520224225104419,
+    "jumps": 1765
+   },
+   "55 deg, ridge mean 0.3, min 0.0": {
+    "jumps_found": 0.6243626062322947,
+    "long_links_right": 0.9125109361329834,
+    "wrong_long_links": 100,
+    "images_without_wrong_long_link": 95,
+    "link_recall": 0.9577654429544955,
+    "jumps": 1765
+   },
+   "55 deg, ridge mean 0.3, min 0.1": {
+    "jumps_found": 0.5388101983002833,
+    "long_links_right": 0.9509594882729211,
+    "wrong_long_links": 46,
+    "images_without_wrong_long_link": 121,
+    "link_recall": 0.9536161793800836,
+    "jumps": 1765
+   },
+   "55 deg, ridge mean 0.4, min 0.0": {
+    "jumps_found": 0.6113314447592068,
+    "long_links_right": 0.9214092140921409,
+    "wrong_long_links": 87,
+    "images_without_wrong_long_link": 103,
+    "link_recall": 0.9571334359199825,
+    "jumps": 1765
+   },
+   "55 deg, ridge mean 0.4, min 0.1": {
+    "jumps_found": 0.5388101983002833,
+    "long_links_right": 0.9509594882729211,
+    "wrong_long_links": 46,
+    "images_without_wrong_long_link": 121,
+    "link_recall": 0.9536161793800836,
+    "jumps": 1765
+   },
+   "55 deg, ridge mean 0.5, min 0.0": {
+    "jumps_found": 0.5960339943342776,
+    "long_links_right": 0.9289055191768008,
+    "wrong_long_links": 76,
+    "images_without_wrong_long_link": 107,
+    "link_recall": 0.9563915146185975,
+    "jumps": 1765
+   },
+   "55 deg, ridge mean 0.5, min 0.1": {
+    "jumps_found": 0.5388101983002833,
+    "long_links_right": 0.9509594882729211,
+    "wrong_long_links": 46,
+    "images_without_wrong_long_link": 121,
+    "link_recall": 0.9536161793800836,
+    "jumps": 1765
+   },
+   "70 deg, ridge mean 0.3, min 0.0": {
+    "jumps_found": 0.6430594900849859,
+    "long_links_right": 0.9057239057239057,
+    "wrong_long_links": 112,
+    "images_without_wrong_long_link": 93,
+    "link_recall": 0.9586722356561882,
+    "jumps": 1765
+   },
+   "70 deg, ridge mean 0.3, min 0.1": {
+    "jumps_found": 0.5478753541076488,
+    "long_links_right": 0.9458333333333333,
+    "wrong_long_links": 52,
+    "images_without_wrong_long_link": 118,
+    "link_recall": 0.9540558364475709,
+    "jumps": 1765
+   },
+   "70 deg, ridge mean 0.4, min 0.0": {
+    "jumps_found": 0.6294617563739376,
+    "long_links_right": 0.9147826086956522,
+    "wrong_long_links": 98,
+    "images_without_wrong_long_link": 101,
+    "link_recall": 0.9580127500549571,
+    "jumps": 1765
+   },
+   "70 deg, ridge mean 0.4, min 0.1": {
+    "jumps_found": 0.5478753541076488,
+    "long_links_right": 0.9458333333333333,
+    "wrong_long_links": 52,
+    "images_without_wrong_long_link": 118,
+    "link_recall": 0.9540558364475709,
+    "jumps": 1765
+   },
+   "70 deg, ridge mean 0.5, min 0.0": {
+    "jumps_found": 0.6124645892351275,
+    "long_links_right": 0.9223826714801444,
+    "wrong_long_links": 86,
+    "images_without_wrong_long_link": 104,
+    "link_recall": 0.9571883930534183,
+    "jumps": 1765
+   },
+   "70 deg, ridge mean 0.5, min 0.1": {
+    "jumps_found": 0.5478753541076488,
+    "long_links_right": 0.9458333333333333,
+    "wrong_long_links": 52,
+    "images_without_wrong_long_link": 118,
+    "link_recall": 0.9540558364475709,
+    "jumps": 1765
+   },
+   "90 deg, ridge mean 0.3, min 0.0": {
+    "jumps_found": 0.6504249291784703,
+    "long_links_right": 0.9,
+    "wrong_long_links": 121,
+    "images_without_wrong_long_link": 92,
+    "link_recall": 0.9590294570235216,
+    "jumps": 1765
+   },
+   "90 deg, ridge mean 0.3, min 0.1": {
+    "jumps_found": 0.5507082152974504,
+    "long_links_right": 0.9412371134020618,
+    "wrong_long_links": 57,
+    "images_without_wrong_long_link": 117,
+    "link_recall": 0.9541932292811607,
+    "jumps": 1765
+   },
+   "90 deg, ridge mean 0.4, min 0.0": {
+    "jumps_found": 0.635127478753541,
+    "long_links_right": 0.9092465753424658,
+    "wrong_long_links": 106,
+    "images_without_wrong_long_link": 98,
+    "link_recall": 0.9582875357221368,
+    "jumps": 1765
+   },
+   "90 deg, ridge mean 0.4, min 0.1": {
+    "jumps_found": 0.5507082152974504,
+    "long_links_right": 0.9412371134020618,
+    "wrong_long_links": 57,
+    "images_without_wrong_long_link": 117,
+    "link_recall": 0.9541932292811607,
+    "jumps": 1765
+   },
+   "90 deg, ridge mean 0.5, min 0.0": {
+    "jumps_found": 0.6169971671388101,
+    "long_links_right": 0.9180035650623886,
+    "wrong_long_links": 92,
+    "images_without_wrong_long_link": 102,
+    "link_recall": 0.957408221587162,
+    "jumps": 1765
+   },
+   "90 deg, ridge mean 0.5, min 0.1": {
+    "jumps_found": 0.5507082152974504,
+    "long_links_right": 0.9412371134020618,
+    "wrong_long_links": 57,
+    "images_without_wrong_long_link": 117,
+    "link_recall": 0.9541932292811607,
+    "jumps": 1765
+   }
+  },
+  "ridge": {
+   "head alone": {
+    "jumps_found": 0.7286192068800764,
+    "long_links_right": 0.8324873096446701,
+    "wrong_long_links": 231,
+    "images_without_wrong_long_link": 67,
+    "link_recall": 0.9638510988189565,
+    "jumps": 2093
+   },
+   "40 deg, ridge mean 0.3, min 0.0": {
+    "jumps_found": 0.6359292881032012,
+    "long_links_right": 0.907088122605364,
+    "wrong_long_links": 97,
+    "images_without_wrong_long_link": 93,
+    "link_recall": 0.9578412318732247,
+    "jumps": 2093
+   },
+   "40 deg, ridge mean 0.3, min 0.1": {
+    "jumps_found": 0.5762064022933588,
+    "long_links_right": 0.9351535836177475,
+    "wrong_long_links": 57,
+    "images_without_wrong_long_link": 110,
+    "link_recall": 0.9541037524293616,
+    "jumps": 2093
+   },
+   "40 deg, ridge mean 0.4, min 0.0": {
+    "jumps_found": 0.6278069756330625,
+    "long_links_right": 0.916256157635468,
+    "wrong_long_links": 85,
+    "images_without_wrong_long_link": 95,
+    "link_recall": 0.9573329346688593,
+    "jumps": 2093
+   },
+   "40 deg, ridge mean 0.4, min 0.1": {
+    "jumps_found": 0.5762064022933588,
+    "long_links_right": 0.9351535836177475,
+    "wrong_long_links": 57,
+    "images_without_wrong_long_link": 110,
+    "link_recall": 0.9541037524293616,
+    "jumps": 2093
+   },
+   "40 deg, ridge mean 0.5, min 0.0": {
+    "jumps_found": 0.6149068322981367,
+    "long_links_right": 0.9233128834355828,
+    "wrong_long_links": 75,
+    "images_without_wrong_long_link": 102,
+    "link_recall": 0.9565256391089849,
+    "jumps": 2093
+   },
+   "40 deg, ridge mean 0.5, min 0.1": {
+    "jumps_found": 0.5762064022933588,
+    "long_links_right": 0.9362186788154897,
+    "wrong_long_links": 56,
+    "images_without_wrong_long_link": 111,
+    "link_recall": 0.9541037524293616,
+    "jumps": 2093
+   },
+   "55 deg, ridge mean 0.3, min 0.0": {
+    "jumps_found": 0.6822742474916388,
+    "long_links_right": 0.8901192504258943,
+    "wrong_long_links": 129,
+    "images_without_wrong_long_link": 85,
+    "link_recall": 0.9607714157572134,
+    "jumps": 2093
+   },
+   "55 deg, ridge mean 0.3, min 0.1": {
+    "jumps_found": 0.6015289058767319,
+    "long_links_right": 0.9259259259259259,
+    "wrong_long_links": 70,
+    "images_without_wrong_long_link": 105,
+    "link_recall": 0.9556884437135595,
+    "jumps": 2093
+   },
+   "55 deg, ridge mean 0.4, min 0.0": {
+    "jumps_found": 0.6703296703296703,
+    "long_links_right": 0.9017699115044248,
+    "wrong_long_links": 111,
+    "images_without_wrong_long_link": 88,
+    "link_recall": 0.9599940200328898,
+    "jumps": 2093
+   },
+   "55 deg, ridge mean 0.4, min 0.1": {
+    "jumps_found": 0.6015289058767319,
+    "long_links_right": 0.9259259259259259,
+    "wrong_long_links": 70,
+    "images_without_wrong_long_link": 105,
+    "link_recall": 0.9556884437135595,
+    "jumps": 2093
+   },
+   "55 deg, ridge mean 0.5, min 0.0": {
+    "jumps_found": 0.6531294792164357,
+    "long_links_right": 0.9144186046511628,
+    "wrong_long_links": 92,
+    "images_without_wrong_long_link": 97,
+    "link_recall": 0.9589176259530573,
+    "jumps": 2093
+   },
+   "55 deg, ridge mean 0.5, min 0.1": {
+    "jumps_found": 0.6015289058767319,
+    "long_links_right": 0.926906779661017,
+    "wrong_long_links": 69,
+    "images_without_wrong_long_link": 106,
+    "link_recall": 0.9556884437135595,
+    "jumps": 2093
+   },
+   "70 deg, ridge mean 0.3, min 0.0": {
+    "jumps_found": 0.6999522216913521,
+    "long_links_right": 0.8861588861588862,
+    "wrong_long_links": 139,
+    "images_without_wrong_long_link": 84,
+    "link_recall": 0.9618777096725968,
+    "jumps": 2093
+   },
+   "70 deg, ridge mean 0.3, min 0.1": {
+    "jumps_found": 0.6101290014333492,
+    "long_links_right": 0.9234746639089969,
+    "wrong_long_links": 74,
+    "images_without_wrong_long_link": 104,
+    "link_recall": 0.9562266407534759,
+    "jumps": 2093
+   },
+   "70 deg, ridge mean 0.4, min 0.0": {
+    "jumps_found": 0.6860965121834687,
+    "long_links_right": 0.896845694799659,
+    "wrong_long_links": 121,
+    "images_without_wrong_long_link": 87,
+    "link_recall": 0.9609807146060697,
+    "jumps": 2093
+   },
+   "70 deg, ridge mean 0.4, min 0.1": {
+    "jumps_found": 0.6101290014333492,
+    "long_links_right": 0.9234746639089969,
+    "wrong_long_links": 74,
+    "images_without_wrong_long_link": 104,
+    "link_recall": 0.9562266407534759,
+    "jumps": 2093
+   },
+   "70 deg, ridge mean 0.5, min 0.0": {
+    "jumps_found": 0.6688963210702341,
+    "long_links_right": 0.9120287253141831,
+    "wrong_long_links": 98,
+    "images_without_wrong_long_link": 96,
+    "link_recall": 0.9599043205262371,
+    "jumps": 2093
+   },
+   "70 deg, ridge mean 0.5, min 0.1": {
+    "jumps_found": 0.6101290014333492,
+    "long_links_right": 0.9244306418219461,
+    "wrong_long_links": 73,
+    "images_without_wrong_long_link": 105,
+    "link_recall": 0.9562266407534759,
+    "jumps": 2093
+   },
+   "90 deg, ridge mean 0.3, min 0.0": {
+    "jumps_found": 0.7047300525561395,
+    "long_links_right": 0.8820678513731826,
+    "wrong_long_links": 146,
+    "images_without_wrong_long_link": 82,
+    "link_recall": 0.9621767080281058,
+    "jumps": 2093
+   },
+   "90 deg, ridge mean 0.3, min 0.1": {
+    "jumps_found": 0.612517916865743,
+    "long_links_right": 0.9200819672131147,
+    "wrong_long_links": 78,
+    "images_without_wrong_long_link": 101,
+    "link_recall": 0.9563761399312304,
+    "jumps": 2093
+   },
+   "90 deg, ridge mean 0.4, min 0.0": {
+    "jumps_found": 0.6908743430482561,
+    "long_links_right": 0.8946925021061499,
+    "wrong_long_links": 125,
+    "images_without_wrong_long_link": 85,
+    "link_recall": 0.9612797129615787,
+    "jumps": 2093
+   },
+   "90 deg, ridge mean 0.4, min 0.1": {
+    "jumps_found": 0.612517916865743,
+    "long_links_right": 0.9200819672131147,
+    "wrong_long_links": 78,
+    "images_without_wrong_long_link": 101,
+    "link_recall": 0.9563761399312304,
+    "jumps": 2093
+   },
+   "90 deg, ridge mean 0.5, min 0.0": {
+    "jumps_found": 0.6731963688485427,
+    "long_links_right": 0.9094942324755989,
+    "wrong_long_links": 102,
+    "images_without_wrong_long_link": 93,
+    "link_recall": 0.9601734190461952,
+    "jumps": 2093
+   },
+   "90 deg, ridge mean 0.5, min 0.1": {
+    "jumps_found": 0.612517916865743,
+    "long_links_right": 0.921025641025641,
+    "wrong_long_links": 77,
+    "images_without_wrong_long_link": 102,
+    "link_recall": 0.9563761399312304,
+    "jumps": 2093
+   }
+  }
+ }
+}

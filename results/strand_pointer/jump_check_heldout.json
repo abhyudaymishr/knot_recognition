@@ -1,0 +1,61 @@
+{
+ "head": "/home/claude/knot_recognition/checkpoints/strand_pointer/smoke3_s0.pth",
+ "images": [
+  150,
+  300
+ ],
+ "results": {
+  "true": {
+   "head alone": {
+    "jumps_found": 0.7104225352112676,
+    "long_links_right": 0.864516129032258,
+    "wrong_long_links": 189,
+    "images_without_wrong_long_link": 83,
+    "link_recall": 0.9652311339391545,
+    "jumps": 1775
+   },
+   "balanced (70.0, 0.3, 0.0)": {
+    "jumps_found": 0.6687323943661971,
+    "long_links_right": 0.9233278955954323,
+    "wrong_long_links": 94,
+    "images_without_wrong_long_link": 103,
+    "link_recall": 0.9632819702357435,
+    "jumps": 1775
+   },
+   "strict (40.0, 0.4, 0.1)": {
+    "jumps_found": 0.5205633802816901,
+    "long_links_right": 0.9698660714285714,
+    "wrong_long_links": 27,
+    "images_without_wrong_long_link": 132,
+    "link_recall": 0.9563545370736204,
+    "jumps": 1775
+   }
+  },
+  "ridge": {
+   "head alone": {
+    "jumps_found": 0.7251184834123223,
+    "long_links_right": 0.8250708215297451,
+    "wrong_long_links": 247,
+    "images_without_wrong_long_link": 71,
+    "link_recall": 0.9566804930770579,
+    "jumps": 1899
+   },
+   "balanced (70.0, 0.3, 0.0)": {
+    "jumps_found": 0.6882569773565034,
+    "long_links_right": 0.8860862489829129,
+    "wrong_long_links": 140,
+    "images_without_wrong_long_link": 87,
+    "link_recall": 0.9544604778874802,
+    "jumps": 1899
+   },
+   "strict (40.0, 0.4, 0.1)": {
+    "jumps_found": 0.5608214849921012,
+    "long_links_right": 0.9253567508232712,
+    "wrong_long_links": 68,
+    "images_without_wrong_long_link": 110,
+    "link_recall": 0.9472746392475317,
+    "jumps": 1899
+   }
+  }
+ }
+}

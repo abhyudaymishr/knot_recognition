@@ -1,0 +1,85 @@
+{
+ "head": "checkpoints/uf_pointer/mps_ufptr_s1_head.pth",
+ "images": [
+  150,
+  300
+ ],
+ "results": {
+  "true": {
+   "head alone": {
+    "jumps_found": 0.7904225352112676,
+    "wrong_long_links": 129,
+    "images_without_wrong_long_link": 92,
+    "images_every_link_right": 51
+   },
+   "straight balanced": {
+    "jumps_found": 0.7397183098591549,
+    "wrong_long_links": 65,
+    "images_without_wrong_long_link": 108,
+    "images_every_link_right": 46
+   },
+   "straight strict": {
+    "jumps_found": 0.5577464788732395,
+    "wrong_long_links": 14,
+    "images_without_wrong_long_link": 137,
+    "images_every_link_right": 32
+   },
+   "curved relink": {
+    "jumps_found": 0.7921126760563381,
+    "wrong_long_links": 133,
+    "images_without_wrong_long_link": 95,
+    "images_every_link_right": 62
+   },
+   "curved relink + straight balanced": {
+    "jumps_found": 0.7414084507042253,
+    "wrong_long_links": 65,
+    "images_without_wrong_long_link": 112,
+    "images_every_link_right": 58
+   },
+   "curved relink + straight strict": {
+    "jumps_found": 0.5633802816901409,
+    "wrong_long_links": 23,
+    "images_without_wrong_long_link": 133,
+    "images_every_link_right": 39
+   }
+  },
+  "ridge": {
+   "head alone": {
+    "jumps_found": 0.7969061876247505,
+    "wrong_long_links": 188,
+    "images_without_wrong_long_link": 79,
+    "images_every_link_right": 39
+   },
+   "straight balanced": {
+    "jumps_found": 0.7544910179640718,
+    "wrong_long_links": 119,
+    "images_without_wrong_long_link": 94,
+    "images_every_link_right": 37
+   },
+   "straight strict": {
+    "jumps_found": 0.6002994011976048,
+    "wrong_long_links": 55,
+    "images_without_wrong_long_link": 116,
+    "images_every_link_right": 27
+   },
+   "curved relink": {
+    "jumps_found": 0.8018962075848304,
+    "wrong_long_links": 203,
+    "images_without_wrong_long_link": 80,
+    "images_every_link_right": 48
+   },
+   "curved relink + straight balanced": {
+    "jumps_found": 0.7584830339321357,
+    "wrong_long_links": 116,
+    "images_without_wrong_long_link": 99,
+    "images_every_link_right": 43
+   },
+   "curved relink + straight strict": {
+    "jumps_found": 0.6077844311377245,
+    "wrong_long_links": 59,
+    "images_without_wrong_long_link": 118,
+    "images_every_link_right": 32
+   }
+  }
+ }
+}
