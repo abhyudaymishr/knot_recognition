@@ -1,0 +1,8 @@
+# name|model|sets|extra flags
+v3_frozen|checkpoints/knot_aware_nanotransformer.pth|blind_v2|--kappa 26.5 --role main
+v3_gap|checkpoints/knot_aware_nanotransformer.pth|kb,close,real,blind_v1,blind_v2|--kappa 26.5 --gap
+seed1|checkpoints/recipe/seed1.pth|blind_v2|--kappa 27.0
+seed2|checkpoints/recipe/seed2.pth|blind_v2|--kappa 26.5
+unet_seg+kp|unet_seg+kp:checkpoints/recipe/baseline_unet_seg.pth,checkpoints/recipe/baseline_unet_kp.pth|blind_v2|--kappa 27.0 --role baseline
+nofft|checkpoints/recipe/nofft.pth|blind_v2|--kappa 30.0
+mk_full|checkpoints/recipe/mk_full.pth|kb,close,real,blind_v1,blind_v2|

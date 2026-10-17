@@ -1,0 +1,8 @@
+{
+ "model": "checkpoints/knot_aware_nanotransformer.pth",
+ "gap": false,
+ "role": "ablation",
+ "ledger": {},
+ "kappa": 26.5,
+ "kappa_from": "given"
+}

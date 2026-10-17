@@ -1,0 +1,21 @@
+cable_id,ground_truth_type,material,colour,diameter_mm,closure,sessions
+c01,0_1,coax RG6,black,6.9,"ends joined (barrel connector, heat-shrink or tape)",sA sB
+c02,0_1,patch cable (Cat6),blue,6.0,"ends joined (barrel connector, heat-shrink or tape)",sC sD
+c03,3_1*,coax RG6,black,6.9,"ends joined (barrel connector, heat-shrink or tape)",sA sC
+c04,3_1,rope 8 mm,any,8.0,"ends joined (barrel connector, heat-shrink or tape)",sB sD
+c05,3_1*,fishing line or thick thread,any,1.0,"ends joined (barrel connector, heat-shrink or tape)",sA sD
+c06,4_1,coax RG58,black,5.0,"ends joined (barrel connector, heat-shrink or tape)",sB sC
+c07,4_1,rope 8 mm,any,8.0,"ends joined (barrel connector, heat-shrink or tape)",sA sB
+c08,5_1*,patch cable (Cat6),any,6.0,"ends joined (barrel connector, heat-shrink or tape)",sC sD
+c09,5_2,coax RG6,white,6.9,"ends joined (barrel connector, heat-shrink or tape)",sA sC
+c10,5_2*,rope 8 mm,any,8.0,"ends joined (barrel connector, heat-shrink or tape)",sB sD
+c11,6_1,coax RG58,black,5.0,"ends joined (barrel connector, heat-shrink or tape)",sA sD
+c12,6_2,patch cable (Cat6),any,6.0,"ends joined (barrel connector, heat-shrink or tape)",sB sC
+c13,6_3,rope 8 mm,any,8.0,"ends joined (barrel connector, heat-shrink or tape)",sA sB
+c14,7_1*,fishing line or thick thread,any,1.0,"ends joined (barrel connector, heat-shrink or tape)",sC sD
+c15,3_1 # 3_1,rope 8 mm,any,8.0,"ends joined (barrel connector, heat-shrink or tape)",sA sC
+c16,3_1 # 3_1*,rope 8 mm,any,8.0,"ends joined (barrel connector, heat-shrink or tape)",sB sD
+c17,"link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",coax RG6 + patch cable (two cables),two colours,6.5,"ends joined (barrel connector, heat-shrink or tape)",sA sD
+c18,"link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",rope + thread (two cables),two colours,4.0,"ends joined (barrel connector, heat-shrink or tape)",sB sC
+c19,"link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]","two coax cables crossing twice, not linked",any,6.9,"ends joined (barrel connector, heat-shrink or tape)",sA sB
+c20,3_1 # 4_1*,coax RG58,black,5.0,"ends joined (barrel connector, heat-shrink or tape)",sC sD

@@ -1,0 +1,2901 @@
+{
+ "set": "blind_real_v1",
+ "manifest_sha256": "0a2564dd1520bca84e21e6c16472989b23f9529b28284ca0186923349c94d190",
+ "model": "seed2",
+ "role": "ablation",
+ "ledger": {
+  "set": "blind:blind_real_v1",
+  "set_hash": "0a2564dd1520bca84e21e6c16472989b23f9529b28284ca0186923349c94d190",
+  "role": "ablation",
+  "checkpoint": "seed2.pth",
+  "checkpoint_sha256": "aa5f4f7e2f593214ad6eb7f106b1fe639223dcf6c0c95b0f5222ce09def8f417",
+  "time_utc": "2026-10-15T05:19:27Z",
+  "git": "3b9b2c6",
+  "repeat_of_same_model": false,
+  "new_main_reason": null,
+  "note": "checkpoints/recipe/seed2.pth"
+ },
+ "by_category": {
+  "all": {
+   "images": 308,
+   "answered": 96,
+   "correct": 90,
+   "wrong": 6,
+   "abstain_reasons": {
+    "2 crossing(s) without exactly four arms": 40,
+    "1 crossing(s) without exactly four arms": 34,
+    "3 crossing(s) without exactly four arms": 27,
+    "free cable ends": 23,
+    "5 crossing(s) without exactly four arms": 23,
+    "4 crossing(s) without exactly four arms": 20
+   },
+   "wrong_examples": [
+    [
+     "knotr_k10_123",
+     "10_123",
+     "10_124"
+    ],
+    [
+     "knotr_k7_1",
+     "7_1",
+     "3_1"
+    ],
+    [
+     "knotr_k8_19",
+     "8_19",
+     "8_20"
+    ],
+    [
+     "knotr_k8_20",
+     "8_20",
+     "8_17"
+    ],
+    [
+     "knotr_k8_21",
+     "8_21",
+     "8_17"
+    ],
+    [
+     "knotr_sum_31_41",
+     "3_1 # 4_1",
+     "3_1 # 3_1*"
+    ]
+   ]
+  },
+  "drawing": {
+   "images": 98,
+   "answered": 61,
+   "correct": 55,
+   "wrong": 6,
+   "abstain_reasons": {
+    "free cable ends": 22,
+    "1 crossing(s) without exactly four arms": 5,
+    "3 crossing(s) without exactly four arms": 3,
+    "2 crossing(s) without exactly four arms": 3,
+    "4 crossing(s) without exactly four arms": 2,
+    "5 crossing(s) without exactly four arms": 1
+   },
+   "wrong_examples": [
+    [
+     "knotr_k10_123",
+     "10_123",
+     "10_124"
+    ],
+    [
+     "knotr_k7_1",
+     "7_1",
+     "3_1"
+    ],
+    [
+     "knotr_k8_19",
+     "8_19",
+     "8_20"
+    ],
+    [
+     "knotr_k8_20",
+     "8_20",
+     "8_17"
+    ],
+    [
+     "knotr_k8_21",
+     "8_21",
+     "8_17"
+    ],
+    [
+     "knotr_sum_31_41",
+     "3_1 # 4_1",
+     "3_1 # 3_1*"
+    ]
+   ]
+  },
+  "render": {
+   "images": 210,
+   "answered": 35,
+   "correct": 35,
+   "wrong": 0,
+   "abstain_reasons": {
+    "2 crossing(s) without exactly four arms": 37,
+    "1 crossing(s) without exactly four arms": 29,
+    "3 crossing(s) without exactly four arms": 24,
+    "5 crossing(s) without exactly four arms": 22,
+    "skeleton branches away from any detected crossin": 19,
+    "4 crossing(s) without exactly four arms": 18
+   },
+   "wrong_examples": []
+  }
+ },
+ "per_image": [
+  {
+   "image_id": "knotr_k10_1",
+   "category": "drawing",
+   "label": "10_1",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "knotr_k10_123",
+   "category": "drawing",
+   "label": "10_123",
+   "answer": "10_124",
+   "correct": false,
+   "reason": null,
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "knotr_k10_47",
+   "category": "drawing",
+   "label": "10_47",
+   "answer": "10_47*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "knotr_k10_61",
+   "category": "drawing",
+   "label": "10_61",
+   "answer": "10_61",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "knotr_k3_1",
+   "category": "drawing",
+   "label": "3_1",
+   "answer": "3_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "knotr_k3_1a",
+   "category": "drawing",
+   "label": "3_1",
+   "answer": "3_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "knotr_k5_1",
+   "category": "drawing",
+   "label": "5_1",
+   "answer": "5_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotr_k5_2",
+   "category": "drawing",
+   "label": "5_2",
+   "answer": "5_2*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotr_k6_1",
+   "category": "drawing",
+   "label": "6_1",
+   "answer": "6_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotr_k6_2",
+   "category": "drawing",
+   "label": "6_2",
+   "answer": "6_2*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotr_k6_3",
+   "category": "drawing",
+   "label": "6_3",
+   "answer": "6_3",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotr_k7_1",
+   "category": "drawing",
+   "label": "7_1",
+   "answer": "3_1",
+   "correct": false,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotr_k7_2",
+   "category": "drawing",
+   "label": "7_2",
+   "answer": "7_2",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotr_k7_3",
+   "category": "drawing",
+   "label": "7_3",
+   "answer": "7_3*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotr_k7_4",
+   "category": "drawing",
+   "label": "7_4",
+   "answer": "7_4*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotr_k7_5",
+   "category": "drawing",
+   "label": "7_5",
+   "answer": "7_5",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotr_k7_6",
+   "category": "drawing",
+   "label": "7_6",
+   "answer": "7_6",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotr_k7_7",
+   "category": "drawing",
+   "label": "7_7",
+   "answer": "7_7",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotr_k7_7a",
+   "category": "drawing",
+   "label": "7_7",
+   "answer": "7_7",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotr_k8_1",
+   "category": "drawing",
+   "label": "8_1",
+   "answer": "8_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_10",
+   "category": "drawing",
+   "label": "8_10",
+   "answer": "8_10*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_11",
+   "category": "drawing",
+   "label": "8_11",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_11_90deg_crossing",
+   "category": "drawing",
+   "label": "8_11",
+   "answer": "8_11*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_12",
+   "category": "drawing",
+   "label": "8_12",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_13",
+   "category": "drawing",
+   "label": "8_13",
+   "answer": "8_13",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_14",
+   "category": "drawing",
+   "label": "8_14",
+   "answer": "8_14",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_15",
+   "category": "drawing",
+   "label": "8_15",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_16",
+   "category": "drawing",
+   "label": "8_16",
+   "answer": "8_16",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_17",
+   "category": "drawing",
+   "label": "8_17",
+   "answer": "8_17",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_19",
+   "category": "drawing",
+   "label": "8_19",
+   "answer": "8_20",
+   "correct": false,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_19a",
+   "category": "drawing",
+   "label": "8_19",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_2",
+   "category": "drawing",
+   "label": "8_2",
+   "answer": "8_2*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_20",
+   "category": "drawing",
+   "label": "8_20",
+   "answer": "8_17",
+   "correct": false,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_21",
+   "category": "drawing",
+   "label": "8_21",
+   "answer": "8_17",
+   "correct": false,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_3",
+   "category": "drawing",
+   "label": "8_3",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_3_90deg_crossing",
+   "category": "drawing",
+   "label": "8_3",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_4",
+   "category": "drawing",
+   "label": "8_4",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_4a",
+   "category": "drawing",
+   "label": "8_4",
+   "answer": "8_4",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_5",
+   "category": "drawing",
+   "label": "8_5",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_5_90deg_crossing",
+   "category": "drawing",
+   "label": "8_5",
+   "answer": "8_5*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_6",
+   "category": "drawing",
+   "label": "8_6",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_6_90deg_crossing",
+   "category": "drawing",
+   "label": "8_6",
+   "answer": "8_6*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_7",
+   "category": "drawing",
+   "label": "8_7",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_8",
+   "category": "drawing",
+   "label": "8_8",
+   "answer": "8_8",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k8_9",
+   "category": "drawing",
+   "label": "8_9",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotr_k9_1",
+   "category": "drawing",
+   "label": "9_1",
+   "answer": "9_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_10",
+   "category": "drawing",
+   "label": "9_10",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_11",
+   "category": "drawing",
+   "label": "9_11",
+   "answer": "9_11*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_12",
+   "category": "drawing",
+   "label": "9_12",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_13",
+   "category": "drawing",
+   "label": "9_13",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_14",
+   "category": "drawing",
+   "label": "9_14",
+   "answer": "9_14",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_15",
+   "category": "drawing",
+   "label": "9_15",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_16",
+   "category": "drawing",
+   "label": "9_16",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_17",
+   "category": "drawing",
+   "label": "9_17",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_18",
+   "category": "drawing",
+   "label": "9_18",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_19",
+   "category": "drawing",
+   "label": "9_19",
+   "answer": "9_19",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_2",
+   "category": "drawing",
+   "label": "9_2",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_20",
+   "category": "drawing",
+   "label": "9_20",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_21",
+   "category": "drawing",
+   "label": "9_21",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_22",
+   "category": "drawing",
+   "label": "9_22",
+   "answer": "9_22",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_23",
+   "category": "drawing",
+   "label": "9_23",
+   "answer": "9_23*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_23a",
+   "category": "drawing",
+   "label": "9_23",
+   "answer": "9_23",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_24",
+   "category": "drawing",
+   "label": "9_24",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_25",
+   "category": "drawing",
+   "label": "9_25",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_26",
+   "category": "drawing",
+   "label": "9_26",
+   "answer": "9_26*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_27",
+   "category": "drawing",
+   "label": "9_27",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_28",
+   "category": "drawing",
+   "label": "9_28",
+   "answer": "9_28",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_29",
+   "category": "drawing",
+   "label": "9_29",
+   "answer": "9_29",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_3",
+   "category": "drawing",
+   "label": "9_3",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_30",
+   "category": "drawing",
+   "label": "9_30",
+   "answer": "9_30",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_31",
+   "category": "drawing",
+   "label": "9_31",
+   "answer": "9_31*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_32",
+   "category": "drawing",
+   "label": "9_32",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_33",
+   "category": "drawing",
+   "label": "9_33",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_34",
+   "category": "drawing",
+   "label": "9_34",
+   "answer": "9_34",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_35",
+   "category": "drawing",
+   "label": "9_35",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_36",
+   "category": "drawing",
+   "label": "9_36",
+   "answer": "9_36*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_37",
+   "category": "drawing",
+   "label": "9_37",
+   "answer": "9_37",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_38",
+   "category": "drawing",
+   "label": "9_38",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_39",
+   "category": "drawing",
+   "label": "9_39",
+   "answer": "9_39*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_4",
+   "category": "drawing",
+   "label": "9_4",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_40",
+   "category": "drawing",
+   "label": "9_40",
+   "answer": "9_40*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_41",
+   "category": "drawing",
+   "label": "9_41",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_42",
+   "category": "drawing",
+   "label": "9_42",
+   "answer": "9_42",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_43",
+   "category": "drawing",
+   "label": "9_43",
+   "answer": "9_43",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_44",
+   "category": "drawing",
+   "label": "9_44",
+   "answer": "9_44",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_45",
+   "category": "drawing",
+   "label": "9_45",
+   "answer": "9_45",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_46",
+   "category": "drawing",
+   "label": "9_46",
+   "answer": "9_46",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_47",
+   "category": "drawing",
+   "label": "9_47",
+   "answer": "9_47",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_48",
+   "category": "drawing",
+   "label": "9_48",
+   "answer": "9_48*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_49",
+   "category": "drawing",
+   "label": "9_49",
+   "answer": "9_49",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_5",
+   "category": "drawing",
+   "label": "9_5",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_6",
+   "category": "drawing",
+   "label": "9_6",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_7",
+   "category": "drawing",
+   "label": "9_7",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_8",
+   "category": "drawing",
+   "label": "9_8",
+   "answer": "9_8*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_k9_9",
+   "category": "drawing",
+   "label": "9_9",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotr_ochiai",
+   "category": "drawing",
+   "label": "0_1",
+   "answer": "0_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 13
+  },
+  {
+   "image_id": "knotr_reefknot",
+   "category": "drawing",
+   "label": "3_1 # 3_1*",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotr_sum_31_41",
+   "category": "drawing",
+   "label": "3_1 # 4_1",
+   "answer": "3_1 # 3_1*",
+   "correct": false,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_3_1_v0",
+   "category": "render",
+   "label": "3_1",
+   "answer": "3_1*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "knotess_3_1_v1",
+   "category": "render",
+   "label": "3_1",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 1
+  },
+  {
+   "image_id": "knotess_4_1_v0",
+   "category": "render",
+   "label": "4_1",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "knotess_4_1_v1",
+   "category": "render",
+   "label": "4_1",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "knotess_5_1_v0",
+   "category": "render",
+   "label": "5_1",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 1
+  },
+  {
+   "image_id": "knotess_5_1_v1",
+   "category": "render",
+   "label": "5_1",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "knotess_5_2_v0",
+   "category": "render",
+   "label": "5_2",
+   "answer": "5_2*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_5_2_v1",
+   "category": "render",
+   "label": "5_2",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_6_1_v0",
+   "category": "render",
+   "label": "6_1",
+   "answer": null,
+   "correct": null,
+   "reason": "Euler check",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_6_1_v1",
+   "category": "render",
+   "label": "6_1",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_6_2_v0",
+   "category": "render",
+   "label": "6_2",
+   "answer": "6_2*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_6_2_v1",
+   "category": "render",
+   "label": "6_2",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_6_3_v0",
+   "category": "render",
+   "label": "6_3",
+   "answer": "6_3",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_6_3_v1",
+   "category": "render",
+   "label": "6_3",
+   "answer": null,
+   "correct": null,
+   "reason": "7 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_1_v0",
+   "category": "render",
+   "label": "7_1",
+   "answer": "7_1*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_1_v1",
+   "category": "render",
+   "label": "7_1",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_7_2_v0",
+   "category": "render",
+   "label": "7_2",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_2_v1",
+   "category": "render",
+   "label": "7_2",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_7_3_v0",
+   "category": "render",
+   "label": "7_3*",
+   "answer": "7_3",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_3_v1",
+   "category": "render",
+   "label": "7_3*",
+   "answer": "7_3",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_4_v0",
+   "category": "render",
+   "label": "7_4*",
+   "answer": "7_4",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_4_v1",
+   "category": "render",
+   "label": "7_4*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_5_v0",
+   "category": "render",
+   "label": "7_5",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_7_5_v1",
+   "category": "render",
+   "label": "7_5",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_7_6_v0",
+   "category": "render",
+   "label": "7_6",
+   "answer": null,
+   "correct": null,
+   "reason": "Euler check",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_6_v1",
+   "category": "render",
+   "label": "7_6",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "knotess_7_7_v0",
+   "category": "render",
+   "label": "7_7",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_7_7_v1",
+   "category": "render",
+   "label": "7_7",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_8_1_v0",
+   "category": "render",
+   "label": "8_1",
+   "answer": "8_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_1_v1",
+   "category": "render",
+   "label": "8_1",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 0
+  },
+  {
+   "image_id": "knotess_8_2_v0",
+   "category": "render",
+   "label": "8_2",
+   "answer": "8_2*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_2_v1",
+   "category": "render",
+   "label": "8_2",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_8_3_v0",
+   "category": "render",
+   "label": "8_3",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_3_v1",
+   "category": "render",
+   "label": "8_3",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_8_4_v0",
+   "category": "render",
+   "label": "8_4*",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_4_v1",
+   "category": "render",
+   "label": "8_4*",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 1
+  },
+  {
+   "image_id": "knotess_8_5_v0",
+   "category": "render",
+   "label": "8_5*",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_8_5_v1",
+   "category": "render",
+   "label": "8_5*",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "knotess_8_6_v0",
+   "category": "render",
+   "label": "8_6",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_6_v1",
+   "category": "render",
+   "label": "8_6",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_7_v0",
+   "category": "render",
+   "label": "8_7",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_7_v1",
+   "category": "render",
+   "label": "8_7",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "knotess_8_8_v0",
+   "category": "render",
+   "label": "8_8",
+   "answer": "8_8",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_8_v1",
+   "category": "render",
+   "label": "8_8",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "knotess_8_9_v0",
+   "category": "render",
+   "label": "8_9",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_9_v1",
+   "category": "render",
+   "label": "8_9",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_8_10_v0",
+   "category": "render",
+   "label": "8_10",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_10_v1",
+   "category": "render",
+   "label": "8_10",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_8_11_v0",
+   "category": "render",
+   "label": "8_11",
+   "answer": "8_11*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_11_v1",
+   "category": "render",
+   "label": "8_11",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_8_12_v0",
+   "category": "render",
+   "label": "8_12",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_12_v1",
+   "category": "render",
+   "label": "8_12",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "knotess_8_13_v0",
+   "category": "render",
+   "label": "8_13",
+   "answer": "8_13",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_13_v1",
+   "category": "render",
+   "label": "8_13",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_8_14_v0",
+   "category": "render",
+   "label": "8_14",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_14_v1",
+   "category": "render",
+   "label": "8_14",
+   "answer": null,
+   "correct": null,
+   "reason": "7 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_15_v0",
+   "category": "render",
+   "label": "8_15",
+   "answer": "8_15*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_15_v1",
+   "category": "render",
+   "label": "8_15",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_16_v0",
+   "category": "render",
+   "label": "8_16*",
+   "answer": "8_16",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_16_v1",
+   "category": "render",
+   "label": "8_16*",
+   "answer": null,
+   "correct": null,
+   "reason": "7 crossing(s) without exactly four arms",
+   "crossings_detected": 11
+  },
+  {
+   "image_id": "knotess_8_17_v0",
+   "category": "render",
+   "label": "8_17",
+   "answer": "8_17",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_17_v1",
+   "category": "render",
+   "label": "8_17",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_18_v0",
+   "category": "render",
+   "label": "8_18",
+   "answer": "8_18",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_18_v1",
+   "category": "render",
+   "label": "8_18",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_8_19_v0",
+   "category": "render",
+   "label": "8_19*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_19_v1",
+   "category": "render",
+   "label": "8_19*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "knotess_8_20_v0",
+   "category": "render",
+   "label": "8_20",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "knotess_8_20_v1",
+   "category": "render",
+   "label": "8_20",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_8_21_v0",
+   "category": "render",
+   "label": "8_21",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_21_v1",
+   "category": "render",
+   "label": "8_21",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_9_1_v0",
+   "category": "render",
+   "label": "9_1",
+   "answer": "9_1*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_1_v1",
+   "category": "render",
+   "label": "9_1",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 0
+  },
+  {
+   "image_id": "knotess_9_2_v0",
+   "category": "render",
+   "label": "9_2",
+   "answer": null,
+   "correct": null,
+   "reason": "Euler check",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_2_v1",
+   "category": "render",
+   "label": "9_2",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_9_3_v0",
+   "category": "render",
+   "label": "9_3*",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_3_v1",
+   "category": "render",
+   "label": "9_3*",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 1
+  },
+  {
+   "image_id": "knotess_9_4_v0",
+   "category": "render",
+   "label": "9_4",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_9_4_v1",
+   "category": "render",
+   "label": "9_4",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "knotess_9_5_v0",
+   "category": "render",
+   "label": "9_5*",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "knotess_9_5_v1",
+   "category": "render",
+   "label": "9_5*",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_9_6_v0",
+   "category": "render",
+   "label": "9_6",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_9_6_v1",
+   "category": "render",
+   "label": "9_6",
+   "answer": "9_6*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_7_v0",
+   "category": "render",
+   "label": "9_7",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_9_7_v1",
+   "category": "render",
+   "label": "9_7",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_9_8_v0",
+   "category": "render",
+   "label": "9_8",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 0
+  },
+  {
+   "image_id": "knotess_9_8_v1",
+   "category": "render",
+   "label": "9_8",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "knotess_9_9_v0",
+   "category": "render",
+   "label": "9_9",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_9_v1",
+   "category": "render",
+   "label": "9_9",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "knotess_9_10_v0",
+   "category": "render",
+   "label": "9_10*",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_9_10_v1",
+   "category": "render",
+   "label": "9_10*",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_9_11_v0",
+   "category": "render",
+   "label": "9_11",
+   "answer": null,
+   "correct": null,
+   "reason": "Euler check",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_11_v1",
+   "category": "render",
+   "label": "9_11",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 1
+  },
+  {
+   "image_id": "knotess_9_12_v0",
+   "category": "render",
+   "label": "9_12",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_12_v1",
+   "category": "render",
+   "label": "9_12",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_9_13_v0",
+   "category": "render",
+   "label": "9_13*",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 0
+  },
+  {
+   "image_id": "knotess_9_13_v1",
+   "category": "render",
+   "label": "9_13*",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "knotess_9_14_v0",
+   "category": "render",
+   "label": "9_14",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_9_14_v1",
+   "category": "render",
+   "label": "9_14",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_9_15_v0",
+   "category": "render",
+   "label": "9_15",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_15_v1",
+   "category": "render",
+   "label": "9_15",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 0
+  },
+  {
+   "image_id": "knotess_9_16_v0",
+   "category": "render",
+   "label": "9_16*",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_9_16_v1",
+   "category": "render",
+   "label": "9_16*",
+   "answer": null,
+   "correct": null,
+   "reason": "8 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_17_v0",
+   "category": "render",
+   "label": "9_17",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_9_17_v1",
+   "category": "render",
+   "label": "9_17",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_9_18_v0",
+   "category": "render",
+   "label": "9_18",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_9_18_v1",
+   "category": "render",
+   "label": "9_18",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_9_19_v0",
+   "category": "render",
+   "label": "9_19",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_19_v1",
+   "category": "render",
+   "label": "9_19",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_20_v0",
+   "category": "render",
+   "label": "9_20",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_20_v1",
+   "category": "render",
+   "label": "9_20",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_21_v0",
+   "category": "render",
+   "label": "9_21",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_21_v1",
+   "category": "render",
+   "label": "9_21",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "knotess_9_22_v0",
+   "category": "render",
+   "label": "9_22*",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_22_v1",
+   "category": "render",
+   "label": "9_22*",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "knotess_9_23_v0",
+   "category": "render",
+   "label": "9_23",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 0
+  },
+  {
+   "image_id": "knotess_9_23_v1",
+   "category": "render",
+   "label": "9_23",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "knotess_9_24_v0",
+   "category": "render",
+   "label": "9_24",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_24_v1",
+   "category": "render",
+   "label": "9_24",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_9_25_v0",
+   "category": "render",
+   "label": "9_25",
+   "answer": "9_25*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_25_v1",
+   "category": "render",
+   "label": "9_25",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_9_26_v0",
+   "category": "render",
+   "label": "9_26",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_26_v1",
+   "category": "render",
+   "label": "9_26",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_9_27_v0",
+   "category": "render",
+   "label": "9_27",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_9_27_v1",
+   "category": "render",
+   "label": "9_27",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "knotess_9_28_v0",
+   "category": "render",
+   "label": "9_28",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_28_v1",
+   "category": "render",
+   "label": "9_28",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "knotess_9_29_v0",
+   "category": "render",
+   "label": "9_29*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_9_29_v1",
+   "category": "render",
+   "label": "9_29*",
+   "answer": null,
+   "correct": null,
+   "reason": "7 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_30_v0",
+   "category": "render",
+   "label": "9_30",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_30_v1",
+   "category": "render",
+   "label": "9_30",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "knotess_9_31_v0",
+   "category": "render",
+   "label": "9_31",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_31_v1",
+   "category": "render",
+   "label": "9_31",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_9_32_v0",
+   "category": "render",
+   "label": "9_32",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_9_32_v1",
+   "category": "render",
+   "label": "9_32",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_9_33_v0",
+   "category": "render",
+   "label": "9_33",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "knotess_9_33_v1",
+   "category": "render",
+   "label": "9_33",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_34_v0",
+   "category": "render",
+   "label": "9_34",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_9_34_v1",
+   "category": "render",
+   "label": "9_34",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "knotess_9_35_v0",
+   "category": "render",
+   "label": "9_35",
+   "answer": "9_35*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_35_v1",
+   "category": "render",
+   "label": "9_35",
+   "answer": null,
+   "correct": null,
+   "reason": "8 crossing(s) without exactly four arms",
+   "crossings_detected": 11
+  },
+  {
+   "image_id": "knotess_9_36_v0",
+   "category": "render",
+   "label": "9_36",
+   "answer": "9_36*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_9_36_v1",
+   "category": "render",
+   "label": "9_36",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_2_2_1_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 1
+  },
+  {
+   "image_id": "knotess_2_2_1_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "knotess_4_2_1_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "knotess_4_2_1_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "knotess_5_2_1_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 1
+  },
+  {
+   "image_id": "knotess_5_2_1_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_6_2_1_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_6_2_1_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_6_2_2_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_6_2_2_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_6_2_3_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_6_2_3_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_7_2_1_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_7_2_1_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "knotess_7_2_2_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_7_2_2_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_7_2_3_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_2_3_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_7_2_4_v0",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 1
+  },
+  {
+   "image_id": "knotess_7_2_4_v1",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "8 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_7_2_5_v0",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_2_5_v1",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_7_2_6_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 0
+  },
+  {
+   "image_id": "knotess_7_2_6_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "Euler check",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_2_7_v0",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_7_2_7_v1",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_7_2_8_v0",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_2_8_v1",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_8_2_1_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_2_1_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_2_2_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_2_2_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "knotess_8_2_3_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_2_3_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_2_4_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_8_2_4_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "8 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "knotess_8_2_5_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_2_5_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_2_6_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 0
+  },
+  {
+   "image_id": "knotess_8_2_6_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_2_7_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "Euler check",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_2_7_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "knotess_8_2_8_v0",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_2_8_v1",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_8_2_9_v0",
+   "category": "render",
+   "label": "link[0_1,4_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_8_2_9_v1",
+   "category": "render",
+   "label": "link[0_1,4_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "knotess_8_2_10_v0",
+   "category": "render",
+   "label": "link[0_1,4_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_2_10_v1",
+   "category": "render",
+   "label": "link[0_1,4_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_2_11_v0",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_2_11_v1",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_6_3_1_v0",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_6_3_1_v1",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "knotess_6_3_2_v0",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 0], [0, 0, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 0], [0, 0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_6_3_2_v1",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 0], [0, 0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_6_3_3_v0",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_6_3_3_v1",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_7_3_1_v0",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_7_3_1_v1",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "9 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "knotess_8_3_1_v0",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_3_1_v1",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 1
+  },
+  {
+   "image_id": "knotess_8_3_2_v0",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 2], [1, 0, 1], [2, 1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_3_2_v1",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_8_3_3_v0",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "Euler check",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_3_3_v1",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "knotess_8_3_4_v0",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 2], [0, 0, 2], [2, 2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "knotess_8_3_4_v1",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 2], [0, 0, 2], [2, 2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "knotess_8_3_5_v0",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 1], [0, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 1], [0, 0, 0], [1, 0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "knotess_8_3_5_v1",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 1], [0, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 1
+  }
+ ]
+}

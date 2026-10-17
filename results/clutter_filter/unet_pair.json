@@ -1,0 +1,344 @@
+{
+ "model": "unet_seg+kp:checkpoints/recipe/baseline_unet_seg.pth,checkpoints/recipe/baseline_unet_kp.pth",
+ "kappa": 27.0,
+ "by_group": {
+  "clutter_dev:S3_dim": {
+   "off": {
+    "images": 40,
+    "answered": 38,
+    "wrong": 0
+   },
+   "on": {
+    "images": 40,
+    "answered": 39,
+    "wrong": 0
+   }
+  },
+  "clutter_dev:S4_clutter": {
+   "off": {
+    "images": 40,
+    "answered": 19,
+    "wrong": 0
+   },
+   "on": {
+    "images": 40,
+    "answered": 27,
+    "wrong": 0
+   }
+  },
+  "gap_dev:diagram": {
+   "off": {
+    "images": 24,
+    "answered": 4,
+    "wrong": 0
+   },
+   "on": {
+    "images": 24,
+    "answered": 4,
+    "wrong": 0
+   }
+  },
+  "gap_dev:diagram_thin_gap": {
+   "off": {
+    "images": 40,
+    "answered": 11,
+    "wrong": 0
+   },
+   "on": {
+    "images": 40,
+    "answered": 11,
+    "wrong": 0
+   }
+  },
+  "gap_dev:ribbon": {
+   "off": {
+    "images": 24,
+    "answered": 11,
+    "wrong": 0
+   },
+   "on": {
+    "images": 24,
+    "answered": 11,
+    "wrong": 0
+   }
+  },
+  "gap_dev:rope": {
+   "off": {
+    "images": 24,
+    "answered": 3,
+    "wrong": 0
+   },
+   "on": {
+    "images": 24,
+    "answered": 3,
+    "wrong": 0
+   }
+  },
+  "gap_dev:shaded": {
+   "off": {
+    "images": 24,
+    "answered": 10,
+    "wrong": 0
+   },
+   "on": {
+    "images": 24,
+    "answered": 10,
+    "wrong": 0
+   }
+  },
+  "gap_dev:tube": {
+   "off": {
+    "images": 24,
+    "answered": 10,
+    "wrong": 0
+   },
+   "on": {
+    "images": 24,
+    "answered": 10,
+    "wrong": 0
+   }
+  },
+  "parser_dev:photo": {
+   "off": {
+    "images": 40,
+    "answered": 34,
+    "wrong": 0
+   },
+   "on": {
+    "images": 40,
+    "answered": 34,
+    "wrong": 0
+   }
+  },
+  "parser_dev:silhouette": {
+   "off": {
+    "images": 40,
+    "answered": 3,
+    "wrong": 0
+   },
+   "on": {
+    "images": 40,
+    "answered": 3,
+    "wrong": 0
+   }
+  },
+  "all": {
+   "off": {
+    "images": 320,
+    "answered": 143,
+    "wrong": 0
+   },
+   "on": {
+    "images": 320,
+    "answered": 152,
+    "wrong": 0
+   }
+  }
+ },
+ "changed": [
+  {
+   "image_id": "clut009",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "Euler check",
+    "removed": 8
+   }
+  },
+  {
+   "image_id": "clut011",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "0_1",
+    "correct": true,
+    "reason": null,
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "clut025",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 2
+   }
+  },
+  {
+   "image_id": "clut029",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 3
+   }
+  },
+  {
+   "image_id": "clut031",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "skeleton branches away from any detected",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 10
+   }
+  },
+  {
+   "image_id": "clut035",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "3_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "3_1",
+    "correct": true,
+    "reason": null,
+    "removed": 2
+   }
+  },
+  {
+   "image_id": "clut041",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 3
+   }
+  },
+  {
+   "image_id": "clut042",
+   "group": "clutter_dev:S3_dim",
+   "gt": "3_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "3_1",
+    "correct": true,
+    "reason": null,
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "clut057",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "0_1",
+    "correct": true,
+    "reason": null,
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "clut073",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "0_1",
+    "correct": true,
+    "reason": null,
+    "removed": 5
+   }
+  },
+  {
+   "image_id": "clut075",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 2
+   }
+  },
+  {
+   "image_id": "gapdev053",
+   "group": "gap_dev:diagram",
+   "gt": "9_1*",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 22
+   }
+  }
+ ]
+}

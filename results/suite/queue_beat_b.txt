@@ -1,0 +1,6 @@
+bu_uf_s0|checkpoints/beat_unet/mps_uf_s0.pth|kb,close,real,blind_v2|--clutter|results/training/beat_unet/mps_uf_s0.json
+bu_uf_topo_s0|checkpoints/beat_unet/mps_uf_topo_s0.pth|kb,close,real,blind_v2|--clutter|results/training/beat_unet/mps_uf_topo_s0.json
+bu_uf_s1|checkpoints/beat_unet/mps_uf_s1.pth|kb,close,real,blind_v2|--clutter|results/training/beat_unet/mps_uf_s1.json
+bu_uf_topo_s1|checkpoints/beat_unet/mps_uf_topo_s1.pth|kb,close,real,blind_v2|--clutter|results/training/beat_unet/mps_uf_topo_s1.json
+bu_uf_s2|checkpoints/beat_unet/mps_uf_s2.pth|kb,close,real,blind_v2|--clutter|results/training/beat_unet/mps_uf_s2.json
+bu_uf_topo_s2|checkpoints/beat_unet/mps_uf_topo_s2.pth|kb,close,real,blind_v2|--clutter|results/training/beat_unet/mps_uf_topo_s2.json

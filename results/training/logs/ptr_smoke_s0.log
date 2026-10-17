@@ -1,0 +1,81 @@
+trunk /home/claude/knot_recognition/checkpoints/beat_unet/mps_uf_s0.pth (2.93M, frozen), head 0.51M; 800 training images, 150 validation
+step 1/1500 loss 4.7618 (2s)
+step 50/1500 loss 4.1100 (78s)
+step 100/1500 loss 2.9002 (168s)
+step 150/1500 loss 2.8752 (250s)
+step 200/1500 loss 2.5921 (345s)
+step 250/1500 loss 1.6629 (432s)
+step 300/1500 loss 1.6033 (523s)
+step 350/1500 loss 1.5133 (598s)
+step 400/1500 loss 1.3883 (676s)
+step 450/1500 loss 2.2637 (753s)
+step 500/1500 loss 1.3507 (832s)
+  val(30): {"true": {"pointer": 0.93, "straightest": 0.9261}, "ridge": {"pointer": 0.9433, "straightest": 0.9459}}
+step 550/1500 loss 1.3429 (912s)
+step 600/1500 loss 1.2415 (987s)
+step 650/1500 loss 1.2162 (1060s)
+step 700/1500 loss 1.2397 (1142s)
+step 750/1500 loss 1.2622 (1216s)
+step 800/1500 loss 1.2251 (1293s)
+step 850/1500 loss 1.2591 (1368s)
+step 900/1500 loss 2.6351 (1446s)
+step 950/1500 loss 1.1537 (1523s)
+step 1000/1500 loss 1.1634 (1599s)
+  val(30): {"true": {"pointer": 0.946, "straightest": 0.9261}, "ridge": {"pointer": 0.9575, "straightest": 0.9459}}
+step 1050/1500 loss 1.1275 (1683s)
+step 1100/1500 loss 1.1117 (1756s)
+step 1150/1500 loss 1.1042 (1835s)
+step 1200/1500 loss 1.1385 (1914s)
+step 1250/1500 loss 1.0796 (1989s)
+step 1300/1500 loss 1.1149 (2066s)
+step 1350/1500 loss 1.1385 (2138s)
+step 1400/1500 loss 1.0845 (2209s)
+step 1450/1500 loss 1.0696 (2286s)
+step 1500/1500 loss 1.1151 (2357s)
+{
+ "true": {
+  "pointer": {
+   "link_recall": 0.9455374807650033,
+   "link_precision": 0.9679324894514768,
+   "jump_recall": 0.5019830028328612,
+   "links_to_clutter": 0,
+   "exact_images": 25,
+   "images": 150,
+   "jumps": 1765,
+   "links": 36392
+  },
+  "straightest": {
+   "link_recall": 0.9213013849197625,
+   "link_precision": 0.9410311824637234,
+   "jump_recall": 0.5161473087818697,
+   "links_to_clutter": 0,
+   "exact_images": 28,
+   "images": 150,
+   "jumps": 1765,
+   "links": 36392
+  }
+ },
+ "ridge": {
+  "pointer": {
+   "link_recall": 0.9562266407534759,
+   "link_precision": 0.9748818777625362,
+   "jump_recall": 0.6024844720496895,
+   "links_to_clutter": 172,
+   "exact_images": 16,
+   "images": 150,
+   "jumps": 2093,
+   "links": 33445
+  },
+  "straightest": {
+   "link_recall": 0.9444461055464195,
+   "link_precision": 0.9611136467366499,
+   "jump_recall": 0.5914954610606784,
+   "links_to_clutter": 211,
+   "exact_images": 8,
+   "images": 150,
+   "jumps": 2093,
+   "links": 33445
+  }
+ }
+}
+[saved] checkpoints/strand_pointer/smoke_s0.pth  (2402s)

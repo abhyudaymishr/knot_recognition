@@ -1,0 +1,12 @@
+true   head alone                           jumps 0.801  wrong long  148  images none wrong  91/150  every link right  58
+true   straight balanced                    jumps 0.736  wrong long   79  images none wrong 103/150  every link right  52
+true   straight strict                      jumps 0.557  wrong long   31  images none wrong 125/150  every link right  34
+true   curved relink                        jumps 0.795  wrong long  140  images none wrong  96/150  every link right  57
+true   curved relink + straight balanced    jumps 0.738  wrong long   82  images none wrong 106/150  every link right  54
+true   curved relink + straight strict      jumps 0.561  wrong long   41  images none wrong 121/150  every link right  37
+ridge  head alone                           jumps 0.801  wrong long  208  images none wrong  77/150  every link right  44
+ridge  straight balanced                    jumps 0.749  wrong long  129  images none wrong  89/150  every link right  40
+ridge  straight strict                      jumps 0.593  wrong long   72  images none wrong 107/150  every link right  27
+ridge  curved relink                        jumps 0.793  wrong long  225  images none wrong  73/150  every link right  45
+ridge  curved relink + straight balanced    jumps 0.748  wrong long  125  images none wrong  92/150  every link right  40
+ridge  curved relink + straight strict      jumps 0.601  wrong long   80  images none wrong 103/150  every link right  27

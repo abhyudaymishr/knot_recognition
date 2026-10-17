@@ -1,0 +1,134 @@
+[
+ {
+  "loss": 1.9531877517700196,
+  "mask": 0.3492535849412282,
+  "center": 0.6836572265625,
+  "center_hi": 0.920276955763499,
+  "crossing_precision": 0.0,
+  "crossing_recall": 0.0,
+  "over_axis_within_45deg": 0.0,
+  "epoch": 1,
+  "minutes": 12.627856953938801
+ },
+ {
+  "loss": 1.2343149995803833,
+  "mask": 0.17549446880817413,
+  "center": 0.5115086929003397,
+  "center_hi": 0.547311832110087,
+  "crossing_precision": 0.0,
+  "crossing_recall": 0.0,
+  "over_axis_within_45deg": 0.0,
+  "epoch": 2,
+  "minutes": 24.50418074528376
+ },
+ {
+  "loss": 1.1373523696263632,
+  "mask": 0.15672338088353474,
+  "center": 0.486681653658549,
+  "center_hi": 0.49394733349482217,
+  "crossing_precision": 0.0,
+  "crossing_recall": 0.0,
+  "over_axis_within_45deg": 0.0,
+  "epoch": 3,
+  "minutes": 36.0539431810379
+ },
+ {
+  "loss": 1.1458459790547688,
+  "mask": 0.15275020738442738,
+  "center": 0.48832435846328737,
+  "center_hi": 0.5047714289029439,
+  "crossing_precision": 0.0,
+  "crossing_recall": 0.0,
+  "over_axis_within_45deg": 0.0,
+  "epoch": 4,
+  "minutes": 48.28937501509984
+ },
+ {
+  "loss": 1.0820397599538167,
+  "mask": 0.14346632460753123,
+  "center": 0.467075400352478,
+  "center_hi": 0.47149803320566813,
+  "crossing_precision": 0.0,
+  "crossing_recall": 0.0,
+  "over_axis_within_45deg": 0.0,
+  "epoch": 5,
+  "minutes": 60.34427332083384
+ },
+ {
+  "loss": 1.0283898893992107,
+  "mask": 0.13828932960828144,
+  "center": 0.44955235163370766,
+  "center_hi": 0.44054819583892824,
+  "crossing_precision": 0.0,
+  "crossing_recall": 0.0,
+  "over_axis_within_45deg": 0.0,
+  "epoch": 6,
+  "minutes": 71.94837157726288
+ },
+ {
+  "loss": 1.035525393486023,
+  "mask": 0.13397137939929962,
+  "center": 0.45122577985127765,
+  "center_hi": 0.4503282324473063,
+  "crossing_precision": 0.0,
+  "crossing_recall": 0.0,
+  "over_axis_within_45deg": 0.0,
+  "epoch": 7,
+  "minutes": 85.45124269326529
+ },
+ {
+  "loss": 1.0314169494311014,
+  "mask": 0.1325440184275309,
+  "center": 0.4500683116912842,
+  "center_hi": 0.4488046352068583,
+  "crossing_precision": 0.0,
+  "crossing_recall": 0.0,
+  "over_axis_within_45deg": 0.0,
+  "epoch": 8,
+  "minutes": 97.68912456035613
+ },
+ {
+  "loss": 1.0179968293507893,
+  "mask": 0.13026833722988765,
+  "center": 0.4463611642519633,
+  "center_hi": 0.4413673365116119,
+  "crossing_precision": 0.0,
+  "crossing_recall": 0.0,
+  "over_axis_within_45deg": 0.0,
+  "epoch": 9,
+  "minutes": 109.68176219463348
+ },
+ {
+  "loss": 1.0039729658762615,
+  "mask": 0.1297368101278941,
+  "center": 0.44147600015004473,
+  "center_hi": 0.43276016394297284,
+  "crossing_precision": 0.0,
+  "crossing_recall": 0.0,
+  "over_axis_within_45deg": 0.0,
+  "epoch": 10,
+  "minutes": 122.31614896853765
+ },
+ {
+  "loss": 0.9972059011459351,
+  "mask": 0.1289075086514155,
+  "center": 0.43942070921262105,
+  "center_hi": 0.4288777101039887,
+  "crossing_precision": 0.0,
+  "crossing_recall": 0.0,
+  "over_axis_within_45deg": 0.0,
+  "epoch": 11,
+  "minutes": 134.14982999960583
+ },
+ {
+  "loss": 0.9931655685106914,
+  "mask": 0.12827890435854594,
+  "center": 0.43826361576716105,
+  "center_hi": 0.42662304957707725,
+  "crossing_precision": 0.0,
+  "crossing_recall": 0.0,
+  "over_axis_within_45deg": 0.0,
+  "epoch": 12,
+  "minutes": 145.61682125329972
+ }
+]

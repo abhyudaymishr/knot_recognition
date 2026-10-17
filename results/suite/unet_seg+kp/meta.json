@@ -1,0 +1,21 @@
+{
+ "model": "unet_seg+kp:checkpoints/recipe/baseline_unet_seg.pth,checkpoints/recipe/baseline_unet_kp.pth",
+ "gap": false,
+ "role": "baseline",
+ "ledger": {
+  "blind_v2": {
+   "set": "blind:blind_real_v2",
+   "set_hash": "907e2ac47e738ac345801c53ef12698dffc82bdd4957afcf68703f64dd9593e3",
+   "role": "baseline",
+   "checkpoint": "baseline_unet_seg.pth",
+   "checkpoint_sha256": "a25f7abe2745fe3e481940c7016098a58d4ffe83cadb9ed9da2c9a9088e9d16b",
+   "time_utc": "2026-10-15T11:59:05Z",
+   "git": "2a403d2",
+   "repeat_of_same_model": false,
+   "new_main_reason": null,
+   "note": "unet_seg+kp:checkpoints/recipe/baseline_unet_seg.pth,checkpoints/recipe/baseline_unet_kp.pth suite=unet_seg+kp gap=False kappa=27.0"
+  }
+ },
+ "kappa": 27.0,
+ "kappa_from": "given"
+}

@@ -1,0 +1,2994 @@
+{
+ "set": "blind_real_v2",
+ "manifest_sha256": "907e2ac47e738ac345801c53ef12698dffc82bdd4957afcf68703f64dd9593e3",
+ "model": "bu_unet_s0",
+ "role": "baseline",
+ "ledger": {
+  "set": "blind:blind_real_v2",
+  "set_hash": "907e2ac47e738ac345801c53ef12698dffc82bdd4957afcf68703f64dd9593e3",
+  "role": "baseline",
+  "checkpoint": "mps_unet_seg_s0.pth",
+  "checkpoint_sha256": "b94ec98dd513f0895a44f8e65ea9875890b049febe5c48f7f3436cc00e39a429",
+  "time_utc": "2026-10-16T02:09:06Z",
+  "git": "2a403d2",
+  "repeat_of_same_model": false,
+  "new_main_reason": null,
+  "note": "unet_seg+kp:checkpoints/beat_unet/mps_unet_seg_s0.pth,checkpoints/beat_unet/mps_unet_kp_s0.pth suite=bu_unet_s0 gap=False clutter=True kappa=27.0"
+ },
+ "gap_check": false,
+ "clutter_filter": true,
+ "kappa": 27.0,
+ "by_category": {
+  "all": {
+   "images": 312,
+   "answered": 102,
+   "correct": 101,
+   "wrong": 1,
+   "abstain_reasons": {
+    "2 crossing(s) without exactly four arms": 43,
+    "3 crossing(s) without exactly four arms": 28,
+    "1 crossing(s) without exactly four arms": 26,
+    "type probability below 0.95": 24,
+    "4 crossing(s) without exactly four arms": 19,
+    "5 crossing(s) without exactly four arms": 18
+   },
+   "wrong_examples": [
+    [
+     "v2_drawing_9_25",
+     "9_25",
+     "3_1 # 4_1"
+    ]
+   ]
+  },
+  "drawing": {
+   "images": 105,
+   "answered": 45,
+   "correct": 44,
+   "wrong": 1,
+   "abstain_reasons": {
+    "type probability below 0.95": 24,
+    "1 crossing(s) without exactly four arms": 19,
+    "2 crossing(s) without exactly four arms": 9,
+    "skeleton branches away from any detected crossin": 7,
+    "3 crossing(s) without exactly four arms": 1
+   },
+   "wrong_examples": [
+    [
+     "v2_drawing_9_25",
+     "9_25",
+     "3_1 # 4_1"
+    ]
+   ]
+  },
+  "render": {
+   "images": 207,
+   "answered": 57,
+   "correct": 57,
+   "wrong": 0,
+   "abstain_reasons": {
+    "2 crossing(s) without exactly four arms": 34,
+    "3 crossing(s) without exactly four arms": 27,
+    "4 crossing(s) without exactly four arms": 19,
+    "5 crossing(s) without exactly four arms": 18,
+    "6 crossing(s) without exactly four arms": 11,
+    "8 crossing(s) without exactly four arms": 8
+   },
+   "wrong_examples": []
+  }
+ },
+ "per_image": [
+  {
+   "image_id": "v2_render_3_1_front",
+   "category": "render",
+   "label": "3_1",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "v2_render_3_1_random",
+   "category": "render",
+   "label": "3_1",
+   "answer": null,
+   "correct": null,
+   "reason": "Euler check",
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "v2_drawing_3_1",
+   "category": "drawing",
+   "label": "3_1",
+   "answer": "3_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 3,
+   "halo_over_line_width": 0.234
+  },
+  {
+   "image_id": "v2_render_4_1_front",
+   "category": "render",
+   "label": "4_1",
+   "answer": "4_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "v2_render_4_1_random",
+   "category": "render",
+   "label": "4_1",
+   "answer": "4_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "v2_drawing_4_1",
+   "category": "drawing",
+   "label": "4_1",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 4,
+   "halo_over_line_width": 0.765
+  },
+  {
+   "image_id": "v2_render_5_1_front",
+   "category": "render",
+   "label": "5_1",
+   "answer": null,
+   "correct": null,
+   "reason": "free cable ends",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_render_5_1_random",
+   "category": "render",
+   "label": "5_1",
+   "answer": null,
+   "correct": null,
+   "reason": "10 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_5_1",
+   "category": "drawing",
+   "label": "5_1",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 5,
+   "halo_over_line_width": 0.103
+  },
+  {
+   "image_id": "v2_render_5_2_front",
+   "category": "render",
+   "label": "5_2",
+   "answer": "5_2*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_render_5_2_random",
+   "category": "render",
+   "label": "5_2",
+   "answer": null,
+   "correct": null,
+   "reason": "7 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_5_2",
+   "category": "drawing",
+   "label": "5_2",
+   "answer": "5_2",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 5,
+   "halo_over_line_width": 0.755
+  },
+  {
+   "image_id": "v2_render_6_1_front",
+   "category": "render",
+   "label": "6_1",
+   "answer": "6_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_render_6_1_random",
+   "category": "render",
+   "label": "6_1",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_6_1",
+   "category": "drawing",
+   "label": "6_1",
+   "answer": "6_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6,
+   "halo_over_line_width": 0.712
+  },
+  {
+   "image_id": "v2_render_6_2_front",
+   "category": "render",
+   "label": "6_2",
+   "answer": "6_2*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_render_6_2_random",
+   "category": "render",
+   "label": "6_2",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_drawing_6_2",
+   "category": "drawing",
+   "label": "6_2",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 6,
+   "halo_over_line_width": 0.127
+  },
+  {
+   "image_id": "v2_render_6_3_front",
+   "category": "render",
+   "label": "6_3",
+   "answer": "6_3",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_render_6_3_random",
+   "category": "render",
+   "label": "6_3",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "v2_drawing_6_3",
+   "category": "drawing",
+   "label": "6_3",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 6,
+   "halo_over_line_width": 0.654
+  },
+  {
+   "image_id": "v2_render_7_1_front",
+   "category": "render",
+   "label": "7_1",
+   "answer": "7_1*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_1_random",
+   "category": "render",
+   "label": "7_1",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_7_1",
+   "category": "drawing",
+   "label": "7_1",
+   "answer": "7_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.25
+  },
+  {
+   "image_id": "v2_render_7_2_random",
+   "category": "render",
+   "label": "7_2",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_7_2",
+   "category": "drawing",
+   "label": "7_2",
+   "answer": "7_2",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.373
+  },
+  {
+   "image_id": "v2_render_7_3_front",
+   "category": "render",
+   "label": "7_3*",
+   "answer": null,
+   "correct": null,
+   "reason": "Euler check",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_3_random",
+   "category": "render",
+   "label": "7_3*",
+   "answer": "7_3",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_7_3",
+   "category": "drawing",
+   "label": "7_3*",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.161
+  },
+  {
+   "image_id": "v2_render_7_4_random",
+   "category": "render",
+   "label": "7_4*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_drawing_7_4",
+   "category": "drawing",
+   "label": "7_4*",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.745
+  },
+  {
+   "image_id": "v2_render_7_5_front",
+   "category": "render",
+   "label": "7_5",
+   "answer": "7_5*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_5_random",
+   "category": "render",
+   "label": "7_5",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_drawing_7_5",
+   "category": "drawing",
+   "label": "7_5",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.151
+  },
+  {
+   "image_id": "v2_render_7_6_front",
+   "category": "render",
+   "label": "7_6",
+   "answer": "7_6*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_6_random",
+   "category": "render",
+   "label": "7_6",
+   "answer": null,
+   "correct": null,
+   "reason": "7 crossing(s) without exactly four arms",
+   "crossings_detected": 12
+  },
+  {
+   "image_id": "v2_drawing_7_6",
+   "category": "drawing",
+   "label": "7_6",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.359
+  },
+  {
+   "image_id": "v2_render_7_7_front",
+   "category": "render",
+   "label": "7_7",
+   "answer": "7_7",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_7_random",
+   "category": "render",
+   "label": "7_7",
+   "answer": "7_7",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_7_7",
+   "category": "drawing",
+   "label": "7_7",
+   "answer": "7_7",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.477
+  },
+  {
+   "image_id": "v2_render_8_1_front",
+   "category": "render",
+   "label": "8_1",
+   "answer": "8_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_1_random",
+   "category": "render",
+   "label": "8_1",
+   "answer": "8_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_8_1",
+   "category": "drawing",
+   "label": "8_1",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.733
+  },
+  {
+   "image_id": "v2_render_8_2_front",
+   "category": "render",
+   "label": "8_2",
+   "answer": "8_2*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_2_random",
+   "category": "render",
+   "label": "8_2",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "v2_drawing_8_2",
+   "category": "drawing",
+   "label": "8_2",
+   "answer": "8_2",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.233
+  },
+  {
+   "image_id": "v2_render_8_3_front",
+   "category": "render",
+   "label": "8_3",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_8_3_random",
+   "category": "render",
+   "label": "8_3",
+   "answer": null,
+   "correct": null,
+   "reason": "7 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_8_3",
+   "category": "drawing",
+   "label": "8_3",
+   "answer": "8_3",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.556
+  },
+  {
+   "image_id": "v2_render_8_4_front",
+   "category": "render",
+   "label": "8_4*",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_render_8_4_random",
+   "category": "render",
+   "label": "8_4*",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_drawing_8_4",
+   "category": "drawing",
+   "label": "8_4*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.248
+  },
+  {
+   "image_id": "v2_render_8_5_front",
+   "category": "render",
+   "label": "8_5*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_5_random",
+   "category": "render",
+   "label": "8_5*",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_8_5",
+   "category": "drawing",
+   "label": "8_5*",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.376
+  },
+  {
+   "image_id": "v2_render_8_6_front",
+   "category": "render",
+   "label": "8_6",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_8_6_random",
+   "category": "render",
+   "label": "8_6",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_8_6",
+   "category": "drawing",
+   "label": "8_6",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.124
+  },
+  {
+   "image_id": "v2_render_8_7_front",
+   "category": "render",
+   "label": "8_7",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_7_random",
+   "category": "render",
+   "label": "8_7",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_8_7",
+   "category": "drawing",
+   "label": "8_7",
+   "answer": "8_7",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.309
+  },
+  {
+   "image_id": "v2_render_8_8_front",
+   "category": "render",
+   "label": "8_8",
+   "answer": "8_8",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_8_random",
+   "category": "render",
+   "label": "8_8",
+   "answer": null,
+   "correct": null,
+   "reason": "9 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_8_8",
+   "category": "drawing",
+   "label": "8_8",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.152
+  },
+  {
+   "image_id": "v2_render_8_9_front",
+   "category": "render",
+   "label": "8_9",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_8_9_random",
+   "category": "render",
+   "label": "8_9",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_8_9",
+   "category": "drawing",
+   "label": "8_9",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.594
+  },
+  {
+   "image_id": "v2_render_8_10_front",
+   "category": "render",
+   "label": "8_10",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_10_random",
+   "category": "render",
+   "label": "8_10",
+   "answer": null,
+   "correct": null,
+   "reason": "9 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_8_10",
+   "category": "drawing",
+   "label": "8_10",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.177
+  },
+  {
+   "image_id": "v2_render_8_11_front",
+   "category": "render",
+   "label": "8_11",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_11_random",
+   "category": "render",
+   "label": "8_11",
+   "answer": null,
+   "correct": null,
+   "reason": "9 crossing(s) without exactly four arms",
+   "crossings_detected": 11
+  },
+  {
+   "image_id": "v2_drawing_8_11",
+   "category": "drawing",
+   "label": "8_11",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.726
+  },
+  {
+   "image_id": "v2_render_8_12_front",
+   "category": "render",
+   "label": "8_12",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_8_12_random",
+   "category": "render",
+   "label": "8_12",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_8_12",
+   "category": "drawing",
+   "label": "8_12",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.332
+  },
+  {
+   "image_id": "v2_render_8_13_front",
+   "category": "render",
+   "label": "8_13",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_13_random",
+   "category": "render",
+   "label": "8_13",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_8_13",
+   "category": "drawing",
+   "label": "8_13",
+   "answer": "8_13",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.216
+  },
+  {
+   "image_id": "v2_render_8_14_front",
+   "category": "render",
+   "label": "8_14",
+   "answer": "8_14*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_14_random",
+   "category": "render",
+   "label": "8_14",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_8_14",
+   "category": "drawing",
+   "label": "8_14",
+   "answer": "8_14",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.21
+  },
+  {
+   "image_id": "v2_render_8_15_front",
+   "category": "render",
+   "label": "8_15",
+   "answer": "8_15*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_15_random",
+   "category": "render",
+   "label": "8_15",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_drawing_8_15",
+   "category": "drawing",
+   "label": "8_15",
+   "answer": "8_15",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.3
+  },
+  {
+   "image_id": "v2_render_8_16_front",
+   "category": "render",
+   "label": "8_16*",
+   "answer": "8_16",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_16_random",
+   "category": "render",
+   "label": "8_16*",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_8_16",
+   "category": "drawing",
+   "label": "8_16*",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.116
+  },
+  {
+   "image_id": "v2_render_8_17_front",
+   "category": "render",
+   "label": "8_17",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_render_8_17_random",
+   "category": "render",
+   "label": "8_17",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_8_17",
+   "category": "drawing",
+   "label": "8_17",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.216
+  },
+  {
+   "image_id": "v2_render_8_18_front",
+   "category": "render",
+   "label": "8_18",
+   "answer": "8_18",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_18_random",
+   "category": "render",
+   "label": "8_18",
+   "answer": null,
+   "correct": null,
+   "reason": "7 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_8_18",
+   "category": "drawing",
+   "label": "8_18",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.151
+  },
+  {
+   "image_id": "v2_render_8_19_front",
+   "category": "render",
+   "label": "8_19*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_8_19_random",
+   "category": "render",
+   "label": "8_19*",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_8_19",
+   "category": "drawing",
+   "label": "8_19*",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 6,
+   "halo_over_line_width": 0.534
+  },
+  {
+   "image_id": "v2_render_8_20_front",
+   "category": "render",
+   "label": "8_20",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_20_random",
+   "category": "render",
+   "label": "8_20",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_8_20",
+   "category": "drawing",
+   "label": "8_20",
+   "answer": "8_20",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.671
+  },
+  {
+   "image_id": "v2_render_8_21_front",
+   "category": "render",
+   "label": "8_21",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_21_random",
+   "category": "render",
+   "label": "8_21",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_drawing_8_21",
+   "category": "drawing",
+   "label": "8_21",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.353
+  },
+  {
+   "image_id": "v2_render_9_1_random",
+   "category": "render",
+   "label": "9_1",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 11
+  },
+  {
+   "image_id": "v2_drawing_9_1",
+   "category": "drawing",
+   "label": "9_1",
+   "answer": "9_1",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.789
+  },
+  {
+   "image_id": "v2_render_9_2_front",
+   "category": "render",
+   "label": "9_2",
+   "answer": "9_2*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_2_random",
+   "category": "render",
+   "label": "9_2",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 11
+  },
+  {
+   "image_id": "v2_drawing_9_2",
+   "category": "drawing",
+   "label": "9_2",
+   "answer": "9_2",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.417
+  },
+  {
+   "image_id": "v2_render_9_3_front",
+   "category": "render",
+   "label": "9_3*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_3_random",
+   "category": "render",
+   "label": "9_3*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_9_3",
+   "category": "drawing",
+   "label": "9_3*",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.179
+  },
+  {
+   "image_id": "v2_render_9_4_front",
+   "category": "render",
+   "label": "9_4",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_9_4_random",
+   "category": "render",
+   "label": "9_4",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_9_4",
+   "category": "drawing",
+   "label": "9_4",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.156
+  },
+  {
+   "image_id": "v2_render_9_5_front",
+   "category": "render",
+   "label": "9_5*",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_9_5_random",
+   "category": "render",
+   "label": "9_5*",
+   "answer": null,
+   "correct": null,
+   "reason": "8 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_9_5",
+   "category": "drawing",
+   "label": "9_5*",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.11
+  },
+  {
+   "image_id": "v2_render_9_6_front",
+   "category": "render",
+   "label": "9_6",
+   "answer": "9_6*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_6_random",
+   "category": "render",
+   "label": "9_6",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_9_6",
+   "category": "drawing",
+   "label": "9_6",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.579
+  },
+  {
+   "image_id": "v2_render_9_7_front",
+   "category": "render",
+   "label": "9_7",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_9_7_random",
+   "category": "render",
+   "label": "9_7",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_9_7",
+   "category": "drawing",
+   "label": "9_7",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.256
+  },
+  {
+   "image_id": "v2_render_9_8_front",
+   "category": "render",
+   "label": "9_8",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_8_random",
+   "category": "render",
+   "label": "9_8",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_9_8",
+   "category": "drawing",
+   "label": "9_8",
+   "answer": "9_8",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.267
+  },
+  {
+   "image_id": "v2_render_9_9_front",
+   "category": "render",
+   "label": "9_9",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_9_random",
+   "category": "render",
+   "label": "9_9",
+   "answer": null,
+   "correct": null,
+   "reason": "7 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_9_9",
+   "category": "drawing",
+   "label": "9_9",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.159
+  },
+  {
+   "image_id": "v2_render_9_10_front",
+   "category": "render",
+   "label": "9_10*",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_9_10_random",
+   "category": "render",
+   "label": "9_10*",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_9_10",
+   "category": "drawing",
+   "label": "9_10*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.157
+  },
+  {
+   "image_id": "v2_render_9_11_front",
+   "category": "render",
+   "label": "9_11",
+   "answer": "9_11*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_11_random",
+   "category": "render",
+   "label": "9_11",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_9_11",
+   "category": "drawing",
+   "label": "9_11",
+   "answer": "9_11",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.331
+  },
+  {
+   "image_id": "v2_render_9_12_front",
+   "category": "render",
+   "label": "9_12",
+   "answer": null,
+   "correct": null,
+   "reason": "Euler check",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_12_random",
+   "category": "render",
+   "label": "9_12",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_drawing_9_12",
+   "category": "drawing",
+   "label": "9_12",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.117
+  },
+  {
+   "image_id": "v2_render_9_13_front",
+   "category": "render",
+   "label": "9_13*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_13_random",
+   "category": "render",
+   "label": "9_13*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_9_13",
+   "category": "drawing",
+   "label": "9_13*",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.536
+  },
+  {
+   "image_id": "v2_render_9_14_front",
+   "category": "render",
+   "label": "9_14",
+   "answer": "9_14",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_14_random",
+   "category": "render",
+   "label": "9_14",
+   "answer": null,
+   "correct": null,
+   "reason": "8 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_9_14",
+   "category": "drawing",
+   "label": "9_14",
+   "answer": "9_14",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.418
+  },
+  {
+   "image_id": "v2_render_9_15_front",
+   "category": "render",
+   "label": "9_15",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_15_random",
+   "category": "render",
+   "label": "9_15",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_9_15",
+   "category": "drawing",
+   "label": "9_15",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.344
+  },
+  {
+   "image_id": "v2_render_9_16_front",
+   "category": "render",
+   "label": "9_16*",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_9_16_random",
+   "category": "render",
+   "label": "9_16*",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_9_16",
+   "category": "drawing",
+   "label": "9_16*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.104
+  },
+  {
+   "image_id": "v2_render_9_17_front",
+   "category": "render",
+   "label": "9_17",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_17_random",
+   "category": "render",
+   "label": "9_17",
+   "answer": null,
+   "correct": null,
+   "reason": "10 crossing(s) without exactly four arms",
+   "crossings_detected": 11
+  },
+  {
+   "image_id": "v2_drawing_9_17",
+   "category": "drawing",
+   "label": "9_17",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.236
+  },
+  {
+   "image_id": "v2_render_9_18_front",
+   "category": "render",
+   "label": "9_18",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_18_random",
+   "category": "render",
+   "label": "9_18",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_9_18",
+   "category": "drawing",
+   "label": "9_18",
+   "answer": "9_18",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.643
+  },
+  {
+   "image_id": "v2_render_9_19_front",
+   "category": "render",
+   "label": "9_19",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_19_random",
+   "category": "render",
+   "label": "9_19",
+   "answer": null,
+   "correct": null,
+   "reason": "7 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_9_19",
+   "category": "drawing",
+   "label": "9_19",
+   "answer": "9_19",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.35
+  },
+  {
+   "image_id": "v2_render_9_20_front",
+   "category": "render",
+   "label": "9_20",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_20_random",
+   "category": "render",
+   "label": "9_20",
+   "answer": null,
+   "correct": null,
+   "reason": "8 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_9_20",
+   "category": "drawing",
+   "label": "9_20",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.55
+  },
+  {
+   "image_id": "v2_render_9_21_front",
+   "category": "render",
+   "label": "9_21",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_9_21_random",
+   "category": "render",
+   "label": "9_21",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_9_21",
+   "category": "drawing",
+   "label": "9_21",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.244
+  },
+  {
+   "image_id": "v2_render_9_22_front",
+   "category": "render",
+   "label": "9_22*",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_22_random",
+   "category": "render",
+   "label": "9_22*",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_9_22",
+   "category": "drawing",
+   "label": "9_22*",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.148
+  },
+  {
+   "image_id": "v2_render_9_23_front",
+   "category": "render",
+   "label": "9_23",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_23_random",
+   "category": "render",
+   "label": "9_23",
+   "answer": "9_23*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_9_23",
+   "category": "drawing",
+   "label": "9_23",
+   "answer": "9_23",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.259
+  },
+  {
+   "image_id": "v2_render_9_24_front",
+   "category": "render",
+   "label": "9_24",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_24_random",
+   "category": "render",
+   "label": "9_24",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_9_24",
+   "category": "drawing",
+   "label": "9_24",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.481
+  },
+  {
+   "image_id": "v2_render_9_25_front",
+   "category": "render",
+   "label": "9_25",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_25_random",
+   "category": "render",
+   "label": "9_25",
+   "answer": null,
+   "correct": null,
+   "reason": "8 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_9_25",
+   "category": "drawing",
+   "label": "9_25",
+   "answer": "3_1 # 4_1",
+   "correct": false,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.373
+  },
+  {
+   "image_id": "v2_render_9_26_front",
+   "category": "render",
+   "label": "9_26",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_26_random",
+   "category": "render",
+   "label": "9_26",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_9_26",
+   "category": "drawing",
+   "label": "9_26",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.107
+  },
+  {
+   "image_id": "v2_render_9_27_front",
+   "category": "render",
+   "label": "9_27",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_9_27_random",
+   "category": "render",
+   "label": "9_27",
+   "answer": null,
+   "correct": null,
+   "reason": "10 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_9_27",
+   "category": "drawing",
+   "label": "9_27",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.285
+  },
+  {
+   "image_id": "v2_render_9_28_front",
+   "category": "render",
+   "label": "9_28",
+   "answer": "9_28*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_28_random",
+   "category": "render",
+   "label": "9_28",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_9_28",
+   "category": "drawing",
+   "label": "9_28",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.197
+  },
+  {
+   "image_id": "v2_render_9_29_front",
+   "category": "render",
+   "label": "9_29*",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_9_29_random",
+   "category": "render",
+   "label": "9_29*",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_drawing_9_29",
+   "category": "drawing",
+   "label": "9_29*",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.285
+  },
+  {
+   "image_id": "v2_render_9_30_front",
+   "category": "render",
+   "label": "9_30",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_9_30_random",
+   "category": "render",
+   "label": "9_30",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_9_30",
+   "category": "drawing",
+   "label": "9_30",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.13
+  },
+  {
+   "image_id": "v2_render_9_31_front",
+   "category": "render",
+   "label": "9_31",
+   "answer": "9_31*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_31_random",
+   "category": "render",
+   "label": "9_31",
+   "answer": null,
+   "correct": null,
+   "reason": "12 crossing(s) without exactly four arms",
+   "crossings_detected": 12
+  },
+  {
+   "image_id": "v2_drawing_9_31",
+   "category": "drawing",
+   "label": "9_31",
+   "answer": "9_31",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.146
+  },
+  {
+   "image_id": "v2_render_9_32_front",
+   "category": "render",
+   "label": "9_32",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 11
+  },
+  {
+   "image_id": "v2_render_9_32_random",
+   "category": "render",
+   "label": "9_32",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_9_32",
+   "category": "drawing",
+   "label": "9_32",
+   "answer": "9_32",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.289
+  },
+  {
+   "image_id": "v2_render_9_33_front",
+   "category": "render",
+   "label": "9_33",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_9_33_random",
+   "category": "render",
+   "label": "9_33",
+   "answer": null,
+   "correct": null,
+   "reason": "8 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_9_33",
+   "category": "drawing",
+   "label": "9_33",
+   "answer": "9_33",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.585
+  },
+  {
+   "image_id": "v2_render_9_34_front",
+   "category": "render",
+   "label": "9_34",
+   "answer": null,
+   "correct": null,
+   "reason": "Euler check",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_34_random",
+   "category": "render",
+   "label": "9_34",
+   "answer": null,
+   "correct": null,
+   "reason": "8 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_9_34",
+   "category": "drawing",
+   "label": "9_34",
+   "answer": "9_34",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.361
+  },
+  {
+   "image_id": "v2_render_9_35_front",
+   "category": "render",
+   "label": "9_35",
+   "answer": "9_35*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_35_random",
+   "category": "render",
+   "label": "9_35",
+   "answer": null,
+   "correct": null,
+   "reason": "8 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_9_35",
+   "category": "drawing",
+   "label": "9_35",
+   "answer": "9_35",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.406
+  },
+  {
+   "image_id": "v2_render_9_36_front",
+   "category": "render",
+   "label": "9_36",
+   "answer": "9_36*",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_render_9_36_random",
+   "category": "render",
+   "label": "9_36",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_9_36",
+   "category": "drawing",
+   "label": "9_36",
+   "answer": "9_36",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.493
+  },
+  {
+   "image_id": "v2_render_2_2_1_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "v2_render_2_2_1_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "v2_drawing_2_2_1",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 2,
+   "halo_over_line_width": 0.38
+  },
+  {
+   "image_id": "v2_render_4_2_1_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "v2_render_4_2_1_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "v2_drawing_4_2_1",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 4,
+   "halo_over_line_width": 0.271
+  },
+  {
+   "image_id": "v2_render_5_2_1_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_render_5_2_1_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_drawing_5_2_1",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 5,
+   "halo_over_line_width": 0.382
+  },
+  {
+   "image_id": "v2_render_6_2_1_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_render_6_2_1_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_6_2_1",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 6,
+   "halo_over_line_width": 0.267
+  },
+  {
+   "image_id": "v2_render_6_2_2_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_render_6_2_2_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_drawing_6_2_2",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 6,
+   "halo_over_line_width": 0.117
+  },
+  {
+   "image_id": "v2_render_6_2_3_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_render_6_2_3_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 3
+  },
+  {
+   "image_id": "v2_drawing_6_2_3",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6,
+   "halo_over_line_width": 0.576
+  },
+  {
+   "image_id": "v2_render_7_2_1_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_2_1_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_7_2_1",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.585
+  },
+  {
+   "image_id": "v2_render_7_2_2_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_2_2_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 2
+  },
+  {
+   "image_id": "v2_drawing_7_2_2",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.25
+  },
+  {
+   "image_id": "v2_render_7_2_3_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_2_3_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "8 crossing(s) without exactly four arms",
+   "crossings_detected": 10
+  },
+  {
+   "image_id": "v2_drawing_7_2_3",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.42
+  },
+  {
+   "image_id": "v2_render_7_2_4_front",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_2_4_random",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_drawing_7_2_4",
+   "category": "drawing",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.322
+  },
+  {
+   "image_id": "v2_render_7_2_5_front",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_2_5_random",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_7_2_5",
+   "category": "drawing",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.281
+  },
+  {
+   "image_id": "v2_render_7_2_6_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_2_6_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "6 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_drawing_7_2_6",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.573
+  },
+  {
+   "image_id": "v2_render_7_2_7_front",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_render_7_2_7_random",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_7_2_7",
+   "category": "drawing",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.332
+  },
+  {
+   "image_id": "v2_render_7_2_8_front",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_2_8_random",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_drawing_7_2_8",
+   "category": "drawing",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "1 crossing(s) without exactly four arms",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.135
+  },
+  {
+   "image_id": "v2_render_8_2_1_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_2_1_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 9
+  },
+  {
+   "image_id": "v2_drawing_8_2_1",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.15
+  },
+  {
+   "image_id": "v2_render_8_2_2_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_2_2_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_drawing_8_2_2",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.175
+  },
+  {
+   "image_id": "v2_render_8_2_3_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_render_8_2_3_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_8_2_3",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.413
+  },
+  {
+   "image_id": "v2_render_8_2_4_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_2_4_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_8_2_4",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 4], [4, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.389
+  },
+  {
+   "image_id": "v2_render_8_2_5_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_2_5_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_8_2_5",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 3], [3, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.113
+  },
+  {
+   "image_id": "v2_render_8_2_6_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_2_6_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_drawing_8_2_6",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.729
+  },
+  {
+   "image_id": "v2_render_8_2_7_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_2_7_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_8_2_7",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.64
+  },
+  {
+   "image_id": "v2_render_8_2_8_front",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_2_8_random",
+   "category": "render",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "5 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_8_2_8",
+   "category": "drawing",
+   "label": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "type probability below 0.95",
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.109
+  },
+  {
+   "image_id": "v2_render_8_2_9_front",
+   "category": "render",
+   "label": "link[0_1,4_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_2_9_random",
+   "category": "render",
+   "label": "link[0_1,4_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": "link[0_1,4_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_8_2_9",
+   "category": "drawing",
+   "label": "link[0_1,4_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 9,
+   "halo_over_line_width": 0.442
+  },
+  {
+   "image_id": "v2_render_8_2_10_front",
+   "category": "render",
+   "label": "link[0_1,4_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": "link[0_1,4_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_2_10_random",
+   "category": "render",
+   "label": "link[0_1,4_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_8_2_10",
+   "category": "drawing",
+   "label": "link[0_1,4_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "answer": "link[0_1,4_1|interlinked|lk=[[0, 0], [0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.28
+  },
+  {
+   "image_id": "v2_render_8_2_11_front",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_2_11_random",
+   "category": "render",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_8_2_11",
+   "category": "drawing",
+   "label": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "answer": "link[0_1,3_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.151
+  },
+  {
+   "image_id": "v2_render_6_3_1_front",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_render_6_3_1_random",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_drawing_6_3_1",
+   "category": "drawing",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 6,
+   "halo_over_line_width": 0.622
+  },
+  {
+   "image_id": "v2_render_6_3_2_front",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 0], [0, 0, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_render_6_3_2_random",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 0], [0, 0, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 0], [0, 0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6
+  },
+  {
+   "image_id": "v2_drawing_6_3_2",
+   "category": "drawing",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 0], [0, 0, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 0], [0, 0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 6,
+   "halo_over_line_width": 0.11
+  },
+  {
+   "image_id": "v2_render_6_3_3_front",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "skeleton branches away from any detected crossin",
+   "crossings_detected": 4
+  },
+  {
+   "image_id": "v2_render_6_3_3_random",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_drawing_6_3_3",
+   "category": "drawing",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 5,
+   "halo_over_line_width": 0.151
+  },
+  {
+   "image_id": "v2_render_7_3_1_front",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_render_7_3_1_random",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 7
+  },
+  {
+   "image_id": "v2_drawing_7_3_1",
+   "category": "drawing",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 7,
+   "halo_over_line_width": 0.133
+  },
+  {
+   "image_id": "v2_render_8_3_1_front",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 2], [1, 2, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_3_1_random",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "7 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_8_3_1",
+   "category": "drawing",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.142
+  },
+  {
+   "image_id": "v2_render_8_3_2_front",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_3_2_random",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_8_3_2",
+   "category": "drawing",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 1], [2, 0, 1], [1, 1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.236
+  },
+  {
+   "image_id": "v2_render_8_3_3_front",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_3_3_random",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "2 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_8_3_3",
+   "category": "drawing",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 1], [1, 0, 1], [1, 1, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.337
+  },
+  {
+   "image_id": "v2_render_8_3_4_front",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 2], [0, 0, 2], [2, 2, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 2], [2, 0, 0], [2, 0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_3_4_random",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 2], [0, 0, 2], [2, 2, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 5
+  },
+  {
+   "image_id": "v2_drawing_8_3_4",
+   "category": "drawing",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 2], [0, 0, 2], [2, 2, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 2, 2], [2, 0, 0], [2, 0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.545
+  },
+  {
+   "image_id": "v2_render_8_3_5_front",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 1], [0, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "3 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_render_8_3_5_random",
+   "category": "render",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 1], [0, 1, 0]]]",
+   "answer": null,
+   "correct": null,
+   "reason": "4 crossing(s) without exactly four arms",
+   "crossings_detected": 8
+  },
+  {
+   "image_id": "v2_drawing_8_3_5",
+   "category": "drawing",
+   "label": "link[0_1,0_1,0_1|interlinked|lk=[[0, 0, 0], [0, 0, 1], [0, 1, 0]]]",
+   "answer": "link[0_1,0_1,0_1|interlinked|lk=[[0, 1, 0], [1, 0, 0], [0, 0, 0]]]",
+   "correct": true,
+   "reason": null,
+   "crossings_detected": 8,
+   "halo_over_line_width": 0.511
+  }
+ ]
+}

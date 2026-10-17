@@ -1,0 +1,141 @@
+trunk checkpoints/beat_unet/mps_uf_s0.pth (2.93M, frozen), head 0.51M; 3000 training images, 150 validation
+step 1/4500 loss 4.1074 (1s)
+step 50/4500 loss 3.8769 (11s)
+step 100/4500 loss 3.1985 (21s)
+step 150/4500 loss 2.5535 (31s)
+step 200/4500 loss 2.1551 (41s)
+step 250/4500 loss 1.8591 (51s)
+step 300/4500 loss 1.5692 (61s)
+step 350/4500 loss 1.4142 (72s)
+step 400/4500 loss 1.2764 (82s)
+step 450/4500 loss 1.2121 (93s)
+step 500/4500 loss 1.2026 (103s)
+step 550/4500 loss 1.1401 (114s)
+step 600/4500 loss 1.1273 (125s)
+step 650/4500 loss 1.0798 (136s)
+step 700/4500 loss 1.1215 (147s)
+step 750/4500 loss 1.1045 (158s)
+step 800/4500 loss 1.0473 (169s)
+step 850/4500 loss 1.0585 (179s)
+step 900/4500 loss 1.0625 (189s)
+step 950/4500 loss 1.0393 (200s)
+step 1000/4500 loss 1.0261 (211s)
+step 1050/4500 loss 1.0277 (221s)
+step 1100/4500 loss 1.0378 (232s)
+step 1150/4500 loss 1.0333 (242s)
+step 1200/4500 loss 1.0033 (253s)
+step 1250/4500 loss 1.0030 (263s)
+step 1300/4500 loss 1.0174 (274s)
+step 1350/4500 loss 1.0013 (284s)
+step 1400/4500 loss 1.0144 (295s)
+step 1450/4500 loss 0.9964 (305s)
+step 1500/4500 loss 0.9943 (316s)
+step 1550/4500 loss 0.9812 (327s)
+step 1600/4500 loss 0.9760 (337s)
+step 1650/4500 loss 0.9834 (348s)
+step 1700/4500 loss 0.9592 (358s)
+step 1750/4500 loss 0.9469 (368s)
+step 1800/4500 loss 0.9595 (378s)
+step 1850/4500 loss 0.9542 (389s)
+step 1900/4500 loss 0.9653 (400s)
+step 1950/4500 loss 0.9312 (410s)
+step 2000/4500 loss 0.9742 (420s)
+step 2050/4500 loss 0.9419 (430s)
+step 2100/4500 loss 0.9875 (441s)
+step 2150/4500 loss 0.9428 (451s)
+step 2200/4500 loss 0.9253 (461s)
+step 2250/4500 loss 0.9339 (472s)
+step 2300/4500 loss 0.9444 (482s)
+step 2350/4500 loss 0.9102 (492s)
+step 2400/4500 loss 0.9293 (503s)
+step 2450/4500 loss 0.9450 (513s)
+step 2500/4500 loss 0.9153 (523s)
+step 2550/4500 loss 0.9108 (533s)
+step 2600/4500 loss 0.9102 (544s)
+step 2650/4500 loss 0.9300 (554s)
+step 2700/4500 loss 0.9075 (564s)
+step 2750/4500 loss 0.8961 (574s)
+step 2800/4500 loss 0.9071 (585s)
+step 2850/4500 loss 0.9076 (595s)
+step 2900/4500 loss 0.9154 (605s)
+step 2950/4500 loss 0.8841 (616s)
+step 3000/4500 loss 0.8837 (626s)
+step 3050/4500 loss 0.8915 (637s)
+step 3100/4500 loss 0.9064 (647s)
+step 3150/4500 loss 0.8880 (658s)
+step 3200/4500 loss 0.8888 (668s)
+step 3250/4500 loss 0.8872 (679s)
+step 3300/4500 loss 0.8987 (689s)
+step 3350/4500 loss 0.8899 (699s)
+step 3400/4500 loss 0.8835 (709s)
+step 3450/4500 loss 0.8848 (719s)
+step 3500/4500 loss 0.8716 (729s)
+step 3550/4500 loss 0.8929 (740s)
+step 3600/4500 loss 0.9049 (750s)
+step 3650/4500 loss 0.8877 (760s)
+step 3700/4500 loss 0.8779 (770s)
+step 3750/4500 loss 0.8878 (781s)
+step 3800/4500 loss 0.8858 (791s)
+step 3850/4500 loss 0.8727 (801s)
+step 3900/4500 loss 0.8761 (812s)
+step 3950/4500 loss 0.8683 (822s)
+step 4000/4500 loss 0.8820 (832s)
+step 4050/4500 loss 0.8879 (842s)
+step 4100/4500 loss 0.8805 (852s)
+step 4150/4500 loss 0.8681 (862s)
+step 4200/4500 loss 0.8690 (872s)
+step 4250/4500 loss 0.8720 (883s)
+step 4300/4500 loss 0.8654 (893s)
+step 4350/4500 loss 0.8778 (903s)
+step 4400/4500 loss 0.8712 (914s)
+step 4450/4500 loss 0.8752 (924s)
+step 4500/4500 loss 0.8829 (934s)
+/Users/abhyuday/knot_recognition/scripts/train_strand_pointer.py:95: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:219.)
+  x = torch.from_numpy(np.asarray(X[i : i + 1])).permute(0, 3, 1, 2).float().to(dev) / 255.0
+{
+ "true": {
+  "pointer": {
+   "link_recall": 0.9774126181578369,
+   "link_precision": 0.9854823516373913,
+   "jump_recall": 0.7620396600566572,
+   "links_to_clutter": 0,
+   "exact_images": 54,
+   "images": 150,
+   "jumps": 1765,
+   "links": 36392
+  },
+  "straightest": {
+   "link_recall": 0.9213013849197625,
+   "link_precision": 0.9410311824637234,
+   "jump_recall": 0.5161473087818697,
+   "links_to_clutter": 0,
+   "exact_images": 28,
+   "images": 150,
+   "jumps": 1765,
+   "links": 36392
+  }
+ },
+ "ridge": {
+  "pointer": {
+   "link_recall": 0.9730303483330842,
+   "link_precision": 0.9800337288441848,
+   "jump_recall": 0.7926421404682275,
+   "links_to_clutter": 117,
+   "exact_images": 37,
+   "images": 150,
+   "jumps": 2093,
+   "links": 33445
+  },
+  "straightest": {
+   "link_recall": 0.9444461055464195,
+   "link_precision": 0.9611136467366499,
+   "jump_recall": 0.5914954610606784,
+   "links_to_clutter": 211,
+   "exact_images": 8,
+   "images": 150,
+   "jumps": 2093,
+   "links": 33445
+  }
+ }
+}
+[saved] checkpoints/strand_pointer/mps_ptr_s0.pth  (941s)

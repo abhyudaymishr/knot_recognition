@@ -1,0 +1,22 @@
+{
+ "model": "checkpoints/beat_unet/mps_uf_topo_s1.pth",
+ "gap": false,
+ "clutter": true,
+ "role": "ablation",
+ "ledger": {
+  "blind_v2": {
+   "set": "blind:blind_real_v2",
+   "set_hash": "907e2ac47e738ac345801c53ef12698dffc82bdd4957afcf68703f64dd9593e3",
+   "role": "ablation",
+   "checkpoint": "mps_uf_topo_s1.pth",
+   "checkpoint_sha256": "2396bd9d0d5fa556fc8db0393d89f9ae49c8529e5d597a26d1e7a9c46f7fb140",
+   "time_utc": "2026-10-16T05:30:01Z",
+   "git": "2a403d2",
+   "repeat_of_same_model": false,
+   "new_main_reason": null,
+   "note": "checkpoints/beat_unet/mps_uf_topo_s1.pth suite=bu_uf_topo_s1 gap=False clutter=True kappa=27.0"
+  }
+ },
+ "kappa": 27.0,
+ "kappa_from": "fit on 294 KnotBench train-split crossings"
+}

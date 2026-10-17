@@ -1,0 +1,67 @@
+device mps; UNetFormer 2.93M + pointer head 0.51M (weight 1.0); batch 16, 188 steps per epoch, 12 epochs, 4 data workers
+  epoch 1 step 50/188: dense 12.3957, pointer 3.7095 (0.5 min, 0.63 s/step, GPU memory 4.6 GB)
+  epoch 1 step 100/188: dense 10.2960, pointer 3.0781 (1.0 min, 0.57 s/step, GPU memory 4.6 GB)
+  epoch 1 step 150/188: dense 8.8702, pointer 2.6396 (1.5 min, 0.57 s/step, GPU memory 5.7 GB)
+/Users/abhyuday/knot_recognition/scripts/train_unetformer_pointer.py:223: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:219.)
+  x = torch.from_numpy(np.asarray(X[i:i + 1])).permute(0, 3, 1, 2).float().div(255).to(dev)
+{"epoch": 1, "min": 2.2, "val_loss": 4.1658, "crossing_P/R": [0.846, 0.629], "over_axis": 0.9171, "pointer_loss": 1.298, "true_links": 0.9445, "true_jumps": 0.4418, "ridge_links": 0.8532, "ridge_jumps": 0.5848}
+  [saved] epoch 1 -> mps_ufptr_s1.pth, mps_ufptr_s1_head.pth
+  epoch 2 step 50/188: dense 3.7216, pointer 1.2416 (2.7 min, 0.55 s/step, GPU memory 5.7 GB)
+  epoch 2 step 100/188: dense 3.4563, pointer 1.2057 (3.1 min, 0.50 s/step, GPU memory 5.7 GB)
+  epoch 2 step 150/188: dense 3.2763, pointer 1.1713 (3.6 min, 0.53 s/step, GPU memory 5.6 GB)
+{"epoch": 2, "min": 4.3, "val_loss": 2.7577, "crossing_P/R": [0.907, 0.736], "over_axis": 0.9427, "pointer_loss": 1.0125, "true_links": 0.9603, "true_jumps": 0.5628, "ridge_links": 0.9226, "ridge_jumps": 0.6826}
+  [saved] epoch 2 -> mps_ufptr_s1.pth, mps_ufptr_s1_head.pth
+  epoch 3 step 50/188: dense 2.5981, pointer 1.0535 (4.8 min, 0.56 s/step, GPU memory 4.5 GB)
+  epoch 3 step 100/188: dense 2.6157, pointer 1.0492 (5.2 min, 0.50 s/step, GPU memory 4.6 GB)
+  epoch 3 step 150/188: dense 2.5757, pointer 1.0310 (5.6 min, 0.54 s/step, GPU memory 4.5 GB)
+{"epoch": 3, "min": 6.4, "val_loss": 2.4376, "crossing_P/R": [0.852, 0.864], "over_axis": 0.9416, "pointer_loss": 0.9251, "true_links": 0.9698, "true_jumps": 0.6687, "ridge_links": 0.9551, "ridge_jumps": 0.7449}
+  [saved] epoch 3 -> mps_ufptr_s1.pth, mps_ufptr_s1_head.pth
+  ridge points refreshed from the model (28s)
+  epoch 4 step 50/188: dense 2.3285, pointer 1.2155 (7.3 min, 0.55 s/step, GPU memory 4.6 GB)
+  epoch 4 step 100/188: dense 2.3458, pointer 1.1830 (7.8 min, 0.54 s/step, GPU memory 5.6 GB)
+  epoch 4 step 150/188: dense 2.3183, pointer 1.1584 (8.3 min, 0.58 s/step, GPU memory 5.6 GB)
+{"epoch": 4, "min": 9.0, "val_loss": 2.3199, "crossing_P/R": [0.942, 0.79], "over_axis": 0.9506, "pointer_loss": 0.9602, "true_links": 0.9668, "true_jumps": 0.6505, "ridge_links": 0.9502, "ridge_jumps": 0.7343}
+  [saved] epoch 4 -> mps_ufptr_s1.pth, mps_ufptr_s1_head.pth
+  epoch 5 step 50/188: dense 2.1596, pointer 1.0396 (9.5 min, 0.55 s/step, GPU memory 5.6 GB)
+  epoch 5 step 100/188: dense 2.1975, pointer 1.0440 (9.9 min, 0.50 s/step, GPU memory 5.6 GB)
+  epoch 5 step 150/188: dense 2.1866, pointer 1.0475 (10.3 min, 0.54 s/step, GPU memory 5.6 GB)
+{"epoch": 5, "min": 11.1, "val_loss": 2.168, "crossing_P/R": [0.905, 0.892], "over_axis": 0.9487, "pointer_loss": 0.9109, "true_links": 0.9705, "true_jumps": 0.6853, "ridge_links": 0.9597, "ridge_jumps": 0.7477}
+  [saved] epoch 5 -> mps_ufptr_s1.pth, mps_ufptr_s1_head.pth
+  epoch 6 step 50/188: dense 2.0951, pointer 1.0296 (11.6 min, 0.56 s/step, GPU memory 4.5 GB)
+  epoch 6 step 100/188: dense 2.0568, pointer 1.0143 (12.0 min, 0.51 s/step, GPU memory 5.6 GB)
+  epoch 6 step 150/188: dense 2.0736, pointer 1.0224 (12.5 min, 0.55 s/step, GPU memory 5.6 GB)
+{"epoch": 6, "min": 13.2, "val_loss": 2.1279, "crossing_P/R": [0.913, 0.861], "over_axis": 0.9518, "pointer_loss": 0.9415, "true_links": 0.9681, "true_jumps": 0.6944, "ridge_links": 0.9584, "ridge_jumps": 0.7399}
+  [saved] epoch 6 -> mps_ufptr_s1.pth, mps_ufptr_s1_head.pth
+  ridge points refreshed from the model (29s)
+  epoch 7 step 50/188: dense 2.0521, pointer 1.0043 (14.2 min, 0.56 s/step, GPU memory 4.5 GB)
+  epoch 7 step 100/188: dense 2.0736, pointer 0.9933 (14.6 min, 0.57 s/step, GPU memory 5.6 GB)
+  epoch 7 step 150/188: dense 2.0581, pointer 0.9881 (15.1 min, 0.58 s/step, GPU memory 5.6 GB)
+{"epoch": 7, "min": 15.8, "val_loss": 2.1094, "crossing_P/R": [0.954, 0.847], "over_axis": 0.9537, "pointer_loss": 0.9, "true_links": 0.9731, "true_jumps": 0.7262, "ridge_links": 0.959, "ridge_jumps": 0.7702}
+  [saved] epoch 7 -> mps_ufptr_s1.pth, mps_ufptr_s1_head.pth
+  epoch 8 step 50/188: dense 2.0736, pointer 1.0050 (16.4 min, 0.57 s/step, GPU memory 5.6 GB)
+  epoch 8 step 100/188: dense 2.0924, pointer 1.0089 (16.8 min, 0.50 s/step, GPU memory 5.6 GB)
+  epoch 8 step 150/188: dense 2.0562, pointer 0.9992 (17.2 min, 0.54 s/step, GPU memory 5.6 GB)
+{"epoch": 8, "min": 18.0, "val_loss": 2.0706, "crossing_P/R": [0.879, 0.909], "over_axis": 0.9526, "pointer_loss": 0.8743, "true_links": 0.9766, "true_jumps": 0.7489, "ridge_links": 0.9659, "ridge_jumps": 0.7733}
+  [saved] epoch 8 -> mps_ufptr_s1.pth, mps_ufptr_s1_head.pth
+  epoch 9 step 50/188: dense 2.0199, pointer 0.9711 (18.5 min, 0.56 s/step, GPU memory 5.6 GB)
+  epoch 9 step 100/188: dense 1.9945, pointer 0.9631 (18.9 min, 0.51 s/step, GPU memory 5.6 GB)
+  epoch 9 step 150/188: dense 1.9772, pointer 0.9603 (19.4 min, 0.54 s/step, GPU memory 5.6 GB)
+{"epoch": 9, "min": 20.1, "val_loss": 1.9943, "crossing_P/R": [0.927, 0.909], "over_axis": 0.9543, "pointer_loss": 0.8771, "true_links": 0.9763, "true_jumps": 0.7458, "ridge_links": 0.9654, "ridge_jumps": 0.7543}
+  [saved] epoch 9 -> mps_ufptr_s1.pth, mps_ufptr_s1_head.pth
+  ridge points refreshed from the model (29s)
+  epoch 10 step 50/188: dense 1.9168, pointer 0.9350 (21.1 min, 0.61 s/step, GPU memory 5.6 GB)
+  epoch 10 step 100/188: dense 1.8846, pointer 0.9269 (21.6 min, 0.55 s/step, GPU memory 5.6 GB)
+  epoch 10 step 150/188: dense 1.8938, pointer 0.9277 (22.0 min, 0.57 s/step, GPU memory 5.6 GB)
+{"epoch": 10, "min": 22.8, "val_loss": 1.974, "crossing_P/R": [0.9, 0.925], "over_axis": 0.9526, "pointer_loss": 0.8582, "true_links": 0.978, "true_jumps": 0.7564, "ridge_links": 0.9688, "ridge_jumps": 0.7774}
+  [saved] epoch 10 -> mps_ufptr_s1.pth, mps_ufptr_s1_head.pth
+  epoch 11 step 50/188: dense 1.9097, pointer 0.9168 (23.3 min, 0.57 s/step, GPU memory 5.6 GB)
+  epoch 11 step 100/188: dense 1.8745, pointer 0.9159 (23.7 min, 0.51 s/step, GPU memory 5.6 GB)
+  epoch 11 step 150/188: dense 1.8672, pointer 0.9182 (24.2 min, 0.55 s/step, GPU memory 5.6 GB)
+{"epoch": 11, "min": 24.9, "val_loss": 1.946, "crossing_P/R": [0.92, 0.923], "over_axis": 0.9549, "pointer_loss": 0.8578, "true_links": 0.978, "true_jumps": 0.7504, "ridge_links": 0.9672, "ridge_jumps": 0.7705}
+  [saved] epoch 11 -> mps_ufptr_s1.pth, mps_ufptr_s1_head.pth
+  epoch 12 step 50/188: dense 1.8576, pointer 0.9094 (25.4 min, 0.58 s/step, GPU memory 5.6 GB)
+  epoch 12 step 100/188: dense 1.8785, pointer 0.9119 (25.9 min, 0.51 s/step, GPU memory 5.6 GB)
+  epoch 12 step 150/188: dense 1.8486, pointer 0.9124 (26.3 min, 0.54 s/step, GPU memory 5.6 GB)
+{"epoch": 12, "min": 27.0, "val_loss": 1.9439, "crossing_P/R": [0.923, 0.924], "over_axis": 0.9544, "pointer_loss": 0.8564, "true_links": 0.9779, "true_jumps": 0.7474, "ridge_links": 0.9696, "ridge_jumps": 0.7867}
+  [saved] epoch 12 -> mps_ufptr_s1.pth, mps_ufptr_s1_head.pth
+done in 27.1 min; history /Users/abhyuday/knot_recognition/results/uf_pointer/mps_ufptr_s1_history.json

@@ -1,0 +1,22 @@
+{
+ "model": "unet_seg+kp:checkpoints/beat_unet/mps_unet_seg_s1.pth,checkpoints/beat_unet/mps_unet_kp_s1.pth",
+ "gap": false,
+ "clutter": true,
+ "role": "baseline",
+ "ledger": {
+  "blind_v2": {
+   "set": "blind:blind_real_v2",
+   "set_hash": "907e2ac47e738ac345801c53ef12698dffc82bdd4957afcf68703f64dd9593e3",
+   "role": "baseline",
+   "checkpoint": "mps_unet_seg_s1.pth",
+   "checkpoint_sha256": "8d4312a4221cefc655dd2bdc90d19e4832d19543e199c19b956b941bb8820e73",
+   "time_utc": "2026-10-16T04:17:58Z",
+   "git": "2a403d2",
+   "repeat_of_same_model": false,
+   "new_main_reason": null,
+   "note": "unet_seg+kp:checkpoints/beat_unet/mps_unet_seg_s1.pth,checkpoints/beat_unet/mps_unet_kp_s1.pth suite=bu_unet_s1 gap=False clutter=True kappa=27.5"
+  }
+ },
+ "kappa": 27.5,
+ "kappa_from": "fit on 294 KnotBench train-split crossings"
+}

@@ -1,0 +1,6 @@
+bu_unet_s0|unet_seg+kp:checkpoints/beat_unet/mps_unet_seg_s0.pth,checkpoints/beat_unet/mps_unet_kp_s0.pth|kb,close,real,blind_v2|--clutter --role baseline|results/training/beat_unet/mps_unet_seg_s0.json results/training/beat_unet/mps_unet_kp_s0.json
+bu_nano3m_s0|checkpoints/beat_unet/mps_nano3m_s0.pth|kb,close,real,blind_v2|--clutter|results/training/beat_unet/mps_nano3m_s0.json
+bu_unet_s1|unet_seg+kp:checkpoints/beat_unet/mps_unet_seg_s1.pth,checkpoints/beat_unet/mps_unet_kp_s1.pth|kb,close,real,blind_v2|--clutter --role baseline|results/training/beat_unet/mps_unet_seg_s1.json results/training/beat_unet/mps_unet_kp_s1.json
+bu_nano3m_s1|checkpoints/beat_unet/mps_nano3m_s1.pth|kb,close,real,blind_v2|--clutter|results/training/beat_unet/mps_nano3m_s1.json
+bu_unet_s2|unet_seg+kp:checkpoints/beat_unet/mps_unet_seg_s2.pth,checkpoints/beat_unet/mps_unet_kp_s2.pth|kb,close,real,blind_v2|--clutter --role baseline|results/training/beat_unet/mps_unet_seg_s2.json results/training/beat_unet/mps_unet_kp_s2.json
+bu_nano3m_s2|checkpoints/beat_unet/mps_nano3m_s2.pth|kb,close,real,blind_v2|--clutter|results/training/beat_unet/mps_nano3m_s2.json

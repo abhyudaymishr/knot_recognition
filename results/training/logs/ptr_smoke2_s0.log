@@ -1,0 +1,82 @@
+trunk /home/claude/knot_recognition/checkpoints/beat_unet/mps_uf_s0.pth (2.93M, frozen), head 0.51M; 3000 training images, 150 validation
+step 1/1500 loss 4.1038 (2s)
+step 50/1500 loss 3.9445 (90s)
+step 100/1500 loss 2.9260 (193s)
+step 150/1500 loss 2.1856 (262s)
+step 200/1500 loss 1.8422 (328s)
+step 250/1500 loss 1.7033 (389s)
+step 300/1500 loss 1.5266 (448s)
+step 350/1500 loss 1.4082 (513s)
+step 400/1500 loss 1.4081 (574s)
+step 450/1500 loss 1.4080 (633s)
+step 500/1500 loss 1.3584 (694s)
+  x = torch.from_numpy(np.asarray(X[i : i + 1])).permute(0, 3, 1, 2).float().to(dev) / 255.0
+  val(30): {"true": {"pointer": 0.8584, "straightest": 0.9261}, "ridge": {"pointer": 0.8601, "straightest": 0.9459}}
+step 550/1500 loss 1.2984 (760s)
+step 600/1500 loss 1.2954 (823s)
+step 650/1500 loss 1.1966 (880s)
+step 700/1500 loss 1.2228 (938s)
+step 750/1500 loss 1.2275 (1001s)
+step 800/1500 loss 1.1827 (1065s)
+step 850/1500 loss 1.1714 (1120s)
+step 900/1500 loss 1.2145 (1179s)
+step 950/1500 loss 1.1958 (1237s)
+step 1000/1500 loss 1.1543 (1296s)
+  val(30): {"true": {"pointer": 0.9515, "straightest": 0.9261}, "ridge": {"pointer": 0.954, "straightest": 0.9459}}
+step 1050/1500 loss 1.1339 (1362s)
+step 1100/1500 loss 1.1604 (1423s)
+step 1150/1500 loss 1.1627 (1481s)
+step 1200/1500 loss 1.1375 (1540s)
+step 1250/1500 loss 1.1708 (1595s)
+step 1300/1500 loss 1.1518 (1660s)
+step 1350/1500 loss 1.1731 (1720s)
+step 1400/1500 loss 1.0894 (1777s)
+step 1450/1500 loss 1.1561 (1836s)
+step 1500/1500 loss 1.1335 (1900s)
+{
+ "true": {
+  "pointer": {
+   "link_recall": 0.9475159375686965,
+   "link_precision": 0.9723099481163997,
+   "jump_recall": 0.48725212464589235,
+   "links_to_clutter": 0,
+   "exact_images": 29,
+   "images": 150,
+   "jumps": 1765,
+   "links": 36392
+  },
+  "straightest": {
+   "link_recall": 0.9213013849197625,
+   "link_precision": 0.9410311824637234,
+   "jump_recall": 0.5161473087818697,
+   "links_to_clutter": 0,
+   "exact_images": 28,
+   "images": 150,
+   "jumps": 1765,
+   "links": 36392
+  }
+ },
+ "ridge": {
+  "pointer": {
+   "link_recall": 0.9530273583495291,
+   "link_precision": 0.97408471364831,
+   "jump_recall": 0.5824175824175825,
+   "links_to_clutter": 163,
+   "exact_images": 14,
+   "images": 150,
+   "jumps": 2093,
+   "links": 33445
+  },
+  "straightest": {
+   "link_recall": 0.9444461055464195,
+   "link_precision": 0.9611136467366499,
+   "jump_recall": 0.5914954610606784,
+   "links_to_clutter": 211,
+   "exact_images": 8,
+   "images": 150,
+   "jumps": 2093,
+   "links": 33445
+  }
+ }
+}
+[saved] checkpoints/strand_pointer/smoke2_s0.pth  (1945s)

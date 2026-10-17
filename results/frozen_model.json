@@ -1,0 +1,25 @@
+{
+ "checkpoint": "knot_aware_nanotransformer.pth",
+ "same_as": "knot_aware_nanotransformer_v3.pth",
+ "sha256": "6ddb46b451d047ddac2d197d46e317ce87693addccb0ee6042baba4a2538ad79",
+ "identical_to_v3_file": true,
+ "config": {
+  "in_channels": 4,
+  "stem_dim": 48,
+  "embed_dim": 128,
+  "depth": 4,
+  "num_heads": 4,
+  "mlp_ratio": 2.0,
+  "dropout": 0.0,
+  "hi_res_center": true
+ },
+ "extra": {
+  "train_images": 3000,
+  "data": "train_v3",
+  "init": "checkpoints/knot_aware_nanotransformer_v2.pth",
+  "kappa": 26.5,
+  "gamma": 2.0
+ },
+ "frozen_on_utc": "2026-10-14T09:47:49Z",
+ "rule": "No change to this checkpoint, its parser settings (heat_thr 0.35, centre-line threshold 0.5, gamma 2, kappa 26.5, type threshold 0.95) or its training data after this date may be evaluated on the real cable set or the blind real-picture set as the main model."
+}

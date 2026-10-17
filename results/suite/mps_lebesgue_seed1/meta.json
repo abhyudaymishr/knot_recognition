@@ -1,0 +1,21 @@
+{
+ "model": "checkpoints/recipe/mps_lebesgue_seed1.pth",
+ "gap": false,
+ "role": "ablation",
+ "ledger": {
+  "blind_v2": {
+   "set": "blind:blind_real_v2",
+   "set_hash": "907e2ac47e738ac345801c53ef12698dffc82bdd4957afcf68703f64dd9593e3",
+   "role": "ablation",
+   "checkpoint": "mps_lebesgue_seed1.pth",
+   "checkpoint_sha256": "5913ae1e4284a4956e8b2b030351f9a1a09d706db826b33c86e4dbc8540efb16",
+   "time_utc": "2026-10-15T21:28:01Z",
+   "git": "2a403d2",
+   "repeat_of_same_model": false,
+   "new_main_reason": null,
+   "note": "checkpoints/recipe/mps_lebesgue_seed1.pth suite=mps_lebesgue_seed1 gap=False kappa=27.5"
+  }
+ },
+ "kappa": 27.5,
+ "kappa_from": "fit on 297 KnotBench train-split crossings"
+}

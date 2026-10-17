@@ -1,0 +1,820 @@
+{
+ "model": "checkpoints/knot_aware_nanotransformer.pth",
+ "kappa": 26.5,
+ "by_group": {
+  "clutter_dev:S3_dim": {
+   "off": {
+    "images": 40,
+    "answered": 26,
+    "wrong": 0
+   },
+   "on": {
+    "images": 40,
+    "answered": 32,
+    "wrong": 0
+   }
+  },
+  "clutter_dev:S4_clutter": {
+   "off": {
+    "images": 40,
+    "answered": 5,
+    "wrong": 0
+   },
+   "on": {
+    "images": 40,
+    "answered": 15,
+    "wrong": 0
+   }
+  },
+  "gap_dev:diagram": {
+   "off": {
+    "images": 24,
+    "answered": 5,
+    "wrong": 0
+   },
+   "on": {
+    "images": 24,
+    "answered": 5,
+    "wrong": 0
+   }
+  },
+  "gap_dev:diagram_thin_gap": {
+   "off": {
+    "images": 40,
+    "answered": 4,
+    "wrong": 0
+   },
+   "on": {
+    "images": 40,
+    "answered": 4,
+    "wrong": 0
+   }
+  },
+  "gap_dev:ribbon": {
+   "off": {
+    "images": 24,
+    "answered": 8,
+    "wrong": 0
+   },
+   "on": {
+    "images": 24,
+    "answered": 8,
+    "wrong": 0
+   }
+  },
+  "gap_dev:rope": {
+   "off": {
+    "images": 24,
+    "answered": 1,
+    "wrong": 0
+   },
+   "on": {
+    "images": 24,
+    "answered": 1,
+    "wrong": 0
+   }
+  },
+  "gap_dev:shaded": {
+   "off": {
+    "images": 24,
+    "answered": 5,
+    "wrong": 0
+   },
+   "on": {
+    "images": 24,
+    "answered": 5,
+    "wrong": 0
+   }
+  },
+  "gap_dev:tube": {
+   "off": {
+    "images": 24,
+    "answered": 7,
+    "wrong": 0
+   },
+   "on": {
+    "images": 24,
+    "answered": 7,
+    "wrong": 0
+   }
+  },
+  "parser_dev:photo": {
+   "off": {
+    "images": 40,
+    "answered": 33,
+    "wrong": 0
+   },
+   "on": {
+    "images": 40,
+    "answered": 33,
+    "wrong": 0
+   }
+  },
+  "parser_dev:silhouette": {
+   "off": {
+    "images": 40,
+    "answered": 2,
+    "wrong": 0
+   },
+   "on": {
+    "images": 40,
+    "answered": 3,
+    "wrong": 0
+   }
+  },
+  "all": {
+   "off": {
+    "images": 320,
+    "answered": 96,
+    "wrong": 0
+   },
+   "on": {
+    "images": 320,
+    "answered": 113,
+    "wrong": 0
+   }
+  }
+ },
+ "changed": [
+  {
+   "image_id": "clut000",
+   "group": "clutter_dev:S3_dim",
+   "gt": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "Euler check",
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "clut005",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 5
+   }
+  },
+  {
+   "image_id": "clut007",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "Euler check",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 3
+   }
+  },
+  {
+   "image_id": "clut015",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "0_1",
+    "correct": true,
+    "reason": null,
+    "removed": 2
+   }
+  },
+  {
+   "image_id": "clut018",
+   "group": "clutter_dev:S3_dim",
+   "gt": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "clut019",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "link[0_1,0_1|interlinked|lk=[[0, 2], [2, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "Euler check",
+    "removed": 3
+   }
+  },
+  {
+   "image_id": "clut021",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "0_1",
+    "correct": true,
+    "reason": null,
+    "removed": 2
+   }
+  },
+  {
+   "image_id": "clut022",
+   "group": "clutter_dev:S3_dim",
+   "gt": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "clut024",
+   "group": "clutter_dev:S3_dim",
+   "gt": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "Euler check",
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "clut026",
+   "group": "clutter_dev:S3_dim",
+   "gt": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "clut036",
+   "group": "clutter_dev:S3_dim",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "0_1",
+    "correct": true,
+    "reason": null,
+    "removed": 2
+   }
+  },
+  {
+   "image_id": "clut041",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "clut042",
+   "group": "clutter_dev:S3_dim",
+   "gt": "3_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "3_1",
+    "correct": true,
+    "reason": null,
+    "removed": 4
+   }
+  },
+  {
+   "image_id": "clut043",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 3
+   }
+  },
+  {
+   "image_id": "clut049",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "clut050",
+   "group": "clutter_dev:S3_dim",
+   "gt": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "clut051",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "0_1",
+    "correct": true,
+    "reason": null,
+    "removed": 5
+   }
+  },
+  {
+   "image_id": "clut073",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "0_1",
+    "correct": true,
+    "reason": null,
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "clut075",
+   "group": "clutter_dev:S4_clutter",
+   "gt": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 2
+   }
+  },
+  {
+   "image_id": "dev001",
+   "group": "parser_dev:silhouette",
+   "gt": "link[0_1,3_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "type probability below 0.95",
+    "removed": 3
+   }
+  },
+  {
+   "image_id": "dev023",
+   "group": "parser_dev:silhouette",
+   "gt": "link[0_1,0_1|interlinked|lk=[[0, 1], [1, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "Euler check",
+    "removed": 2
+   }
+  },
+  {
+   "image_id": "dev057",
+   "group": "parser_dev:silhouette",
+   "gt": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "traversal did not close",
+    "removed": 4
+   }
+  },
+  {
+   "image_id": "dev079",
+   "group": "parser_dev:silhouette",
+   "gt": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": "link[0_1,0_1|separable|lk=[[0, 0], [0, 0]]]",
+    "correct": true,
+    "reason": null,
+    "removed": 4
+   }
+  },
+  {
+   "image_id": "gapdev010",
+   "group": "gap_dev:tube",
+   "gt": "7_1*",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 22
+   }
+  },
+  {
+   "image_id": "gapdev016",
+   "group": "gap_dev:tube",
+   "gt": "5_1*",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 5
+   }
+  },
+  {
+   "image_id": "gapdev025",
+   "group": "gap_dev:ribbon",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "skeleton branches away from any detected",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 4
+   }
+  },
+  {
+   "image_id": "gapdev028",
+   "group": "gap_dev:ribbon",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "1 crossing(s) without exactly four arms",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "2 crossing(s) without exactly four arms",
+    "removed": 1
+   }
+  },
+  {
+   "image_id": "gapdev033",
+   "group": "gap_dev:ribbon",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "skeleton branches away from any detected",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 3
+   }
+  },
+  {
+   "image_id": "gapdev038",
+   "group": "gap_dev:ribbon",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "skeleton branches away from any detected",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 7
+   }
+  },
+  {
+   "image_id": "gapdev053",
+   "group": "gap_dev:diagram",
+   "gt": "9_1*",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 13
+   }
+  },
+  {
+   "image_id": "gapdev054",
+   "group": "gap_dev:diagram",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "skeleton branches away from any detected",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 3
+   }
+  },
+  {
+   "image_id": "gapdev061",
+   "group": "gap_dev:diagram",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "skeleton branches away from any detected",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 3
+   }
+  },
+  {
+   "image_id": "gapdev073",
+   "group": "gap_dev:rope",
+   "gt": "8_19*",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "skeleton branches away from any detected",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 4
+   }
+  },
+  {
+   "image_id": "gapdev076",
+   "group": "gap_dev:rope",
+   "gt": "8_19*",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "skeleton branches away from any detected",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 8
+   }
+  },
+  {
+   "image_id": "gapdev089",
+   "group": "gap_dev:rope",
+   "gt": "7_1*",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 23
+   }
+  },
+  {
+   "image_id": "gapdev094",
+   "group": "gap_dev:rope",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "skeleton branches away from any detected",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 3
+   }
+  },
+  {
+   "image_id": "gapdev112",
+   "group": "gap_dev:shaded",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "skeleton branches away from any detected",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 3
+   }
+  },
+  {
+   "image_id": "gapdev115",
+   "group": "gap_dev:shaded",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 2
+   }
+  },
+  {
+   "image_id": "gapdev118",
+   "group": "gap_dev:shaded",
+   "gt": "8_19*",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "skeleton branches away from any detected",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 6
+   }
+  },
+  {
+   "image_id": "gapdev139",
+   "group": "gap_dev:diagram_thin_gap",
+   "gt": "0_1",
+   "off": {
+    "answer": null,
+    "correct": null,
+    "reason": "free cable ends",
+    "removed": 0
+   },
+   "on": {
+    "answer": null,
+    "correct": null,
+    "reason": "no diagram",
+    "removed": 2
+   }
+  }
+ ]
+}

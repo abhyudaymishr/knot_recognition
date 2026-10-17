@@ -1,0 +1,21 @@
+{
+ "model": "checkpoints/recipe/nofft.pth",
+ "gap": false,
+ "role": "ablation",
+ "ledger": {
+  "blind_v2": {
+   "set": "blind:blind_real_v2",
+   "set_hash": "907e2ac47e738ac345801c53ef12698dffc82bdd4957afcf68703f64dd9593e3",
+   "role": "ablation",
+   "checkpoint": "nofft.pth",
+   "checkpoint_sha256": "7da2d7bb6a66058a1b73986270e3d729a9a373fd4f3d8f07166c67a131f802ee",
+   "time_utc": "2026-10-15T12:08:56Z",
+   "git": "2a403d2",
+   "repeat_of_same_model": false,
+   "new_main_reason": null,
+   "note": "checkpoints/recipe/nofft.pth suite=nofft gap=False kappa=30.0"
+  }
+ },
+ "kappa": 30.0,
+ "kappa_from": "given"
+}
