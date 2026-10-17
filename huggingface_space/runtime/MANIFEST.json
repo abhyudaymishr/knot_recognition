@@ -1,0 +1,116 @@
+{
+ "model": "mps_uf_s0.pth",
+ "strand_head": "mps_ptr_s0.pth",
+ "kappa": 26.5,
+ "repository_commit": "b69a93c",
+ "files": {
+  "Knotgen/census_braids.json": {
+   "source": "Knotgen/census_braids.json",
+   "sha256": "01ff771821b7"
+  },
+  "Knotgen/knotgen.py": {
+   "source": "Knotgen/knotgen.py",
+   "sha256": "041d5e6d02a8"
+  },
+  "knot_recognition/annotate.py": {
+   "source": "src/knot_recognition/annotate.py",
+   "sha256": "45eb508daf71"
+  },
+  "knot_recognition/cable/__init__.py": {
+   "source": "src/knot_recognition/cable/__init__.py",
+   "sha256": "e3b0c44298fc"
+  },
+  "knot_recognition/cable/consistency.py": {
+   "source": "src/knot_recognition/cable/consistency.py",
+   "sha256": "86b45ccf6552"
+  },
+  "knot_recognition/cable/denoise.py": {
+   "source": "src/knot_recognition/cable/denoise.py",
+   "sha256": "a84a2ec50070"
+  },
+  "knot_recognition/cable/diagram.py": {
+   "source": "src/knot_recognition/cable/diagram.py",
+   "sha256": "92ef64d47d64"
+  },
+  "knot_recognition/cable/from_traversal.py": {
+   "source": "src/knot_recognition/cable/from_traversal.py",
+   "sha256": "f2bff6fd093b"
+  },
+  "knot_recognition/cable/gap_measure.py": {
+   "source": "src/knot_recognition/cable/gap_measure.py",
+   "sha256": "834924a206f1"
+  },
+  "knot_recognition/cable/identify.py": {
+   "source": "src/knot_recognition/cable/identify.py",
+   "sha256": "29178cd4a5d1"
+  },
+  "knot_recognition/cable/moves.py": {
+   "source": "src/knot_recognition/cable/moves.py",
+   "sha256": "31252d2ba51f"
+  },
+  "knot_recognition/cable/neural_parser.py": {
+   "source": "src/knot_recognition/cable/neural_parser.py",
+   "sha256": "bfc8b9b2d005"
+  },
+  "knot_recognition/cable/uncertainty.py": {
+   "source": "src/knot_recognition/cable/uncertainty.py",
+   "sha256": "baf960f17b79"
+  },
+  "knot_recognition/gauss_pd.py": {
+   "source": "src/knot_recognition/gauss_pd.py",
+   "sha256": "125e3c75c006"
+  },
+  "knot_recognition/knot_aware.py": {
+   "source": "src/knot_recognition/knot_aware.py",
+   "sha256": "2f3b1b24fcfd"
+  },
+  "knot_recognition/minkowski.py": {
+   "source": "src/knot_recognition/minkowski.py",
+   "sha256": "3b37f63d4463"
+  },
+  "knot_recognition/nanotransformer.py": {
+   "source": "src/knot_recognition/nanotransformer.py",
+   "sha256": "dbf2d95f7d25"
+  },
+  "knot_recognition/preprocess.py": {
+   "source": "src/knot_recognition/preprocess.py",
+   "sha256": "04f6253c149f"
+  },
+  "knot_recognition/strand_pointer.py": {
+   "source": "src/knot_recognition/strand_pointer.py",
+   "sha256": "4b6b61948875"
+  },
+  "knot_recognition/topology_loss.py": {
+   "source": "src/knot_recognition/topology_loss.py",
+   "sha256": "3b985eaef2e5"
+  },
+  "knot_recognition/traverser.py": {
+   "source": "src/knot_recognition/traverser.py",
+   "sha256": "2886406aff8c"
+  },
+  "knot_recognition/unetformer.py": {
+   "source": "src/knot_recognition/unetformer.py",
+   "sha256": "c7cf204f61d3"
+  },
+  "knot_recognition/utils.py": {
+   "source": "src/knot_recognition/utils.py",
+   "sha256": "5c97a2f7436f"
+  },
+  "knotinfo_full_dataset.json": {
+   "source": "data/knotinfo/knotinfo_full_dataset.json",
+   "sha256": "ac17fa6b816d"
+  },
+  "mps_ptr_s0.pth": {
+   "source": "checkpoints/strand_pointer/mps_ptr_s0.pth",
+   "sha256": "f0df2bdbd37b"
+  },
+  "mps_uf_s0.pth": {
+   "source": "checkpoints/beat_unet/mps_uf_s0.pth",
+   "sha256": "21f6439e2f22"
+  },
+  "nanotransformer_knot250.pth": {
+   "source": "checkpoints/nanotransformer_knot250.pth",
+   "sha256": "d1c16fc05198"
+  }
+ }
+}

@@ -11,6 +11,10 @@ computed downstream (cable.neural_parser):
   heat     crossing-centre heatmap
   over     axial direction (cos 2a, sin 2a) of the strand on top at each crossing
   orient   axial direction of the strand everywhere else (used to pair arms)
+  center   centre-line ridge (stays split where two strands touch and the mask merges)
+  center_hi the same ridge on a 256 x 256 grid (2 px at 512) from a full-resolution
+           branch: on the 128 grid two centre-lines closer than ~2 cells (about one
+           cable width) merge into one ridge
   count    number of crossings (global token; checked against the Euler count)
 
 Input: 4 channels at 256 x 256 = RGB + an FFT-cleaned grey channel
@@ -55,6 +59,24 @@ def preprocess(img: np.ndarray, size: int = INPUT_SIZE) -> np.ndarray:
     return np.concatenate([rgb, f[..., None]], axis=2)
 
 
+def letterbox(img, size: int = 512, fill: float = 0.9):
+    """Fit any photo into a size x size square without distortion (stretching shears crossing
+    angles). Padding uses the median border colour. Returns (array, scale, (x_off, y_off)) so
+    annotations or outputs can be mapped between the two frames: p_square = p * scale + off."""
+    from PIL import Image
+
+    im = img if isinstance(img, Image.Image) else Image.fromarray(np.asarray(img)[..., :3].astype(np.uint8))
+    im = im.convert("RGB")
+    a = np.asarray(im)
+    bg = tuple(int(v) for v in np.median(np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]]), axis=0))
+    s = (fill * size) / max(im.width, im.height)
+    r = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))), Image.LANCZOS)
+    off = ((size - r.width) // 2, (size - r.height) // 2)
+    canvas = Image.new("RGB", (size, size), bg)
+    canvas.paste(r, off)
+    return np.asarray(canvas), s, off
+
+
 @dataclass
 class KnotAwareConfig:
     in_channels: int = 4
@@ -64,6 +86,12 @@ class KnotAwareConfig:
     num_heads: int = 4
     mlp_ratio: float = 2.0
     dropout: float = 0.0
+    hi_res_center: bool = False
+    # Minkowski attention (knot_recognition.minkowski); defaults reproduce v1-v3 exactly
+    attn_pos_bias: str = "none"       # "none" | "minkowski": -alpha_h ||r_i - r_j||_{p_h}, learnable p_h
+    attn_content: str = "dot"         # "dot" | "minkowski": -||q - k||_p^p / (p sqrt d), p = 1 / 2 per head
+    layer_cake: float = 0.0           # weight of the Lebesgue (layer-cake) loss used in training
+    topo_loss: float = 0.0            # weight of the clDice centre-line topology loss used in training
 
 
 def _conv(i, o, s=1):
@@ -83,8 +111,15 @@ class KnotAwareNanoTransformer(nn.Module):
         self.count_token = nn.Parameter(torch.zeros(1, 1, d))
         nn.init.trunc_normal_(self.pos, std=0.02)
         nn.init.trunc_normal_(self.count_token, std=0.02)
-        self.blocks = nn.ModuleList([TransformerEncoderBlock(d, cfg.num_heads, cfg.mlp_ratio, cfg.dropout, cfg.dropout)
-                                     for _ in range(cfg.depth)])
+        if cfg.attn_pos_bias == "none" and cfg.attn_content == "dot":
+            self.blocks = nn.ModuleList([TransformerEncoderBlock(d, cfg.num_heads, cfg.mlp_ratio, cfg.dropout, cfg.dropout)
+                                         for _ in range(cfg.depth)])
+        else:
+            from .minkowski import MinkowskiEncoderBlock
+            self.blocks = nn.ModuleList([MinkowskiEncoderBlock(d, cfg.num_heads, cfg.mlp_ratio, cfg.dropout, cfg.dropout,
+                                                               content=cfg.attn_content,
+                                                               pos_bias=cfg.attn_pos_bias == "minkowski", grid=self.grid)
+                                         for _ in range(cfg.depth)])
         self.norm = nn.LayerNorm(d)
         self.up = nn.Sequential(nn.ConvTranspose2d(d, 96, 2, 2), nn.GELU(), nn.ConvTranspose2d(96, cfg.stem_dim, 2, 2))
         self.fuse = nn.Sequential(_conv(2 * cfg.stem_dim, cfg.stem_dim), _conv(cfg.stem_dim, cfg.stem_dim))
@@ -94,10 +129,18 @@ class KnotAwareNanoTransformer(nn.Module):
         self.head_heat = nn.Conv2d(32, 1, 1)
         self.head_over = nn.Conv2d(32, 2, 1)
         self.head_orient = nn.Conv2d(32, 2, 1)
+        self.head_center = nn.Conv2d(32, 1, 1)
+        if cfg.hi_res_center:
+            self.stem1 = nn.Sequential(_conv(cfg.in_channels, 16), _conv(16, 16))   # stride 1 (256 x 256)
+            self.up3 = nn.ConvTranspose2d(32, 16, 2, 2)
+            self.fuse3 = nn.Sequential(_conv(32, 16), _conv(16, 16))
+            self.head_center_hi = nn.Conv2d(16, 1, 1)
         self.head_count = nn.Sequential(nn.Linear(d, d), nn.GELU(), nn.Linear(d, 1))
         nn.init.constant_(self.head_heat.bias, -2.19)  # prior P(crossing) ~ 0.1
 
     def forward(self, x: torch.Tensor) -> Dict[str, torch.Tensor]:
+        if x.shape[1] > self.cfg.in_channels:   # e.g. the no-FFT ablation (in_channels=3) sees RGB only
+            x = x[:, : self.cfg.in_channels]
         f2 = self.stem2(x)                             # (B, 24, 128, 128)
         f4 = self.stem(f2)                             # (B, C, 64, 64)
         t = self.patch(f4)                             # (B, d, 16, 16)
@@ -111,8 +154,12 @@ class KnotAwareNanoTransformer(nn.Module):
         g = tok[:, 1:].transpose(1, 2).reshape(B, d, h, w)
         y = self.fuse(torch.cat([self.up(g), f4], 1))  # (B, C, 64, 64)
         y = self.fuse2(torch.cat([self.up2(y), f2], 1))  # (B, 32, 128, 128)
-        return {"mask": self.head_mask(y).squeeze(1), "heat": self.head_heat(y).squeeze(1),
-                "over": self.head_over(y), "orient": self.head_orient(y), "count": cnt}
+        out = {"mask": self.head_mask(y).squeeze(1), "heat": self.head_heat(y).squeeze(1),
+               "center": self.head_center(y).squeeze(1), "over": self.head_over(y), "orient": self.head_orient(y), "count": cnt}
+        if self.cfg.hi_res_center:
+            z = self.fuse3(torch.cat([self.up3(y), self.stem1(x)], 1))   # (B, 16, 256, 256)
+            out["center_hi"] = self.head_center_hi(z).squeeze(1)
+        return out
 
 
 # ----------------------------------------------------------------------------- losses
@@ -132,31 +179,66 @@ def axial_loss(pred, target, weight):
     return (err * weight).sum() / weight.sum().clamp(min=1)
 
 
-def total_loss(out, tg):
-    m = tg["mask"]
-    bce = F.binary_cross_entropy_with_logits(out["mask"], m)
-    pm = torch.sigmoid(out["mask"])
-    dice = 1 - (2 * (pm * m).sum((1, 2)) + 1) / (pm.sum((1, 2)) + m.sum((1, 2)) + 1)
-    parts = {
-        "mask": bce + dice.mean(),
-        "heat": focal_heat_loss(out["heat"], tg["heat"]),
-        "over": axial_loss(out["over"], tg["over"], tg["over_w"]),
-        "orient": axial_loss(out["orient"], tg["orient"], tg["orient_w"]),
-        "count": F.smooth_l1_loss(out["count"], tg["count"]) * 0.1,
-    }
-    return sum(parts.values()), {k: float(v) for k, v in parts.items()}
+def total_loss(out, tg, layer_cake: float = 0.0, topo: float = 0.0, as_float: bool = True):
+    """Sum of the losses of the heads a model actually has (baselines have a subset).
+    ``as_float=False`` returns the parts as detached tensors, so a GPU step does not wait for them.
+
+    ``layer_cake`` > 0 adds, for the mask and the centre-line ridges, the Lebesgue-measure
+    term of knot_recognition.minkowski: the mean area of {prediction > t} xor {target > t}
+    over the threshold band the parser uses for that map."""
+    parts = {}
+    if "mask" in out:
+        m = tg["mask"]
+        bce = F.binary_cross_entropy_with_logits(out["mask"], m)
+        pm = torch.sigmoid(out["mask"])
+        dice = 1 - (2 * (pm * m).sum((1, 2)) + 1) / (pm.sum((1, 2)) + m.sum((1, 2)) + 1)
+        parts["mask"] = bce + dice.mean()
+    if "heat" in out:
+        parts["heat"] = focal_heat_loss(out["heat"], tg["heat"])
+    if "over" in out:
+        parts["over"] = axial_loss(out["over"], tg["over"], tg["over_w"])
+    if "orient" in out:
+        parts["orient"] = axial_loss(out["orient"], tg["orient"], tg["orient_w"])
+    if "count" in out:
+        parts["count"] = F.smooth_l1_loss(out["count"], tg["count"]) * 0.1
+    for k in ("center", "center_hi"):
+        if k in tg and k in out:
+            c = tg[k]
+            pc = torch.sigmoid(out[k])
+            # ridge cells are rare: weight positives so the thin ridge is not washed out
+            wgt = 1 + 4 * c
+            bce_c = (F.binary_cross_entropy_with_logits(out[k], c, reduction="none") * wgt).sum() / wgt.sum()
+            dice_c = 1 - (2 * (pc * c).sum((1, 2)) + 1) / (pc.sum((1, 2)) + c.sum((1, 2)) + 1)
+            parts[k] = bce_c + dice_c.mean()
+    if layer_cake > 0:
+        from .minkowski import LAYER_CAKE_BANDS, layer_cake_loss
+        for k, (lo, hi) in LAYER_CAKE_BANDS.items():
+            if k in out and k in tg:
+                parts["lebesgue_" + k] = layer_cake * layer_cake_loss(torch.sigmoid(out[k]), tg[k], lo, hi)
+    if topo > 0:
+        from .topology_loss import TOPO_ITERS, cldice_loss
+        for k, it in TOPO_ITERS.items():
+            if k in out and k in tg:
+                parts["cldice_" + k] = topo * cldice_loss(torch.sigmoid(out[k]), tg[k], it)
+    return sum(parts.values()), ({k: float(v) for k, v in parts.items()} if as_float else {k: v.detach() for k, v in parts.items()})
 
 
 # ----------------------------------------------------------------------------- io
 
 def save(model: KnotAwareNanoTransformer, path, extra: Optional[dict] = None):
-    torch.save({"config": asdict(model.cfg), "state_dict": model.state_dict(), "extra": extra or {}}, path)
+    sd = {k: v.detach().cpu() for k, v in model.state_dict().items()}  # portable across cpu / mps / cuda
+    torch.save({"config": asdict(model.cfg), "state_dict": sd, "extra": extra or {}}, path)
 
 
 def load(path, device: str = "cpu") -> KnotAwareNanoTransformer:
     ck = torch.load(path, map_location=device, weights_only=False)
-    m = KnotAwareNanoTransformer(KnotAwareConfig(**ck["config"]))
-    m.load_state_dict(ck["state_dict"])
+    if ck["config"].get("arch") == "unetformer":
+        from .unetformer import UNetFormer, UNetFormerConfig
+        m = UNetFormer(UNetFormerConfig(**ck["config"]))
+    else:
+        m = KnotAwareNanoTransformer(KnotAwareConfig(**ck["config"]))
+    missing, _ = m.load_state_dict(ck["state_dict"], strict=False)
+    m.has_center = not any(k.startswith("head_center") for k in missing)
     m.extra = ck.get("extra", {})
     return m.eval()
 
@@ -188,7 +270,7 @@ def predict(model: KnotAwareNanoTransformer, img: np.ndarray, tta: bool = True) 
     x = preprocess(img)
     t = torch.from_numpy(x).permute(2, 0, 1).float().unsqueeze(0) / 255.0
     views = [(False, 0)] + ([(f, r) for f in (False, True) for r in range(4)][1:] if tta else [])
-    acc = {"mask": 0, "heat": 0, "over": 0, "orient": 0, "count": 0.0}
+    acc = {"mask": 0, "heat": 0, "center": 0, "center_hi": 0, "over": 0, "orient": 0, "count": 0.0}
     for hf, rot in views:
         xi = t.flip(-1) if hf else t
         xi = torch.rot90(xi, rot, (-2, -1))
@@ -196,13 +278,16 @@ def predict(model: KnotAwareNanoTransformer, img: np.ndarray, tta: bool = True) 
         back = lambda m: (torch.rot90(m, -rot, (-2, -1)).flip(-1) if hf else torch.rot90(m, -rot, (-2, -1)))
         acc["mask"] = acc["mask"] + back(torch.sigmoid(o["mask"]))
         acc["heat"] = acc["heat"] + back(torch.sigmoid(o["heat"]))
+        acc["center"] = acc["center"] + back(torch.sigmoid(o["center"]))
+        if "center_hi" in o:
+            acc["center_hi"] = acc["center_hi"] + back(torch.sigmoid(o["center_hi"]))
         ov = o["over"] / o["over"].norm(dim=1, keepdim=True).clamp(min=1e-6)
         acc["over"] = acc["over"] + _axial_inverse(back(ov), hf, rot)
         orn = o["orient"] / o["orient"].norm(dim=1, keepdim=True).clamp(min=1e-6)
         acc["orient"] = acc["orient"] + _axial_inverse(back(orn), hf, rot)
         acc["count"] += float(o["count"][0])
     n = len(views)
-    return {
+    out = {
         "mask": (acc["mask"] / n)[0].numpy(),
         "heat": (acc["heat"] / n)[0].numpy(),
         "over": (acc["over"] / n)[0].numpy(),      # length < 1 where views disagree
@@ -211,3 +296,8 @@ def predict(model: KnotAwareNanoTransformer, img: np.ndarray, tta: bool = True) 
         "cell_px": np.asarray(img).shape[0] / 128.0,
         "tta_views": n,
     }
+    if getattr(model, "has_center", True):
+        out["center"] = (acc["center"] / n)[0].numpy()
+    if getattr(model.cfg, "hi_res_center", False):
+        out["center_hi"] = (acc["center_hi"] / n)[0].numpy()
+    return out
