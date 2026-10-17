@@ -1,0 +1,92 @@
+{
+ "checkpoint": "nanotransformer_knot250.pth",
+ "classes": 250,
+ "threshold": 0.95,
+ "note": "trained on raw_knot/; real_pictures are its training data",
+ "knotbench_photo": {
+  "photo_sessions": {
+   "images": 240,
+   "in_vocabulary": 144,
+   "forced_accuracy": 0.125,
+   "forced_wrong": 210,
+   "selective_answered": 0,
+   "selective_correct": 0,
+   "selective_wrong": 0,
+   "median_top_probability": 0.00676702382043004
+  },
+  "silhouettes": {
+   "images": 60,
+   "in_vocabulary": 36,
+   "forced_accuracy": 0.11666666666666667,
+   "forced_wrong": 53,
+   "selective_answered": 0,
+   "selective_correct": 0,
+   "selective_wrong": 0,
+   "median_top_probability": 0.006985882064327598
+  }
+ },
+ "close_strands": {
+  "images": 100,
+  "in_vocabulary": 60,
+  "forced_accuracy": 0.08,
+  "forced_wrong": 92,
+  "selective_answered": 0,
+  "selective_correct": 0,
+  "selective_wrong": 0,
+  "median_top_probability": 0.006896334700286388
+ },
+ "blind_ledger": {
+  "set": "blind:blind_real_v1",
+  "set_hash": "0a2564dd1520bca84e21e6c16472989b23f9529b28284ca0186923349c94d190",
+  "role": "baseline",
+  "checkpoint": "nanotransformer_knot250.pth",
+  "checkpoint_sha256": "d1c16fc05198377b8b901f7f44f906748ef9832e8668e39d3321be4130443b02",
+  "time_utc": "2026-10-14T10:51:20Z",
+  "git": "28420b9",
+  "repeat_of_same_model": false,
+  "new_main_reason": null,
+  "note": "250-class classifier"
+ },
+ "blind_real_v1": {
+  "all": {
+   "images": 308,
+   "in_vocabulary": 238,
+   "forced_accuracy": 0.006493506493506494,
+   "forced_wrong": 306,
+   "selective_answered": 0,
+   "selective_correct": 0,
+   "selective_wrong": 0,
+   "median_top_probability": 0.005761003354564309
+  },
+  "drawing": {
+   "images": 98,
+   "in_vocabulary": 96,
+   "forced_accuracy": 0.0,
+   "forced_wrong": 98,
+   "selective_answered": 0,
+   "selective_correct": 0,
+   "selective_wrong": 0,
+   "median_top_probability": 0.004776219138875604
+  },
+  "render": {
+   "images": 210,
+   "in_vocabulary": 142,
+   "forced_accuracy": 0.009523809523809525,
+   "forced_wrong": 208,
+   "selective_answered": 0,
+   "selective_correct": 0,
+   "selective_wrong": 0,
+   "median_top_probability": 0.006560139125213027
+  }
+ },
+ "real_pictures_TRAINING_DATA": {
+  "images": 166,
+  "in_vocabulary": 166,
+  "forced_accuracy": 0.18072289156626506,
+  "forced_wrong": 136,
+  "selective_answered": 0,
+  "selective_correct": 0,
+  "selective_wrong": 0,
+  "median_top_probability": 0.006920507876202464
+ }
+}
