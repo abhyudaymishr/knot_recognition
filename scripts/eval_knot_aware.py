@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import sys
 import time
 from pathlib import Path
@@ -26,8 +27,9 @@ import numpy as np
 from PIL import Image
 
 from knot_recognition.cable import photo_bench as pb
+from knot_recognition.cable.compare import same_answer
 from knot_recognition.cable.identify import identify_diagram, type_key
-from knot_recognition.cable.neural_parser import parse
+from knot_recognition.cable.neural_parser import parse_best as parse
 from knot_recognition.cable.uncertainty import propagate
 from knot_recognition.knot_aware import load, predict
 
@@ -44,12 +46,42 @@ def pair_dirs(D, crossing_id):
     return [to[0], -to[1]], [tu[0], -tu[1]], c
 
 
-def evaluate_image(model, r, kappa):
-    img = np.asarray(Image.open(DATA / r["file"]).convert("RGB"))
+# ablation switches (environment): KA_NO_TTA=1, KA_NO_EULER=1, KA_RIDGES=hi|lo|hi,lo, KA_GAMMA=<float>
+ABL = {"tta": not os.environ.get("KA_NO_TTA"), "euler_gate": not os.environ.get("KA_NO_EULER"),
+       "ridges": tuple(os.environ["KA_RIDGES"].split(",")) if os.environ.get("KA_RIDGES") else None}
+
+
+def load_any(spec):
+    """A knot-aware checkpoint path, or a baseline spec:
+    'unet_seg:<ckpt>' (segmentation only) or 'unet_seg+kp:<seg ckpt>,<kp ckpt>'."""
+    spec = str(spec)
+    if spec.startswith("unet_seg+kp:"):
+        from knot_recognition.baselines import Predictor, load_unet
+        a, b = spec.split(":", 1)[1].split(",")
+        return Predictor([load_unet(a), load_unet(b)], "unet_seg+kp")
+    if spec.startswith("unet_seg:"):
+        from knot_recognition.baselines import Predictor, load_unet
+        return Predictor([load_unet(spec.split(":", 1)[1])], "unet_seg")
+    m = load(spec)
+    m.extra.setdefault("gamma", 2.0)
+    return m
+
+
+def spec_name(spec) -> str:
+    spec = str(spec)
+    if ":" in spec:
+        return spec.split(":", 1)[0]
+    return Path(spec).stem
+
+
+def evaluate_image(model, r, kappa, img=None, gap_check=None):
+    if img is None:
+        img = np.asarray(Image.open(DATA / r["file"]).convert("RGB"))
     ann, gt = r["annotation"], r["ground_truth"]["type"]
     t0 = time.perf_counter()
-    pred = predict(model, img)
-    D, rep = parse(img, model, kappa=kappa, pred=pred)
+    pred = model.predict_maps(img, ABL["tta"]) if hasattr(model, "predict_maps") else predict(model, img, tta=ABL["tta"])
+    D, rep = parse(img, model, kappa=kappa, pred=pred, euler_gate=ABL["euler_gate"], ridges=ABL["ridges"],
+                   gap_check=gap_check)
     sec = time.perf_counter() - t0
     gpos = np.array([c["pos_px"] for c in ann["crossings"]]).reshape(-1, 2)
     ppos = np.array([c["pos_px"] for c in rep["crossings"]]).reshape(-1, 2)
@@ -106,7 +138,7 @@ def summarise(rows):
     groups = [r["cable_id"] for r in rows]
     tp = sum(r["tp"] for r in rows); npred = sum(r["n_pred"] for r in rows); ngt = sum(r["n_gt"] for r in rows)
     ans = [r["answer"] for r in rows]
-    correct = [a == r["gt"] for a, r in zip(ans, rows)]
+    correct = [same_answer(a, r["gt"]) for a, r in zip(ans, rows)]
     n_ans = sum(a is not None for a in ans)
     reasons = {}
     for r in rows:
@@ -126,20 +158,23 @@ def summarise(rows):
         "topology_accuracy_all": float(np.mean(correct)),
         "topology_accuracy_ci95_cable_bootstrap": pb.cable_bootstrap([float(c) for c in correct], groups),
         "selective_accuracy": (sum(c for c, a in zip(correct, ans) if a is not None) / n_ans) if n_ans else None,
-        "wrong_confident_answers": sum(1 for a, r in zip(ans, rows) if a is not None and a != r["gt"]),
+        "wrong_confident_answers": sum(1 for a, r in zip(ans, rows) if a is not None and not same_answer(a, r["gt"])),
         "abstain_reasons": reasons,
         "sec_per_image_median": float(np.median([r["sec"] for r in rows])),
     }
 
 
 def main():
-    model = load(CKPT)
-    model.extra["gamma"] = 2.0  # chosen on data/knot_aware/parser_dev (scripts/make_parser_dev_set.py), not here
+    ckpt = sys.argv[1] if len(sys.argv) > 1 else str(CKPT)
+    out_name = sys.argv[2] if len(sys.argv) > 2 else "knot_aware_v1.json"
+    model = load_any(ckpt)
+    model.extra["gamma"] = float(os.environ.get("KA_GAMMA", 2.0))  # 2 chosen on data/knot_aware/parser_dev, not here
     recs = [json.loads(l) for l in open(DATA / "records.jsonl")]
     split = json.load(open(DATA / "splits.json"))
     by_id = {r["image_id"]: r for r in recs}
     # 1. calibrate kappa on the benchmark train split
-    cal = [evaluate_image(model, by_id[i], kappa=1.0) for i in split["train"]]
+    # (the gap-measure veto, KA_GAP=1, is off here: kappa describes the network's own margins)
+    cal = [evaluate_image(model, by_id[i], kappa=1.0, gap_check=False) for i in split["train"]]
     margins = [mg for r in cal for mg in r["margins"]]
     kappa = fit_kappa(margins) if margins else 4.0
     model.extra["kappa"] = kappa
@@ -166,7 +201,10 @@ def main():
             | {"coverage": old["overall"]["adapter"]["coverage"], "wrong_confident_answers_without_gate": old["overall"]["adapter_no_gate"].get("wrong_confident_answers")},
             "silhouette": {k: old["diagnostic_silhouette"][k] for k in ("crossing_precision", "crossing_recall", "over_under_accuracy")},
         }
-    out = ROOT / "results" / "knotbench_photo" / "knot_aware_v1.json"
+    res["checkpoint"] = spec_name(ckpt)
+    res["ablation"] = {k: v for k, v in ABL.items()} | {"gamma": model.extra["gamma"],
+                                                         "gap_check": os.environ.get("KA_GAP", "0") == "1"}
+    out = ROOT / "results" / "knotbench_photo" / out_name
     json.dump(res, open(out, "w"), indent=1, default=float)
     for name in ("overall_photo_sessions", "test_split", "unseen_sessions_S3_S4"):
         o = res[name]

@@ -9,6 +9,9 @@ All maps are on a grid with ``stride`` pixels per cell (relative to the rendered
   over_w    weight map for ``over`` (1 near crossings, else 0)
   orient    axial direction of the strand, (cos 2a, sin 2a), on cable cells away from crossings
   orient_w  weight map for ``orient``
+  center    centre-line ridge: exp(-d^2 / (2 sigma^2)), d = distance to the nearest
+            strand centre-line in cells (sigma = 0.8 cell). Two strands closer than a cable
+            width merge in ``mask`` but keep separate ridges here.
   count     number of crossings
 
 Axial (doubled-angle) encoding makes a strand direction and its reverse identical,
@@ -74,5 +77,20 @@ def dense_targets(ann: Dict[str, Any], stride: int = 8) -> Dict[str, np.ndarray]
     orient[:, ok] /= n[ok]
     orient[:, ~ok] = 0
     orient_w = (ok & ~near).astype(np.float32)
-    return {"mask": mask.astype(np.float32), "heat": heat, "over": over, "over_w": over_w,
+    center = centerline_target(ann, stride)
+    return {"mask": mask.astype(np.float32), "center": center, "heat": heat, "over": over, "over_w": over_w,
             "orient": orient, "orient_w": orient_w, "count": np.float32(len(ann["crossings"]))}
+
+
+def centerline_target(ann: Dict[str, Any], stride: int = 4, sigma_cells: float = 0.8) -> np.ndarray:
+    import cv2
+
+    W, H = ann["image_size"]
+    line = np.full((H, W), 255, np.uint8)
+    for comp in ann["components"]:
+        P = np.round(np.asarray(comp) * 16).astype(np.int32).reshape(-1, 1, 2)
+        cv2.polylines(line, [P], True, 0, 1, lineType=cv2.LINE_8, shift=4)
+    d = cv2.distanceTransform(line, cv2.DIST_L2, 5)
+    c = stride // 2
+    dc = d[c::stride, c::stride][: H // stride, : W // stride] / stride
+    return np.exp(-dc ** 2 / (2 * sigma_cells ** 2)).astype(np.float32)

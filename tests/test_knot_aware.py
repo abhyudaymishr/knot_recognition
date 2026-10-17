@@ -127,3 +127,45 @@ def test_dihedral_augmentation_keeps_axial_targets_consistent():
         for f_img, f_vec in ((lambda x: x.flip(-1), axial_hflip), (lambda x: x.flip(-2), axial_vflip),
                              (lambda x: torch.rot90(x, 1, (-2, -1)), axial_rot90)):
             assert np.dot(axial_of(f_img(t)[0].numpy()), f_vec(v)[0, :, 0, 0].numpy()) > 0.95
+
+
+def test_centerline_target_separates_touching_strands():
+    """Two parallel strands 0.8 cable widths apart (edges overlap in the mask) keep two ridges."""
+    from knot_recognition.cable.targets import centerline_target
+    from knot_recognition.cable.synth import gt_mask
+    w = 12
+    ann = {"image_size": [128, 128], "cable_width_px": w,
+           "components": [[(20, 60), (108, 60)], [(20, 60 + 0.8 * w + 0.0), (108, 60 + 0.8 * w)]]}
+    m = gt_mask(ann)
+    col = m[:, 64]
+    assert col[60:70].all()  # merged in the mask
+    c = centerline_target(ann, stride=2)[:, 32]
+    peaks = [i for i in range(1, len(c) - 1) if c[i] >= c[i - 1] and c[i] > c[i + 1] and c[i] > 0.5]
+    assert len(peaks) == 2
+
+
+def test_bridge_ends_joins_facing_gap_only():
+    from knot_recognition.cable.neural_parser import _bridge_ends
+    sk = np.zeros((40, 80), bool)
+    sk[20, 5:30] = True
+    sk[20, 36:75] = True          # 6 px gap on one line
+    sk[5, 5:30] = True            # an unrelated parallel end far away
+    ridge = np.zeros((40, 80), np.float32)
+    ridge[19:22, :] = 0.4
+    out, n = _bridge_ends(sk, ridge, max_len=10)
+    assert n == 1 and out[20, 30:36].all() and not out[5, 30:36].any()
+
+
+def test_styled_render_keeps_exact_ground_truth():
+    """Every style draws the same projected diagram: crossings stay inside the frame and the type is unchanged."""
+    from knot_recognition.cable import styles, synth
+    from knot_recognition.cable.identify import identify_diagram, type_key
+    from knot_recognition.cable.diagram import from_curves_3d
+    rng = np.random.default_rng(0)
+    curves = synth.make_instance([1, 1, 1], 123, wobble=0.15)
+    gt = type_key(identify_diagram(from_curves_3d(curves)))
+    for st in styles.STYLES:
+        img, ann, D, info = styles.render_styled(curves, np.random.default_rng(7), style=st)
+        assert img.size == (512, 512) and info["style"] == st
+        assert all(0 <= c["pos_px"][0] < 512 and 0 <= c["pos_px"][1] < 512 for c in ann["crossings"])
+        assert type_key(identify_diagram(D)) == gt
